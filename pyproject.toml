@@ -1,0 +1,15 @@
+[project]
+name = "claimreg"
+version = "0.1.0"
+description = "Tools for the claim registry: validation and source checks"
+requires-python = ">=3.10"
+dependencies = ["pyyaml>=6"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+claimreg = "claimreg.__main__:main"
+
+[tool.setuptools]
+packages = ["claimreg"]

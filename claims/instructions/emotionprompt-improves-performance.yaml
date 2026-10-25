@@ -1,0 +1,36 @@
+id: emotionprompt-improves-performance
+version: 1.0.0
+title: Appending emotional stimuli to a prompt (EmotionPrompt) improves task performance
+status: active
+technique:
+  summary: >
+    Append a short emotional or psychological sentence to the original prompt, e.g. "This is very
+    important to my career."
+  example: |
+    <task instruction> This is very important to my career.
+conditions:
+  model_family: [gpt, llama, other]
+  # Tested: ChatGPT (gpt-3.5-turbo-0613), GPT-4, Llama 2, Vicuna, BLOOM, Flan-T5-Large
+  model_versions: {gpt: ["3.5-turbo", "4"], llama: ["2"], other: ["Vicuna", "BLOOM", "Flan-T5-Large"]}
+  task_family: [instruction-induction, mixed-benchmark, generative-writing]   # BIG-Bench counts as mixed-benchmark
+  reasoning: disabled
+  tool_use: none
+  context_size: short
+effect:
+  direction: helps
+  outcome: task performance (automatic metrics); human-rated quality on generative tasks
+  magnitude: +8.00% relative on Instruction Induction, +115% on BIG-Bench; +10.9% average in a human study (n=106)
+evidence:
+  - tier: observed
+    source: https://arxiv.org/abs/2307.11760
+    reported_by: Cheng Li, Jindong Wang, Yixuan Zhang, Kaijie Zhu, Wenxin Hou, Jianxun Lian, Fang Luo, Qiang Yang, Xing Xie (Microsoft Research et al.)
+    config: 11 emotional stimuli (EP01-EP11) appended to original prompts, zero-shot and 5-shot, on 24 Instruction Induction and 21 BIG-Bench tasks, plus a human study on generative tasks
+    model: Flan-T5-Large, Vicuna, Llama 2, BLOOM, ChatGPT (gpt-3.5-turbo-0613), GPT-4
+    outcome: Emotional prompts improved scores; EP02 ("This is very important to my career") was best on Instruction Induction
+    quote: 'Our automatic experiments show that LLMs have a grasp of emotional intelligence, and their performance can be improved with emotional prompts (which we call "EmotionPrompt" that combines the original prompt with emotional stimuli), e.g., 8.00% relative performance improvement in Instruction Induction and 115% in BIG-Bench.'
+    retrieved: 2026-10-25
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [tip-threat-prompts-no-effect], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

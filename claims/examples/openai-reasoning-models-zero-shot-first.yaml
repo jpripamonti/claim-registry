@@ -1,0 +1,29 @@
+id: openai-reasoning-models-zero-shot-first
+version: 1.0.0
+title: For OpenAI reasoning models, try zero-shot first and add examples only for complex output requirements
+status: active
+technique:
+  summary: >
+    Adding few-shot examples to prompts for reasoning models. Write the prompt without examples
+    first; add a few only if output requirements are complex, closely aligned with the instructions.
+conditions:
+  model_family: [openai-o]
+  model_versions: any
+  task_family: [any]
+  reasoning: enabled
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: no_effect         # "often" not needed; mismatched examples "may produce poor results"
+  outcome: result quality
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/reasoning-best-practices
+    retrieved: 2026-10-25
+    quote: "Reasoning models often don’t need few-shot examples to produce good results, so try to write prompts without examples first. If you have more complex requirements for your desired output, it may help to include a few examples of inputs and desired outputs in your prompt."
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}   # cross-vendor tension with gemini-always-include-few-shot
+history:
+  - 1.0.0 2026-10-25 created

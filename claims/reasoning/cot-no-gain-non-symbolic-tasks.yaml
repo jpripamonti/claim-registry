@@ -1,0 +1,37 @@
+id: cot-no-gain-non-symbolic-tasks
+version: 1.0.0
+title: Chain-of-thought gives little or no gain outside math and symbolic reasoning
+status: active
+technique:
+  summary: >
+    Zero-shot or few-shot chain-of-thought prompting, compared with direct-answer prompting.
+conditions:
+  model_family: [llama, mistral, qwen, gpt, gemini, claude-haiku, claude-sonnet, other]
+  # Tested (14): Llama 2 7B Chat, Llama 3.1 8B/70B Instruct, Mistral 7B Instruct v0.3, Qwen2 7B/72B
+  # Instruct, gpt-4o-mini-2024-07-18, gpt-4o-2024-08-06, Gemini 1.5 Flash, Gemini 1.5 Pro,
+  # claude-3-haiku-20240307, claude-3-5-sonnet-20240620, Gemma 2 9B, Phi-3 Small 8k
+  model_versions: {llama: ["2", "3.1"], mistral: ["7b-instruct-v0.3"], qwen: ["2"], gpt: ["4o", "4o-mini"], gemini: ["1.5"], claude-haiku: ["3"], claude-sonnet: ["3.5"], other: ["Gemma 2 9B", "Phi-3 Small"]}
+  task_family: [commonsense-qa, language-understanding, reading-comprehension, knowledge-qa]
+  reasoning: disabled
+  tool_use: none
+  context_size: short
+effect:
+  direction: no_effect
+  outcome: accuracy on commonsense, language-understanding and reading-comprehension benchmarks
+  magnitude: >
+    Little to no separation between CoT and direct answering on CSQA, PIQA, SiQA, WinoGrande, AGI
+    LSAT and ARC. The same study reports CoT gains of up to 41.6% on MATH and 66.9% on GSM8K.
+evidence:
+  - tier: observed
+    source: https://arxiv.org/html/2409.12183
+    reported_by: Zayne Sprague, Fangcong Yin, Juan Diego Rodriguez, Dongwei Jiang, Manya Wadhwa, Prasann Singhal, Xinyu Zhao, Xi Ye, Kyle Mahowald, Greg Durrett (UT Austin et al.)
+    config: Zero-shot and few-shot, direct vs CoT, on 20 datasets, plus a meta-analysis of 100+ CoT papers
+    model: 14 models, listed in the conditions comment
+    outcome: CoT gains concentrate in math and logic; non-symbolic reasoning datasets show no improvement
+    quote: "there is little to no separation between the performance of zero-shot CoT and zero-shot direct answer. Despite these datasets involving reasoning, CoT does not yield improvement."
+    retrieved: 2026-10-25
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [manual-cot-when-thinking-off], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

@@ -1,0 +1,35 @@
+id: prefill-unsupported-claude-4-6-plus
+version: 1.0.0
+title: Prefilling the last assistant turn returns a 400 error on Claude 4.6 and later
+status: active
+technique:
+  summary: >
+    Prefilling the final assistant message (a partial response for Claude to continue). Use
+    structured outputs, system-prompt instructions, or move continuations into the user turn instead.
+conditions:
+  model_family: [claude]
+  model_versions: ">=4.6"   # page: "Claude 4.6 models and Claude Mythos Preview"; earlier models still support prefill
+  task_family: [any]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: request rejected with HTTP 400
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-10-25
+    quote: >-
+      Starting with Claude 4.6 models and Claude Mythos Preview, prefilled responses (providing a partial assistant message for Claude to continue from) on the last assistant turn are no longer supported. Requests with prefilled assistant messages to these models return a 400 error.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-10-25
+    quote: >-
+      Earlier models continue to support prefills, and adding assistant messages elsewhere in the conversation is not affected.
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

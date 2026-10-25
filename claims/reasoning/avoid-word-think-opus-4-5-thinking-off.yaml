@@ -1,0 +1,30 @@
+id: avoid-word-think-opus-4-5-thinking-off
+version: 1.0.0
+title: With thinking disabled, Claude Opus 4.5 is sensitive to the word "think"; use "consider" or "evaluate"
+status: active
+technique:
+  summary: >
+    When extended thinking is off on Opus 4.5, write "consider", "evaluate" or "reason through"
+    instead of "think".
+conditions:
+  model_family: [claude-opus]
+  model_versions: ["4.5"]
+  task_family: [unspecified]
+  reasoning: disabled
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: avoids unwanted sensitivity to "think" wording (the page does not describe the failure)
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-10-25
+    quote: >-
+      When extended thinking is disabled, Claude Opus 4.5 is particularly sensitive to the word "think" and its variants. Consider using alternatives such as "consider," "evaluate," or "reason through" in those cases.
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

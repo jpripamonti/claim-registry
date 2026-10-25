@@ -1,0 +1,35 @@
+id: gpt-4-1-long-context-json-documents-poor
+version: 1.0.0
+title: For many documents in GPT-4.1 context, JSON formatting performs poorly while XML performs well
+status: active
+technique:
+  summary: >
+    Formatting many documents in the context as a JSON array of objects. Use XML
+    (<doc id='1' title='...'>) or "ID | TITLE | CONTENT" instead.
+  example: |
+    <doc id='1' title='The Fox'>The quick brown fox jumps over the lazy dog</doc>
+conditions:
+  model_family: [gpt]
+  model_versions: ["4.1"]
+  task_family: [unspecified]
+  reasoning: disabled
+  tool_use: unspecified
+  context_size: long
+effect:
+  direction: hurts             # the technique is JSON formatting; XML is the recommended alternative
+  outcome: long-context performance
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide
+    retrieved: 2026-10-25
+    quote: "JSON performed particularly poorly."
+  - tier: asserted
+    source: https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide
+    retrieved: 2026-10-25
+    quote: "XML performed well in our long context testing."
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

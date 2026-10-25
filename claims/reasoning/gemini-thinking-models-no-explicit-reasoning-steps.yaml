@@ -1,0 +1,29 @@
+id: gemini-thinking-models-no-explicit-reasoning-steps
+version: 1.0.0
+title: Gemini 2.5 and 3 need no request to write out reasoning steps; "Think very hard" can help on hard problems
+status: active
+technique:
+  summary: >
+    Asking Gemini 2.5 or 3 to write plans or reasoning steps in the answer. They think internally;
+    for heavy reasoning a simple "Think very hard before answering" can help, at extra token cost.
+conditions:
+  model_family: [gemini]
+  model_versions: ">=2.5"
+  task_family: [unspecified]
+  reasoning: enabled
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: no_effect
+  outcome: reasoning performance
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://ai.google.dev/gemini-api/docs/prompting-strategies
+    retrieved: 2026-10-25
+    quote: "As such, it's generally not necessary to have the model outline, plan, or detail reasoning steps in the returned response itself. For problems that require heavy reasoning, simple requests like \"Think very hard before answering\" can improve performance, though at the cost of extra thinking tokens."
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

@@ -1,0 +1,36 @@
+id: agents-md-context-files-no-success-gain
+version: 1.0.0
+title: Repository context files (AGENTS.md / CLAUDE.md) do not raise coding-agent task success but raise cost
+status: active
+technique:
+  summary: >
+    Give a coding agent a repository-level context file (AGENTS.md for Codex and Qwen Code, CLAUDE.md
+    for Claude Code) with a repo overview and instructions, LLM-generated or developer-written.
+conditions:
+  model_family: [claude-sonnet, gpt, qwen]
+  # Tested: Claude Code + Sonnet 4.5; Codex + GPT-5.2 and GPT-5.1 mini; Qwen Code + Qwen3-30b-coder
+  model_versions: {claude-sonnet: ["4.5"], gpt: ["5.2", "5.1-mini"], qwen: ["3"]}
+  task_family: [agentic-coding]   # SWE-bench Lite; 138 Python issues from repos with developer-committed context files
+  reasoning: unspecified   # GPT-5.x runs used reasoning; the Claude thinking setting is not stated
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: no_effect
+  outcome: task resolution rate (cost increases)
+  magnitude: >
+    LLM-generated files: marginal, non-significant negative effect. Developer-written files:
+    marginal, non-significant gain. Cost up 20-23% on average.
+evidence:
+  - tier: observed
+    source: https://arxiv.org/abs/2602.11988
+    reported_by: Thibaud Gloaguen, Niels Mündler-Sasahara, Mark Niklas Müller, Veselin Raychev, Martin Vechev (ETH Zurich, LogicStar.ai)
+    config: No context file vs LLM-generated file (following agent-developer recommendations) vs developer-committed file, on SWE-bench Lite and a 138-issue benchmark (v3 of the paper)
+    model: Sonnet 4.5 (Claude Code), GPT-5.2 and GPT-5.1 mini (Codex), Qwen3-30b-coder (Qwen Code)
+    outcome: No general improvement in success; agents follow the instructions, which adds testing and exploration and so cost
+    quote: "Surprisingly, we find that providing context files does not generally improve task success rates, while increasing inference cost by over 20% on average."
+    retrieved: 2026-10-25
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

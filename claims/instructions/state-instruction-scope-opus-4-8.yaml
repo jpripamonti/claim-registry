@@ -1,0 +1,37 @@
+id: state-instruction-scope-opus-4-8
+version: 1.0.0
+title: Claude Opus 4.8 follows instructions literally, so state their scope explicitly
+status: active
+technique:
+  summary: >
+    Opus 4.8 does not generalize an instruction from one item to others. When an instruction should
+    apply broadly, say so.
+  example: |
+    Apply this formatting to every section, not just the first one.
+conditions:
+  model_family: [claude-opus]
+  model_versions: ["4.8"]   # "particularly at lower effort levels"
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: instruction applied to the intended scope
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-4-8
+    retrieved: 2026-10-25
+    quote: >-
+      Claude Opus 4.8 interprets prompts literally and explicitly, particularly at lower effort levels. It does not silently generalize an instruction from one item to another, and it does not infer requests you didn't make.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-4-8
+    retrieved: 2026-10-25
+    quote: >-
+      If you need Claude to apply an instruction broadly, state the scope explicitly (for example, "Apply this formatting to every section, not just the first one").
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

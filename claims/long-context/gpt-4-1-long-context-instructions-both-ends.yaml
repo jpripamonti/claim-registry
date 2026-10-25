@@ -1,0 +1,29 @@
+id: gpt-4-1-long-context-instructions-both-ends
+version: 1.0.0
+title: With long context, GPT-4.1 does best with instructions at both the beginning and the end
+status: active
+technique:
+  summary: >
+    Repeat the instructions before and after the long context block. If they appear only once, put
+    them above the context, not below.
+conditions:
+  model_family: [gpt]
+  model_versions: ["4.1"]
+  task_family: [unspecified]
+  reasoning: disabled
+  tool_use: unspecified
+  context_size: long
+effect:
+  direction: helps
+  outcome: task performance on long-context prompts
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide
+    retrieved: 2026-10-25
+    quote: "If you have long context in your prompt, ideally place your instructions at both the beginning and end of the provided context, as we found this to perform better than only above or below. If you’d prefer to only have your instructions once, then above the provided context works better than below."
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}   # cross-vendor tension: Gemini 3 and Claude advise instructions last
+history:
+  - 1.0.0 2026-10-25 created

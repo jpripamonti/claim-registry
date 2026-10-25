@@ -1,0 +1,34 @@
+id: prompt-format-spurious-sensitivity
+version: 1.0.0
+title: Meaning-preserving changes to prompt format swing few-shot accuracy widely and unpredictably
+status: active
+technique:
+  summary: >
+    Varying only the surface format of a few-shot prompt (separators, casing, spacing, field names,
+    e.g. "Passage: <text> || Answer: <text>") while keeping the content the same.
+conditions:
+  model_family: [llama, gpt, other]
+  # Tested: LLaMA-2-7B/13B/70B, Falcon-7B, Falcon-7B-Instruct, GPT-3.5-Turbo
+  model_versions: {llama: ["2"], gpt: ["3.5-turbo"], other: ["Falcon-7B", "Falcon-7B-Instruct"]}
+  task_family: [classification, multiple-choice-qa]   # 53 Super-NaturalInstructions tasks
+  reasoning: disabled
+  tool_use: none
+  context_size: short
+effect:
+  direction: mixed
+  outcome: few-shot accuracy depends on an arbitrary format choice; the best format does not transfer across models
+  magnitude: Up to 76 accuracy points (LLaMA-2-13B); GPT-3.5-Turbo median spread 0.064, max 0.562 across 53 tasks
+evidence:
+  - tier: observed
+    source: https://arxiv.org/abs/2310.11324
+    reported_by: Melanie Sclar, Yejin Choi, Yulia Tsvetkov, Alane Suhr (University of Washington, AI2, UC Berkeley)
+    config: Plausible equivalent prompt formats sampled with the FormatSpread algorithm, few-shot, on 53 Super-NaturalInstructions tasks
+    model: LLaMA-2-7B, LLaMA-2-13B, LLaMA-2-70B (4-bit), Falcon-7B, Falcon-7B-Instruct, GPT-3.5-Turbo
+    outcome: Large accuracy spread across equivalent formats; persists with larger models, more shots and instruction tuning
+    quote: "We find that several widely used open-source LLMs are extremely sensitive to subtle changes in prompt formatting in few-shot settings, with performance differences of up to 76 accuracy points when evaluated using LLaMA-2-13B."
+    retrieved: 2026-10-25
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

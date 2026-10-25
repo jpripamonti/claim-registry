@@ -1,0 +1,38 @@
+id: aggressive-tool-language-overtriggers
+version: 1.0.0
+title: Emphatic "CRITICAL/MUST" tool instructions cause overtriggering on Claude Opus 4.5 and 4.6
+status: active
+technique:
+  summary: >
+    Emphatic wording written to fix tool or skill undertriggering on older models ("CRITICAL: You
+    MUST use this tool when...") makes these models overtrigger. Soften it.
+  example: |
+    Before: CRITICAL: You MUST use this tool when...
+    After:  Use this tool when...
+conditions:
+  model_family: [claude-opus]
+  model_versions: ["4.5", "4.6"]   # page names Claude Opus 4.5 and Claude Opus 4.6
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: tool or skill overtriggering
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-10-25
+    quote: >-
+      Claude Opus 4.5 and Claude Opus 4.6 are also more responsive to the system prompt than previous models. If your prompts were designed to reduce undertriggering on tools or skills, these models might now overtrigger. The fix is to soften any aggressive language.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-10-25
+    quote: >-
+      Where you might have said "CRITICAL: You MUST use this tool when...," you can use more normal prompting such as "Use this tool when..." instead.
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

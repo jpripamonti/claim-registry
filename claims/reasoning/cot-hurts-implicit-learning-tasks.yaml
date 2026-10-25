@@ -1,0 +1,37 @@
+id: cot-hurts-implicit-learning-tasks
+version: 1.0.0
+title: Chain-of-thought lowers accuracy on tasks where verbal deliberation also hurts humans
+status: active
+technique:
+  summary: >
+    Prompt the model to reason step by step before answering (zero-shot CoT), compared with answering
+    directly.
+conditions:
+  model_family: [gpt, openai-o, claude-opus, claude-sonnet, gemini, llama]
+  # Tested: GPT-4o, o1-preview, Claude 3.5 Sonnet, Claude 3 Opus, Gemini 1.5 Pro,
+  # Llama 3.1 70B/8B Instruct, Llama 3 70B/8B Instruct
+  model_versions: {gpt: ["4o"], openai-o: ["o1-preview"], claude-opus: ["3"], claude-sonnet: ["3.5"], gemini: ["1.5"], llama: ["3", "3.1"]}
+  task_family: [implicit-statistical-learning, visual-recognition, rule-learning-with-exceptions]
+  reasoning: disabled   # CoT prompted on non-reasoning models; o1-preview compared with zero-shot GPT-4o
+  tool_use: none
+  context_size: short
+effect:
+  direction: hurts
+  outcome: accuracy
+  magnitude: >
+    Artificial-grammar learning: GPT-4o -23.1pp, Claude 3 Opus -8.00pp, Gemini 1.5 Pro -6.05pp,
+    Llama 3.1 70B -8.80pp; o1-preview 36.3pp below zero-shot GPT-4o. Mixed on three control tasks.
+evidence:
+  - tier: observed
+    source: https://arxiv.org/html/2410.21333
+    reported_by: Ryan Liu, Jiayi Geng, Addison J. Wu, Ilia Sucholutsky, Tania Lombrozo, Thomas L. Griffiths (Princeton)
+    config: Zero-shot direct answer vs zero-shot CoT on six psychology-derived tasks (artificial grammar learning, face recognition, classifying data with rule exceptions, three controls)
+    model: o1-preview, GPT-4o, Claude 3.5 Sonnet, Claude 3 Opus, Gemini 1.5 Pro, Llama 3.1 70B/8B Instruct, Llama 3 70B/8B Instruct
+    outcome: Large CoT-induced drops on three task types; mixed effects on the other three
+    quote: "Across other models, we find consistent decreases in performance with CoT: 23.1% in GPT-4o, 8.00% in Claude 3 Opus, 6.05% in Gemini, and 8.80% in Llama 3.1 70B Instruct."
+    retrieved: 2026-10-25
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [manual-cot-when-thinking-off], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

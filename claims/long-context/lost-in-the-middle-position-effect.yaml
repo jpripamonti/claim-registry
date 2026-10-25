@@ -1,0 +1,35 @@
+id: lost-in-the-middle-position-effect
+version: 1.0.0
+title: Relevant information in the middle of the context is used worse than at the start or end
+status: active
+technique:
+  summary: >
+    Place the relevant document or key near the beginning or end of the input context rather than in
+    the middle.
+conditions:
+  model_family: [gpt, claude, other]
+  # Tested: GPT-3.5-Turbo and GPT-3.5-Turbo-16K (0613), Claude-1.3 and Claude-1.3-100K,
+  # MPT-30B-Instruct, LongChat-13B-16K; GPT-4 (8K) on a subset
+  model_versions: {gpt: ["3.5-turbo", "4"], claude: ["1.3"], other: ["MPT-30B-Instruct", "LongChat-13B-16K"]}
+  task_family: [multi-document-qa, key-value-retrieval]
+  reasoning: disabled
+  tool_use: none
+  context_size: unspecified   # 10/20/30 documents; the paper does not say whether contexts exceeded ~20k tokens
+effect:
+  direction: helps
+  outcome: accuracy when relevant information is at the start or end rather than the middle (U-shaped curve)
+  magnitude: GPT-3.5-Turbo multi-document QA dropped by more than 20% with the answer mid-context, in the worst case below closed-book (56.1%)
+evidence:
+  - tier: observed
+    source: https://arxiv.org/abs/2307.03172
+    reported_by: Nelson F. Liu, Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Bevilacqua, Fabio Petroni, Percy Liang (Stanford, Samaya AI)
+    config: Multi-document QA with the gold passage moved across positions among 10/20/30 documents; synthetic JSON key-value retrieval with varying key position; greedy decoding
+    model: GPT-3.5-Turbo (0613), GPT-3.5-Turbo-16K, Claude-1.3, Claude-1.3-100K, MPT-30B-Instruct, LongChat-13B-16K, GPT-4 (subset)
+    outcome: U-shaped accuracy by position, worst mid-context, including for extended-context models
+    quote: "In particular, we observe that performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models."
+    retrieved: 2026-10-25
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

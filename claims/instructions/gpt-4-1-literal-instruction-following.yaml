@@ -1,0 +1,29 @@
+id: gpt-4-1-literal-instruction-following
+version: 1.0.0
+title: GPT-4.1 follows instructions more literally than earlier GPT models, so state desired behaviour explicitly
+status: active
+technique:
+  summary: >
+    When migrating prompts to GPT-4.1, state the desired behaviour explicitly instead of relying on
+    the model to infer intent. A single firm clarifying sentence is usually enough.
+conditions:
+  model_family: [gpt]
+  model_versions: ["4.1"]      # page mentions GPT-4.1, gpt-4.1-2025-04-14, GPT-4o
+  task_family: [any]
+  reasoning: disabled          # page: "GPT-4.1 is not a reasoning model"
+  tool_use: any
+  context_size: any
+effect:
+  direction: helps
+  outcome: adherence to intended behaviour
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide
+    retrieved: 2026-10-25
+    quote: "GPT-4.1 is trained to follow instructions more closely and more literally than its predecessors, which tended to more liberally infer intent from user and system prompts."
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

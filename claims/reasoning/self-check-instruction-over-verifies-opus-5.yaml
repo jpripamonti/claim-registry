@@ -1,0 +1,30 @@
+id: self-check-instruction-over-verifies-opus-5
+version: 1.0.0
+title: Verification instructions cause over-verification on Claude Opus 5
+status: active
+technique:
+  summary: >
+    Self-verification instructions carried over from prompts tuned for earlier models. Remove them
+    rather than rewriting them.
+conditions:
+  model_family: [claude-opus]
+  model_versions: ["5"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: over-verification, adding tokens and latency
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-10-25
+    quote: >-
+      Claude Opus 5 is the exception: it verifies its own work well without explicit instruction, and verification instructions carried over from prompts tuned for earlier models can cause over-verification, adding tokens and latency. On Claude Opus 5, remove these instructions rather than rewriting them.
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [self-check-instruction-catches-errors], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

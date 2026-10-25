@@ -1,0 +1,32 @@
+id: gpt-4-1-agentic-system-reminders
+version: 1.0.0
+title: Persistence, tool-calling and planning reminders in a GPT-4.1 agent prompt raise SWE-bench Verified by about 20%
+status: active
+technique:
+  summary: >
+    Start the agent system prompt with three reminders: persistence (keep going until the query is
+    resolved), tool-calling (use tools instead of guessing), and optionally planning.
+  example: |
+    You are an agent - please keep going until the user’s query is completely resolved, before ending your turn and yielding back to the user.
+    If you are not sure about file content or codebase structure pertaining to the user’s request, use your tools to read files and gather the relevant information: do NOT guess or make up an answer.
+conditions:
+  model_family: [gpt]
+  model_versions: ["4.1"]
+  task_family: [agentic-coding]  # measured on SWE-bench Verified; the page recommends it for "any agent prompt"
+  reasoning: disabled
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: SWE-bench Verified score (OpenAI internal)
+  magnitude: close to 20% increase
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide
+    retrieved: 2026-10-25
+    quote: "The model adhered closely to these three simple instructions and increased our internal SWE-bench Verified score by close to 20% - so we highly encourage starting any agent prompt with clear reminders covering the three categories listed above."
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

@@ -1,0 +1,30 @@
+id: general-over-prescriptive-thinking-guidance
+version: 1.0.0
+title: With thinking on, a general instruction like "think thoroughly" beats a hand-written step-by-step plan
+status: active
+technique:
+  summary: >
+    Guide thinking with a general instruction such as "think thoroughly" rather than a prescribed
+    sequence of reasoning steps.
+conditions:
+  model_family: [claude]
+  model_versions: ">=4.5"   # page: "Claude's latest models"
+  task_family: [unspecified]
+  reasoning: enabled
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: reasoning quality
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-10-25
+    quote: >-
+      A prompt such as "think thoroughly" often produces better reasoning than a hand-written step-by-step plan. Claude's reasoning frequently exceeds what a human would prescribe.
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

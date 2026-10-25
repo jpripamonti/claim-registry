@@ -1,0 +1,22 @@
+# Allowed task_family values. "any" = claimed to hold for every task; "unspecified" = the source
+# does not say.
+- any
+- unspecified
+- agentic-coding
+- classification
+- commonsense-qa
+- engineering-qa
+- factual-knowledge
+- generative-writing
+- graduate-science-qa
+- implicit-statistical-learning
+- instruction-induction
+- key-value-retrieval
+- knowledge-qa
+- language-understanding
+- mixed-benchmark          # benchmark suites spanning many task types (e.g. BIG-Bench)
+- multi-document-qa
+- multiple-choice-qa
+- reading-comprehension
+- rule-learning-with-exceptions
+- visual-recognition

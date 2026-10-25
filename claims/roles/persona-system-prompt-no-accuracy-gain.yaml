@@ -1,0 +1,41 @@
+id: persona-system-prompt-no-accuracy-gain
+version: 1.0.0
+title: Adding a persona to the system prompt does not improve accuracy on factual multiple-choice questions
+status: active
+technique:
+  summary: >
+    Put a role or persona in the system prompt ("You are a lawyer", "You are a helpful assistant",
+    interpersonal or occupational roles) before an objective factual question.
+  example: |
+    system: You are a physicist.
+    user: <MMLU question with options>
+conditions:
+  model_family: [llama, mistral, qwen, other]
+  # Tested: FLAN-T5-XXL (11B), Llama-3-Instruct 8B and 70B, Mistral-7B-Instruct-v0.2,
+  # Qwen2.5-Instruct 3B to 72B. No closed API models.
+  model_versions: {llama: ["3"], mistral: ["7b-instruct-v0.2"], qwen: ["2.5"], other: ["FLAN-T5-XXL"]}
+  task_family: [multiple-choice-qa, factual-knowledge]   # 2,410 MMLU questions
+  reasoning: disabled
+  tool_use: none
+  context_size: short
+effect:
+  direction: no_effect
+  outcome: accuracy on objective factual questions
+  magnitude: >
+    No gain over the no-persona control and sometimes a small loss. Picking the best persona per
+    question after the fact raises accuracy, but automatic persona selection was often no better
+    than random.
+evidence:
+  - tier: observed
+    source: https://arxiv.org/html/2311.10054
+    reported_by: Mingqian Zheng, Jiaxin Pei, Lajanugen Logeswaran, Moontae Lee, David Jurgens (University of Michigan, LG AI Research)
+    config: 162 personas (6 interpersonal relationship types, 8 expertise domains) in system or user prompts vs a no-persona control, on 2,410 MMLU questions
+    model: FLAN-T5-XXL, Llama-3-Instruct 8B/70B, Mistral-7B-Instruct-v0.2, Qwen2.5-Instruct 3B-72B
+    outcome: Personas did not improve accuracy over the control; their effect was largely random
+    quote: "Through our analysis, we find that, in general, prompting with personas has no or small negative effects on model performance compared with the control setting where no persona is added."
+    retrieved: 2026-10-25
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

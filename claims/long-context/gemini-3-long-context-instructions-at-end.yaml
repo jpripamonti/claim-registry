@@ -1,0 +1,29 @@
+id: gemini-3-long-context-instructions-at-end
+version: 1.0.0
+title: With large context on Gemini 3, put all the context first and the instructions or question at the very end
+status: active
+technique:
+  summary: >
+    Supply the documents or code first, bridge with a phrase like "Based on the information
+    above...", and place the specific instruction or question last.
+conditions:
+  model_family: [gemini]
+  model_versions: ">=3"
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: long
+effect:
+  direction: helps
+  outcome: unspecified ("recommended for optimal results")
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://ai.google.dev/gemini-api/docs/prompting-strategies
+    retrieved: 2026-10-25
+    quote: "When providing large amounts of context (e.g., documents, code), supply all the context first. Place your specific instructions or questions at the very end of the prompt."
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}   # cross-vendor tension with gpt-4-1-long-context-instructions-both-ends
+history:
+  - 1.0.0 2026-10-25 created

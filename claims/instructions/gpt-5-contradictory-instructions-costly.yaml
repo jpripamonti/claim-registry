@@ -1,0 +1,29 @@
+id: gpt-5-contradictory-instructions-costly
+version: 1.0.0
+title: Contradictory or vague instructions hurt GPT-5 more than other models
+status: active
+technique:
+  summary: >
+    Prompts containing contradictory or ambiguous instructions (e.g. "always do X first" alongside
+    "in emergencies do Y before anything"). Resolve the instruction hierarchy explicitly.
+conditions:
+  model_family: [gpt]
+  model_versions: ["5"]
+  task_family: [any]
+  reasoning: enabled
+  tool_use: any
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: reasoning efficiency and performance (reasoning tokens spent reconciling contradictions)
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/cookbook/examples/gpt-5/gpt-5_prompting_guide
+    retrieved: 2026-10-25
+    quote: "However, its careful instruction-following behavior means that poorly-constructed prompts containing contradictory or vague instructions can be more damaging to GPT-5 than to other models, as it expends reasoning tokens searching for a way to reconcile the contradictions rather than picking one instruction at random."
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

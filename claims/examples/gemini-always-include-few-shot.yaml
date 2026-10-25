@@ -1,0 +1,28 @@
+id: gemini-always-include-few-shot
+version: 1.0.0
+title: Google recommends always including few-shot examples in Gemini prompts
+status: active
+technique:
+  summary: >
+    Include a few varied, consistently formatted examples in the prompt. Too many risk overfitting.
+conditions:
+  model_family: [gemini]
+  model_versions: unspecified  # general page; code samples use gemini-2.5-flash
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: prompt effectiveness (control of format, phrasing and scope)
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://ai.google.dev/gemini-api/docs/prompting-strategies
+    retrieved: 2026-10-25
+    quote: "We recommend to always include few-shot examples in your prompts. Prompts without few-shot examples are likely to be less effective."
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}   # cross-vendor tension with openai-reasoning-models-zero-shot-first
+history:
+  - 1.0.0 2026-10-25 created

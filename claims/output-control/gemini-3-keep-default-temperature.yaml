@@ -1,0 +1,33 @@
+id: gemini-3-keep-default-temperature
+version: 1.0.0
+title: Lowering temperature below the default 1.0 on Gemini 3 can cause looping or degraded performance
+status: active
+technique:
+  summary: >
+    Setting temperature below 1.0 on Gemini 3. Leave it at the default and remove low-temperature
+    settings carried over from earlier models.
+conditions:
+  model_family: [gemini]
+  model_versions: ">=3"        # page mentions gemini-3-flash-preview, gemini-3.1-pro-preview, gemini-3.1-flash-lite
+  task_family: [any]           # "For all Gemini 3 models"; harm stated as "particularly" math and reasoning
+  reasoning: enabled
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: looping or degraded performance, particularly on complex math or reasoning tasks
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://ai.google.dev/gemini-api/docs/gemini-3
+    retrieved: 2026-10-25
+    quote: "Changing the temperature (setting it below 1.0) may lead to unexpected behavior, such as looping or degraded performance, particularly in complex mathematical or reasoning tasks."
+  - tier: asserted
+    source: https://ai.google.dev/gemini-api/docs/gemini-3
+    retrieved: 2026-10-25
+    quote: "For all Gemini 3 models, we strongly recommend keeping the temperature parameter at its default value of 1.0."
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

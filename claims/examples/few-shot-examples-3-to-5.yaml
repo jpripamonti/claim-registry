@@ -1,0 +1,35 @@
+id: few-shot-examples-3-to-5
+version: 1.0.0
+title: Three to five relevant, diverse examples improve accuracy and consistency on Claude
+status: active
+technique:
+  summary: >
+    Include 3-5 examples that mirror the real use case, cover edge cases, and are wrapped in
+    <example> tags (<examples> for several).
+conditions:
+  model_family: [claude]
+  model_versions: ">=4.5"   # page scope: "current Claude models"
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: accuracy and consistency of output format, tone and structure
+  magnitude: 3-5 examples recommended for best results
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-10-25
+    quote: >-
+      A few well-crafted examples (known as few-shot or multishot prompting) improve accuracy and consistency.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-10-25
+    quote: >-
+      Include 3–5 examples for best results.
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

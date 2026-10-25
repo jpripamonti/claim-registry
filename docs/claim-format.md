@@ -40,6 +40,7 @@ conditions:                       # where the claim holds; see "Conditions"
   model_family: [claude]
   model_versions: ">=3"           # version range within the family, or "any"
   task_family: [any]
+  reasoning: any                  # enabled | disabled | any  (extended thinking / reasoning models)
   tool_use: any                   # required | none | any
   context_size: any               # short | long | any  (long = over ~20k tokens)
 
@@ -79,6 +80,17 @@ These are computed by the tooling, never written by hand:
 Conditions are what make a claim precise. Rules:
 
 - `any` means the claim is meant to hold everywhere in that dimension.
+- `model_family` is either a vendor family (`claude`, `gpt`, `openai-o`, `gemini`, …) or one line
+  within it (`claude-opus`, `claude-sonnet`, …) when the source names a specific line. Version
+  numbers are shared across Claude lines, but not every line has every version (there is an Opus
+  4.8 and no Sonnet 4.8), so a claim about "Claude Opus 4.5" uses `claude-opus`, not `claude`.
+- `model_versions` is `any`, `unspecified`, a range such as `">=4.6"` or `"<4"`, or a list of exact
+  versions such as `["4.5", "4.6"]`. Ranges compare against the ordered version list in
+  `vocab/model-families.yaml` and match only versions listed there for that family or line.
+  When `model_family` lists several families (typical for a study that tested many models),
+  `model_versions` is a map from each family to its own value, e.g.
+  `{claude-sonnet: ["3.5"], gpt: ["4o"]}`. A YAML comment names the exact models tested.
+- Family `other` holds models outside the vocabulary; its versions are free text.
 - `unspecified` means the source did not say. It is different from `any`: an asserted claim from a
   doc that never mentions task type gets `task_family: [unspecified]`, not `[any]`.
 - A claim never becomes "deprecated". When a technique stops working on newer models, the existing
@@ -103,6 +115,11 @@ not evidence.
 Contradictory claims coexist. If source A says a technique helps and source B says it does not, the
 registry holds two claims, each with its own evidence, linked by `contradicts`. Tools that cite one
 of them always show the other.
+
+Two claims contradict when they describe the same technique and outcome for at least one shared
+model family, and give different effect directions. Different vendors giving opposite advice for
+their own models (Google: always use examples; OpenAI: try reasoning models without examples
+first) is not a contradiction, because no model falls under both.
 
 ## Versioning
 

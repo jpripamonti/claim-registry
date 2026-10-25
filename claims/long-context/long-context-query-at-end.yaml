@@ -1,0 +1,38 @@
+id: long-context-query-at-end
+version: 1.0.0
+title: Placing long documents first and the query last improves response quality on long inputs
+status: active
+technique:
+  summary: >
+    With large inputs (20k+ tokens), put the long documents near the top of the prompt, above the
+    query, instructions and examples, so the query comes last.
+  example: |
+    <documents>...</documents>
+    Analyze the annual report and competitor analysis. Identify strategic advantages.
+conditions:
+  model_family: [claude]
+  model_versions: any        # page: "This improves performance across all models."
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: long         # page: "large documents or data-rich inputs (20k+ tokens)"
+effect:
+  direction: helps
+  outcome: response quality, especially with complex multidocument inputs
+  magnitude: up to 30 percent in Anthropic's tests
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-10-25
+    quote: >-
+      Queries at the end can improve response quality by up to 30 percent in tests, especially with complex, multidocument inputs.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-10-25
+    quote: >-
+      Place your long documents and inputs near the top of your prompt, above your query, instructions, and examples. This improves performance across all models.
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

@@ -1,0 +1,37 @@
+# Model families and their versions, oldest first. Ranges like ">=4.6" compare positions in these
+# lists. A line (claude-opus, ...) belongs to its parent family; a claim on the parent covers every
+# line. Versions are strings.
+
+claude:
+  versions: ["1.3", "3", "3.5", "3.7", "4", "4.1", "4.5", "4.6", "4.7", "4.8", "5", "5.1", "5.5"]
+claude-opus:
+  parent: claude
+  versions: ["3", "4", "4.1", "4.5", "4.6", "4.7", "4.8", "5", "5.5"]
+claude-sonnet:
+  parent: claude
+  versions: ["3.5", "3.7", "4", "4.5", "4.6", "5", "5.5"]
+claude-haiku:
+  parent: claude
+  versions: ["3", "3.5", "4.5", "5.5"]
+claude-fable:
+  parent: claude
+  versions: ["5", "5.1"]
+claude-mythos:
+  parent: claude
+  versions: ["preview", "5", "5.1"]
+
+gpt:
+  versions: ["3.5-turbo", "4", "4o", "4o-mini", "4.1", "5", "5.1", "5.1-mini", "5.2"]
+openai-o:
+  versions: ["o1-preview", "o1", "o1-mini", "o3", "o3-mini", "o4-mini"]
+gemini:
+  versions: ["1.5", "2.0", "2.5", "3", "3.1"]
+
+llama:
+  versions: ["2", "3", "3.1"]
+mistral:
+  versions: ["7b-instruct-v0.2", "7b-instruct-v0.3"]
+qwen:
+  versions: ["2", "2.5", "3"]
+
+other: {}   # models outside this list; versions are free text

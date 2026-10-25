@@ -1,0 +1,31 @@
+id: gpt-4-1-induced-planning-between-tool-calls
+version: 1.0.0
+title: Prompting GPT-4.1 to plan explicitly between tool calls raises SWE-bench Verified pass rate by 4%
+status: active
+technique:
+  summary: >
+    Because GPT-4.1 has no internal chain of thought, instruct it to write an explicit plan and to
+    reflect on outcomes before and after each function call.
+  example: |
+    You MUST plan extensively before each function call, and reflect extensively on the outcomes of the previous function calls.
+conditions:
+  model_family: [gpt]
+  model_versions: ["4.1"]
+  task_family: [agentic-coding]
+  reasoning: disabled
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: SWE-bench Verified pass rate
+  magnitude: +4% pass rate
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide
+    retrieved: 2026-10-25
+    quote: "In our experimentation with the SWE-bench Verified agentic task, inducing explicit planning increased the pass rate by 4%."
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

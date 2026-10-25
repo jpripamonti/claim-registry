@@ -1,0 +1,29 @@
+id: self-check-instruction-catches-errors
+version: 1.0.0
+title: Asking Claude to verify its answer before finishing catches errors
+status: active
+technique:
+  summary: >
+    Append an instruction such as "Before you finish, verify your answer against [test criteria]."
+conditions:
+  model_family: [claude]
+  model_versions: ">=4.5"   # page scope: current models; same page makes Opus 5 the exception
+  task_family: [unspecified]   # "especially for coding and math"
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: errors caught, especially in coding and math
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-10-25
+    quote: >-
+      Append something like "Before you finish, verify your answer against [test criteria]." This catches errors reliably, especially for coding and math.
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [self-check-instruction-over-verifies-opus-5], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

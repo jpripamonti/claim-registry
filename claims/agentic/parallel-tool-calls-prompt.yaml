@@ -1,0 +1,35 @@
+id: parallel-tool-calls-prompt
+version: 1.0.0
+title: An explicit parallel-tool-calls instruction raises Claude's parallel tool calling to about 100 percent
+status: active
+technique:
+  summary: >
+    A system-prompt block telling Claude to make all independent tool calls in parallel, and
+    dependent ones in sequence.
+  example: |
+    <use_parallel_tool_calls>
+    If you intend to call multiple tools and there are no dependencies between the tool calls,
+    make all of the independent tool calls in parallel. ...
+    </use_parallel_tool_calls>
+conditions:
+  model_family: [claude]
+  model_versions: ">=4.5"   # page: "Claude's latest models"
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: rate of parallel tool calling
+  magnitude: high without prompting; about 100 percent with prompting
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-10-25
+    quote: >-
+      Although the model has a high success rate in parallel tool calling without prompting, you can boost this to about 100 percent or adjust the aggression level:
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

@@ -1,0 +1,30 @@
+id: written-reasoning-declined-newest-models
+version: 1.0.0
+title: On the newest Claude models, asking for written-out reasoning may be declined; rely on thinking instead
+status: active
+technique:
+  summary: >
+    Asking the model for visible reasoning in the response (for example in <thinking> tags).
+    Rely on built-in thinking instead, at lower effort if cost matters.
+conditions:
+  model_family: [claude-fable, claude-opus, claude-sonnet]
+  model_versions: {claude-fable: ["5", "5.1"], claude-opus: ["5", "5.5"], claude-sonnet: ["5.5"]}
+  task_family: [unspecified]
+  reasoning: unspecified          # Fable 5/5.1 and Opus 5.5 have thinking always on
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: request may be declined
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-10-25
+    quote: >-
+      On Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, and Claude Sonnet 5.5, rely on thinking instead, at a lower effort level if cost or latency matters: a prompt that asks the model to write out its reasoning, for example in <thinking> tags, may be declined.
+as_of: 2026-10-25
+review_by: 2027-04-25
+relations: {contradicts: [manual-cot-when-thinking-off], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-10-25 created

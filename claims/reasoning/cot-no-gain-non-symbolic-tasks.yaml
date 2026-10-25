@@ -24,14 +24,15 @@ effect:
 evidence:
   - tier: observed
     source: https://arxiv.org/html/2409.12183
+    retrieved: 2026-10-25
     reported_by: Zayne Sprague, Fangcong Yin, Juan Diego Rodriguez, Dongwei Jiang, Manya Wadhwa, Prasann Singhal, Xinyu Zhao, Xi Ye, Kyle Mahowald, Greg Durrett (UT Austin et al.)
     config: Zero-shot and few-shot, direct vs CoT, on 20 datasets, plus a meta-analysis of 100+ CoT papers
     model: 14 models, listed in the conditions comment
     outcome: CoT gains concentrate in math and logic; non-symbolic reasoning datasets show no improvement
-    quote: "there is little to no separation between the performance of zero-shot CoT and zero-shot direct answer. Despite these datasets involving reasoning, CoT does not yield improvement."
-    retrieved: 2026-10-25
+    quote: >-
+      there is little to no separation between the performance of zero-shot CoT and zero-shot direct answer. Despite these datasets involving reasoning, CoT does not yield improvement.
 as_of: 2026-10-25
 review_by: 2027-04-25
-relations: {contradicts: [manual-cot-when-thinking-off], refines: [], superseded_by: null}
+relations: {contradicts: [], refines: [], superseded_by: null}
 history:
   - 1.0.0 2026-10-25 created

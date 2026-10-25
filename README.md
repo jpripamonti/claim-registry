@@ -6,7 +6,7 @@ primarily a knowledge base — a dependency system that prompts and agent config
 
 ## The unit is a claim, not a practice
 
-A claim: *technique T, under conditions C (model family, version, task family, tool use, context
+A claim: *technique T, under conditions C (model family, version, task family, reasoning, tool use, context
 size), has effect E, supported by evidence of tier X, as of date D.* Conditions are first-class, so
 nothing is ever simply "deprecated" — it's "no measurable effect on model Y for task family Z."
 Contradictory claims coexist with their evidence; the system records disagreement rather than forcing
@@ -44,4 +44,5 @@ user outcomes flow back as observed evidence.
 ## Governance (designed first)
 
 An editorial model for who can assert claims, how disputes resolve, a public changelog, open data.
+See [docs/governance.md](docs/governance.md) and [docs/claim-format.md](docs/claim-format.md).
 Without that, the registry is just one more opinionated blog with a schema.

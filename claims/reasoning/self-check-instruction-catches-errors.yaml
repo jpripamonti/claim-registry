@@ -24,6 +24,6 @@ evidence:
       Append something like "Before you finish, verify your answer against [test criteria]." This catches errors reliably, especially for coding and math.
 as_of: 2026-10-25
 review_by: 2027-04-25
-relations: {contradicts: [self-check-instruction-over-verifies-opus-5], refines: [], superseded_by: null}
+relations: {contradicts: [], refines: [], superseded_by: null}
 history:
   - 1.0.0 2026-10-25 created

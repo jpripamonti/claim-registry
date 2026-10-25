@@ -21,12 +21,13 @@ effect:
 evidence:
   - tier: observed
     source: https://arxiv.org/abs/2310.11324
+    retrieved: 2026-10-25
     reported_by: Melanie Sclar, Yejin Choi, Yulia Tsvetkov, Alane Suhr (University of Washington, AI2, UC Berkeley)
     config: Plausible equivalent prompt formats sampled with the FormatSpread algorithm, few-shot, on 53 Super-NaturalInstructions tasks
     model: LLaMA-2-7B, LLaMA-2-13B, LLaMA-2-70B (4-bit), Falcon-7B, Falcon-7B-Instruct, GPT-3.5-Turbo
     outcome: Large accuracy spread across equivalent formats; persists with larger models, more shots and instruction tuning
-    quote: "We find that several widely used open-source LLMs are extremely sensitive to subtle changes in prompt formatting in few-shot settings, with performance differences of up to 76 accuracy points when evaluated using LLaMA-2-13B."
-    retrieved: 2026-10-25
+    quote: >-
+      We find that several widely used open-source LLMs are extremely sensitive to subtle changes in prompt formatting in few-shot settings, with performance differences of up to 76 accuracy points when evaluated using LLaMA-2-13B.
 as_of: 2026-10-25
 review_by: 2027-04-25
 relations: {contradicts: [], refines: [], superseded_by: null}

@@ -7,8 +7,8 @@ technique:
     Prefilling the final assistant message (a partial response for Claude to continue). Use
     structured outputs, system-prompt instructions, or move continuations into the user turn instead.
 conditions:
-  model_family: [claude]
-  model_versions: ">=4.6"   # page: "Claude 4.6 models and Claude Mythos Preview"; earlier models still support prefill
+  model_family: [claude, claude-mythos]
+  model_versions: {claude: ">=4.6", claude-mythos: ["preview"]}   # page: "Claude 4.6 models and Claude Mythos Preview"; earlier models still support prefill
   task_family: [any]
   reasoning: unspecified
   tool_use: unspecified

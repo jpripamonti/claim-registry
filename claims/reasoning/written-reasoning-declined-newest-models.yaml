@@ -25,6 +25,6 @@ evidence:
       On Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, and Claude Sonnet 5.5, rely on thinking instead, at a lower effort level if cost or latency matters: a prompt that asks the model to write out its reasoning, for example in <thinking> tags, may be declined.
 as_of: 2026-10-25
 review_by: 2027-04-25
-relations: {contradicts: [manual-cot-when-thinking-off], refines: [], superseded_by: null}
+relations: {contradicts: [], refines: [manual-cot-when-thinking-off], superseded_by: null}
 history:
   - 1.0.0 2026-10-25 created

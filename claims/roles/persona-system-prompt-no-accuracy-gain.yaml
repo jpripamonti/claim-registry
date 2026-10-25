@@ -28,12 +28,13 @@ effect:
 evidence:
   - tier: observed
     source: https://arxiv.org/html/2311.10054
+    retrieved: 2026-10-25
     reported_by: Mingqian Zheng, Jiaxin Pei, Lajanugen Logeswaran, Moontae Lee, David Jurgens (University of Michigan, LG AI Research)
     config: 162 personas (6 interpersonal relationship types, 8 expertise domains) in system or user prompts vs a no-persona control, on 2,410 MMLU questions
     model: FLAN-T5-XXL, Llama-3-Instruct 8B/70B, Mistral-7B-Instruct-v0.2, Qwen2.5-Instruct 3B-72B
     outcome: Personas did not improve accuracy over the control; their effect was largely random
-    quote: "Through our analysis, we find that, in general, prompting with personas has no or small negative effects on model performance compared with the control setting where no persona is added."
-    retrieved: 2026-10-25
+    quote: >-
+      Through our analysis, we find that, in general, prompting with personas has no or small negative effects on model performance compared with the control setting where no persona is added.
 as_of: 2026-10-25
 review_by: 2027-04-25
 relations: {contradicts: [], refines: [], superseded_by: null}

@@ -18,7 +18,7 @@ claim fields and version rules referred to here are defined in [claim-format.md]
 - **Contributor**: anyone. Proposes claims, evidence and disputes through pull requests.
 - **Editor**: reviews and merges changes, cuts registry versions, rules on disputes. While the
   project is small, the owner is the only editor. More editors are added by the existing editors,
-  and their names are listed in `EDITORS.md`.
+  and their names are listed in `EDITORS.md` (created with the first registry version).
 - **Vendor staff** (people working for a model provider) may contribute, but must say so in the
   pull request. They cannot add observed evidence about their own employer's models.
 
@@ -52,19 +52,20 @@ editor resolves it within 30 days with one of these outcomes:
 
 | Finding | Outcome |
 |---|---|
-| The disputer has contrary evidence | A new claim is added with that evidence, linked as `contradicts`. The original stays. |
+| The disputer has contrary evidence | A new claim is added with that evidence, linked as `contradicts` when it meets the definition in claim-format.md. The original stays. |
 | The claim's conditions are broader than its evidence | Conditions are narrowed (a major bump). |
-| The evidence is misquoted, unreachable or does not say what the claim says | The item is marked as upheld-disputed and stops counting toward the tier. If no evidence remains, the claim is withdrawn. |
+| The evidence is misquoted, unreachable or does not say what the claim says | The dispute is recorded on the claim as `upheld` for that item, which stops counting toward the tier. If no evidence remains, the claim is withdrawn. |
 | No problem found | The dispute is closed with the reasons written in the issue. |
 
 An editor does not rule on a dispute about a claim they wrote or a source they are connected to.
-Another editor does, or, while there is only one editor, the dispute stays open and is marked as
-such on the claim.
+Another editor does, or, while there is only one editor, the dispute stays open and is recorded
+on the claim with status `open`.
 
 ## Releases
 
 - An editor tags a registry version after merging changes, at most once a day.
-- `CHANGELOG.md` lists, for each version, every claim that changed, its bump and a one-line reason.
+- `CHANGELOG.md` (created with the first registry version) lists, for each version, every claim
+  that changed, its bump and a one-line reason.
 
 ## Open data
 

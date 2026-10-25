@@ -23,7 +23,8 @@ evidence:
   - tier: asserted
     source: https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide
     retrieved: 2026-10-25
-    quote: "In our experimentation with the SWE-bench Verified agentic task, inducing explicit planning increased the pass rate by 4%."
+    quote: >-
+      In our experimentation with the SWE-bench Verified agentic task, inducing explicit planning increased the pass rate by 4%.
 as_of: 2026-10-25
 review_by: 2027-04-25
 relations: {contradicts: [], refines: [], superseded_by: null}

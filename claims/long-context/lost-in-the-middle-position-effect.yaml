@@ -22,12 +22,13 @@ effect:
 evidence:
   - tier: observed
     source: https://arxiv.org/abs/2307.03172
+    retrieved: 2026-10-25
     reported_by: Nelson F. Liu, Kevin Lin, John Hewitt, Ashwin Paranjape, Michele Bevilacqua, Fabio Petroni, Percy Liang (Stanford, Samaya AI)
     config: Multi-document QA with the gold passage moved across positions among 10/20/30 documents; synthetic JSON key-value retrieval with varying key position; greedy decoding
     model: GPT-3.5-Turbo (0613), GPT-3.5-Turbo-16K, Claude-1.3, Claude-1.3-100K, MPT-30B-Instruct, LongChat-13B-16K, GPT-4 (subset)
     outcome: U-shaped accuracy by position, worst mid-context, including for extended-context models
-    quote: "In particular, we observe that performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models."
-    retrieved: 2026-10-25
+    quote: >-
+      In particular, we observe that performance is often highest when relevant information occurs at the beginning or end of the input context, and significantly degrades when models must access relevant information in the middle of long contexts, even for explicitly long-context models.
 as_of: 2026-10-25
 review_by: 2027-04-25
 relations: {contradicts: [], refines: [], superseded_by: null}

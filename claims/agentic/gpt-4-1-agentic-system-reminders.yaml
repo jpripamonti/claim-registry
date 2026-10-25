@@ -24,7 +24,8 @@ evidence:
   - tier: asserted
     source: https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide
     retrieved: 2026-10-25
-    quote: "The model adhered closely to these three simple instructions and increased our internal SWE-bench Verified score by close to 20% - so we highly encourage starting any agent prompt with clear reminders covering the three categories listed above."
+    quote: >-
+      The model adhered closely to these three simple instructions and increased our internal SWE-bench Verified score by close to 20% - so we highly encourage starting any agent prompt with clear reminders covering the three categories listed above.
 as_of: 2026-10-25
 review_by: 2027-04-25
 relations: {contradicts: [], refines: [], superseded_by: null}

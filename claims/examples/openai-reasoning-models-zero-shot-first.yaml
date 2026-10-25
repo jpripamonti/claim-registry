@@ -9,7 +9,7 @@ technique:
 conditions:
   model_family: [openai-o]
   model_versions: any
-  task_family: [any]
+  task_family: [unspecified]
   reasoning: enabled
   tool_use: unspecified
   context_size: unspecified
@@ -21,9 +21,10 @@ evidence:
   - tier: asserted
     source: https://developers.openai.com/api/docs/guides/reasoning-best-practices
     retrieved: 2026-10-25
-    quote: "Reasoning models often don’t need few-shot examples to produce good results, so try to write prompts without examples first. If you have more complex requirements for your desired output, it may help to include a few examples of inputs and desired outputs in your prompt."
+    quote: >-
+      Reasoning models often don’t need few-shot examples to produce good results, so try to write prompts without examples first. If you have more complex requirements for your desired output, it may help to include a few examples of inputs and desired outputs in your prompt.
 as_of: 2026-10-25
 review_by: 2027-04-25
-relations: {contradicts: [], refines: [], superseded_by: null}   # cross-vendor tension with gemini-always-include-few-shot
+relations: {contradicts: [], refines: [], superseded_by: null}
 history:
   - 1.0.0 2026-10-25 created

@@ -9,7 +9,7 @@ technique:
 conditions:
   model_family: [openai-o]
   model_versions: any          # page mentions o1, o1-mini, o3, o3-mini, o4-mini
-  task_family: [any]
+  task_family: [unspecified]
   reasoning: enabled
   tool_use: unspecified
   context_size: unspecified
@@ -21,11 +21,13 @@ evidence:
   - tier: asserted
     source: https://developers.openai.com/api/docs/guides/reasoning-best-practices
     retrieved: 2026-10-25
-    quote: "Some prompt engineering techniques, like instructing the model to “think step by step,” may not enhance performance (and can sometimes hinder it)."
+    quote: >-
+      Some prompt engineering techniques, like instructing the model to “think step by step,” may not enhance performance (and can sometimes hinder it).
   - tier: asserted
     source: https://developers.openai.com/api/docs/guides/reasoning-best-practices
     retrieved: 2026-10-25
-    quote: "Since these models perform reasoning internally, prompting them to “think step by step” or “explain your reasoning” is unnecessary."
+    quote: >-
+      Since these models perform reasoning internally, prompting them to “think step by step” or “explain your reasoning” is unnecessary.
 as_of: 2026-10-25
 review_by: 2027-04-25
 relations: {contradicts: [], refines: [], superseded_by: null}

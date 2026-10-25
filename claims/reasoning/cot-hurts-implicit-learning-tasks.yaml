@@ -24,14 +24,15 @@ effect:
 evidence:
   - tier: observed
     source: https://arxiv.org/html/2410.21333
+    retrieved: 2026-10-25
     reported_by: Ryan Liu, Jiayi Geng, Addison J. Wu, Ilia Sucholutsky, Tania Lombrozo, Thomas L. Griffiths (Princeton)
     config: Zero-shot direct answer vs zero-shot CoT on six psychology-derived tasks (artificial grammar learning, face recognition, classifying data with rule exceptions, three controls)
     model: o1-preview, GPT-4o, Claude 3.5 Sonnet, Claude 3 Opus, Gemini 1.5 Pro, Llama 3.1 70B/8B Instruct, Llama 3 70B/8B Instruct
     outcome: Large CoT-induced drops on three task types; mixed effects on the other three
-    quote: "Across other models, we find consistent decreases in performance with CoT: 23.1% in GPT-4o, 8.00% in Claude 3 Opus, 6.05% in Gemini, and 8.80% in Llama 3.1 70B Instruct."
-    retrieved: 2026-10-25
+    quote: >-
+      Across other models, we find consistent decreases in performance with CoT: 23.1% in GPT-4o, 8.00% in Claude 3 Opus, 6.05% in Gemini, and 8.80% in Llama 3.1 70B Instruct.
 as_of: 2026-10-25
 review_by: 2027-04-25
-relations: {contradicts: [manual-cot-when-thinking-off], refines: [], superseded_by: null}
+relations: {contradicts: [], refines: [], superseded_by: null}
 history:
   - 1.0.0 2026-10-25 created

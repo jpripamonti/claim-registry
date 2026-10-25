@@ -9,9 +9,9 @@ technique:
 conditions:
   model_family: [gpt]
   model_versions: ["5"]
-  task_family: [any]
+  task_family: [unspecified]
   reasoning: enabled
-  tool_use: any
+  tool_use: unspecified
   context_size: unspecified
 effect:
   direction: hurts
@@ -21,7 +21,8 @@ evidence:
   - tier: asserted
     source: https://developers.openai.com/cookbook/examples/gpt-5/gpt-5_prompting_guide
     retrieved: 2026-10-25
-    quote: "However, its careful instruction-following behavior means that poorly-constructed prompts containing contradictory or vague instructions can be more damaging to GPT-5 than to other models, as it expends reasoning tokens searching for a way to reconcile the contradictions rather than picking one instruction at random."
+    quote: >-
+      However, its careful instruction-following behavior means that poorly-constructed prompts containing contradictory or vague instructions can be more damaging to GPT-5 than to other models, as it expends reasoning tokens searching for a way to reconcile the contradictions rather than picking one instruction at random.
 as_of: 2026-10-25
 review_by: 2027-04-25
 relations: {contradicts: [], refines: [], superseded_by: null}

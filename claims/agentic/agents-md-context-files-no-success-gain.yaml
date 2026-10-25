@@ -23,12 +23,13 @@ effect:
 evidence:
   - tier: observed
     source: https://arxiv.org/abs/2602.11988
+    retrieved: 2026-10-25
     reported_by: Thibaud Gloaguen, Niels Mündler-Sasahara, Mark Niklas Müller, Veselin Raychev, Martin Vechev (ETH Zurich, LogicStar.ai)
     config: No context file vs LLM-generated file (following agent-developer recommendations) vs developer-committed file, on SWE-bench Lite and a 138-issue benchmark (v3 of the paper)
     model: Sonnet 4.5 (Claude Code), GPT-5.2 and GPT-5.1 mini (Codex), Qwen3-30b-coder (Qwen Code)
     outcome: No general improvement in success; agents follow the instructions, which adds testing and exploration and so cost
-    quote: "Surprisingly, we find that providing context files does not generally improve task success rates, while increasing inference cost by over 20% on average."
-    retrieved: 2026-10-25
+    quote: >-
+      Surprisingly, we find that providing context files does not generally improve task success rates, while increasing inference cost by over 20% on average.
 as_of: 2026-10-25
 review_by: 2027-04-25
 relations: {contradicts: [], refines: [], superseded_by: null}

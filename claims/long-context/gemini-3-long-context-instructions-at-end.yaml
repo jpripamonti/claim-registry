@@ -21,9 +21,10 @@ evidence:
   - tier: asserted
     source: https://ai.google.dev/gemini-api/docs/prompting-strategies
     retrieved: 2026-10-25
-    quote: "When providing large amounts of context (e.g., documents, code), supply all the context first. Place your specific instructions or questions at the very end of the prompt."
+    quote: >-
+      When providing large amounts of context (e.g., documents, code), supply all the context first. Place your specific instructions or questions at the very end of the prompt.
 as_of: 2026-10-25
 review_by: 2027-04-25
-relations: {contradicts: [], refines: [], superseded_by: null}   # cross-vendor tension with gpt-4-1-long-context-instructions-both-ends
+relations: {contradicts: [], refines: [], superseded_by: null}
 history:
   - 1.0.0 2026-10-25 created

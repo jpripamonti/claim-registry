@@ -21,9 +21,10 @@ evidence:
   - tier: asserted
     source: https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide
     retrieved: 2026-10-25
-    quote: "If you have long context in your prompt, ideally place your instructions at both the beginning and end of the provided context, as we found this to perform better than only above or below. If you’d prefer to only have your instructions once, then above the provided context works better than below."
+    quote: >-
+      If you have long context in your prompt, ideally place your instructions at both the beginning and end of the provided context, as we found this to perform better than only above or below. If you’d prefer to only have your instructions once, then above the provided context works better than below.
 as_of: 2026-10-25
 review_by: 2027-04-25
-relations: {contradicts: [], refines: [], superseded_by: null}   # cross-vendor tension: Gemini 3 and Claude advise instructions last
+relations: {contradicts: [], refines: [], superseded_by: null}
 history:
   - 1.0.0 2026-10-25 created

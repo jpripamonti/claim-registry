@@ -25,6 +25,6 @@ evidence:
       Claude Opus 5 is the exception: it verifies its own work well without explicit instruction, and verification instructions carried over from prompts tuned for earlier models can cause over-verification, adding tokens and latency. On Claude Opus 5, remove these instructions rather than rewriting them.
 as_of: 2026-10-25
 review_by: 2027-04-25
-relations: {contradicts: [self-check-instruction-catches-errors], refines: [], superseded_by: null}
+relations: {contradicts: [], refines: [self-check-instruction-catches-errors], superseded_by: null}
 history:
   - 1.0.0 2026-10-25 created

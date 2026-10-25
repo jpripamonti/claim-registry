@@ -8,7 +8,7 @@ technique:
     the final answer in <answer> tags for extraction.
 conditions:
   model_family: [claude]
-  model_versions: unspecified   # same page says not to do this on Fable 5.1, Fable 5, Opus 5.5, Opus 5, Sonnet 5.5
+  model_versions: ">=4.5"   # page scope: current Claude models; written-reasoning-declined-newest-models is the exception for the 5.x models it names
   task_family: [unspecified]
   reasoning: disabled
   tool_use: unspecified
@@ -25,9 +25,6 @@ evidence:
       When thinking is off, you can still encourage step-by-step reasoning by asking Claude to think through the problem before it answers, and to put the final answer in <answer> tags so you can extract it.
 as_of: 2026-10-25
 review_by: 2027-04-25
-relations:
-  contradicts: [written-reasoning-declined-newest-models, cot-hurts-implicit-learning-tasks, cot-no-gain-non-symbolic-tasks]
-  refines: []
-  superseded_by: null
+relations: {contradicts: [], refines: [], superseded_by: null}
 history:
   - 1.0.0 2026-10-25 created

@@ -23,11 +23,13 @@ evidence:
   - tier: asserted
     source: https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide
     retrieved: 2026-10-25
-    quote: "JSON performed particularly poorly."
+    quote: >-
+      JSON performed particularly poorly.
   - tier: asserted
     source: https://developers.openai.com/cookbook/examples/gpt4-1_prompting_guide
     retrieved: 2026-10-25
-    quote: "XML performed well in our long context testing."
+    quote: >-
+      XML performed well in our long context testing.
 as_of: 2026-10-25
 review_by: 2027-04-25
 relations: {contradicts: [], refines: [], superseded_by: null}

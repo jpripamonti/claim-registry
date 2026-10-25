@@ -20,9 +20,10 @@ evidence:
   - tier: asserted
     source: https://ai.google.dev/gemini-api/docs/prompting-strategies
     retrieved: 2026-10-25
-    quote: "We recommend to always include few-shot examples in your prompts. Prompts without few-shot examples are likely to be less effective."
+    quote: >-
+      We recommend to always include few-shot examples in your prompts. Prompts without few-shot examples are likely to be less effective.
 as_of: 2026-10-25
 review_by: 2027-04-25
-relations: {contradicts: [], refines: [], superseded_by: null}   # cross-vendor tension with openai-reasoning-models-zero-shot-first
+relations: {contradicts: [], refines: [], superseded_by: null}
 history:
   - 1.0.0 2026-10-25 created

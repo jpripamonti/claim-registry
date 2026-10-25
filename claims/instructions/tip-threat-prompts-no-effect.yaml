@@ -26,14 +26,15 @@ effect:
 evidence:
   - tier: observed
     source: https://arxiv.org/abs/2508.00614
+    retrieved: 2026-10-25
     reported_by: Lennart Meincke, Ethan Mollick, Lilach Mollick, Dan Shapiro (Wharton Generative AI Labs)
     config: GPQA system prompt "You are a very intelligent assistant, who follows instructions directly.", temperature 1.0, zero-shot, 25 trials per question; 8 variants vs baseline incl. "This is very important to my career!", "If you get this wrong, I will kick a puppy!", tip $1000 / $1 trillion
     model: gemini-1.5-flash-002, gemini-2.0-flash-001, gpt-4o-2024-08-06, gpt-4o-mini-2024-07-18, o4-mini-2025-04-16
     outcome: No meaningful overall improvement; EmotionPrompt's EP02 stimulus slightly hurt Gemini 2.0 Flash on GPQA (RD -0.040, p=0.002)
-    quote: "Threatening or tipping a model generally has no significant effect on benchmark performance."
-    retrieved: 2026-10-25
+    quote: >-
+      Threatening or tipping a model generally has no significant effect on benchmark performance.
 as_of: 2026-10-25
 review_by: 2027-04-25
-relations: {contradicts: [emotionprompt-improves-performance], refines: [], superseded_by: null}
+relations: {contradicts: [], refines: [], superseded_by: null}
 history:
   - 1.0.0 2026-10-25 created

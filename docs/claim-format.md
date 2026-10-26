@@ -187,6 +187,22 @@ A config is up to date when every cited claim's current version has the same maj
 pin and is not withdrawn. A minor or major change produces an update notice explaining what changed,
 with the evidence. Major changes are flagged as breaking.
 
+## Finding the claims that apply to a model
+
+`python3 -m claimreg applies --model <family or line> --version <v> [--context-size short|long]`
+lists the claims that apply to one model, sorted by id, with each claim's effect direction and the
+conditions the user still has to check (task family, reasoning, tool use, and input size when
+`--context-size` is not given). A claim applies when:
+
+- its status is `active` (superseded and withdrawn claims are no longer followed);
+- one of its `model_family` entries is the given family or line, or the parent family of the given
+  line (a claim on `claude` covers `claude-sonnet`; a claim on `claude-opus` covers only Opus);
+- the version falls within that entry's `model_versions` (`any` and `unspecified` match every
+  version; `unspecified` is shown as a condition to check);
+- with `--context-size`, its `context_size` is that size, `any` or `unspecified`.
+
+The family and version must be in `vocab/model-families.yaml`; anything else is an error.
+
 ## Examples in the registry
 
 - **Scoped to one model line and version:** `claims/instructions/aggressive-tool-language-overtriggers.yaml`

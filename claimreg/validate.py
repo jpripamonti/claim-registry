@@ -2,9 +2,10 @@
 import datetime as dt
 import re
 
+from .versions import expand
+
 ID_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+$")
-RANGE_RE = re.compile(r"^(>=|<=|>|<)?(.+)$")
 
 TOP_FIELDS = ["id", "version", "title", "status", "technique", "conditions", "effect",
               "evidence", "as_of", "review_by", "relations", "history"]
@@ -102,16 +103,11 @@ def _check_versions(fam, value, reg):
     known = (reg.families.get(fam) or {}).get("versions")
     if known is None:            # unknown family (reported elsewhere) or free-text family "other"
         return
-    if value in ("any", "unspecified"):
-        return
-    if isinstance(value, list):
-        for v in value:
-            if str(v) not in known:
-                yield f"version {v!r} not listed for {fam!r}"
-        return
-    m = RANGE_RE.match(str(value))
-    if not m or m.group(2) not in known:
-        yield f"model_versions {value!r} is not a valid range for {fam!r}"
+    try:
+        expand(value, known)
+    except ValueError as e:
+        for msg in str(e).split("; "):
+            yield f"{msg} for {fam!r}"
 
 
 def _check_effect(e):

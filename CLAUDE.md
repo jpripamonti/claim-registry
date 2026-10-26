@@ -9,4 +9,6 @@
   - `python3 -m claimreg check-quotes [ids]` fetches each source and confirms its quote is there.
   - Tests: `python3 -m pytest -q` (offline; quote tests use fake pages).
 - Run both commands before committing claim changes.
+- When auditing a project against the claims, check each condition (model, version, input size)
+  against measured values, not limits or estimates from the code.
 - Next: commands that check claims cited in a config, write `claims.lock`, and explain changes.

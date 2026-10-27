@@ -1,11 +1,13 @@
 import copy
+import datetime as dt
 from pathlib import Path
 
 import pytest
 import yaml
 
 from claimreg import registry
-from claimreg.validate import validate
+from claimreg.__main__ import main
+from claimreg.validate import stale_claims, validate
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -133,3 +135,20 @@ def test_invalid_yaml_is_reported(tmp_path):
     make_registry(tmp_path, claim())
     (tmp_path / "claims/t/broken.yaml").write_text("id: [unclosed\n")
     assert any(m.startswith("invalid YAML") for m in messages(registry.load(tmp_path)))
+
+
+def test_stale_claims_use_the_injected_date(tmp_path):
+    reg = make_registry(tmp_path, claim(), claim(id="beta", review_by=dt.date(2026, 11, 1)))
+    assert [c.id for c in stale_claims(reg, dt.date(2026, 10, 27))] == []
+    assert [c.id for c in stale_claims(reg, dt.date(2027, 1, 1))] == ["beta"]
+    assert [c.id for c in stale_claims(reg, dt.date(2027, 4, 25))] == ["beta"]   # review_by day itself is fresh
+    assert [c.id for c in stale_claims(reg, dt.date(2030, 1, 1))] == ["alpha", "beta"]
+    assert validate(reg) == []                      # stale is a warning, not an error
+
+
+def test_validate_command_warns_about_stale_without_failing(tmp_path, capsys):
+    make_registry(tmp_path, claim(review_by=dt.date(2020, 1, 1)))
+    assert main(["--root", str(tmp_path), "validate"]) == 0
+    out = capsys.readouterr().out
+    assert "claims/t/alpha.yaml: stale since 2020-01-01" in out
+    assert "1 claims, 0 errors, 1 stale" in out

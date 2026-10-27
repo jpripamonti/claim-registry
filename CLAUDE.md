@@ -5,7 +5,7 @@
 - Registry data: `claims/<topic>/<id>.yaml` (seed claims, every quote checked against its live
   source) and `vocab/` (allowed model versions and task families).
 - Tool: `claimreg/` (Python, needs only PyYAML). Run from the repo root:
-  - `python3 -m claimreg validate` checks every claim against the format rules and vocab.
+  - `python3 -m claimreg validate` checks every claim against the format rules and vocab, and warns about stale claims.
   - `python3 -m claimreg check-quotes [ids]` fetches each source and confirms its quote is there.
   - `python3 -m claimreg applies --model claude-sonnet --version 5.5 [--context-size long]` lists the active claims that apply to that model.
   - Tests: `python3 -m pytest -q` (offline; quote tests use fake pages).

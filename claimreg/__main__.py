@@ -6,7 +6,7 @@ from pathlib import Path
 from . import registry
 from .applies import CONTEXT_SIZES, applicable
 from .quotes import check_quotes
-from .validate import validate
+from .validate import stale_claims, validate
 
 
 def _rel(path, root):
@@ -21,7 +21,10 @@ def cmd_validate(args):
     errors = validate(reg)
     for path, msg in errors:
         print(f"{_rel(path, reg.root)}: {msg}")
-    print(f"{len(reg.claims)} claims, {len(errors)} errors")
+    stale = stale_claims(reg)
+    for claim in stale:
+        print(f"{_rel(claim.path, reg.root)}: stale since {claim.data['review_by']}")
+    print(f"{len(reg.claims)} claims, {len(errors)} errors, {len(stale)} stale")
     return 1 if errors else 0
 
 

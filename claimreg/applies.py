@@ -1,4 +1,5 @@
 """Which claims apply to a given model, version and input size."""
+from .registry import is_stale
 from .versions import expand, versions_for
 
 FOLLOWED_STATUSES = {"active"}      # superseded and withdrawn claims are no longer followed
@@ -54,8 +55,11 @@ def open_conditions(conditions, family, reg, context_size=None):
     return out
 
 
-def applicable(reg, family, version, context_size=None):
-    """Return [(claim, open_conditions)] for followed claims matching the model, sorted by id."""
+def applicable(reg, family, version, context_size=None, today=None):
+    """Return [(claim, open_conditions)] for followed claims matching the model, sorted by id.
+
+    A claim past its review_by date on `today` (default: current date) gets "stale" as its
+    last open condition."""
     check_model(reg, family, version)
     result = []
     for cid in sorted(reg.claims):
@@ -68,5 +72,8 @@ def applicable(reg, family, version, context_size=None):
             continue
         if context_size and cond.get("context_size") not in (*_OPEN, context_size):
             continue
-        result.append((claim, open_conditions(cond, family, reg, context_size)))
+        conds = open_conditions(cond, family, reg, context_size)
+        if is_stale(claim, today):
+            conds.append("stale")
+        result.append((claim, conds))
     return result

@@ -1,0 +1,67 @@
+name: Quote check
+
+on:
+  schedule:
+    - cron: "17 4 * * 1" # Mondays 04:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+env:
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  GH_REPO: ${{ github.repository }}
+  ISSUE_TITLE: Quote check failed
+
+jobs:
+  check-quotes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+
+      - name: Fetch sources and check quotes
+        id: check
+        run: |
+          mkdir -p "$RUNNER_TEMP/qc"
+          set +e
+          python3 -m claimreg check-quotes > "$RUNNER_TEMP/qc/output.txt" 2>&1
+          echo "status=$?" >> "$GITHUB_OUTPUT"
+          cat "$RUNNER_TEMP/qc/output.txt"
+
+      - name: Open, update or close the issue
+        env:
+          STATUS: ${{ steps.check.outputs.status }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          set -eu
+          out="$RUNNER_TEMP/qc/output.txt"
+          body="$RUNNER_TEMP/qc/body.md"
+          # Open issue with exactly this title, if any (search is fuzzy, so filter exactly).
+          existing=$(gh issue list --state open --search "\"$ISSUE_TITLE\" in:title" \
+            --limit 100 --json number,title \
+            --jq "map(select(.title == \"$ISSUE_TITLE\"))[0].number // empty")
+
+          if [ "$STATUS" != "0" ]; then
+            {
+              echo "The weekly quote check failed (exit code $STATUS). Run: $RUN_URL"
+              echo
+              echo '```'
+              tail -c 60000 "$out"
+              echo '```'
+            } > "$body"
+            if [ -n "$existing" ]; then
+              gh issue comment "$existing" --body-file "$body"
+            else
+              gh issue create --title "$ISSUE_TITLE" --body-file "$body"
+            fi
+            exit 1
+          fi
+
+          if [ -n "$existing" ]; then
+            gh issue close "$existing" --comment "Quote check passes again. Run: $RUN_URL"
+          fi

@@ -9,6 +9,8 @@
   - `python3 -m claimreg check-quotes [ids]` fetches each source and confirms its quote is there.
   - `python3 -m claimreg applies --model claude-sonnet --version 5.5 [--context-size long]` lists the active claims that apply to that model.
   - Tests: `python3 -m pytest -q` (offline; quote tests use fake pages).
+- CI (`.github/workflows/`) runs tests and validation on every push, and the quote check weekly,
+  opening an issue on failure.
 - Run both commands before committing claim changes.
 - When auditing a project against the claims, check each condition (model, version, input size)
   against measured values, not limits or estimates from the code.

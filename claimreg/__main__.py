@@ -6,6 +6,7 @@ from pathlib import Path
 from . import registry
 from .applies import CONTEXT_SIZES, applicable
 from .quotes import check_quotes
+from .snapshots import SOURCES_DIR, save_snapshot, snapshot_diff
 from .validate import validate
 
 
@@ -27,15 +28,37 @@ def cmd_validate(args):
 
 def cmd_check_quotes(args):
     reg = registry.load(args.root)
-    bad = 0
-    for claim, n, url, status in check_quotes(reg, ids=set(args.ids) or None):
+    pages, diffed, bad = {}, set(), 0
+    for claim, n, url, status in check_quotes(reg, ids=set(args.ids) or None, pages=pages):
         if status != "ok":
             bad += 1
         if status != "ok" or args.verbose:
             print(f"{status.upper() if status in ('ok', 'missing') else status}  "
                   f"{claim.id} evidence[{n}]  {url}")
+        if status == "missing":
+            _print_diff(reg.root, url, pages[url], diffed)
+    if args.save_sources:
+        written = [url for url, page in pages.items()
+                   if not isinstance(page, Exception) and save_snapshot(reg.root, url, page)]
+        print(f"{len(written)} source snapshots written")
     print(f"{bad} quotes not found")
     return 1 if bad else 0
+
+
+def _print_diff(root, url, page, diffed):
+    """Show how the page changed since its snapshot, once per URL."""
+    if url in diffed:
+        print("    (page diff shown above)")
+        return
+    diffed.add(url)
+    diff = snapshot_diff(root, url, page)
+    if diff is None:
+        print(f"    no snapshot of this page in {SOURCES_DIR}/; nothing to compare against")
+    elif not diff:
+        print("    page text unchanged since its snapshot")
+    else:
+        for line in diff:
+            print("    " + line)
 
 
 def cmd_applies(args):
@@ -64,6 +87,8 @@ def main(argv=None):
     q = sub.add_parser("check-quotes", help="fetch each source and confirm its quote is on the page")
     q.add_argument("ids", nargs="*", help="only these claim ids (default: all)")
     q.add_argument("-v", "--verbose", action="store_true", help="also list quotes that were found")
+    q.add_argument("--save-sources", action="store_true",
+                   help=f"write the plain-text snapshot of each fetched page to {SOURCES_DIR}/")
     q.set_defaults(func=cmd_check_quotes)
     a = sub.add_parser("applies", help="list the active claims that apply to a model and version")
     a.add_argument("--model", required=True, help="family or line, e.g. claude-sonnet")

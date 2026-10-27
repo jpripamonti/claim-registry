@@ -8,12 +8,22 @@ _PUNCT = str.maketrans({"‘": "'", "’": "'", "“": '"', "”": '"',
                         "–": "-", "—": "-", " ": " "})
 
 
-def normalize(text):
-    """Make page text and quotes comparable: entities, curly quotes, markdown marks, whitespace."""
+def clean(text):
+    """Entities, curly quotes, markdown marks and whitespace removed; case kept."""
     text = html.unescape(text).translate(_PUNCT)
     text = re.sub(r'\\n|\\"', " ", text)       # escaped text inside embedded JSON
     text = re.sub(r"[*_`#>]", "", text)         # markdown emphasis and headings
-    return re.sub(r"\s+", " ", text).strip().lower()
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def normalize(text):
+    """Make page text and quotes comparable: `clean`, then lowercase."""
+    return clean(text).lower()
+
+
+def strip_tags(raw_html, sep=" "):
+    text = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", raw_html, flags=re.S | re.I)
+    return re.sub(r"<[^>]+>", sep, text)
 
 
 def page_variants(raw_html):
@@ -22,9 +32,8 @@ def page_variants(raw_html):
     Tags are replaced by a space in one version and removed in another: a space is right
     between block elements, but wrong for an inline link or code span in mid-sentence.
     """
-    text = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", raw_html, flags=re.S | re.I)
-    return [normalize(re.sub(r"<[^>]+>", " ", text)),
-            normalize(re.sub(r"<[^>]+>", "", text)),
+    return [normalize(strip_tags(raw_html, " ")),
+            normalize(strip_tags(raw_html, "")),
             normalize(raw_html)]
 
 
@@ -39,9 +48,13 @@ def fetch(url, timeout=40):
         return resp.read().decode(resp.headers.get_content_charset() or "utf-8", "replace")
 
 
-def check_quotes(reg, ids=None, fetcher=fetch):
-    """Yield (claim, evidence_index, url, status) with status 'ok', 'missing' or 'error: ...'."""
-    cache = {}
+def check_quotes(reg, ids=None, fetcher=None, pages=None):
+    """Yield (claim, evidence_index, url, status) with status 'ok', 'missing' or 'error: ...'.
+
+    Each fetched page (or the exception raised fetching it) is stored in `pages` by URL, if given.
+    """
+    cache = {} if pages is None else pages
+    fetcher = fetcher or fetch
     for cid, claim in reg.claims.items():
         if ids and cid not in ids:
             continue

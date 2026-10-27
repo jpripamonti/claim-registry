@@ -1,0 +1,338 @@
+source: https://developers.openai.com/api/docs/guides/reasoning-best-practices
+retrieved: 2026-10-27
+
+Reasoning best practices | OpenAI API For the complete documentation index, see llms.txt .
+Markdown versions of documentation pages are available by appending .md to the page URL.
+ChatGPT Start searching API Dashboard Try ChatGPT Home API Overview Get started with the OpenAI API
+Models Explore models and compare capabilities Agents Build persistent agents on hosted
+infrastructure Tools Connect models to tools and data Audio & voice Build speech and realtime voice
+experiences Production Deploy and scale your API integrations API reference Explore endpoints,
+parameters, and responses ChatGPT Plugins Extend ChatGPT and Codex Sign in with ChatGPT Apps powered
+by your user's ChatGPT plan Commerce Build commerce flows in ChatGPT Ads Publish and measure ads in
+ChatGPT Workspace Agents Trigger published ChatGPT workspace agents ChatGPT + Codex user docs Guides
+and product docs for ChatGPT and Codex Use cases Example workflows and tasks teams can take on with
+ChatGPT or Codex Docs Use cases Training Resources Resources Showcase Demo apps to get inspired Blog
+Learnings and experiences from developers Cookbook Notebook examples for building with OpenAI models
+Learn Docs, videos, and demo apps for building with OpenAI Community Programs, meetups, and support
+for builders Overview Models Agents Tools Audio & voice Production API reference Search the API docs
+Search docs Suggested responses create reasoningeffort realtime prompt caching Primary navigation
+API ChatGPT Docs Use cases Training Resources Resources Search docs Suggested responses create
+reasoningeffort realtime prompt caching Overview Models Agents Tools Audio & voice Production API
+reference Docs Models Home Get started Quickstart Using GPT-6 Key concepts Core concepts Responses
+API Decisions API Conversation state Background mode Streaming WebSocket mode Mid-turn steering
+Multi-agent Webhooks File inputs Compaction Counting tokens SDKs and CLI OpenAI SDK OpenAI CLI
+Resources Changelog Deprecations Supported countries OpenAI Crawlers Terms and policies Legacy APIs
+Agent Builder Overview Migration guide Node reference Safety in building agents Evals Getting
+started Working with evals Prompt optimizer External models Graders Fine-tuning Optimization cycle
+Supervised fine-tuning Vision fine-tuning Direct preference optimization Reinforcement fine-tuning
+RFT use cases Best practices Assistants API Migration guide Model catalog Choose a model Pricing
+Model selection Text and code Text generation Code generation Structured output Prompting Overview
+Prompt engineering Citation formatting Migration guide Prompt generation Frontend prompting
+Reasoning Reasoning models Reasoning best practices Images Images and vision Image input cost
+calculator Image generation Overview Image prompting Realtime and audio Audio and speech Getting
+started Voice agents Specialized models Deep research Embeddings Moderation Overview Agents API
+Overview Quickstart Architecture Configuring Agents Sessions Run and continue sessions Events and
+items Manage sessions Scheduled automations Webhooks Environments and sandboxes OpenAI-hosted
+sandboxes Self-hosted sandboxes Sandbox lifecycle Pre-warm sandboxes Sandbox security Files and
+artifacts Tools and integrations Web search Computer use Functions MCP connections Plugins Vaults
+Multi-agent Observability and usage Tracing Errors and recovery API reference Bedrock Managed Agents
+Agents SDK Overview Quickstart Agent definitions Models and providers Running agents Sandbox agents
+Orchestration Guardrails Results and state Integrations and observability Evaluate agent workflows
+ChatKit Overview Customize Widgets Actions Advanced integrations Overview Function calling Search
+and retrieval Web search File search Retrieval Connect tools and data MCP servers Secure MCP Tunnel
+Build tool workflows Skills Tool search Programmatic tool calling Async tool calling Computer and
+code Shell Computer use Integration recipes Driver reference Apply Patch Local shell Code
+interpreter Media Image generation Overview GPT-Live Getting started Prompting Managing sessions
+Delegation and tools Migrate to GPT-Live Partner integrations Realtime API Getting started Prompting
+Managing conversations Voice activity detection Tools and MCP Build with voice Voice agents Connect
+voice to Decisions Custom voices Cost optimization Connections WebRTC WebRTC with WARP WebSockets
+Telephony and SIP Server-side controls Audio processing File transcription Live transcription Live
+translation Text to speech Audio in Chat Completions Go live Production best practices Deployment
+checklist Performance and quality Fast mode Ultrafast mode Latency optimization Predicted Outputs
+Accuracy optimization Evaluation Evaluation best practices Promptfoo Cost and throughput Cost
+optimization Prompt caching Prompt cache diagnostics Batch Flex processing Safety and governance
+Safety best practices Red teaming Daybreak Safety checks Safety classifiers Cybersecurity checks
+Misalignment monitoring Enforcement notifications Under-18 guidance CSAM guidance Content provenance
+Your data Private Safety Processing Permissions Infrastructure and access Terraform provider
+Overview Projects and access Service accounts Rate limits and spend Model, tool, and data controls
+Import and reconciliation Private Link IP allowlist Organization blocking Mutual TLS Workload
+identity federation Federation rules X.509 certificates Kubernetes AWS Microsoft Azure Google Cloud
+Oracle Cloud Infrastructure GitHub Actions SPIFFE Idira IP egress ranges Amazon Bedrock Operations
+Rate limits Spend limits Admin APIs Error codes Overview Plugins Sign in with ChatGPT Commerce Ads
+Workspace Agents ChatGPT + Codex user docs Use cases Docs Overview Home Quickstart Core concepts
+Plugin architecture Skills MCP server Plan Brainstorm use cases Define tools Build Build an MCP
+server Add UI to your MCP server (optional) Add events to your MCP server (optional) Extensions
+Authenticate users Build skills Package your plugin Examples Test and publish Connect and test your
+plugin Submit and publish Submit desktop-only plugins Submission error reference Conversion specs
+Restaurant reservation spec Get Quote spec Product checkout spec Guides UI guidelines Optimize
+Metadata Submit a Claude Code plugin Security & Privacy Troubleshooting Resources Changelog Plugin
+guidelines MCP server review requirements Plugin UI reference Checkout API reference Home Quickstart
+Request a client ID Identity On your website In your ChatGPT plugin Account security notification
+ChatGPT plan usage Overview UI/UX guidelines Registration and sign-in Accounts and sessions Models
+and inference Codex app-server Self-hosted VMs Token reference Errors and recovery Preview
+limitations Home Guides Get started Best practices File Upload Overview Products API Overview Feeds
+Products Promotions Ads Overview Measurement Measurement Pixel Multiple Pixels (Advanced) Image Tag
+Conversions API Supported Events Advertiser API Overview API Partner Setup Campaign Management
+Bidding & Budgets Targeting Product Feeds Hotel Feeds (limited beta) Conversion Tracking Reporting
+Troubleshooting Account Management API Reference Authentication Ad Account Audit Logs Campaigns Ad
+Groups Ads Insights Files Conversion Setup Home Get started Trigger workspace agent runs
+Authenticate with Workspace Agent access tokens Overview Features Configuration Developers Security
+Administration Use Cases Resources Docs Overview Home Get started Quickstart Use ChatGPT Get started
+with Work Meet dots Import from another agent Foundations Prompting Model selection Personalize
+ChatGPT Skills & Plugins Permissions Explore What's new Models Pricing Glossary Available on ChatGPT
+desktop app ChatGPT mobile app ChatGPT on the web Codex CLI Codex IDE extension Codex Cloud Releases
+Changelog Feature Maturity Open Source Overview Workflows Projects and chats Build plugins
+Visualizations Scheduled tasks Long-running work Notifications Pets Codex Micro Capabilities Browser
+Computer use Voice Composer Predictions Plugins Sign in with ChatGPT Web search Image generation
+Image inputs Appshots Browser extension Work with files Sites Overview Create a site Data and
+connections Publish and share Manage a site dots Meet dots Getting started Messaging Tasks and
+memory Computers and apps Controls ChatGPT Space Overview Getting started Pages Work with agents
+Collaboration Reference Commands Slash commands Settings Troubleshooting Overview Customization
+Overview Memories Computer History Config file Config Basics Advanced Config Config Reference
+Environment Variables Sample Config Agent configuration AGENTS.md Subagents Speed Rules Extend
+ChatGPT and Codex Record & Replay MCP Linux Desktop app Windows Desktop app Windows sandbox WSL
+Overview Development workflows Code review Integrated terminal Extend and automate Build skills Site
+tools (WebMCP) Annotations Extensibility Hooks Environments Modes Local environments Git worktrees
+Codex Cloud Cloud environments Build with Codex Codex SDK App Server Model catalogs GitHub Action
+Non-interactive mode Third-party integrations GitHub GitLab (Beta) Slack Linear Reference CLI
+customization Developer commands Developer settings Overview Permissions Profiles Sandboxing
+Auto-review Agent approvals & security Codex Security Overview Codex Security Cloud Setup Security
+Review Improving the threat model FAQ Codex Security plugin Quickstart Run a security scan Run a
+deep scan Review code changes Use the Security workbench Triage a backlog Fix findings Propose
+security hardening Write vulnerability reports Export and track findings Changelog Codex Security
+CLI Quickstart Run bulk scans CI/CD Overview GitHub Actions GitLab CI/CD Reference FAQ Codex
+Security SDK Cyber safety Models & Trusted Access Recommended configuration Overview Getting started
+Admin rollout guide Admin plugin Feature Configuration Dots Space Sites Teams and Team Tasks ChatGPT
+in Slack and Teams Workspace connections Local computer access for Work Cloud and dots Identity and
+access Authentication overview Groups and provisioning Dynamic groups User lifecycle management
+Roles and workspace permissions Personal access tokens Service accounts Deployment and configuration
+Windows app and CLI deployment Manage app updates Managed configuration Codex security cookbook
+Remote connections Workspace model availability Amazon Bedrock Bedrock GovCloud configuration
+Connect to a gateway Roll out a gateway Gateway compatibility Bedrock through LiteLLM ChatGPT EDU
+Education plans Higher education setup ChatGPT Work Overview Cloud security Local security Usage and
+cost Admin FAQ Collaboration and sharing GPTs and sharing Plugins and connections Plugin controls
+Plugin management Skill controls Migrate custom GPTs to plugins Usage and analytics Workspace
+analytics Usage Insights Analytics API Security and compliance Governance Agent security Prisma AIRS
+HIPAA configuration Compliance API and audit events Explore use cases Collections Home Videos
+Showcase OpenAI Academy Online trainings Community Codex Ambassadors Codex for Students Codex for
+Open Source Events Blog Company blog Developer blog Explore use cases Collections Home Videos
+Showcase OpenAI Academy Online trainings Community Codex Ambassadors Codex for Students Codex for
+Open Source Events Blog Company blog Developer blog Showcase Blog Cookbook Learn Community Docs
+Showcase All posts Recent Designing failover across OpenAI model providers Maintaining software with
+the GPT-6 family Bringing my LED display to life with GPT-Live-1 and Codex Rethinking skills and
+prompts for GPT-6 Astra Architectural visualization with Astra Topics General API Apps SDK Audio
+Codex Life sciences Home Topics Sign-in with ChatGPT Agents Evals Multimodal Text Guardrails
+Optimization ChatGPT Codex gpt-oss Contribute Cookbook on GitHub Home OpenAI Developers plugin Docs
+MCP Categories Demo apps Videos Topics Agents Audio & Voice Computer Use Codex Evals gpt-oss
+Fine-tuning Image generation Scaling Tools Video generation Community Programs Codex Ambassadors
+Meet the ambassadors Codex for Students Codex for Open Source OpenAI for Startups Spaces Events
+Developer Forum Discord Reddit X API Dashboard Try ChatGPT Model catalog Choose a model Pricing
+Model selection Text and code Text generation Code generation Structured output Prompting Overview
+Prompt engineering Citation formatting Migration guide Prompt generation Frontend prompting
+Reasoning Reasoning models Reasoning best practices Images Images and vision Image input cost
+calculator Image generation Overview Image prompting Realtime and audio Audio and speech Getting
+started Voice agents Specialized models Deep research Embeddings Moderation Copy Page Reasoning best
+practices Copy Page Learn when to use reasoning models and how they compare to GPT models.
+OpenAI offers two types of models: reasoning models (o3 and o4-mini, for example) and GPT models
+(like GPT-4.1).
+These model families behave differently.
+This guide covers: The difference between our reasoning and non-reasoning GPT models When to use our
+reasoning models How to prompt reasoning models effectively Read more about reasoning models and how
+they work.
+Reasoning models vs.
+GPT models Compared to GPT models, our o-series models excel at different tasks and require
+different prompts.
+One model family isn't better than the other-they're just different.
+We trained our o-series models ("the planners") to think longer and harder about complex tasks,
+making them effective at strategizing, planning solutions to complex problems, and making decisions
+based on large volumes of ambiguous information.
+These models can also execute tasks with high accuracy and precision, making them ideal for domains
+that would otherwise require a human expert-like math, science, engineering, financial services, and
+legal services.
+On the other hand, our lower-latency, more cost-efficient GPT models ("the workhorses") are designed
+for straightforward execution.
+An application might use o-series models to plan out the strategy to solve a problem, and use GPT
+models to execute specific tasks, particularly when speed and cost are more important than perfect
+accuracy.
+How to choose What's most important for your use case?
+Speed and cost → GPT models are faster and tend to cost less Executing well defined tasks → GPT
+models handle explicitly defined tasks well Accuracy and reliability → o-series models are reliable
+decision makers Complex problem-solving → o-series models work through ambiguity and complexity If
+speed and cost are the most important factors when completing your tasks and your use case is made
+up of straightforward, well defined tasks, then our GPT models are the best fit for you.
+However, if accuracy and reliability are the most important factors and you have a very complex,
+multistep problem to solve, our o-series models are likely right for you.
+Most AI workflows will use a combination of both models-o-series for agentic planning and
+decision-making, GPT series for task execution.
+Our GPT-4o and GPT-4o mini models triage order details with customer information, identify the order
+issues and the return policy, and then feed all of these data points into o3-mini to make the final
+decision about the viability of the return based on policy.
+When to use our reasoning models Here are a few patterns of successful usage that we've observed
+from customers and internally at OpenAI.
+This isn't a comprehensive review of all possible use cases but, rather, some practical guidance for
+testing our o-series models.
+Ready to use a reasoning model?
+Skip to the quickstart → 1.
+Navigating ambiguous tasks Reasoning models are particularly good at taking limited information or
+disparate pieces of information and with a simple prompt, understanding the user's intent and
+handling any gaps in the instructions.
+In fact, reasoning models will often ask clarifying questions before making uneducated guesses or
+attempting to fill information gaps.
+"o1's reasoning capabilities enable our multi-agent platform Matrix to produce exhaustive,
+well-formatted, and detailed responses when processing complex documents.
+For example, o1 enabled Matrix to easily identify baskets available under the restricted payments
+capacity in a credit agreement, with a basic prompt.
+No former models are as performant.
+o1 yielded stronger results on 52% of complex prompts on dense Credit Agreements compared to other
+models." - Hebbia , AI knowledge platform company for legal and finance 2.
+Finding a needle in a haystack When you're passing large amounts of unstructured information,
+reasoning models are great at understanding and pulling out only the most relevant information to
+answer a question.
+"To analyze a company's acquisition, o1 reviewed dozens of company documents-like contracts and
+leases-to find any tricky conditions that might affect the deal.
+The model was tasked with flagging key terms and in doing so, identified a crucial "change of
+control" provision in the footnotes: if the company was sold, it would have to pay off a $75 million
+loan immediately.
+o1's extreme attention to detail enables our AI agents to support finance professionals by
+identifying mission-critical information." - Endex , AI financial intelligence platform 3.
+Finding relationships and nuance across a large dataset We've found that reasoning models are
+particularly good at reasoning over complex documents that have hundreds of pages of dense,
+unstructured information-things like legal contracts, financial statements, and insurance claims.
+The models are particularly strong at drawing parallels between documents and making decisions based
+on unspoken truths represented in the data.
+"Tax research requires synthesizing multiple documents to produce a final, cogent answer.
+We swapped GPT-4o for o1 and found that o1 was much better at reasoning over the interplay between
+documents to reach logical conclusions that were not evident in any one single document.
+As a result, we saw a 4x improvement in end-to-end performance by switching to o1-incredible." -
+Blue J , AI platform for tax research Reasoning models are also skilled at reasoning over nuanced
+policies and rules, and applying them to the task at hand in order to reach a reasonable conclusion.
+"In financial analyses, analysts often tackle complex scenarios around shareholder equity and need
+to understand the relevant legal intricacies.
+We tested about 10 models from different providers with a challenging but common question: how does
+a fundraise affect existing shareholders, especially when they exercise their anti-dilution
+privileges?
+This required reasoning through pre- and post-money valuations and dealing with circular dilution
+loops-something top financial analysts would spend 20-30 minutes to figure out.
+We found that o1 and o3-mini can do this flawlessly!
+The models even produced a clear calculation table showing the impact on a $100k shareholder." -
+BlueFlame AI , AI platform for investment management 4.
+Multistep agentic planning Reasoning models are critical to agentic planning and strategy
+development.
+We've seen success when a reasoning model is used as "the planner," producing a detailed, multistep
+solution to a problem and then selecting and assigning the right GPT model ("the doer") for each
+step, based on whether high intelligence or low latency is most important.
+"We use o1 as the planner in our agent infrastructure, letting it orchestrate other models in the
+workflow to complete a multistep task.
+We find o1 is really good at selecting data types and breaking down big questions into smaller
+chunks, enabling other models to focus on execution." - Argon AI , AI knowledge platform for the
+pharmaceutical industry "o1 powers many of our agentic workflows at Lindy, our AI assistant for
+work.
+The model uses function calling to pull information from your calendar or email and then can
+automatically help you schedule meetings, send emails, and manage other parts of your day-to-day
+tasks.
+We switched all of our agentic steps that used to cause issues to o1 and observing our agents
+becoming basically flawless overnight!" - Lindy.AI , AI assistant for work 5.
+Visual reasoning As of today, o1 is the only reasoning model that supports vision capabilities.
+What sets it apart from GPT-4o is that o1 can grasp even the most challenging visuals, like charts
+and tables with ambiguous structure or photos with poor image quality.
+"We automate risk and compliance reviews for millions of products online, including luxury jewelry
+dupes, endangered species, and controlled substances.
+GPT-4o reached 50% accuracy on our hardest image classification tasks.
+o1 achieved an impressive 88% accuracy without any modifications to our pipeline." - SafetyKit ,
+AI-powered risk and compliance platform From our own internal testing, we've seen that o1 can
+identify fixtures and materials from highly detailed architectural drawings to generate a
+comprehensive bill of materials.
+One of the most surprising things we observed was that o1 can draw parallels across different images
+by taking a legend on one page of the architectural drawings and correctly applying it across
+another page without explicit instructions.
+Below you can see that, for the 4x4 PT wood posts, o1 recognized that "PT" stands for pressure
+treated based on the legend.
+6.
+Reviewing, debugging, and improving code quality Reasoning models are particularly effective at
+reviewing and improving large amounts of code, often running code reviews in the background given
+the models' higher latency.
+"We deliver automated AI Code Reviews on platforms like GitHub and GitLab.
+While code review process is not inherently latency-sensitive, it does require understanding the
+code diffs across multiple files.
+This is where o1 really shines-it's able to reliably detect minor changes to a codebase that could
+be missed by a human reviewer.
+We were able to increase product conversion rates by 3x after switching to o-series models." -
+CodeRabbit , AI code review startup While GPT-4o and GPT-4o mini may be better designed for writing
+code with their lower latency, we've also seen o3-mini spike on code production for use cases that
+are slightly less latency-sensitive.
+"o3-mini consistently produces high-quality, conclusive code, and very frequently arrives at the
+correct solution when the problem is well-defined, even for very challenging coding tasks.
+While other models may only be useful for small-scale, quick code iterations, o3-mini excels at
+planning and executing complex software design systems." - Windsurf , collaborative agentic
+AI-powered IDE, built by Codeium 7.
+Evaluation and benchmarking for other model responses We've also seen reasoning models do well in
+benchmarking and evaluating other model responses.
+Data validation is important for ensuring dataset quality and reliability, especially in sensitive
+fields like healthcare.
+Traditional validation methods use predefined rules and patterns, but advanced models like o1 and
+o3-mini can understand context and reason about data for a more flexible and intelligent approach to
+validation.
+"Many customers use LLM-as-a-judge as part of their eval process in Braintrust.
+For example, a healthcare company might summarize patient questions using a workhorse model like
+gpt-4o, then assess the summary quality with o1.
+One Braintrust customer saw the F1 score of a judge go from 0.12 with 4o to 0.74 with o1!
+In these use cases, they've found o1's reasoning to be a game-changer in finding nuanced differences
+in completions, for the hardest and most complex grading tasks." - Braintrust , AI evals platform
+How to prompt reasoning models effectively These models perform best with straightforward prompts.
+Some prompt engineering techniques, like instructing the model to "think step by step," may not
+enhance performance (and can sometimes hinder it).
+See best practices below, or get started with prompt examples .
+Developer messages are the new system messages : Starting with o1-2024-12-17 , reasoning models
+support developer messages rather than system messages, to align with the chain of command behavior
+described in the model spec .
+Keep prompts simple and direct : The models excel at understanding and responding to brief, clear
+instructions.
+Avoid chain-of-thought prompts : Since these models perform reasoning internally, prompting them to
+"think step by step" or "explain your reasoning" is unnecessary.
+Use delimiters for clarity : Use delimiters like markdown, XML tags, and section titles to clearly
+indicate distinct parts of the input, helping the model interpret different sections appropriately.
+Try zero shot first, then few shot if needed : Reasoning models often don't need few-shot examples
+to produce good results, so try to write prompts without examples first.
+If you have more complex requirements for your desired output, it may help to include a few examples
+of inputs and desired outputs in your prompt.
+Just ensure that the examples align very closely with your prompt instructions, as discrepancies
+between the two may produce poor results.
+Provide specific guidelines : If there are ways you explicitly want to constrain the model's
+response (like "propose a solution with a budget under $500"), explicitly outline those constraints
+in the prompt.
+Be very specific about your end goal : In your instructions, try to give very specific parameters
+for a successful response, and encourage the model to keep reasoning and iterating until it matches
+your success criteria.
+Markdown formatting : Starting with o1-2024-12-17 , reasoning models in the API will avoid
+generating responses with markdown formatting.
+To signal to the model when you do want markdown formatting in the response, include the string
+Formatting re-enabled on the first line of your developer message.
+How to keep costs low and accuracy high With the introduction of o3 and o4-mini models, persisted
+reasoning items in the Responses API are treated differently.
+Previously (for o1 , o3-mini , o1-mini and o1-preview ), reasoning items were always ignored in
+follow‑up API requests, even if they were included in the input items of the requests.
+With o3 and o4-mini , some reasoning items adjacent to function calls are included in the model's
+context to help improve model performance while using the least amount of reasoning tokens.
+For the best results with this change, we recommend using the Responses API with the store parameter
+set to true , and passing in all reasoning items from previous requests (either using
+previousresponseid , or by taking all the output items from an older request and passing them in as
+input items for a new one).
+OpenAI will automatically include any relevant reasoning items in the model's context and ignore any
+irrelevant ones.
+In more advanced use‑cases where you'd like to manage what goes into the model's context more
+precisely, we recommend that you at least include all reasoning items between the latest function
+call and the previous user message.
+Doing this will ensure that the model doesn't have to restart its reasoning when you respond to a
+function call, resulting in better function‑calling performance and lower overall token usage.
+If you're using the Chat Completions API, reasoning items are never included in the context of the
+model.
+This is because Chat Completions is a stateless API.
+This will result in slightly degraded model performance and greater reasoning token usage in complex
+agentic cases involving many function calls.
+In instances where complex multiple function calling is not involved, there should be no degradation
+in performance regardless of the API being used.
+Other resources For more inspiration, visit the OpenAI Cookbook , which contains example code and
+links to third-party resources, or learn more about our models and reasoning capabilities: Meet the
+models Reasoning guide How to use reasoning for validation Video course: Reasoning with o1 Papers on
+advanced prompting to improve reasoning Previous Reasoning models Ask AI Docs agent Loading docs
+agent...

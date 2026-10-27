@@ -116,6 +116,20 @@ Every claim needs at least one evidence item. What each tier requires:
 An observed item without a config is not accepted: "it works for me" with nothing to reproduce is
 not evidence.
 
+### Source snapshots
+
+`sources/` holds a plain-text snapshot of every page an evidence item cites, one file per URL,
+named from its host and path (`https://example.com/docs/a` becomes `example.com_docs_a.txt`). The
+first lines give the URL and the date the text was captured. The text is the page with tags
+replaced by spaces and whitespace collapsed, split into one sentence per line and wrapped at 100
+characters, so a re-save of an unchanged page gives an identical file.
+
+`python3 -m claimreg check-quotes --save-sources` writes the snapshot of every page it fetched; an
+unchanged page keeps its file and date. Without the flag nothing under `sources/` is written. When
+a quote is missing and its page has a snapshot, `check-quotes` prints a unified diff between the
+snapshot and the current page, so the editor sees whether the advice changed or the sentence only
+moved; without a snapshot it says so.
+
 ## Contradictions
 
 Contradictory claims coexist. If source A says a technique helps and source B says it does not, the

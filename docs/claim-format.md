@@ -79,7 +79,8 @@ These are computed by the tooling, never written by hand:
 
 - **tier** of the claim: the highest tier among its evidence items that have no upheld dispute
   against them. Order: measured > observed > asserted.
-- **stale**: true when today is past `review_by`.
+- **stale**: true when today is past `review_by`. `validate` warns about each stale claim
+  (the exit code is unaffected) and `applies` ends the claim's line with `stale`.
 
 ## Conditions
 

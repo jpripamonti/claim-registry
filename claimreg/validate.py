@@ -2,6 +2,7 @@
 import datetime as dt
 import re
 
+from .registry import is_stale
 from .versions import expand
 
 ID_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
@@ -30,6 +31,11 @@ def validate(reg):
     for claim in reg.claims.values():
         errors += [(claim.path, m) for m in _check_claim(claim, reg)]
     return errors
+
+
+def stale_claims(reg, today=None):
+    """Return the claims past their review_by date, sorted by id (a warning, not an error)."""
+    return [reg.claims[cid] for cid in sorted(reg.claims) if is_stale(reg.claims[cid], today)]
 
 
 def _check_claim(claim, reg):

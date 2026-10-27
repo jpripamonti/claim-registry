@@ -1,3 +1,5 @@
+import datetime as dt
+
 import pytest
 
 from claimreg import registry
@@ -91,3 +93,14 @@ def test_real_registry_newest_claude_models():
         assert "self-check-instruction-over-verifies-opus-5" not in got
         assert "aggressive-tool-language-overtriggers" not in got
     assert "self-check-instruction-over-verifies-opus-5" in ids(reg, "claude-opus", "5")
+
+
+def test_stale_claims_are_marked(tmp_path):
+    reg = make_registry(tmp_path, claim(), claim(id="beta", review_by=dt.date(2026, 11, 1)))
+
+    def marks(today):
+        return {c.id: conds for c, conds in applicable(reg, "claude", "5.1", today=today)}
+
+    assert marks(dt.date(2026, 10, 27)) == {"alpha": [], "beta": []}
+    assert marks(dt.date(2027, 1, 1)) == {"alpha": [], "beta": ["stale"]}
+    assert marks(dt.date(2030, 1, 1)) == {"alpha": ["stale"], "beta": ["stale"]}

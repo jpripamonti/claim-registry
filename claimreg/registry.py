@@ -1,4 +1,5 @@
 """Load claims and vocabularies from a registry checkout."""
+import datetime as dt
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -22,6 +23,14 @@ class Registry:
     families: dict        # family name -> {"versions": [...], "parent": ...}
     task_families: set
     load_errors: list     # (path, message) for files that could not be parsed
+
+
+def is_stale(claim, today=None):
+    """True when `today` (default: the current date) is past the claim's review_by date."""
+    review_by = claim.data.get("review_by")
+    if not isinstance(review_by, dt.date):      # missing or malformed; `validate` reports it
+        return False
+    return (today or dt.date.today()) > review_by
 
 
 def load(root="."):

@@ -1,0 +1,1132 @@
+source: https://ai.google.dev/gemini-api/docs/gemini-3
+retrieved: 2026-10-27
+
+Gemini 3 developer guide | Gemini API | Google AI for Developers Skip to main content / English
+Deutsch Español - América Latina Français Indonesia Italiano Polski Português - Brasil Shqip Tiếng
+Việt Türkçe Русский עברית العربيّة فارسی हिंदी বাংলা ภาษาไทย 中文 - 简体 中文 - 繁體 日本語 한국어 Get API key
+Cookbook Community Sign in Gemini API Get API key Cookbook Community Gemini 4 Argon is now
+available.
+Try it out .
+Home Gemini API Send feedback Gemini 3 developer guide Deprecation notice: This page is deprecated
+and will be removed.
+See the What's new in Gemini 3.8 Flash guide for the latest developer guidance, including migration
+instructions, prompting best practices, and an updated feature overview for all Gemini 3.x models.
+Gemini 3 is our most intelligent model family to date, built on a foundation of state-of-the-art
+reasoning.
+It is designed to bring any idea to life by mastering agentic workflows, autonomous coding, and
+complex multimodal tasks.
+This guide covers key features of the Gemini 3 model family and how to get the most out of it.
+Explore our collection of Gemini 3 apps to see how the model handles advanced reasoning, autonomous
+coding, and complex multimodal tasks.
+Get started with a few lines of code: Python from google import genai client = genai .
+Client () interaction = client .
+interactions .
+create ( model = "gemini-3.1-pro-preview" , input = "Find the race condition in this multi-threaded
+C++ snippet: [code here]" , ) print ( interaction .
+outputtext ) JavaScript import { GoogleGenAI } from "@google/genai" ; const client = new GoogleGenAI
+({}); async function run () { const interaction = await client .
+interactions .
+create ({ model : "gemini-3.1-pro-preview" , input : "Find the race condition in this multi-threaded
+C++ snippet: [code here]" , }); console .
+log ( interaction .
+outputtext ); } run (); Java import com.google.genai.Client ; import
+com.google.genai.gaos.models.interactions.CreateModelInteraction ; import
+com.google.genai.gaos.models.interactions.Interaction ; import
+com.google.genai.gaos.models.interactions.InteractionsInput ; import
+com.google.genai.gaos.models.interactions.Model ; import
+com.google.genai.gaos.models.operations.CreateInteractionRequestBody ; Client client = new Client
+(); CreateModelInteraction request = CreateModelInteraction .
+builder () .
+model ( Model .
+of ( "gemini-3.1-pro-preview" )) .
+input ( InteractionsInput .
+of ( "Find the race condition in this multi-threaded C++ snippet: [code here]" )) .
+build (); Interaction interaction = client .
+interactions .
+create ( CreateInteractionRequestBody .
+of ( request )).
+interaction ().
+get (); System .
+out .
+println ( interaction .
+outputText ().
+orElse ( "" )); Go package main import ( "context" "fmt" "log" "google.golang.org/genai"
+"google.golang.org/genai/interactions/models/interactions"
+"google.golang.org/genai/interactions/models/operations" ) func main () { ctx := context .
+Background () client , err := genai .
+NewClient ( ctx , nil ) if err != nil { log .
+Fatal ( err ) } res , err := client .
+Interactions .
+Create ( ctx , operations .
+CreateInteractionRequest { Body : operations .
+NewCreateInteractionRequestBody ( interactions .
+CreateModelInteraction { Model : interactions .
+Model ( "gemini-3.1-pro-preview" ), Input : interactions .
+NewInteractionsInput ( "Find the race condition in this multi-threaded C++ snippet: [code here]" ),
+}), }) if err != nil { log .
+Fatal ( err ) } if res .
+Interaction .
+OutputText != nil { fmt .
+Println ( res .
+Interaction .
+OutputText ) } } REST curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+-H "x-goog-api-key: $GEMINIAPIKEY " \ -H 'Content-Type: application/json' \ -d '{ "model":
+"gemini-3.1-pro-preview", "input": "Find the race condition in this multi-threaded C++ snippet:
+[code here]" }' Meet the Gemini 3 series Gemini 3.1 Pro is best for complex tasks that require broad
+world knowledge and advanced reasoning across modalities.
+Gemini 3 Flash is our latest 3-series model, with Pro-level intelligence at the speed and pricing of
+Flash.
+Nano Banana Pro (also known as Gemini 3 Pro Image) is our highest quality image generation model,
+and Nano Banana 2 (also known as Gemini 3.1 Flash Image) is the high-volume, high-efficiency, lower
+price-point equivalent.
+Gemini 3.1 Flash-Lite is our workhorse model built for cost-efficiency model and high-volume tasks.
+All Gemini 3 models are currently in preview.
+Model ID Context Window (In / Out) Knowledge Cutoff Pricing (Input / Output) gemini-3.1-flash-lite
+1M / 64k Jan 2025 $0.25 (text, image, video), $0.50 (audio) / $1.50 gemini-3.1-flash-image-preview
+128k / 32k Jan 2025 $0.25 (Text Input) / $0.067 (Image Output) gemini-3.1-pro-preview 1M / 64k Jan
+2025 $2 / $12 (<200k tokens) $4 / $18 (200k tokens) gemini-3-flash-preview 1M / 64k Jan 2025 $0.50 /
+$3 gemini-3-pro-image-preview 65k / 32k Jan 2025 $2 (Text Input) / $0.134 (Image Output) Pricing is
+per 1 million tokens unless otherwise noted.
+Image pricing varies by resolution.
+See the pricing page for details.
+For detailed limits, pricing, and additional information, see the models page .
+New API features in Gemini 3 Gemini 3 introduces new parameters designed to give developers more
+control over latency, cost, and multimodal fidelity.
+Level of thinking Gemini 3 series models use dynamic thinking by default to reason through prompts.
+You can use the thinkinglevel parameter, which controls the maximum depth of the model's internal
+reasoning process before it produces a response.
+Gemini 3 treats these levels as relative allowances for thinking rather than strict token
+guarantees.
+If thinkinglevel is not specified, Gemini 3 will default to high .
+For faster, lower-latency responses when complex reasoning isn't required, you can constrain the
+model's thinking level to low .
+Thinking Level Gemini 3.1 Pro Gemini 3.1 Flash-Lite Gemini 3 Flash Description minimal Not supported
+Supported (Default) Supported Matches the "no thinking" setting for most queries.
+The model may think very minimally for complex coding tasks.
+Minimizes latency for chat or high throughput applications.
+Note, minimal does not guarantee that thinking is off.
+low Supported Supported Supported Minimizes latency and cost.
+Best for simple instruction following, chat, or high-throughput applications.
+medium Supported Supported Supported Balanced thinking for most tasks.
+high Supported (Default, Dynamic) Supported (Dynamic) Supported (Default, Dynamic) Maximizes
+reasoning depth.
+The model may take significantly longer to reach a first (non thinking) output token, but the output
+will be more carefully reasoned.
+Python from google import genai client = genai .
+Client () interaction = client .
+interactions .
+create ( model = "gemini-3.1-pro-preview" , input = "How does AI work?" , generationconfig = {
+"thinkinglevel" : "low" }, ) print ( interaction .
+outputtext ) JavaScript import { GoogleGenAI } from "@google/genai" ; const client = new GoogleGenAI
+({}); const interaction = await client .
+interactions .
+create ({ model : "gemini-3.1-pro-preview" , input : "How does AI work?" , generationconfig : {
+thinkinglevel : "low" , }, }); console .
+log ( interaction .
+outputtext ); Java import com.google.genai.Client ; import
+com.google.genai.gaos.models.interactions.CreateModelInteraction ; import
+com.google.genai.gaos.models.interactions.GenerationConfig ; import
+com.google.genai.gaos.models.interactions.Interaction ; import
+com.google.genai.gaos.models.interactions.InteractionsInput ; import
+com.google.genai.gaos.models.interactions.Model ; import
+com.google.genai.gaos.models.interactions.ThinkingLevel ; import
+com.google.genai.gaos.models.operations.CreateInteractionRequestBody ; Client client = new Client
+(); CreateModelInteraction request = CreateModelInteraction .
+builder () .
+model ( Model .
+of ( "gemini-3.1-pro-preview" )) .
+input ( InteractionsInput .
+of ( "How does AI work?" )) .
+generationConfig ( GenerationConfig .
+builder () .
+thinkingLevel ( ThinkingLevel .
+LOW ) .
+build ()) .
+build (); Interaction interaction = client .
+interactions .
+create ( CreateInteractionRequestBody .
+of ( request )).
+interaction ().
+get (); System .
+out .
+println ( interaction .
+outputText ().
+orElse ( "" )); Go package main import ( "context" "fmt" "log" "google.golang.org/genai"
+"google.golang.org/genai/interactions/models/interactions"
+"google.golang.org/genai/interactions/models/operations" ) func main () { ctx := context .
+Background () client , err := genai .
+NewClient ( ctx , nil ) if err != nil { log .
+Fatal ( err ) } res , err := client .
+Interactions .
+Create ( ctx , operations .
+CreateInteractionRequest { Body : operations .
+NewCreateInteractionRequestBody ( interactions .
+CreateModelInteraction { Model : interactions .
+Model ( "gemini-3.1-pro-preview" ), Input : interactions .
+NewInteractionsInput ( "How does AI work?" ), GenerationConfig : & interactions .
+GenerationConfig { ThinkingLevel : interactions .
+ThinkingLevelLow .
+ToPointer (), }, }), }) if err != nil { log .
+Fatal ( err ) } if res .
+Interaction .
+OutputText != nil { fmt .
+Println ( res .
+Interaction .
+OutputText ) } } REST curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+-H "x-goog-api-key: $GEMINIAPIKEY " \ -H 'Content-Type: application/json' \ -d '{ "model":
+"gemini-3.1-pro-preview", "input": "How does AI work?", "generationconfig": { "thinkinglevel": "low"
+} }' Important: You cannot use both thinkinglevel and the legacy thinkingbudget parameter in the
+same request.
+Doing so will return a 400 error.
+Temperature For all Gemini 3 models, we strongly recommend keeping the temperature parameter at its
+default value of 1.0 .
+While previous models often benefited from tuning temperature to control creativity versus
+determinism, Gemini 3's reasoning capabilities are optimized for the default setting.
+Changing the temperature (setting it below 1.0) may lead to unexpected behavior, such as looping or
+degraded performance, particularly in complex mathematical or reasoning tasks.
+Thought signatures Gemini 3 models use thought signatures to maintain reasoning context across API
+calls.
+These signatures are encrypted representations of the model's internal thought process.
+Stateful Mode (Recommended) : When using the Interactions API in stateful mode (providing
+previousinteractionid ), the server automatically manages conversation history and thought
+signatures.
+Stateless Mode : If you are managing conversation history manually, you must include thought blocks
+with their signatures in subsequent requests to validate authenticity.
+For detailed information, see the Thought Signatures page.
+Structured Outputs with tools Gemini 3 models allow you to combine Structured Outputs with built-in
+tools, including Grounding with Google Search , URL Context , Code Execution , and Function Calling
+.
+Python from google import genai from pydantic import BaseModel , Field from typing import List class
+MatchResult ( BaseModel ): winner : str = Field ( description = "The name of the winner." )
+finalmatchscore : str = Field ( description = "The final match score." ) scorers : List [ str ] =
+Field ( description = "The name of the scorer." ) client = genai .
+Client () interaction = client .
+interactions .
+create ( model = "gemini-3.1-pro-preview" , input = "Search for all details for the latest Euro." ,
+tools = [ { "type" : "googlesearch" }, { "type" : "urlcontext" } ], responseformat = { "type" :
+"text" , "mimetype" : "application/json" , "schema" : MatchResult .
+modeljsonschema () }, ) result = MatchResult .
+modelvalidatejson ( interaction .
+outputtext ) print ( result ) JavaScript import { GoogleGenAI } from "@google/genai" ; import as z
+from "zod" ; const matchJsonSchema = { type : "object" , properties : { winner : { type : "string" ,
+description : "The name of the winner." }, finalmatchscore : { type : "string" , description : "The
+final score." }, scorers : { type : "array" , items : { type : "string" }, description : "The name
+of the scorer." } }, required : [ "winner" , "finalmatchscore" , "scorers" ] }; const matchSchema =
+z .
+fromJSONSchema ( matchJsonSchema ); const client = new GoogleGenAI ({}); async function run () {
+const interaction = await client .
+interactions .
+create ({ model : "gemini-3.1-pro-preview" , input : "Search for all details for the latest Euro." ,
+tools : [ { type : "googlesearch" }, { type : "urlcontext" } ], responseformat : { type : "text" ,
+mimetype : "application/json" , schema : matchJsonSchema }, }); const match = matchSchema .
+parse ( JSON .
+parse ( interaction .
+outputtext )); console .
+log ( match ); } run (); Java import com.google.genai.Client ; import
+com.google.genai.gaos.models.interactions.CreateModelInteraction ; import
+com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat ; import
+com.google.genai.gaos.models.interactions.GoogleSearch ; import
+com.google.genai.gaos.models.interactions.Interaction ; import
+com.google.genai.gaos.models.interactions.InteractionsInput ; import
+com.google.genai.gaos.models.interactions.Model ; import
+com.google.genai.gaos.models.interactions.ResponseFormat ; import
+com.google.genai.gaos.models.interactions.TextResponseFormat ; import
+com.google.genai.gaos.models.interactions.TextResponseFormatMimeType ; import
+com.google.genai.gaos.models.interactions.URLContext ; import
+com.google.genai.gaos.models.operations.CreateInteractionRequestBody ; import java.util.Arrays ;
+import java.util.HashMap ; import java.util.Map ; Client client = new Client (); Map<String , Object
+properties = new HashMap < (); properties .
+put ( "winner" , Map .
+of ( "type" , "string" , "description" , "The name of the winner." )); properties .
+put ( "finalmatchscore" , Map .
+of ( "type" , "string" , "description" , "The final match score." )); properties .
+put ( "scorers" , Map .
+of ( "type" , "array" , "items" , Map .
+of ( "type" , "string" ), "description" , "The name of the scorer." )); Map<String , Object schema =
+new HashMap < (); schema .
+put ( "type" , "object" ); schema .
+put ( "properties" , properties ); schema .
+put ( "required" , Arrays .
+asList ( "winner" , "finalmatchscore" , "scorers" )); CreateModelInteraction request =
+CreateModelInteraction .
+builder () .
+model ( Model .
+of ( "gemini-3.1-pro-preview" )) .
+input ( InteractionsInput .
+of ( "Search for all details for the latest Euro." )) .
+tools ( Arrays .
+asList ( GoogleSearch .
+builder ().
+build (), URLContext .
+builder ().
+build ())) .
+responseFormat ( CreateModelInteractionResponseFormat .
+of ( ResponseFormat .
+of ( TextResponseFormat .
+builder () .
+mimeType ( TextResponseFormatMimeType .
+APPLICATIONJSON ) .
+schema ( schema ) .
+build ()))) .
+build (); Interaction interaction = client .
+interactions .
+create ( CreateInteractionRequestBody .
+of ( request )).
+interaction ().
+get (); System .
+out .
+println ( interaction .
+outputText ().
+orElse ( "" )); Go package main import ( "context" "fmt" "log" "google.golang.org/genai"
+"google.golang.org/genai/interactions/models/interactions"
+"google.golang.org/genai/interactions/models/operations" ) func main () { ctx := context .
+Background () client , err := genai .
+NewClient ( ctx , nil ) if err != nil { log .
+Fatal ( err ) } schema := map [ string ] any { "type" : "object" , "properties" : map [ string ] any
+{ "winner" : map [ string ] any { "type" : "string" , "description" : "The name of the winner." , },
+"finalmatchscore" : map [ string ] any { "type" : "string" , "description" : "The final match
+score." , }, "scorers" : map [ string ] any { "type" : "array" , "items" : map [ string ] any {
+"type" : "string" }, "description" : "The name of the scorer." , }, }, "required" : [] string {
+"winner" , "finalmatchscore" , "scorers" }, } res , err := client .
+Interactions .
+Create ( ctx , operations .
+CreateInteractionRequest { Body : operations .
+NewCreateInteractionRequestBody ( interactions .
+CreateModelInteraction { Model : interactions .
+Model ( "gemini-3.1-pro-preview" ), Input : interactions .
+NewInteractionsInput ( "Search for all details for the latest Euro." ), Tools : [] interactions .
+Tool { interactions .
+NewTool ( interactions .
+GoogleSearch {}), interactions .
+NewTool ( interactions .
+URLContext {}), }, ResponseFormat : genai .
+Ptr ( interactions .
+NewCreateModelInteractionResponseFormat ( interactions .
+NewResponseFormat ( interactions .
+TextResponseFormat { MimeType : interactions .
+TextResponseFormatMimeType ( "application/json" ).
+ToPointer (), Schema : schema , }), )), }), }) if err != nil { log .
+Fatal ( err ) } if res .
+Interaction .
+OutputText != nil { fmt .
+Println ( res .
+Interaction .
+OutputText ) } } REST curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \
+-H "x-goog-api-key: $GEMINIAPIKEY " \ -H 'Content-Type: application/json' \ -d '{ "model":
+"gemini-3.1-pro-preview", "input": "Search for all details for the latest Euro.", "tools": [
+{"type": "googlesearch"}, {"type": "urlcontext"} ], "responseformat": { "type": "text", "mimetype":
+"application/json", "schema": { "type": "object", "properties": { "winner": {"type": "string",
+"description": "The name of the winner."}, "finalmatchscore": {"type": "string", "description": "The
+final score."}, "scorers": { "type": "array", "items": {"type": "string"}, "description": "The name
+of the scorer." } }, "required": ["winner", "finalmatchscore", "scorers"] } } }' Image generation
+Gemini 3.1 Flash Image and Gemini 3 Pro Image let you generate and edit images from text prompts.
+It uses reasoning to "think" through a prompt and can retrieve real-time data-such as weather
+forecasts or stock charts-before using Google Search grounding before generating high-fidelity
+images.
+New & improved capabilities: 4K & text rendering: Generate sharp, legible text and diagrams with up
+to 2K and 4K resolutions.
+Grounded generation: Use the googlesearch tool to verify facts and generate imagery based on
+real-world information.
+Grounding with Google Image Search available for Gemini 3.1 Flash Image.
+Conversational editing: Multi-turn image editing by simply asking for changes (e.g., "Make the
+background a sunset").
+This workflow relies on Thought Signatures to preserve visual context between turns.
+For complete details on aspect ratios, editing workflows, and configuration options, see the Image
+Generation guide .
+Python from google import genai import base64 client = genai .
+Client () interaction = client .
+interactions .
+create ( model = "gemini-3-pro-image-preview" , input = "Generate an infographic of the current
+weather in Tokyo." , tools = [{ "type" : "googlesearch" }], responseformat = { "type" : "image" ,
+"aspectratio" : "16:9" , "imagesize" : "4K" } ) from PIL import Image import io generatedimage =
+interaction .
+outputimage if generatedimage : imagedata = base64 .
+b64decode ( generatedimage .
+data ) image = Image .
+open ( io .
+BytesIO ( imagedata )) image .
+save ( 'weathertokyo.png' ) image .
+show () JavaScript import { GoogleGenAI } from "@google/genai" ; import as fs from "node:fs" ; const
+client = new GoogleGenAI ({}); async function run () { const interaction = await client .
+interactions .
+create ({ model : "gemini-3-pro-image-preview" , input : "Generate a visualization of the current
+weather in Tokyo." , tools : [{ type : "googlesearch" }], responseformat : { type : "image" ,
+aspectratio : "16:9" , imagesize : "4K" } }); const buffer = Buffer .
+from ( interaction .
+outputimage .
+data , 'base64' ); fs .
+writeFileSync ( 'weathertokyo.png' , buffer ); } run (); Java import com.google.genai.Client ;
+import com.google.genai.gaos.models.interactions.CreateModelInteraction ; import
+com.google.genai.gaos.models.interactions.CreateModelInteractionResponseFormat ; import
+com.google.genai.gaos.models.interactions.GoogleSearch ; import
+com.google.genai.gaos.models.interactions.ImageContent ; import
+com.google.genai.gaos.models.interactions.ImageResponseFormat ; import
+com.google.genai.gaos.models.interactions.ImageResponseFormatAspectRatio ; import
+com.google.genai.gaos.models.interactions.ImageResponseFormatImageSize ; import
+com.google.genai.gaos.models.interactions.Interaction ; import
+com.google.genai.gaos.models.interactions.InteractionsInput ; import
+com.google.genai.gaos.models.interactions.Model ; import
+com.google.genai.gaos.models.interactions.ResponseFormat ; import
+com.google.genai.gaos.models.operations.CreateInteractionRequestBody ; import java.nio.file.Files ;
+import java.nio.file.Paths ; import java.util.Arrays ; import java.util.Base64 ; import
+java.util.Optional ; Client client = new Client (); CreateModelInteraction request =
+CreateModelInteraction .
+builder () .
+model ( Model .
+of ( "gemini-3-pro-image-preview" )) .
+input ( InteractionsInput .
+of ( "Generate an infographic of the current weather in Tokyo." )) .
+tools ( Arrays .
+asList ( GoogleSearch .
+builder ().
+build ())) .
+responseFormat ( CreateModelInteractionResponseFormat .
+of ( ResponseFormat .
+of ( ImageResponseFormat .
+builder () .
+aspectRatio ( ImageResponseFormatAspectRatio .
+ONEHUNDREDANDSIXTYNINE ) .
+imageSize ( ImageResponseFormatImageSize .
+FOURK ) .
+build ()))) .
+build (); Interaction interaction = client .
+interactions .
+create ( CreateInteractionRequestBody .
+of ( request )).
+interaction ().
+get (); Optional<ImageContent generatedImage = interaction .
+outputImage (); if ( generatedImage .
+isPresent () && generatedImage .
+get ().
+data ().
+isPresent ()) { byte [] imageBytes = Base64 .
+getDecoder ().
+decode ( generatedImage .
+get ().
+data ().
+get ()); Files .
+write ( Paths .
+get ( "weathertokyo.png" ), imageBytes ); } Go package main import ( "context" "encoding/base64"
+"log" "os" "google.golang.org/genai" "google.golang.org/genai/interactions/models/interactions"
+"google.golang.org/genai/interactions/models/operations" ) func main () { ctx := context .
+Background () client , err := genai .
+NewClient ( ctx , nil ) if err != nil { log .
+Fatal ( err ) } res , err := client .
+Interactions .
+Create ( ctx , operations .
+CreateInteractionRequest { Body : operations .
+NewCreateInteractionRequestBody ( interactions .
+CreateModelInteraction { Model : interactions .
+Model ( "gemini-3-pro-image-preview" ), Input : interactions .
+NewInteractionsInput ( "Generate an infographic of the current weather in Tokyo." ), Tools : []
+interactions .
+Tool { interactions .
+NewTool ( interactions .
+GoogleSearch {}), }, ResponseFormat : genai .
+Ptr ( interactions .
+NewCreateModelInteractionResponseFormat ( interactions .
+NewResponseFormat ( interactions .
+ImageResponseFormat { AspectRatio : interactions .
+ImageResponseFormatAspectRatioOneHundredAndSixtyNine .
+ToPointer (), ImageSize : interactions .
+ImageResponseFormatImageSize ( "4K" ).
+ToPointer (), }), )), }), }) if err != nil { log .
+Fatal ( err ) } if generatedImage := res .
+Interaction .
+GetOutputImage (); generatedImage != nil && generatedImage .
+Data != nil { imageBytes , err := base64 .
+StdEncoding .
+DecodeString ( generatedImage .
+Data ) if err != nil { log .
+Fatal ( err ) } if err := os .
+WriteFile ( "weathertokyo.png" , imageBytes , 0644 ); err != nil { log .
+Fatal ( err ) } } } REST curl -X POST
+"https://generativelanguage.googleapis.com/v1beta/interactions" \ -H "x-goog-api-key: $GEMINIAPIKEY
+" \ -H 'Content-Type: application/json' \ -d '{ "model": "gemini-3-pro-image-preview", "input":
+"Generate a visualization of the current weather in Tokyo.", "tools": [{"type": "googlesearch"}],
+"responseformat": { "type": "image", "aspectratio": "16:9", "imagesize": "4K" } }' Example Response
+Code Execution with images Gemini 3 Flash can treat vision as an active investigation, not just a
+static glance.
+By combining reasoning with code execution , the model formulates a plan, then writes and executes
+Python code to zoom in, crop, annotate, or otherwise manipulate images step-by-step to visually
+ground its answers.
+Use cases: Zoom and inspect: The model implicitly detects when details are too small (e.g., reading
+a distant gauge or serial number) and writes code to crop and re-examine the area at higher
+resolution.
+Visual math and plotting: The model can run multi-step calculations using code (e.g., summing line
+items on a receipt, or generating a Matplotlib chart from extracted data).
+Image annotation: The model can draw arrows, bounding boxes, or other annotations directly onto
+images to answer spatial questions like "Where should this item go?".
+To enable visual thinking, configure Code Execution as a tool.
+The model will automatically use code to manipulate images when needed.
+Python from google import genai from google.genai import types import requests from PIL import Image
+import io import base64 imagepath = "https://goo.gle/instrument-img" imagebytes = requests .
+get ( imagepath ) .
+content image = types .
+Part .
+frombytes ( data = imagebytes , mimetype = "image/jpeg" ) client = genai .
+Client () interaction = client .
+interactions .
+create ( model = "gemini-3-flash-preview" , input = [ image , "Zoom into the expression pedals and
+tell me how many pedals are there?" ], tools = [{ "type" : "codeexecution" }], ) from
+IPython.display import display from PIL import Image import io for step in interaction .
+steps : if step .
+type == "modeloutput" : for contentblock in step .
+content : if contentblock .
+type == "text" : print ( contentblock .
+text ) elif contentblock .
+type == "image" : display ( Image .
+open ( io .
+BytesIO ( base64 .
+b64decode ( contentblock .
+data )))) elif step .
+type == "codeexecutioncall" : print ( step .
+code ) elif step .
+type == "codeexecutionresult" : print ( step .
+output ) JavaScript import { GoogleGenAI } from "@google/genai" ; const client = new GoogleGenAI
+({}); async function main () { const imageUrl = "https://goo.gle/instrument-img" ; const response =
+await fetch ( imageUrl ); const imageArrayBuffer = await response .
+arrayBuffer (); const base64ImageData = Buffer .
+from ( imageArrayBuffer ).
+toString ( "base64" ); const interaction = await client .
+interactions .
+create ({ model : "gemini-3-flash-preview" , input : [ { type : "image" , mimetype : "image/jpeg" ,
+data : base64ImageData , }, { type : "text" , text : "Zoom into the expression pedals and tell me
+how many pedals are there?" , }, ], tools : [{ type : "codeexecution" }], }); for ( const step of
+interaction .
+steps ) { if ( step .
+type === "modeloutput" ) { for ( const contentBlock of step .
+content ) { if ( contentBlock .
+type === "text" ) { console .
+log ( "Text:" , contentBlock .
+text ); } } } else if ( step .
+type === "codeexecutioncall" ) { console .
+log ( "Code:" , step .
+code ); } else if ( step .
+type === "codeexecutionresult" ) { console .
+log ( "Output:" , step .
+output ); } } } main (); Java import com.google.genai.Client ; import
+com.google.genai.gaos.models.interactions.CodeExecution ; import
+com.google.genai.gaos.models.interactions.CodeExecutionCallStep ; import
+com.google.genai.gaos.models.interactions.CodeExecutionResultStep ; import
+com.google.genai.gaos.models.interactions.Content ; import
+com.google.genai.gaos.models.interactions.CreateModelInteraction ; import
+com.google.genai.gaos.models.interactions.ImageContent ; import
+com.google.genai.gaos.models.interactions.ImageContentMimeType ; import
+com.google.genai.gaos.models.interactions.Interaction ; import
+com.google.genai.gaos.models.interactions.InteractionsInput ; import
+com.google.genai.gaos.models.interactions.Model ; import
+com.google.genai.gaos.models.interactions.ModelOutputStep ; import
+com.google.genai.gaos.models.interactions.Step ; import
+com.google.genai.gaos.models.interactions.TextContent ; import
+com.google.genai.gaos.models.operations.CreateInteractionRequestBody ; import java.io.InputStream ;
+import java.net.URL ; import java.util.Arrays ; import java.util.Base64 ; import
+java.util.Collections ; Client client = new Client (); URL url = new URL (
+"https://goo.gle/instrument-img" ); byte [] imageBytes ; try ( InputStream is = url .
+openStream ()) { imageBytes = is .
+readAllBytes (); } String base64ImageData = Base64 .
+getEncoder ().
+encodeToString ( imageBytes ); CreateModelInteraction request = CreateModelInteraction .
+builder () .
+model ( Model .
+of ( "gemini-3-flash-preview" )) .
+input ( InteractionsInput .
+ofContent ( Arrays .
+asList ( ImageContent .
+builder () .
+mimeType ( ImageContentMimeType .
+IMAGEJPEG ) .
+data ( base64ImageData ) .
+build (), TextContent .
+builder () .
+text ( "Zoom into the expression pedals and tell me how many pedals are there?" ) .
+build ()))) .
+tools ( Arrays .
+asList ( CodeExecution .
+builder ().
+build ())) .
+build (); Interaction interaction = client .
+interactions .
+create ( CreateInteractionRequestBody .
+of ( request )).
+interaction ().
+get (); for ( Step step : interaction .
+steps ().
+orElse ( Collections .
+emptyList ())) { if ( step instanceof ModelOutputStep ) { ModelOutputStep modelOutput = (
+ModelOutputStep ) step ; for ( Content contentBlock : modelOutput .
+content ().
+orElse ( Collections .
+emptyList ())) { if ( contentBlock instanceof TextContent ) { System .
+out .
+println ( "Text: " + (( TextContent ) contentBlock ).
+text ().
+orElse ( "" )); } } } else if ( step instanceof CodeExecutionCallStep ) { CodeExecutionCallStep
+callStep = ( CodeExecutionCallStep ) step ; callStep .
+arguments ().
+flatMap ( args - args .
+code ()).
+ifPresent ( code - System .
+out .
+println ( "Code: " + code )); } else if ( step instanceof CodeExecutionResultStep ) {
+CodeExecutionResultStep resultStep = ( CodeExecutionResultStep ) step ; System .
+out .
+println ( "Output: " + resultStep .
+result ().
+orElse ( "" )); } } Go package main import ( "context" "encoding/base64" "fmt" "io" "log" "net/http"
+"google.golang.org/genai" "google.golang.org/genai/interactions/models/interactions"
+"google.golang.org/genai/interactions/models/operations" ) func main () { ctx := context .
+Background () client , err := genai .
+NewClient ( ctx , nil ) if err != nil { log .
+Fatal ( err ) } httpRes , err := http .
+Get ( "https://goo.gle/instrument-img" ) if err != nil { log .
+Fatal ( err ) } defer httpRes .
+Body .
+Close () imageBytes , err := io .
+ReadAll ( httpRes .
+Body ) if err != nil { log .
+Fatal ( err ) } base64ImageData := base64 .
+StdEncoding .
+EncodeToString ( imageBytes ) res , err := client .
+Interactions .
+Create ( ctx , operations .
+CreateInteractionRequest { Body : operations .
+NewCreateInteractionRequestBody ( interactions .
+CreateModelInteraction { Model : interactions .
+Model ( "gemini-3-flash-preview" ), Input : interactions .
+NewInteractionsInput ([] interactions .
+Content { interactions .
+NewContent ( interactions .
+ImageContent { MimeType : interactions .
+ImageContentMimeType ( "image/jpeg" ).
+ToPointer (), Data : genai .
+Ptr ( base64ImageData ), }), interactions .
+NewContent ( interactions .
+TextContent { Text : "Zoom into the expression pedals and tell me how many pedals are there?" , }),
+}), Tools : [] interactions .
+Tool { interactions .
+NewTool ( interactions .
+CodeExecution {}), }, }), }) if err != nil { log .
+Fatal ( err ) } for , step := range res .
+Interaction .
+Steps { if modelOutput := step .
+ModelOutputStep ; modelOutput != nil { for , contentBlock := range modelOutput .
+Content { if textContent := contentBlock .
+TextContent ; textContent != nil { fmt .
+Println ( "Text:" , textContent .
+Text ) } } } else if callStep := step .
+CodeExecutionCallStep ; callStep != nil { if callStep .
+Arguments .
+Code != nil { fmt .
+Println ( "Code:" , callStep .
+Arguments .
+Code ) } } else if resultStep := step .
+CodeExecutionResultStep ; resultStep != nil { fmt .
+Println ( "Output:" , resultStep .
+Result ) } } } REST IMGURL = "https://goo.gle/instrument-img" MODEL = "gemini-3-flash-preview"
+MIMETYPE = $( curl -sIL " $IMGURL " | grep -i '^content-type:' | awk -F ': ' '{print $2}' | sed
+'s/\r$//' | head -n 1 ) if [[ -z " $MIMETYPE " || !
+" $MIMETYPE " == image/ ]] ; then MIMETYPE = "image/jpeg" fi if [[ " $( uname ) " == "Darwin" ]] ;
+then IMAGEB64 = $( curl -sL " $IMGURL " | base64 -b 0 ) elif [[ " $( base64 --version 2&1 ) " =
+"FreeBSD" ]] ; then IMAGEB64 = $( curl -sL " $IMGURL " | base64 ) else IMAGEB64 = $( curl -sL "
+$IMGURL " | base64 -w0 ) fi curl -X POST
+"https://generativelanguage.googleapis.com/v1beta/interactions" \ -H "x-goog-api-key: $GEMINIAPIKEY
+" \ -H 'Content-Type: application/json' \ -d '{ "model": "' $MODEL '", "input": [ { "type": "image",
+"mimetype":"' " $MIMETYPE " '", "data": "' " $IMAGEB64 " '" }, {"type": "text", "text": "Zoom into
+the expression pedals and tell me how many pedals are there?"} ], "tools": [{"type":
+"codeexecution"}] }' For more details on code execution with images, see Code Execution .
+Multimodal function responses Multimodal function calling allows users to have function responses
+containing multimodal objects allowing for improved utilization of function calling capabilities of
+the model.
+Standard function calling only supports text-based function responses: Python This will only work
+for SDK newer than 2.0.0 from google import genai import requests import base64 client = genai .
+Client () 1.
+Define the tool getimagetool = { "type" : "function" , "name" : "getimage" , "description" :
+"Retrieves the image file reference for a specific order item." , "parameters" : { "type" : "object"
+, "properties" : { "itemname" : { "type" : "string" , "description" : "The name or description of
+the item ordered (e.g., 'instrument')." } }, "required" : [ "itemname" ], }, } 2.
+Send the request with tools interaction1 = client .
+interactions .
+create ( model = "gemini-3-flash-preview" , input = "Show me the instrument I ordered last month." ,
+tools = [ getimagetool ], ) 3.
+Find the function call step fcstep = next ( s for s in interaction1 .
+steps if s .
+type == "functioncall" ) print ( f "Tool Call: { fcstep .
+name } ( { fcstep .
+arguments } )" ) Execute tool (fetch image) imagepath = "https://goo.gle/instrument-img" imagebytes
+= requests .
+get ( imagepath ) .
+content imageb64 = base64 .
+b64encode ( imagebytes ) .
+decode ( "utf-8" ) 4.
+Send multimodal function result back interaction2 = client .
+interactions .
+create ( model = "gemini-3-flash-preview" , previousinteractionid = interaction1 .
+id , input = [{ "type" : "functionresult" , "name" : fcstep .
+name , "callid" : fcstep .
+id , "result" : [ { "type" : "text" , "text" : "instrument.jpg" }, { "type" : "image" , "mimetype" :
+"image/jpeg" , "data" : imageb64 , } ] }], tools = [ getimagetool ] ) print ( f " Final model
+response: { interaction2 .
+outputtext } " ) JavaScript import { GoogleGenAI } from '@google/genai' ; const client = new
+GoogleGenAI ({}); const getImageTool = { type : 'function' , name : 'getimage' , description :
+'Retrieves the image file reference for a specific order item.' , parameters : { type : 'object' ,
+properties : { itemname : { type : 'string' , description : "The name or description of the item
+ordered (e.g., 'instrument')." , }, }, required : [ 'itemname' ], }, }; const interaction1 = await
+client .
+interactions .
+create ({ model : 'gemini-3-flash-preview' , input : 'Use the getimage tool to show me the
+instrument I ordered last month.' , tools : [ getImageTool ], }); const fcStep = interaction1 .
+steps .
+find ( s = s .
+type === 'functioncall' ); console .
+log ( Tool Call: ${ fcStep .
+name } ( ${ JSON .
+stringify ( fcStep .
+arguments ) } ) ); const imageUrl = 'https://goo.gle/instrument-img' ; const response = await fetch
+( imageUrl ); const imageArrayBuffer = await response .
+arrayBuffer (); const base64ImageData = Buffer .
+from ( imageArrayBuffer ).
+toString ( 'base64' ); const interaction2 = await client .
+interactions .
+create ({ model : 'gemini-3-flash-preview' , previousinteractionid : interaction1 .
+id , input : [{ type : 'functionresult' , name : fcStep .
+name , callid : fcStep .
+id , result : [ { type : 'text' , text : 'instrument.jpg' }, { type : 'image' , mimetype :
+'image/jpeg' , data : base64ImageData , } ] }], tools : [ getImageTool ] }); console .
+log ( Final model response: ${ interaction2 .
+outputtext } ); Java import com.google.genai.Client ; import
+com.google.genai.gaos.models.interactions.CreateModelInteraction ; import
+com.google.genai.gaos.models.interactions.Function ; import
+com.google.genai.gaos.models.interactions.FunctionCallStep ; import
+com.google.genai.gaos.models.interactions.FunctionResultStep ; import
+com.google.genai.gaos.models.interactions.FunctionResultStepResultUnion ; import
+com.google.genai.gaos.models.interactions.FunctionResultSubcontent ; import
+com.google.genai.gaos.models.interactions.ImageContent ; import
+com.google.genai.gaos.models.interactions.ImageContentMimeType ; import
+com.google.genai.gaos.models.interactions.Interaction ; import
+com.google.genai.gaos.models.interactions.InteractionsInput ; import
+com.google.genai.gaos.models.interactions.Model ; import
+com.google.genai.gaos.models.interactions.Step ; import
+com.google.genai.gaos.models.interactions.TextContent ; import
+com.google.genai.gaos.models.operations.CreateInteractionRequestBody ; import java.io.InputStream ;
+import java.net.URL ; import java.util.ArrayList ; import java.util.Arrays ; import java.util.Base64
+; import java.util.Collections ; import java.util.HashMap ; import java.util.List ; import
+java.util.Map ; Client client = new Client (); Map<String , Object itemProp = new HashMap < ();
+itemProp .
+put ( "type" , "string" ); itemProp .
+put ( "description" , "The name or description of the item ordered (e.g., 'instrument')." );
+Map<String , Object properties = new HashMap < (); properties .
+put ( "itemname" , itemProp ); Map<String , Object parameters = new HashMap < (); parameters .
+put ( "type" , "object" ); parameters .
+put ( "properties" , properties ); parameters .
+put ( "required" , Arrays .
+asList ( "itemname" )); Function getImageTool = Function .
+builder () .
+name ( "getimage" ) .
+description ( "Retrieves the image file reference for a specific order item." ) .
+parameters ( parameters ) .
+build (); CreateModelInteraction req1 = CreateModelInteraction .
+builder () .
+model ( Model .
+of ( "gemini-3-flash-preview" )) .
+input ( InteractionsInput .
+of ( "Use the getimage tool to show me the instrument I ordered last month." )) .
+tools ( Arrays .
+asList ( getImageTool )) .
+build (); Interaction interaction1 = client .
+interactions .
+create ( CreateInteractionRequestBody .
+of ( req1 )).
+interaction ().
+get (); FunctionCallStep fcStep = null ; for ( Step step : interaction1 .
+steps ().
+orElse ( Collections .
+emptyList ())) { if ( step instanceof FunctionCallStep ) { fcStep = ( FunctionCallStep ) step ;
+break ; } } if ( fcStep != null ) { System .
+out .
+println ( "Tool Call: " + fcStep .
+name ().
+orElse ( "" )); URL url = new URL ( "https://goo.gle/instrument-img" ); byte [] imageBytes ; try (
+InputStream is = url .
+openStream ()) { imageBytes = is .
+readAllBytes (); } String base64ImageData = Base64 .
+getEncoder ().
+encodeToString ( imageBytes ); List<FunctionResultSubcontent subcontents = new ArrayList < ();
+subcontents .
+add ( TextContent .
+builder ().
+text ( "instrument.jpg" ).
+build ()); subcontents .
+add ( ImageContent .
+builder () .
+mimeType ( ImageContentMimeType .
+IMAGEJPEG ) .
+data ( base64ImageData ) .
+build ()); FunctionResultStep funcResult = FunctionResultStep .
+builder () .
+name ( fcStep .
+name ().
+orElse ( "" )) .
+callId ( fcStep .
+id ().
+orElse ( "" )) .
+result ( FunctionResultStepResultUnion .
+of ( subcontents )) .
+build (); CreateModelInteraction req2 = CreateModelInteraction .
+builder () .
+model ( Model .
+of ( "gemini-3-flash-preview" )) .
+input ( InteractionsInput .
+ofStep ( Arrays .
+asList ( funcResult ))) .
+tools ( Arrays .
+asList ( getImageTool )) .
+previousInteractionId ( interaction1 .
+id ().
+orElse ( "" )) .
+build (); Interaction interaction2 = client .
+interactions .
+create ( CreateInteractionRequestBody .
+of ( req2 )).
+interaction ().
+get (); System .
+out .
+println ( "Final model response: " + interaction2 .
+outputText ().
+orElse ( "" )); } Go package main import ( "context" "encoding/base64" "fmt" "io" "log" "net/http"
+"google.golang.org/genai" "google.golang.org/genai/interactions/models/interactions"
+"google.golang.org/genai/interactions/models/operations" ) func main () { ctx := context .
+Background () client , err := genai .
+NewClient ( ctx , nil ) if err != nil { log .
+Fatal ( err ) } getImageTool := interactions .
+NewTool ( interactions .
+Function { Name : genai .
+Ptr ( "getimage" ), Description : genai .
+Ptr ( "Retrieves the image file reference for a specific order item." ), Parameters : map [ string ]
+any { "type" : "object" , "properties" : map [ string ] any { "itemname" : map [ string ] any {
+"type" : "string" , "description" : "The name or description of the item ordered (e.g.,
+'instrument')." , }, }, "required" : [] string { "itemname" }, }, }) res1 , err := client .
+Interactions .
+Create ( ctx , operations .
+CreateInteractionRequest { Body : operations .
+NewCreateInteractionRequestBody ( interactions .
+CreateModelInteraction { Model : interactions .
+Model ( "gemini-3-flash-preview" ), Input : interactions .
+NewInteractionsInput ( "Use the getimage tool to show me the instrument I ordered last month." ),
+Tools : [] interactions .
+Tool { getImageTool }, }), }) if err != nil { log .
+Fatal ( err ) } for , step := range res1 .
+Interaction .
+Steps { if fcStep := step .
+FunctionCallStep ; fcStep != nil { fmt .
+Println ( "Tool Call:" , fcStep .
+Name ) httpRes , err := http .
+Get ( "https://goo.gle/instrument-img" ) if err != nil { log .
+Fatal ( err ) } defer httpRes .
+Body .
+Close () imageBytes , err := io .
+ReadAll ( httpRes .
+Body ) if err != nil { log .
+Fatal ( err ) } base64ImageData := base64 .
+StdEncoding .
+EncodeToString ( imageBytes ) funcResult := interactions .
+NewStep ( interactions .
+FunctionResultStep { Name : genai .
+Ptr ( fcStep .
+Name ), CallID : fcStep .
+ID , Result : interactions .
+NewFunctionResultStepResultUnion ([] interactions .
+FunctionResultSubcontent { interactions .
+NewFunctionResultSubcontent ( interactions .
+TextContent { Text : "instrument.jpg" , }), interactions .
+NewFunctionResultSubcontent ( interactions .
+ImageContent { MimeType : interactions .
+ImageContentMimeType ( "image/jpeg" ).
+ToPointer (), Data : genai .
+Ptr ( base64ImageData ), }), }), }) res2 , err := client .
+Interactions .
+Create ( ctx , operations .
+CreateInteractionRequest { Body : operations .
+NewCreateInteractionRequestBody ( interactions .
+CreateModelInteraction { Model : interactions .
+Model ( "gemini-3-flash-preview" ), PreviousInteractionID : res1 .
+Interaction .
+ID , Tools : [] interactions .
+Tool { getImageTool }, Input : interactions .
+NewInteractionsInput ([] interactions .
+Step { funcResult }), }), }) if err != nil { log .
+Fatal ( err ) } if res2 .
+Interaction .
+OutputText != nil { fmt .
+Println ( "Final model response:" , res2 .
+Interaction .
+OutputText ) } break } } } REST IMGURL = "https://goo.gle/instrument-img" MIMETYPE = $( curl -sIL "
+$IMGURL " | grep -i '^content-type:' | awk -F ': ' '{print $2}' | sed 's/\r$//' | head -n 1 ) if [[
+-z " $MIMETYPE " || !
+" $MIMETYPE " == image/ ]] ; then MIMETYPE = "image/jpeg" fi Check for macOS if [[ " $( uname ) " ==
+"Darwin" ]] ; then IMAGEB64 = $( curl -sL " $IMGURL " | base64 -b 0 ) elif [[ " $( base64 --version
+2&1 ) " = "FreeBSD" ]] ; then IMAGEB64 = $( curl -sL " $IMGURL " | base64 ) else IMAGEB64 = $( curl
+-sL " $IMGURL " | base64 -w0 ) fi 1.
+First interaction (triggers function call) curl -X POST
+"https://generativelanguage.googleapis.com/v1beta/interactions" \ -H "x-goog-api-key: $GEMINIAPIKEY"
+\ -H 'Content-Type: application/json' \ -d '{ "model": "gemini-3-flash-preview", "input": "Show me
+the instrument I ordered last month.", "tools": [...] }' 2.
+Send multimodal function result back (Replace INTERACTIONID and CALLID) curl -X POST
+"https://generativelanguage.googleapis.com/v1beta/interactions" \ -H "x-goog-api-key: $GEMINIAPIKEY
+" \ -H 'Content-Type: application/json' \ -d '{ "model": "gemini-3-flash-preview",
+"previousinteractionid": "INTERACTIONID", "input": [{ "type": "functionresult", "name": "getimage",
+"callid": "CALLID", "result": [ { "type": "text", "text": "instrument.jpg" }, { "type": "image",
+"mimetype": "' " $MIMETYPE " '", "data": "' " $IMAGEB64 " '" } ] }] }' Combine built-in tools and
+function calling Gemini 3 allows the use of built-in tools (like Google Search, URL context, and
+more ) and custom function calling tools in the same API call, allowing for more complex workflows.
+Python from google import genai from google.genai import types client = genai .
+Client () getWeather = { "type" : "function" , "name" : "getWeather" , "description" : "Gets the
+weather for a requested city." , "parameters" : { "type" : "object" , "properties" : { "city" : {
+"type" : "string" , "description" : "The city and state, e.g.
+Utqiaġvik, Alaska" , }, }, "required" : [ "city" ], }, } interaction = client .
+interactions .
+create ( model = "gemini-3-flash-preview" , input = "What is the northernmost city in the United
+States?
+What's the weather like there today?" , tools = [ { "type" : "googlesearch" }, getWeather ], )
+fcstep = next (( s for s in interaction .
+steps if s .
+type == "functioncall" ), None ) if fcstep : result = { "response" : "Very cold.
+22 degrees Fahrenheit." } finalinteraction = client .
+interactions .
+create ( model = "gemini-3-flash-preview" , input = [ { "type" : "functionresult" , "name" : fcstep
+.
+name , "callid" : fcstep .
+id , "result" : result } ], tools = [ { "type" : "googlesearch" }, getWeather ],
+previousinteractionid = interaction .
+id , ) print ( finalinteraction .
+outputtext ) JavaScript import { GoogleGenAI , Type } from '@google/genai' ; const client = new
+GoogleGenAI ({}); const getWeatherDeclaration = { type : 'function' , name : 'getWeather' ,
+description : 'Gets the weather for a requested city.' , parameters : { type : Type .
+OBJECT , properties : { city : { type : Type .
+STRING , description : 'The city and state, e.g.
+Utqiaġvik, Alaska' , }, }, required : [ 'city' ], }, }; const interaction = await client .
+interactions .
+create ({ model : 'gemini-3-flash-preview' , input : "What is the northernmost city in the United
+States?
+What's the weather like there today?" , tools : [ { type : "googlesearch" }, getWeatherDeclaration
+], }); const fcStep = interaction .
+steps .
+find ( s = s .
+type === 'functioncall' ); if ( fcStep ) { const result = { response : "Very cold.
+22 degrees Fahrenheit." }; const finalInteraction = await client .
+interactions .
+create ({ model : 'gemini-3-flash-preview' , input : [ { type : 'functionresult' , name : fcStep .
+name , callid : fcStep .
+id , result : result } ], tools : [ { type : "googlesearch" }, getWeatherDeclaration ],
+previousinteractionid : interaction .
+id , }); console .
+log ( finalInteraction .
+outputtext ); } Java import com.google.genai.Client ; import
+com.google.genai.gaos.models.interactions.CreateModelInteraction ; import
+com.google.genai.gaos.models.interactions.Function ; import
+com.google.genai.gaos.models.interactions.FunctionCallStep ; import
+com.google.genai.gaos.models.interactions.FunctionResultStep ; import
+com.google.genai.gaos.models.interactions.FunctionResultStepResultUnion ; import
+com.google.genai.gaos.models.interactions.GoogleSearch ; import
+com.google.genai.gaos.models.interactions.Interaction ; import
+com.google.genai.gaos.models.interactions.InteractionsInput ; import
+com.google.genai.gaos.models.interactions.Model ; import
+com.google.genai.gaos.models.interactions.Step ; import
+com.google.genai.gaos.models.operations.CreateInteractionRequestBody ; import java.util.Arrays ;
+import java.util.Collections ; import java.util.HashMap ; import java.util.Map ; Client client = new
+Client (); Map<String , Object cityProp = new HashMap < (); cityProp .
+put ( "type" , "string" ); cityProp .
+put ( "description" , "The city and state, e.g.
+Utqiaġvik, Alaska" ); Map<String , Object properties = new HashMap < (); properties .
+put ( "city" , cityProp ); Map<String , Object parameters = new HashMap < (); parameters .
+put ( "type" , "object" ); parameters .
+put ( "properties" , properties ); parameters .
+put ( "required" , Arrays .
+asList ( "city" )); Function getWeather = Function .
+builder () .
+name ( "getWeather" ) .
+description ( "Gets the weather for a requested city." ) .
+parameters ( parameters ) .
+build (); CreateModelInteraction request = CreateModelInteraction .
+builder () .
+model ( Model .
+of ( "gemini-3-flash-preview" )) .
+input ( InteractionsInput .
+of ( "What is the northernmost city in the United States?
+What's the weather like there today?" )) .
+tools ( Arrays .
+asList ( GoogleSearch .
+builder ().
+build (), getWeather )) .
+build (); Interaction interaction = client .
+interactions .
+create ( CreateInteractionRequestBody .
+of ( request )).
+interaction ().
+get (); FunctionCallStep fcStep = null ; for ( Step step : interaction .
+steps ().
+orElse ( Collections .
+emptyList ())) { if ( step instanceof FunctionCallStep ) { fcStep = ( FunctionCallStep ) step ;
+break ; } } if ( fcStep != null ) { FunctionResultStep funcResult = FunctionResultStep .
+builder () .
+name ( fcStep .
+name ().
+orElse ( "" )) .
+callId ( fcStep .
+id ().
+orElse ( "" )) .
+result ( FunctionResultStepResultUnion .
+of ( "{ response : Very cold.
+22 degrees Fahrenheit.
+}" )) .
+build (); CreateModelInteraction finalRequest = CreateModelInteraction .
+builder () .
+model ( Model .
+of ( "gemini-3-flash-preview" )) .
+input ( InteractionsInput .
+ofStep ( Arrays .
+asList ( funcResult ))) .
+tools ( Arrays .
+asList ( GoogleSearch .
+builder ().
+build (), getWeather )) .
+previousInteractionId ( interaction .
+id ().
+orElse ( "" )) .
+build (); Interaction finalInteraction = client .
+interactions .
+create ( CreateInteractionRequestBody .
+of ( finalRequest )).
+interaction ().
+get (); System .
+out .
+println ( finalInteraction .
+outputText ().
+orElse ( "" )); } Go package main import ( "context" "fmt" "log" "google.golang.org/genai"
+"google.golang.org/genai/interactions/models/interactions"
+"google.golang.org/genai/interactions/models/operations" ) func main () { ctx := context .
+Background () client , err := genai .
+NewClient ( ctx , nil ) if err != nil { log .
+Fatal ( err ) } getWeather := interactions .
+NewTool ( interactions .
+Function { Name : genai .
+Ptr ( "getWeather" ), Description : genai .
+Ptr ( "Gets the weather for a requested city." ), Parameters : map [ string ] any { "type" :
+"object" , "properties" : map [ string ] any { "city" : map [ string ] any { "type" : "string" ,
+"description" : "The city and state, e.g.
+Utqiaġvik, Alaska" , }, }, "required" : [] string { "city" }, }, }) tools := [] interactions .
+Tool { interactions .
+NewTool ( interactions .
+GoogleSearch {}), getWeather , } res , err := client .
+Interactions .
+Create ( ctx , operations .
+CreateInteractionRequest { Body : operations .
+NewCreateInteractionRequestBody ( interactions .
+CreateModelInteraction { Model : interactions .
+Model ( "gemini-3-flash-preview" ), Input : interactions .
+NewInteractionsInput ( "What is the northernmost city in the United States?
+What's the weather like there today?" ), Tools : tools , }), }) if err != nil { log .
+Fatal ( err ) } for , step := range res .
+Interaction .
+Steps { if fcStep := step .
+FunctionCallStep ; fcStep != nil { funcResult := interactions .
+NewStep ( interactions .
+FunctionResultStep { Name : genai .
+Ptr ( fcStep .
+Name ), CallID : fcStep .
+ID , Result : interactions .
+NewFunctionResultStepResultUnion ( {"response": "Very cold.
+22 degrees Fahrenheit."} ), }) finalRes , err := client .
+Interactions .
+Create ( ctx , operations .
+CreateInteractionRequest { Body : operations .
+NewCreateInteractionRequestBody ( interactions .
+CreateModelInteraction { Model : interactions .
+Model ( "gemini-3-flash-preview" ), PreviousInteractionID : res .
+Interaction .
+ID , Tools : tools , Input : interactions .
+NewInteractionsInput ([] interactions .
+Step { funcResult }), }), }) if err != nil { log .
+Fatal ( err ) } if finalRes .
+Interaction .
+OutputText != nil { fmt .
+Println ( finalRes .
+Interaction .
+OutputText ) } break } } } Migration from Gemini 2.5 Gemini 3 is our most capable model family to
+date and offers a stepwise improvement over Gemini 2.5.
+When migrating, consider the following: Thinking: If you were previously using complex prompt
+engineering (like chain of thought) to force Gemini 2.5 to reason, try Gemini 3 with thinkinglevel:
+"high" and simplified prompts.
+Temperature settings: If your existing code explicitly sets temperature (especially to low values
+for deterministic outputs), we recommend removing this parameter and using the Gemini 3 default of
+1.0 to avoid potential looping issues or performance degradation on complex tasks.
+PDF & document understanding: If you relied on specific behavior for dense document parsing, test
+the new mediaresolutionhigh setting to ensure continued accuracy.
+Token consumption: Migrating to Gemini 3 defaults may increase token usage for PDFs but decrease
+token usage for video.
+If requests now exceed the context window due to higher default resolutions, we recommend explicitly
+reducing the media resolution.
+Image segmentation: Image segmentation capabilities (returning pixel-level masks for objects) are
+not supported in Gemini 3 Pro or Gemini 3 Flash.
+For workloads requiring built-in image segmentation, we recommend continuing to use Gemini 2.5 Flash
+with thinking turned off.
+Computer Use: Gemini 3 Pro and Gemini 3 Flash support Computer Use .
+Unlike the 2.5 series, you don't need to use a separate model to access the Computer Use tool.
+Tool support : Combining built-in tools with function calling is now supported for Gemini 3 models.
+Maps grounding is also now supported for Gemini 3 models.
+OpenAI compatibility For users utilizing the OpenAI compatibility layer , standard parameters
+(OpenAI's reasoningeffort ) are automatically mapped to Gemini ( thinkinglevel ) equivalents.
+Prompting best practices Gemini 3 is a reasoning model, which changes how you should prompt.
+Precise instructions: Be concise in your input prompts.
+Gemini 3 responds best to direct, clear instructions.
+It may over-analyze verbose or overly complex prompt engineering techniques used for older models.
+Output verbosity: By default, Gemini 3 is less verbose and prefers providing direct, efficient
+answers.
+If your use case requires a more conversational or "chatty" persona, you must explicitly steer the
+model in the prompt (e.g., "Explain this as a friendly, talkative assistant").
+Context management: When working with large datasets (e.g., entire books, codebases, or long
+videos), place your specific instructions or questions at the end of the prompt, after the data
+context.
+Anchor the model's reasoning to the provided data by starting your question with a phrase like,
+"Based on the preceding information...".
+Learn more about prompt design strategies in the prompt engineering guide .
+FAQ What is the knowledge cutoff for Gemini 3?
+Gemini 3 models have a knowledge cutoff of January 2025.
+For more recent information, use the Search Grounding tool.
+What are the context window limits?
+Gemini 3 models support a 1 million token input context window and up to 64k tokens of output.
+Is there a free tier for Gemini 3?
+Gemini 3 Flash gemini-3-flash-preview has a free tier in the Gemini API.
+You can try Gemini 3.1 Pro and 3 Flash at no cost in Google AI Studio, but there is no free tier
+available for gemini-3.1-pro-preview in the Gemini API.
+Will my old thinkingbudget code still work?
+Yes, thinkingbudget is still supported for backward compatibility, but we recommend migrating to
+thinkinglevel for more predictable performance.
+Don't use both in the same request.
+Does Gemini 3 support the Batch API?
+Yes, Gemini 3 supports the Batch API .
+Is Context Caching supported?
+Yes, Context Caching is supported for Gemini 3.
+Which tools are supported in Gemini 3?
+Gemini 3 supports Google Search , Grounding with Google Maps , File Search , Code Execution , and
+URL Context .
+It also supports standard Function Calling for your own custom tools, and in combination with
+built-in tools .
+What is gemini-3.1-pro-preview-customtools ?
+If you are using gemini-3.1-pro-preview and the model ignores your custom tools in favor of bash
+commands, try the gemini-3.1-pro-preview-customtools model instead.
+More info [here][customtools-model].
+Send feedback Except as otherwise noted, the content of this page is licensed under the Creative
+Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License .
+For details, see the Google Developers Site Policies .
+Java is a registered trademark of Oracle and/or its affiliates.
+Last updated 2026-10-09 UTC.
+Need to tell us more?
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my
+problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Missing the information I
+need","missingTheInformationINeed","thumb-down"],["Too complicated / too many
+steps","tooComplicatedTooManySteps","thumb-down"],["Out of date","outOfDate","thumb-down"],["Samples
+/ code issue","samplesCodeIssue","thumb-down"],["Other","otherDown","thumb-down"]],["Last updated
+2026-10-09 UTC."],[],[]] Terms Privacy Manage cookies English Deutsch Español - América Latina
+Français Indonesia Italiano Polski Português - Brasil Shqip Tiếng Việt Türkçe Русский עברית
+العربيّة فارسی हिंदी বাংলা ภาษาไทย 中文 - 简体 中文 - 繁體 日本語 한국어

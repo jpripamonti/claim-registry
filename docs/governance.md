@@ -44,6 +44,8 @@ alongside it, so readers can weigh it.
   `CHANGELOG.md`, because they trigger update notices for every config pinned to the claim.
 - Asserted claims are re-checked when their source page changes, or by `review_by` at the latest.
   A claim past `review_by` is shown as stale. It is not removed.
+- When an editor re-checks a claim, they refresh its source snapshot with
+  `python3 -m claimreg check-quotes <id> --save-sources` and commit it with the change.
 
 ## Disputes
 

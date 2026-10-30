@@ -72,10 +72,10 @@ on the claim with status `open`.
 ## Open data
 
 - Claim data is published under CC BY 4.0, so anyone can copy and reuse it with attribution.
+- The tooling code (`claimreg/`) is published under the MIT license, see `LICENSE`.
 - The registry has no private claims, private evidence or paid tiers of data.
 
 ## Open decisions
 
-- The license for the tooling code.
 - How many editors are needed before the single-editor rule for disputes is dropped.
 - Whether opt-in telemetry from users can count as observed evidence, and under what privacy rules.

@@ -2,6 +2,7 @@
 name = "claimreg"
 version = "0.1.0"
 description = "Tools for the claim registry: validation and source checks"
+license = "MIT"
 requires-python = ">=3.10"
 dependencies = ["pyyaml>=6"]
 

@@ -9,6 +9,8 @@
   - `python3 -m claimreg check-quotes [ids]` fetches each source and confirms its quote is there.
     `--save-sources` refreshes the page snapshots in `sources/`; a missing quote shows a diff against its snapshot.
   - `python3 -m claimreg applies --model claude-sonnet --version 5.5 [--context-size long]` lists the active claims that apply to that model.
+  - `python3 -m claimreg check-config CLAUDE.md [--write-lock]` checks the claims a config cites
+    (`<!-- claim: id@major -->`) and compares them with its `claims.lock`.
   - Tests: `python3 -m pytest -q` (offline; quote tests use fake pages).
 - CI (`.github/workflows/`) runs tests and validation on every push, and the quote check weekly,
   opening an issue on failure.

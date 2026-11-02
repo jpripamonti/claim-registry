@@ -202,6 +202,28 @@ A config is up to date when every cited claim's current version has the same maj
 pin and is not withdrawn. A minor or major change produces an update notice explaining what changed,
 with the evidence. Major changes are flagged as breaking.
 
+### Tooling
+
+`python3 -m claimreg check-config <config> [--lock PATH] [--write-lock] [-v]` reads every
+`<!-- claim: <id>@<major> -->` comment in the config and prints one line per citation, with its
+file and line:
+
+- `unknown`: no claim has that id. A problem.
+- `major mismatch`: the claim's current major differs from the pin. The line gives the current
+  version, followed by the `history` lines since the pinned major. A problem.
+- `withdrawn`, or `superseded by <id>`: the claim is no longer followed. A problem.
+- `stale`: the claim is past `review_by`. A warning only, as in `validate`.
+- `contradicted by <id>`: an active claim lists this one in `contradicts`. Shown for information.
+- `ok`: none of the above; printed only with `-v`.
+
+`--write-lock` writes `claims.lock` next to the config (or at `--lock`), with every cited claim at
+its current version. `registry` is the newest date tag; while the registry has none, it is the day
+the lock was written, and a comment in the file says so. Without the flag, an existing lock is
+compared with the registry: each cited claim whose version moved prints `changed <id> <old> ->
+<new>` and the `history` lines since the locked version. A major change is a problem; a minor or
+patch change is informational, as is a claim in the lock but no longer cited, or cited but not in
+the lock. The command exits 1 when any problem is found.
+
 ## Finding the claims that apply to a model
 
 `python3 -m claimreg applies --model <family or line> --version <v> [--context-size short|long]`

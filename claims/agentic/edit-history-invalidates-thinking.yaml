@@ -1,0 +1,53 @@
+id: edit-history-invalidates-thinking
+version: 1.0.0
+title: Editing earlier turns, the system prompt or the tool list mid-conversation invalidates thinking blocks on Claude 5.x models
+status: active
+technique:
+  summary: >
+    Changing anything before a thinking block between requests (earlier messages, the system prompt,
+    the tool list; for example inserting and later deleting per-turn reminders, or adding a tool or
+    system prompt text partway through). Keep history append-only: send changes as turn-scoped or
+    mid-conversation system messages or in the newest turn, and declare tools and system prompt
+    additions from the first request.
+conditions:
+  model_family: [claude-fable, claude-opus, claude-sonnet, claude-haiku]
+  model_versions: {claude-fable: ["5.1"], claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}
+  task_family: [unspecified]
+  reasoning: enabled
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: earlier thinking blocks invalidated (400 error or dropped) and prompt cache restarted
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Append each assistant turn to the history exactly as the API returned it, thinking blocks included, and don’t edit earlier turns between requests. A thinking block is valid only while everything before it is unchanged: the system prompt, the tool list, and every earlier message.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Most history edits that trip the prefix check also restart the prompt cache: injecting and removing per-turn reminders, summarizing older turns in place, or changing the system prompt mid-session.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Declare the tool in `tools` from the first request of the session: adding it to `tools` later edits the conversation’s prefix and invalidates earlier thinking blocks
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Because the reminder is appended rather than inserted and later deleted, the prompt cache and preserved thinking stay intact.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      A request that sends thinking blocks back after `system` changed can return a 400 error, so a stored conversation resumed with the new system prompt can fail.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

@@ -1,0 +1,30 @@
+id: adaptive-thinking-keeps-reasoning-out-of-reply-haiku-5-5
+version: 1.0.0
+title: Adaptive thinking at medium effort keeps reasoning-like text out of Claude Haiku 5.5's visible replies
+status: active
+technique:
+  summary: >
+    Haiku 5.5 sometimes writes reasoning-like text in the user-facing reply, more often with
+    thinking off or at low effort. Switch to adaptive thinking and medium effort.
+conditions:
+  model_family: [claude-haiku]
+  model_versions: ["5.5"]
+  task_family: [unspecified]
+  reasoning: unspecified   # the technique is turning adaptive thinking on; the problem shows with thinking off
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: less reasoning-like text in the visible reply
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Claude Haiku 5.5 sometimes writes reasoning-like text in the reply that users see. This occurs more often with thinking off or at `low` effort. If you see this behavior, switch to adaptive thinking and `medium` effort.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

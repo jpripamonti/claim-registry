@@ -1,0 +1,32 @@
+id: compaction-summary-preserve-list-fable-5-1
+version: 1.0.0
+title: Telling Claude Fable 5.1 exactly what to preserve improves client-side compaction summaries
+status: active
+technique:
+  summary: >
+    When compacting a long conversation on the client, give a summarization instruction that lists
+    what must be kept: problems and how they were handled, options tried or set aside, decisions and
+    constraints stated exactly, current state, open items, and hard-to-reconstruct details. Server-
+    side compaction already does this.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.1"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: long
+effect:
+  direction: helps
+  outcome: constraints, decisions and exact details retained after compaction
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Claude Fable 5.1 responds well to being told explicitly what its summary must retain when a long conversation is compacted. Server-side compaction already does this. If you compact on the client side, use the following summarization instruction:
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

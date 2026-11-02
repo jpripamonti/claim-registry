@@ -1,0 +1,42 @@
+id: parse-last-json-value-sonnet-5-5
+version: 1.0.0
+title: When Claude Sonnet 5.5 is asked for JSON in the prompt, parse the last JSON value in the response
+status: active
+technique:
+  summary: >
+    Without structured outputs, the model often works the problem out in text and writes the JSON at
+    the end. Read only text blocks, treat max_tokens stops as failed, scan for complete JSON values
+    and keep the last one (not everything from the first { to the last }), check the fields, and
+    retry once if they are wrong.
+conditions:
+  model_family: [claude-sonnet]
+  model_versions: ["5.5"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: share of responses with usable JSON; accuracy unchanged
+  magnitude: nearly every response usable
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      The JSON usually holds the right answer, but a parser that expects the whole response to be JSON fails.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Don’t take everything from the first `{` to the last `}`. The model occasionally writes a draft before its final JSON, and that range would include both.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      In testing, this made nearly every response usable without changing its accuracy.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

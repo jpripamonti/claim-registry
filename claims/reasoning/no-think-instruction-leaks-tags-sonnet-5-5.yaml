@@ -1,0 +1,30 @@
+id: no-think-instruction-leaks-tags-sonnet-5-5
+version: 1.0.0
+title: With between_tools thinking, instructions not to think make Claude Sonnet 5.5 leak internal XML tags
+status: active
+technique:
+  summary: >
+    Instructions telling the model not to think, kept in prompts that run Sonnet 5.5 with thinking
+    type between_tools (no up-front thinking). Remove them.
+conditions:
+  model_family: [claude-sonnet]
+  model_versions: ["5.5"]
+  task_family: [unspecified]
+  reasoning: unspecified   # thinking type between_tools (no up-front thinking); no condition value for it
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: internal XML tags in the visible output
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      With `between_tools`, remove any instruction that tells the model not to think. Such instructions make it more likely that the model writes internal XML tags in its visible output.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

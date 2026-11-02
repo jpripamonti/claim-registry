@@ -1,0 +1,38 @@
+id: current-date-with-search-tool-haiku-5-5
+version: 1.0.0
+title: Giving Claude Haiku 5.5 today's date alongside a search tool grounds answers in recent results
+status: active
+technique:
+  summary: >
+    When the model has a search tool, put the current date in the system prompt or the search tool's
+    description, rendered once when the conversation starts (give a new date in the newest turn if
+    the conversation continues another day).
+  example: |
+    The current date is {{current_date}}.
+conditions:
+  model_family: [claude-haiku]
+  model_versions: ["5.5"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: answers grounded in recent search results; more searching with short prompts
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      When you give Claude Haiku 5.5 a search tool, also give it today’s date. In Anthropic’s testing, this grounded the model’s answers in recent search results.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      With a short prompt at `medium` effort, the date alone led the model to search more often.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

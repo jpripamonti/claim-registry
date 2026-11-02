@@ -1,0 +1,42 @@
+id: reduce-safeguard-false-positives-fable-5-1
+version: 1.0.0
+title: Rephrasing compile checks, explaining lesser-known languages and removing base64 tool output reduce Claude Fable 5.1 false refusals
+status: active
+technique:
+  summary: >
+    Three situations make safeguard false positives (stop_reason "refusal") more likely on Fable
+    5.1: ask "Are there any bugs in this program?" instead of whether it compiles; give context or
+    documentation for lesser-known programming languages; remove tools that return base64 data into
+    the context.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.1"]
+  task_family: [unspecified]   # page frames it as benign coding requests
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: fewer false-positive safeguard refusals on benign requests
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Instead of “Does this program compile without errors?”, ask “Are there any bugs in this program?”
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Give the model context about what the language is and how it works, for example by giving it access to the language’s documentation.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Tools that return base64-encoded data into the model’s context can trigger false positives, so removing them is the recommended fix.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

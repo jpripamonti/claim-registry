@@ -1,0 +1,33 @@
+id: answer-directly-line-reduces-thinking-opus-5-5
+version: 1.0.0
+title: On Claude Opus 5.5 at low effort, a line like "Answer directly without deliberating." cuts thinking further, possibly at a quality cost
+status: active
+technique:
+  summary: >
+    For integrations that ran Opus 5 with thinking disabled: on Opus 5.5 start at low effort, and if
+    time to first token still matters, add a system prompt line such as "Answer directly without
+    deliberating." Measure quality when adding it.
+  example: |
+    Answer directly without deliberating.
+conditions:
+  model_family: [claude-opus]
+  model_versions: ["5.5"]   # advice given for low effort, after lowering effort first; see lower-effort-to-reduce-thinking
+  task_family: [unspecified]
+  reasoning: enabled   # thinking is always on for Opus 5.5
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: mixed
+  outcome: less thinking and shorter time to first token; quality can drop
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      If time to first token still matters after that, a system prompt line such as “Answer directly without deliberating.” can reduce thinking further; measure quality when you add it, because less thinking can lower it.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

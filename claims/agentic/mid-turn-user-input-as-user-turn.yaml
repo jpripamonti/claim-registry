@@ -1,0 +1,52 @@
+id: mid-turn-user-input-as-user-turn
+version: 1.0.0
+title: Deliver mid-turn user messages as user-turn text after the tool results, or Claude Sonnet and Haiku 5.5 may ignore them
+status: active
+technique:
+  summary: >
+    Never put user text inside a tool_result block or deliver it as a system message right after a
+    tool result. Append the user's words as a text block after the last tool_result in the same user
+    message, and keep harness notices in a separate mid-conversation system message. On Sonnet 5.5
+    in interactive sessions, also avoid your own token countdown after tool results.
+conditions:
+  model_family: [claude-sonnet, claude-haiku]
+  model_versions: {claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: mid-turn user messages followed rather than treated as possible prompt injection
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      The model can then tell the user that the tool result contained text posing as a message from them, and ignore the message or ask the user to confirm it.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Never put user text inside a `tool_result` block. The model misreads that placement most often.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Deliver mid-turn user input as a user turn. Append the user’s words as a text block in the user message that carries the `tool_result` blocks, after the last `tool_result`.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Suppose a message the user typed mid-task arrives inside a `tool_result` block, or as a mid-conversation system message right after a tool result. The model can then treat it as untrusted text and ignore it.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Deliver mid-turn user input as a user turn. Append the user’s words as a text block after the last `tool_result` in the same user message.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

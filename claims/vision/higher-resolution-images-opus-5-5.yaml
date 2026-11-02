@@ -1,0 +1,29 @@
+id: higher-resolution-images-opus-5-5
+version: 1.0.0
+title: Higher-resolution images improve Claude Opus 5.5 accuracy on the densest visual inputs, most for technical drawings
+status: active
+technique:
+  summary: >
+    Send higher-resolution images for the densest visual inputs, especially technical drawings.
+conditions:
+  model_family: [claude-opus]
+  model_versions: ["5.5"]
+  task_family: [chart-and-diagram-reading]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: accuracy on dense visual inputs
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      For the densest inputs, two things still add accuracy. Higher-resolution images help, most of all for inputs such as technical drawings.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

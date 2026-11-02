@@ -1,0 +1,39 @@
+id: think-first-line-json-reasoning-sonnet-5-5
+version: 1.0.0
+title: A "think the problem through" line raises Claude Sonnet 5.5 accuracy on multi-step tasks with JSON answers
+status: active
+technique:
+  summary: >
+    For JSON answers to tasks needing a few steps of working out (totaling figures, applying a rule,
+    ranking), with adaptive thinking, add "Think the problem through before you answer." to the end
+    of the system prompt. Under between_tools without tools the line has no effect; xhigh effort is
+    the alternative.
+  example: |
+    Think the problem through before you answer.
+conditions:
+  model_family: [claude-sonnet]
+  model_versions: ["5.5"]
+  task_family: [unspecified]
+  reasoning: enabled   # adaptive thinking
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: accuracy on multi-step tasks with JSON output, at more output tokens
+  magnitude: at high effort, accuracy close to the xhigh level
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      With this line, the model more often thinks before it answers. At `high` effort, the line brings accuracy close to what the model reaches at `xhigh`, for a modest increase in output tokens. At `low` and `medium` effort, it raises accuracy, though not to what the model reaches at `high`, and the increase in output tokens is larger.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      In a request without tools, the model doesn’t think before it answers under `between_tools`. The line has no effect there, and accuracy on these tasks is lower.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

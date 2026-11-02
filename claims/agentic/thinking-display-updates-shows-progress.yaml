@@ -1,0 +1,46 @@
+id: thinking-display-updates-shows-progress
+version: 1.0.0
+title: On Claude Fable 5.1, Opus 5.5 and Sonnet 5.5, request progress-update thinking blocks or long agentic turns look silent
+status: active
+technique:
+  summary: >
+    The model's notes between tool calls come back as progress-update thinking blocks whose text is
+    empty at the default thinking.display. Set display "updates" (beta header thinking-display-
+    updates-2026-08-18), or "summarized", and render the non-empty blocks.
+conditions:
+  model_family: [claude-fable, claude-opus, claude-sonnet]
+  model_versions: {claude-fable: ["5.1"], claude-opus: ["5.5"], claude-sonnet: ["5.5"]}   # Sonnet 5.5: with between_tools the notes come back with summary text, no display field needed
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: users see the model's progress notes during long tool-calling turns
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      The model’s short notes between tool calls, what it just found and what it’s doing next, come back as progress-update `thinking` blocks, and those blocks are empty under the default `thinking.display` of `"omitted"`.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      If you aren’t requesting them, the model’s updates might simply not be reaching your users.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      As a result, a client that renders only `text` blocks can look silent during a long agentic turn. Set `display: "updates"` (beta, `thinking-display-updates-2026-08-18` header) to receive a short summary of each note;
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      At the default `thinking.display`, a progress-update block’s text is empty, so a client that renders only `text` blocks can look silent during a long agentic turn.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

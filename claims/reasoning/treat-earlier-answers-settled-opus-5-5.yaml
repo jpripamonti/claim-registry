@@ -1,0 +1,44 @@
+id: treat-earlier-answers-settled-opus-5-5
+version: 1.0.0
+title: Telling Claude Opus 5.5 to treat earlier answers as settled cuts thinking on chat follow-ups
+status: active
+technique:
+  summary: >
+    In multi-turn chat, add two sentences at the end of the system prompt telling the model to treat
+    answered questions as done and focus its thinking on the new message. Leave it out of long
+    analyses and agentic tasks; it may make the model less likely to flag a mistake in an earlier
+    answer.
+  example: |
+    Once you have answered something, treat that answer as done. On later turns, focus your thinking on what the user is asking now, and don't go back over an earlier answer unless the user asks about it or points out a problem with it.
+conditions:
+  model_family: [claude-opus]
+  model_versions: ["5.5"]
+  task_family: [chat]
+  reasoning: enabled   # thinking is always on for Opus 5.5
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: less thinking and sooner replies on follow-up turns, quality unaffected
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      In multi-turn chat, Claude Opus 5.5 sometimes goes back over an earlier answer while it thinks about a new message, even a short follow-up, which adds thinking and latency on later turns.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      In Anthropic’s testing this reduced thinking on follow-up turns and made replies start sooner without affecting quality.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      The instruction might also make the model less likely to point out a mistake in an earlier answer on its own, so if that matters for your application, test for it before adopting the instruction.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

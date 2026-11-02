@@ -1,0 +1,38 @@
+id: define-mannered-prose-fable-5-1
+version: 1.0.0
+title: An instruction that defines mannered prose makes Claude Fable 5.1's writing less dense
+status: active
+technique:
+  summary: >
+    Fable 5.1's prose can run denser than Fable 5's (longer sentences, fewer paragraph breaks). Add
+    an instruction that defines the anti-pattern, mannered prose, preferably in a user message; the
+    short version "Please remove all mannered prose." also tends to work.
+  example: |
+    Please remove all mannered prose.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.1"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: plainer, less dense prose
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      In some cases, though, its prose is denser than Claude Fable 5’s: sentences run longer and there are fewer paragraph breaks. An instruction that defines the anti-pattern, mannered prose, helps. Add it to a user message (preferred) or the system prompt:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      The short version also tends to work:
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

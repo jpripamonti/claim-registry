@@ -1,0 +1,36 @@
+id: async-subagents-lead-keeps-working-fable-5-1
+version: 1.0.0
+title: Letting the Claude Fable 5.1 lead agent keep working while subagents run shortens coding tasks
+status: active
+technique:
+  summary: >
+    Have the subagent-starting tool return immediately, pass each subagent's result back in a later
+    user message, and give the lead a separate tool to wait for a result, instead of forcing it to
+    wait for each subagent.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.1"]
+  task_family: [agentic-coding]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: lower average time to completion at similar quality, token usage and cost
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      On coding tasks, letting the lead continue while subagents run lowers average time to completion at similar quality, token usage, and cost.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      The model still often waits. The time savings come from the runs where it carries on with other work.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

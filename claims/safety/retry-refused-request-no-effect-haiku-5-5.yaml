@@ -1,0 +1,30 @@
+id: retry-refused-request-no-effect-haiku-5-5
+version: 1.0.0
+title: Resending a request that Claude Haiku 5.5 refused usually gets another refusal
+status: active
+technique:
+  summary: >
+    Retrying the same request after a stop_reason "refusal" decline. Haiku 5.5 has no server-side
+    fallback; handle refusals in the client instead.
+conditions:
+  model_family: [claude-haiku]
+  model_versions: ["5.5"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: no_effect
+  outcome: refusal repeated
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      If a request is declined, handle `stop_reason: "refusal"` in your client. Sending the same request to Claude Haiku 5.5 again usually returns another refusal.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

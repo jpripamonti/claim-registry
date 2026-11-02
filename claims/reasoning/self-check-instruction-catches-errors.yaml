@@ -1,5 +1,5 @@
 id: self-check-instruction-catches-errors
-version: 1.0.0
+version: 1.1.0
 title: Asking Claude to verify its answer before finishing catches errors
 status: active
 technique:
@@ -22,8 +22,9 @@ evidence:
     retrieved: 2026-10-25
     quote: >-
       Append something like "Before you finish, verify your answer against [test criteria]." This catches errors reliably, especially for coding and math.
-as_of: 2026-10-25
-review_by: 2027-04-25
+as_of: 2026-11-02
+review_by: 2027-05-02
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.1.0 2026-11-02 refined by run-real-check-instruction-coding
   - 1.0.0 2026-10-25 created

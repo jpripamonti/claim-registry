@@ -1,0 +1,33 @@
+id: anti-formatting-rules-underformat-fable-5-1
+version: 1.0.0
+title: Anti-formatting rules written for earlier models leave Claude Fable 5.1's chat replies under-structured
+status: active
+technique:
+  summary: >
+    Anti-formatting language in the prompt (written because earlier models overused bullets and
+    bold). Remove it, or replace it with a rule that says when lists and other formatting are
+    appropriate.
+  example: |
+    Use lists and bullet points when asked to, or when the content is multifaceted enough that they help with clarity. ...
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.1"]
+  task_family: [chat]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: chat replies with less structure than the content needs
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Earlier models overused bullets and bold in chat, and many prompts carry anti-formatting rules written to reduce that. Claude Fable 5.1 tends toward the opposite: it uses bold less and is less likely to reach for headers, lists, or quotation marks. If your prompt contains anti-formatting language, remove it or replace it with a rule that says when specific formatting is appropriate, such as the following:
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

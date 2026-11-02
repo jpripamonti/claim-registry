@@ -1,0 +1,36 @@
+id: send-message-tool-for-verbatim-content
+version: 1.0.0
+title: Give Claude Opus 5.5 and Sonnet 5.5 a send-message tool for content the user must see verbatim mid-turn
+status: active
+technique:
+  summary: >
+    When the model may need to hand the user exact content partway through a long turn (a code
+    snippet, a question it needs answered), give it a simple tool for sending the user a message and
+    tell it to use the tool only for such content. Declare the tool from the first request.
+conditions:
+  model_family: [claude-opus, claude-sonnet]
+  model_versions: {claude-opus: ["5.5"], claude-sonnet: ["5.5"]}
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: user receives exact content mid-turn, not only summarized progress notes
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Second, if the model might need to hand the user something verbatim partway through a long turn, such as a code snippet, give it a simple tool for sending the user a message and tell it to reserve the tool for that content.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Sometimes the model needs to show the user exact text partway through a long turn, such as a code snippet or a question it needs answered. For that case, give it a simple tool for sending the user a message. Tell the model to use that tool only for such content.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

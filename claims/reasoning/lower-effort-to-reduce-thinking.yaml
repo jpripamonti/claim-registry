@@ -1,0 +1,41 @@
+id: lower-effort-to-reduce-thinking
+version: 1.0.0
+title: To reduce thinking on Claude Opus, Sonnet and Haiku 5.5, lower the effort level; prompt instructions to think less are unreliable
+status: active
+technique:
+  summary: >
+    When you want less thinking (lower cost, latency or time to first token), lower the effort level
+    rather than asking for less thinking in the prompt. Sonnet 5.5 thinks briefly before almost
+    every reply from medium effort up; at low it skips thinking on most simple requests.
+conditions:
+  model_family: [claude-opus, claude-sonnet, claude-haiku]
+  model_versions: {claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}
+  task_family: [unspecified]
+  reasoning: enabled   # Opus 5.5 thinking is always on; Sonnet and Haiku 5.5 default to adaptive thinking
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: less thinking, with lower cost and latency
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      To get less thinking, lower the effort level first. Lowering effort reduces thinking, and with it cost and latency, more reliably than prompt instructions do.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      To get less thinking, lower the effort level. From `medium` up, the model thinks briefly before almost every reply, even a greeting, which adds to the time before the first visible token. Asking it in the system prompt to think less doesn’t reliably reduce its thinking.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      To get less thinking, lower the effort level. In Anthropic’s testing, telling the model in the prompt to answer directly didn’t stop it from thinking.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

@@ -1,0 +1,55 @@
+id: search-changeable-facts-instruction
+version: 1.0.0
+title: Telling Claude 5.x models to search for facts that may have changed, even when confident, raises search where needed
+status: active
+technique:
+  summary: >
+    Remove language that discourages tool use ("minimize tool calls"), then tell the model in the
+    system prompt to search for things that may have changed since training (names it does not
+    confidently recognize, what is allowed, required or charged, prices, versions, office holders)
+    even when it feels sure. Most needed at low effort and with long system prompts; on Fable 5.1,
+    raising effort for the affected turns is an alternative.
+  example: |
+    Use the search tool to check specifics that may have changed since your training, such as what is allowed, required or charged, even when you feel confident. For researched work such as a report or a comparison, gather current sources rather than writing from your training knowledge.
+conditions:
+  model_family: [claude-fable, claude-sonnet, claude-haiku]
+  model_versions: {claude-fable: ["5.1"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}
+  task_family: [unspecified]   # Sonnet page: chat and knowledge work, research and support products
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: searches for facts that may have changed instead of answering from memory
+  magnitude: "Haiku 5.5: unneeded searches added on only 0-3 percent of prompts that need none"
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      At `low` effort, Claude Fable 5.1 is less likely than Claude Fable 5 to call a search or retrieval tool, and more likely to answer from memory.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      In other cases, a prompt nudge toward verification helps. In the system prompt, say that recognizing a name isn’t the same as knowing its current state, and that such names should be searched as the user wrote them:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      First, check your prompt for language that discourages tool use, such as “only use tools when strictly necessary” or “minimize tool calls,” and remove it. Then, if your product gives the model a search tool, add this to your system prompt:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      The model also sometimes needs an extra nudge to search. This occurs most at `low` effort and with long system prompts.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      In Anthropic’s testing, this text raised the search rate on questions whose answers had changed. On prompts that need no search, it added searches in only 0–3 percent of tries.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

@@ -1,0 +1,68 @@
+id: calibrate-effort-per-model
+version: 1.0.0
+title: Sweep effort levels against your own evals on each new Claude 5.x model instead of carrying over the old setting
+status: active
+technique:
+  summary: >
+    Choose the effort level per model by testing several levels against your own evals, starting at
+    the recommended default (Fable 5.1: high; Opus 5.5: medium; Sonnet 5.5: high, or medium for
+    agentic and latency-sensitive work; Haiku 5.5: medium), rather than reusing the previous model's
+    setting: level names do not mean the same amount of thinking across models. Reserve xhigh and
+    max for work where you have measured a quality gain.
+conditions:
+  model_family: [claude-fable, claude-opus, claude-sonnet, claude-haiku]
+  model_versions: {claude-fable: ["5.1"], claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}   # effort is not a condition field; the page's effort advice is in the summary
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: trade-off between quality, latency and cost
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Effort is the primary control for trading off intelligence, latency, and cost on Claude Fable 5.1. Re-run the sweep even if you already ran one on Claude Fable 5: effort level names don’t correspond to the same amount of thinking across models.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      The simplest approach is to run requests like these at `high`, the recommended starting point, and move to `xhigh` or `max` only where you’ve measured a quality gain
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Start at `medium`, the default on Claude Opus 5.5 (Claude Opus 5 defaults to `high`), set it explicitly, and test several levels against your own evals rather than carrying over the setting you used on Claude Opus 5.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Reserve `xhigh` and `max` for work where you’ve measured a quality gain.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Its levels are recalibrated: a level doesn’t produce the same amount of thinking as the same level on Claude Sonnet 5. Run a fresh sweep against your own evals rather than carrying over the setting you used on Claude Sonnet 5.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Reserve `xhigh` and `max` for work where you’ve measured a quality gain, because thinking and replies get much longer there.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      It replaces the thinking budget (`budget_tokens`) that Claude Haiku 4.5 used, so there’s no old setting to carry over. Compare two or three of these levels on your own evals:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      `xhigh` and `max` are for work where a quality gain on your evals justifies the cost.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

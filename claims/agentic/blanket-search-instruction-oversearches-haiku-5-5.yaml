@@ -1,0 +1,30 @@
+id: blanket-search-instruction-oversearches-haiku-5-5
+version: 1.0.0
+title: A blanket "search for any present-day question" instruction makes Claude Haiku 5.5 over-search without more correct answers
+status: active
+technique:
+  summary: >
+    A blanket instruction to search for every present-day factual question regardless of confidence.
+    Use a targeted instruction instead (see search-changeable-facts-instruction).
+conditions:
+  model_family: [claude-haiku]
+  model_versions: ["5.5"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: unneeded searches, with no gain in correct answers
+  magnitude: searched on half of the prompts that needed no search; no more correct answers
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Avoid blanket instructions such as “search for any present-day factual question, regardless of how confident you are.” In Anthropic’s testing, that instruction made the model search on half of the prompts that needed no search. It didn’t produce more correct answers.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

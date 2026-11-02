@@ -1,0 +1,39 @@
+id: batch-tool-calls-nudge-fable-5-1
+version: 1.0.0
+title: In coding and computer-use loops, a per-turn nudge makes Claude Fable 5.1 batch independent tool calls
+status: active
+technique:
+  summary: >
+    Where the next independent tool calls are implied by the task rather than requested, Fable 5.1
+    may issue one per turn. Append a one-sentence nudge after each batch of tool results, as a turn-
+    scoped system message (or a text block after the tool_result blocks), leaving earlier copies in
+    place.
+  example: |
+    First privately list what you need next; then request every item that doesn't depend on another's result in this one response.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.1"]
+  task_family: [agentic-coding, computer-use]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: "independent tool calls issued in one turn: fewer turns, tokens and wall-clock time; answer quality unaffected"
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      The exception is coding and computer-use loops where the next independent calls are implied by the task rather than explicitly requested (custom coding agents, bash-and-editor harnesses, computer use): there it might issue them one in each turn instead. This doesn’t affect answer quality, but each extra turn costs tokens, a round trip, and wall-clock time. A one-sentence nudge at the end of the current request addresses it:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Each time you send tool results back, append it after that user message as a turn-scoped system message: a `role: "system"` entry in `messages` with `clear_at: "next_user_message"`.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [parallel-tool-calls-prompt], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

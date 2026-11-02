@@ -1,0 +1,47 @@
+id: image-tools-for-dense-visual-inputs
+version: 1.0.0
+title: Crop, zoom and image-processing tools improve Claude 5.x accuracy on dense charts and technical drawings
+status: active
+technique:
+  summary: >
+    Run the model as an agent with a container holding the raw images and libraries such as PIL and
+    OpenCV, or at least give it a cropping tool that returns an enlarged region. On Opus 5.5, re-
+    test older visual scaffolding first; tools are used better at higher effort. On Sonnet 5.5,
+    tools help charts at every effort level and technical drawings from high effort up.
+conditions:
+  model_family: [claude-fable, claude-opus, claude-sonnet]
+  model_versions: {claude-fable: ["5.1"], claude-opus: ["5.5"], claude-sonnet: ["5.5"]}
+  task_family: [chart-and-diagram-reading]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: accuracy reading dense charts, diagrams and technical drawings
+  magnitude: "Sonnet 5.5: with tools at high effort, charts read more accurately than without tools at max effort, at a fraction of the cost"
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      If running a container is too much overhead, an image-cropping tool alone delivers most of the uplift: a tool that returns a chosen region of the image, cropped and enlarged, lets the model examine specific details in more depth and scales test-time compute with image tokens.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      So do image-processing tools: run the model as an agent with access to a container that holds the raw images and has libraries such as PIL and OpenCV installed, so that it can crop, zoom, measure, and verify its work.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      The model uses these tools more effectively at higher effort levels. Without tools, raising effort improves its reading of technical drawings but does little for charts.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      With such tools, the model reads these inputs markedly more accurately. On charts, the tools help at every effort level. On technical drawings, they help only from `high` effort up, and most at `xhigh` and `max`. For charts, adding tools helps more than raising effort: in testing, with tools at `high` effort, the model read charts more accurately than without tools at `max` effort, at a fraction of the cost.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

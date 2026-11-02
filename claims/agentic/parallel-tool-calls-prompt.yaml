@@ -1,5 +1,5 @@
 id: parallel-tool-calls-prompt
-version: 1.0.0
+version: 1.1.0
 title: An explicit parallel-tool-calls instruction raises Claude's parallel tool calling to about 100 percent
 status: active
 technique:
@@ -28,8 +28,9 @@ evidence:
     retrieved: 2026-10-25
     quote: >-
       Although the model has a high success rate in parallel tool calling without prompting, you can boost this to about 100 percent or adjust the aggression level:
-as_of: 2026-10-25
-review_by: 2027-04-25
+as_of: 2026-11-02
+review_by: 2027-05-02
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.1.0 2026-11-02 refined by batch-tool-calls-nudge-fable-5-1
   - 1.0.0 2026-10-25 created

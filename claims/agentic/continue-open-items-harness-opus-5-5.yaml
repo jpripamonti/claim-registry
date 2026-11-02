@@ -1,0 +1,39 @@
+id: continue-open-items-harness-opus-5-5
+version: 1.0.0
+title: For unattended Claude Opus 5.5 agents, treat a text-only end of turn as a report and send a continuation naming open items
+status: active
+technique:
+  summary: >
+    Keep the task's parts in a checklist the model updates. When a turn ends with text, items still
+    open and no blocker stated, send a short user message naming the open items (or have a smaller
+    model check a stated completion condition). Wait for running background commands or subagents.
+    Stop after two or three automatic continuations.
+  example: |
+    Your task list still has open items: migrate the remaining two endpoints and update their tests. Continue with them. If one is blocked, say what is blocking it.
+conditions:
+  model_family: [claude-opus]
+  model_versions: ["5.5"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: unattended agent loop keeps running to task completion
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Treat a text-only end of turn as a report rather than as proof the task is done. Keep the task’s parts in a checklist the model updates, such as a to-do tool or a file. If a turn ends with items still open and no blocker stated, send a short user message naming them, such as the following one.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Either way, stop after two or three automatic continuations on the same task rather than repeating them indefinitely, so that a run that is genuinely stuck ends and can be reviewed.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

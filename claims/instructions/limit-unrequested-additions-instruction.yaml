@@ -1,0 +1,37 @@
+id: limit-unrequested-additions-instruction
+version: 1.0.0
+title: An instruction to leave out unrequested fixes, extras and tests cuts them on Claude Fable 5.1 and Sonnet 5.5
+status: active
+technique:
+  summary: >
+    Tell the coding agent not to fix, extend or add (features, tests, docs, refactors) beyond what
+    the task asks, and to mention such ideas at the end instead.
+  example: |
+    When the work the user asked for is done and checked, stop and report. Don't add features, tests, files, docs or refactors that weren't asked for. If you think one would help, mention it at the end instead of doing it.
+conditions:
+  model_family: [claude-fable, claude-sonnet]
+  model_versions: {claude-fable: ["5.1"], claude-sonnet: ["5.5"]}   # Sonnet 5.5: effect stated for xhigh and max effort
+  task_family: [agentic-coding]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: fewer unrequested additions and committed test files; task success unchanged
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      It responds well to explicit instructions about what to leave out. With the following instruction, unrequested additions and committed test code drop substantially with no measurable change in task success:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      If you prefer changes limited to what was explicitly requested, add only the second paragraph of that prompt, which starts “When the work the user asked for is done.” At `xhigh` and `max` effort, that paragraph reduces these additions and makes changes smaller overall.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

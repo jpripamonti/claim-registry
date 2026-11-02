@@ -1,0 +1,50 @@
+id: progress-update-instructions
+version: 1.0.0
+title: Removing narration-suppressing lines and saying when to give updates yields more predictable progress updates
+status: active
+technique:
+  summary: >
+    First remove older system prompt lines that suppress narration, such as "hold all findings for
+    the final response". Then, if you want more or predictable updates, say in the system prompt
+    when you want user-facing text and what it should contain, for example a line of intent before
+    the first tool call and a short standalone recap at the end. Helps most in human-in-the-loop
+    work.
+  example: |
+    Before you start, say in a line what you're about to do; brief updates while you work help the user follow along. Close with a short recap that stands on its own — what you found, what you did, and what's next — so a reader who only sees the last message has the full picture.
+conditions:
+  model_family: [claude-fable, claude-opus, claude-sonnet]
+  model_versions: {claude-fable: ["5.1"], claude-opus: ["5.5"], claude-sonnet: ["5.5"]}
+  task_family: [unspecified]   # pages: helps most in human-in-the-loop work
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: more frequent and predictable user-facing updates
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Some earlier models gave frequent updates while working, which led to system prompt lines such as “hold all findings for the final response.” Remove lines like that before adding anything.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      If you still want more updates, for example when pair programming or in other human-in-the-loop work, add a short system prompt line that says when you want user-facing text from the model and what each update should contain:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Third, if you want more frequent or predictable updates, such as a one-line statement of intent before the first tool call and a short recap at the end, say so in the system prompt; the model is responsive to such instructions. This helps most in human-in-the-loop work.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Next, remove older instructions such as “hold all findings for the final response.” If you then want updates at predictable points, for example a line on what the model is about to do before its first tool call and a short recap at the end, say so in the system prompt. The model follows instructions like this.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

@@ -1,0 +1,33 @@
+id: targeted-edits-instruction-fable-5-1
+version: 1.0.0
+title: An instruction to edit surgically stops Claude Fable 5.1 rewriting whole files for small changes
+status: active
+technique:
+  summary: >
+    Append an instruction to the system prompt or first user message saying edit tokens are best
+    minimized and files should be surgically edited rather than rewritten when that does not change
+    the result.
+  example: |
+    The number of tokens used to edit files is best minimized, all else being equal. Therefore, when it will not affect the end result, try to surgically edit a file rather than rewrite the entire thing.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.1"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: targeted edits instead of whole-file rewrites; fewer output tokens and less time
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Claude Fable 5.1 is more likely than Claude Fable 5 to rewrite an entire text file rather than make a targeted edit. The resulting file is usually the same, but unless the file is short or most of it is changing, a rewrite costs more output tokens and time. With the instruction, Claude Fable 5.1 behaves like Claude Fable 5 on small and medium changes.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

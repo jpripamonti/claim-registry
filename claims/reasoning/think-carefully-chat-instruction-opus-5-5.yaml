@@ -1,0 +1,30 @@
+id: think-carefully-chat-instruction-opus-5-5
+version: 1.0.0
+title: In chat, "think carefully before answering" instructions slow Claude Opus 5.5 replies without a clear quality gain
+status: active
+technique:
+  summary: >
+    System prompt instructions in chat applications telling the model to think carefully before
+    answering. Remove them; effort is the main control for how much the model thinks.
+conditions:
+  model_family: [claude-opus]
+  model_versions: ["5.5"]
+  task_family: [chat]
+  reasoning: enabled   # thinking is always on for Opus 5.5
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: replies start later, with no clear gain in reply quality
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      In Anthropic’s testing in a chat product, removing such a line made replies start sooner, with no clear decline in the quality of the reply.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

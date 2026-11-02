@@ -1,0 +1,44 @@
+id: silence-reminder-after-quiet-tool-steps
+version: 1.0.0
+title: A harness reminder after several silent tool-calling steps shortens silent stretches on Claude Opus 5.5 and Sonnet 5.5
+status: active
+technique:
+  summary: >
+    Have the harness count consecutive tool-calling steps that give the user nothing to read; after
+    several (for example five), append a one-turn reminder after the latest tool results as a turn-
+    scoped system message, and leave it in place. Stop after two or three reminders. On Sonnet 5.5,
+    frequent harness text after tool results can be misread as prompt injection.
+  example: |
+    The user hasn't heard from you in a while — say in a few words what you're doing, then continue.
+conditions:
+  model_family: [claude-opus, claude-sonnet]
+  model_versions: {claude-opus: ["5.5"], claude-sonnet: ["5.5"]}
+  task_family: [unspecified]   # Opus 5.5 result measured on agentic coding tasks
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: fewer and shorter silent stretches in long tool-calling turns
+  magnitude: "Opus 5.5: roughly halved the share of agentic coding tasks with a long silent stretch, with no measurable cost change"
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      With `display: "updates"` set (the first lever), count consecutive tool-calling steps that give the user nothing to read: no `text` block and no progress-update text.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      In Anthropic’s testing on agentic coding tasks, this roughly halved the share of tasks with a long silent stretch, with no measurable change in cost.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      At `high` effort, with a tool for sending the user a message available, the reminder leads the model to update the user more often and shortens its longest silent stretches, with no measurable change in task quality.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

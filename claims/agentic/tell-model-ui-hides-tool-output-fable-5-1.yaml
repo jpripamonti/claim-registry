@@ -1,0 +1,32 @@
+id: tell-model-ui-hides-tool-output-fable-5-1
+version: 1.0.0
+title: Tell Claude Fable 5.1 when the UI hides tool output, or it runs commands just to show output
+status: active
+technique:
+  summary: >
+    If your product collapses or hides tool output, say so: after each tool output the UI hides, add
+    a note as a turn-scoped system message telling the model that only it sees the output.
+  example: |
+    Only you see that command's output — the user's terminal shows at most a few lines of it. If the user needs to read any of it, put it in your reply.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.1"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: fewer commands run only to display output the user never sees
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      If your product collapses or hides tool output, tell the model. Otherwise it might run commands to “show” the user output that your UI never displays.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

@@ -3,10 +3,14 @@
 - any
 - unspecified
 - agentic-coding
+- chart-and-diagram-reading   # charts, diagrams, technical drawings, screenshots
+- chat                        # conversational assistants and chatbots
 - classification
 - commonsense-qa
+- computer-use                # operating applications from screenshots
 - engineering-qa
 - factual-knowledge
+- frontend-design
 - generative-writing
 - graduate-science-qa
 - implicit-statistical-learning
@@ -19,4 +23,6 @@
 - multiple-choice-qa
 - reading-comprehension
 - rule-learning-with-exceptions
+- summarization
 - visual-recognition
+- workflow-automation         # agents working across connected apps (email, docs, CRM)

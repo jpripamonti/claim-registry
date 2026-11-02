@@ -1,0 +1,66 @@
+id: keep-working-instruction-reduces-early-stops
+version: 1.0.0
+title: A system prompt telling the agent to keep working until the task is done reduces early stops on Claude 5.x models
+status: active
+technique:
+  summary: >
+    Tell the agent in the system prompt to carry on until everything requested is done and to stop
+    only when it cannot continue without the user or before a risky step; naming the kinds of early
+    stop to avoid (announcing the next step instead of taking it, asking permission for requested
+    work) helps. Costs more tool calls and tokens and can make the model ask less about ambiguous
+    requests; leave it out of human-in-the-loop applications. Raising effort also reduces early
+    stops on Sonnet and Haiku 5.5.
+  example: |
+    Keep working until everything the user asked for is done, and only stop to ask when you can't go on without the user or before a risky step.
+conditions:
+  model_family: [claude-fable, claude-opus, claude-sonnet, claude-haiku]
+  model_versions: {claude-fable: ["5.1"], claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}   # Sonnet and Haiku: most needed at low (and medium) effort
+  task_family: [unspecified]   # Sonnet and Haiku pages scope it to agentic coding; Fable and Opus to long unattended tasks
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: fewer turns ended before the requested work is done
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Without the nudge, the model sometimes describes what it would do next instead of doing it (“Next, I’ll …”) or stops to ask permission for a step the original request already covered (“Shall I apply this?”).
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Two system prompt additions together mitigate this. Apply both. If you need to limit prompt length, use only the first, which keeps most of the effect.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      This block can also make the model less likely to ask about ambiguous requests, so check that trade-off on your own tasks.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Claude Opus 5.5 is responsive to instructions that name the specific kinds of early stop you want it to avoid, such as ending the turn with a summary that announces the next step instead of taking it. It also helps to name the stops you do want, for example when no work can advance without the user’s input.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Expect somewhat more tool calls and output tokens per task.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      With this prompt, the model carries more of the work through at `low` and `medium` effort, so sessions at those levels run longer and cost more.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      With a long coding-agent system prompt at `low` effort, it sometimes stops early and hands the task back to the user. If you see this in your agent, add this text to your system prompt:
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

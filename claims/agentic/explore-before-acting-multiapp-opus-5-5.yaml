@@ -1,0 +1,39 @@
+id: explore-before-acting-multiapp-opus-5-5
+version: 1.0.0
+title: Telling Claude Opus 5.5 to explore all connected apps before acting raises multiapp task success
+status: active
+technique:
+  summary: >
+    In workflow automation across connected apps (email, documents, spreadsheets, CRM), add a system
+    prompt sentence telling the model to open every possibly relevant source, including ones the
+    task does not mention, before changing anything. Keep untrusted content out of the searched
+    records, since the model acts on what it finds.
+  example: |
+    Before taking any action, explore broadly with tool calls: list and open the emails, documents, spreadsheet tabs and records across the available apps that could be relevant to this task, including ones the task does not explicitly mention, and use what you find.
+conditions:
+  model_family: [claude-opus]
+  model_versions: ["5.5"]
+  task_family: [workflow-automation]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: more tasks completed correctly, at slightly more tool calls and tokens
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Claude Opus 5.5 tends to get to work quickly, and on loosely specified tasks it helps to tell the model to look through the relevant sources before acting.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      In Anthropic’s testing on multiapp automation tasks, Claude Opus 5.5 completed noticeably more of them correctly with this instruction, at both `medium` and `max` effort, at the cost of slightly more tool calls and tokens.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

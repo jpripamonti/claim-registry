@@ -1,0 +1,39 @@
+id: time-signals-multiagent-opus-5-5
+version: 1.0.0
+title: Elapsed-time signals and a time budget make Claude Opus 5.5 agent teams finish sooner
+status: active
+technique:
+  summary: >
+    In a multiagent harness, append the elapsed time against a time budget to each message sent back
+    to the model (for example "elapsed 340s / 1200s"), setting the budget somewhat above the time
+    you want; without a budget, show elapsed time and add a system prompt sentence saying time
+    matters. The budget is advisory; the model may search and verify a little less.
+  example: |
+    Time matters here: do not spend time that can be avoided, and the earlier a correct result is obtained, the better.
+conditions:
+  model_family: [claude-opus]
+  model_versions: ["5.5"]
+  task_family: [unspecified]   # evaluated on research tasks
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: agent teams finish sooner, answer quality comparable to a single agent
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      In Anthropic’s evaluations of small agent teams on research tasks, both signals made teams finish sooner than a single agent working without them. Teams given a budget kept answer quality comparable to the single agent’s while finishing considerably sooner.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Also check answer quality on your own tasks, because under time pressure the model might search and verify a little less.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

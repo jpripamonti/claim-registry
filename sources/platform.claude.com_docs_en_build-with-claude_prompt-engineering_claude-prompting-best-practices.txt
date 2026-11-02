@@ -1,5 +1,5 @@
 source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
-retrieved: 2026-10-27
+retrieved: 2026-11-02
 
 Prompting best practices - Claude Platform Docs Claude Platform Docs Messages Managed Agents Admin
 Resources  Best practices  Models & pricing SDKs, CLI, and libraries Claude API skill Release
@@ -72,14 +72,14 @@ If they'd be confused, Claude will be too.
 Be specific about the output format and constraints you want.
 Provide instructions as sequential steps using numbered lists or bullet points when the order or
 completeness of steps matters.
-Example: Creating an analytics dashboard  Less effective: Create an analytics dashboard  More
+Example: Creating an analytics dashboard  Less effective: Create an analytics dashboard  More
 effective: Create an analytics dashboard.
 Include as many relevant features and interactions as possible.
 Go beyond the basics to create a fully-featured implementation.
  Add context to improve performance  Providing context or motivation behind your instructions,
 such as explaining to Claude why such behavior is important, can give Claude more information about
 your goals and help it deliver more targeted responses.
-Example: Formatting preferences  Less effective: NEVER use ellipses  More effective: Your response
+Example: Formatting preferences  Less effective: NEVER use ellipses  More effective: Your response
 will be read aloud by a text-to-speech engine, so never use ellipses since the text-to-speech engine
 will not know how to pronounce them.
  Claude can generalize from the explanation.
@@ -117,7 +117,7 @@ complex, multidocument inputs.
 Structure document content and metadata with XML tags: When using multiple documents, wrap each
 document in <document tags with <documentcontent and <source (and other metadata) subtags for
 clarity.
-Example multidocument structure  < documents < document index = "1" < source annualreport2023.pdf
+Example multidocument structure  < documents < document index = "1" < source annualreport2023.pdf
 </ source < documentcontent {{ANNUALREPORT}} </ documentcontent </ document < document index = "2" <
 source competitoranalysisq2.xlsx </ source < documentcontent {{COMPETITORANALYSIS}} </
 documentcontent </ document </ documents Analyze the annual report and competitor analysis.
@@ -125,7 +125,7 @@ Identify strategic advantages and recommend Q3 focus areas.
  Ground responses in quotes: For long document tasks, ask Claude to quote relevant parts of the
 documents first before carrying out its task.
 This helps Claude focus on the relevant content and ignore the rest of the document.
-Example quote extraction  You are an AI physician's assistant.
+Example quote extraction  You are an AI physician's assistant.
 Your task is to help doctors diagnose possible patient illnesses.
 < documents < document index = "1" < source patientsymptoms.txt </ source < documentcontent
 {{PATIENTSYMPTOMS}} </ documentcontent </ document < document index = "2" < source
@@ -210,7 +210,7 @@ Model intelligence and instruction following have advanced such that most use ca
 longer require it.
 Earlier models continue to support prefills, and adding assistant messages elsewhere in the
 conversation is not affected.
-Here are common prefill scenarios and how to migrate away from them: Controlling output formatting 
+Here are common prefill scenarios and how to migrate away from them: Controlling output formatting 
 Prefills have been used to force specific output formats such as JSON/YAML, classification, and
 similar patterns where the prefill constrains Claude to a particular structure.
 Migration: The structured outputs feature is designed specifically to constrain Claude's responses
@@ -219,22 +219,22 @@ Try asking the model to conform to your output structure first, as newer models 
 complex schemas when told to, especially if implemented with retries.
 For classification tasks, use either tools with an enum field containing your valid labels or
 structured outputs.
-Eliminating preambles  Prefills such as Here is the requested summary: were used to skip
+Eliminating preambles  Prefills such as Here is the requested summary: were used to skip
 introductory text.
 Migration: Use direct instructions in the system prompt: "Respond directly without preamble.
 Do not start with phrases like 'Here is...', 'Based on...', etc." Alternatively, direct the model to
 output within XML tags, use structured outputs, or use tool calling.
 If the occasional preamble slips through, strip it in post-processing.
-Avoiding bad refusals  Prefills were used to steer around unnecessary refusals.
+Avoiding bad refusals  Prefills were used to steer around unnecessary refusals.
 Migration: Claude is much better at appropriate refusals now.
 Clear prompting within the user message without prefill should be sufficient.
-Continuations  Prefills were used to continue partial completions, resume interrupted responses, or
+Continuations  Prefills were used to continue partial completions, resume interrupted responses, or
 extend a previous generation from where it ended.
 Migration: Move the continuation to the user message, and include the final text from the
 interrupted response: "Your previous response was interrupted and ended with [previousresponse].
 Continue from where you left off." If this is part of error-handling or incomplete-response-handling
 and there is no UX penalty, retry the request.
-Context hydration and role consistency  Prefills were used to periodically ensure refreshed or
+Context hydration and role consistency  Prefills were used to periodically ensure refreshed or
 injected context.
 Migration: For very long conversations, inject what were previously prefilled-assistant reminders
 into the user turn.
@@ -246,7 +246,7 @@ benefit from explicit direction to use specific tools.
 If you say "can you suggest some changes," Claude will sometimes provide suggestions rather than
 implementing them, even if making changes might be what you intended.
 To learn how to define tools and troubleshoot tool triggering, see Tool use with Claude .
-For Claude to take action, be more explicit: Example: Explicit instructions  Less effective (Claude
+For Claude to take action, be more explicit: Example: Explicit instructions  Less effective (Claude
 will only suggest): Can you suggest some changes to improve this function?
  More effective (Claude will make the changes): Change this function to improve its performance.
  Or: Make these edits to the authentication flow.
@@ -457,7 +457,7 @@ restored.
 Claude's latest models perform especially well in using git to track state across multiple sessions.
 Emphasize incremental progress: Explicitly ask Claude to keep track of its progress and focus on
 incremental work.
-Example: State tracking  tests.json  { "tests" : [ { "id" : 1 , "name" : "authenticationflow" ,
+Example: State tracking  tests.json  { "tests" : [ { "id" : 1 , "name" : "authenticationflow" ,
 "status" : "passing" }, { "id" : 2 , "name" : "usermanagement" , "status" : "failing" }, { "id" : 3
 , "name" : "apiendpoints" , "status" : "notstarted" } ], "total" : 200 , "passing" : 150 , "failing"
 : 25 , "notstarted" : 25 } // Progress notes (progress.txt) Session 3 progress: - Fixed
@@ -621,8 +621,10 @@ With web search, such as the web search tool , Claude checks the label before an
 latency and search costs.
 Without web search, Claude points the person to the label's dosing chart, a pharmacist, or the
 child's doctor instead of giving a dose.
-Medication dosing block for Claude Sonnet 5.5  <medicalguidance This applies only when the person
-explicitly says the medicine is for a child, and isn't a healthcare professional asking for work.
+Medication dosing block for Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, Claude
+Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 5.5, and Claude Sonnet 5 
+<medicalguidance This applies only when the person explicitly says the medicine is for a child, and
+isn't a healthcare professional asking for work.
 Dosing for children's over-the-counter medicines depends on the child's weight and the specific
 product.
 For infants and toddlers, a small error can cause real harm.
@@ -719,11 +721,9 @@ Claude 4.6 models are more proactive and might overtrigger on instructions that 
 previous models.
 Pass thinking blocks back unchanged and keep history append-only: Append each assistant turn exactly
 as the API returned it, thinking blocks included.
-On Claude Fable 5.1, Claude Opus 5.5, Claude Sonnet 5.5, and Claude Haiku 5.5, modifying the
-conversation before a thinking block results in an error, or in the block being dropped if you opt
-into that: editing earlier messages, rebuilding system or tools , or summarizing older turns in
-place between requests invalidates every later thinking block, so move those changes to
-mid-conversation system messages and server-side context management.
+On Claude 5.1 and later models, editing earlier messages, rebuilding system or tools , or
+summarizing older turns in place between requests invalidates every later thinking block .
+Move those changes to mid-conversation system messages and server-side context management.
 See Keep the conversation history append-only .
 For detailed migration steps, see the Migration guide .
 Migrating to Claude Sonnet 5.5  See the Claude Sonnet 5.5 migration guide .

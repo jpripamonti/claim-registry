@@ -1,0 +1,33 @@
+id: ideas-first-instruction-sonnet-5-5
+version: 1.0.0
+title: Telling Claude Sonnet 5.5 to stop at ideas or a plan keeps it from building on open-ended requests
+status: active
+technique:
+  summary: >
+    On open-ended requests the model can start building a presentation, report or video when only
+    ideas were wanted. Say so in the request, or add a system prompt line telling it to give ideas,
+    options or a plan and wait for a go-ahead.
+  example: |
+    When the user asks for ideas, options or a plan, give them that and stop. Don't start building or changing anything until they say to go ahead.
+conditions:
+  model_family: [claude-sonnet]
+  model_versions: ["5.5"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: ideas or a plan delivered instead of unrequested building
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      When a request is open-ended, for example “show me what you can do with this,” the model can start building a presentation, report, or video when you only wanted ideas. If you want ideas or a plan first, say so in the request, or add this to your system prompt:
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

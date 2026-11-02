@@ -1,0 +1,31 @@
+id: full-example-marks-quotations-fable-5-1
+version: 1.0.0
+title: One complete example of a correct response stops Claude Fable 5.1 reproducing source text unmarked in summaries
+status: active
+technique:
+  summary: >
+    Add to the system prompt one complete example of a correct response: the user's request, the
+    response, and a sentence explaining why it is correct (own indirect speech, at most a short
+    marked quotation).
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.1"]
+  task_family: [summarization]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: fewer passages of source text reproduced without quotation marks
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      When summarizing documents, Claude Fable 5.1 is more likely than Claude Fable 5 to reproduce passages of the source text without marking them as quotations. To address this, add one complete example of a correct response to the system prompt: the user’s request, the response, and a sentence explaining why the response is correct.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

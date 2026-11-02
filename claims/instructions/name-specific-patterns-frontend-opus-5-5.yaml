@@ -1,0 +1,33 @@
+id: name-specific-patterns-frontend-opus-5-5
+version: 1.0.0
+title: Naming specific design patterns to avoid, not "avoid a generic look", steers Claude Opus 5.5 frontend output
+status: active
+technique:
+  summary: >
+    Without design direction, Opus 5.5 falls back on a few default styles; a general instruction
+    such as "avoid a generic AI look" mostly swaps one default for another. List the specific
+    patterns to avoid, check which defaults the result used instead, and extend the list.
+  example: |
+    Output a vanilla HTML/CSS personal website with placeholder data. Do not use a cream or off-white background, italic accent words in headlines, numbered "01/02/03" section labels, monospace labels, or pill-shaped buttons.
+conditions:
+  model_family: [claude-opus]
+  model_versions: ["5.5"]
+  task_family: [frontend-design]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: less generic frontend designs
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Asked for frontend work without design direction, Claude Opus 5.5 falls back on a few default styles, and a general instruction such as “avoid a generic AI look” mostly swaps one default for another. It responds well to instructions that name specific patterns to avoid, as in the following example.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

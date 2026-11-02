@@ -1,0 +1,44 @@
+id: run-real-check-instruction-coding
+version: 1.0.0
+title: Telling Claude Sonnet and Haiku 5.5 coding agents to run a real check before reporting done stops skipped checks
+status: active
+technique:
+  summary: >
+    Add a system prompt paragraph: when changing runnable code, run a real check that exercises the
+    change (tests, type-checker, build, or the changed command) before reporting it done; syntax-
+    only checks do not count; install declared dependencies if missing; otherwise say which check
+    was not run. Most needed at low (Sonnet) or low and medium (Haiku) effort.
+  example: |
+    When you change code that can be run, built, or type-checked, run a real check that exercises the change before reporting it done: the project's tests, type-checker, or build, or the changed command itself. ...
+conditions:
+  model_family: [claude-sonnet, claude-haiku]
+  model_versions: {claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}   # Sonnet: effect stated at low effort; Haiku: seen at low and medium
+  task_family: [agentic-coding]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: changes verified before being reported done; Haiku 5.5 task performance improved
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      At `low` effort, though, it sometimes reports a change as done without running a check that exercises it.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      At `low` effort, it makes skipped or superficial checks rare, with no measurable change in task quality and only a slightly higher cost per task:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      In Anthropic’s testing, the model checked its changes more often with this text, and its performance improved, at the cost of more tokens.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [self-check-instruction-catches-errors], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

@@ -1,0 +1,33 @@
+id: no-extra-review-rounds-instruction-sonnet-5-5
+version: 1.0.0
+title: At max effort, telling Claude Sonnet 5.5 not to start its own review rounds cuts session cost by about a third
+status: active
+technique:
+  summary: >
+    At xhigh and max effort Sonnet 5.5 can start its own review and verification rounds, sometimes
+    with reviewer subagents. A system prompt line telling it to stop and report once the work and
+    its checks pass, without extra review rounds or reviewer subagents unless asked, prevents this.
+  example: |
+    When the work the user asked for is done and its checks pass, stop and report. Don't start extra rounds of review or hardening on your own, and don't launch reviewer sub-agents unless the user asked for a review. If you think a deeper review is worth doing, say so at the end.
+conditions:
+  model_family: [claude-sonnet]
+  model_versions: ["5.5"]   # tested at max effort; relevant at xhigh and max
+  task_family: [agentic-coding]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: session cost; no reviewer subagents launched; quality unchanged
+  magnitude: session cost cut by about a third at max effort, no change in quality
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      In testing on coding tasks at `max` effort, this stopped the model from launching reviewer subagents and cut session cost by about a third, with no change in quality. It makes self-started review rounds by the main agent less frequent but doesn’t remove them entirely.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

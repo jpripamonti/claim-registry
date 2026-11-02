@@ -1,0 +1,38 @@
+id: no-double-drafting-note-fable-5-1
+version: 1.0.0
+title: At xhigh and max effort, a note against drafting the whole deliverable in thinking shortens Claude Fable 5.1's thinking
+status: active
+technique:
+  summary: >
+    For long deliverables at xhigh or max effort (high is the recommended default), append a note to
+    the user message stating the single max_tokens limit and asking the model not to compose the
+    full output in its reasoning and again as the reply.
+  example: |
+    Everything produced in one reply, including any reasoning or drafting done before the reply, counts toward a single limit of about [max_tokens] tokens. ... Composing an entire output or deliverable in full as reasoning and then again as a reply would double the length of the turn without improving the result, so don't do that.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.1"]   # advice for xhigh and max effort
+  task_family: [unspecified]
+  reasoning: enabled
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: much shorter thinking on prose and code requests, less wait and fewer output tokens
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      When a single request asks for a long deliverable, such as a full rewrite of a long document, it might draft much of that deliverable in its thinking and then write it again as the reply, which means a longer wait and more output tokens.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Append the following note to the end of the user message. It makes the thinking much shorter on prose and code requests.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

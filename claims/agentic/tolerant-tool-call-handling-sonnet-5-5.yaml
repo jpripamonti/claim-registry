@@ -1,0 +1,35 @@
+id: tolerant-tool-call-handling-sonnet-5-5
+version: 1.0.0
+title: Handle Claude Sonnet 5.5 tool calls with wrong letter case or near-miss parameter names instead of failing
+status: active
+technique:
+  summary: >
+    Accept a call when the tool-name match is unambiguous despite letter case, or return a
+    tool_result with is_error true stating the exact expected name.
+conditions:
+  model_family: [claude-sonnet]
+  model_versions: ["5.5"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: near-miss tool calls recovered instead of failing; the model usually corrects itself next turn
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Claude Sonnet 5.5 occasionally calls a declared tool by a name that differs only in letter case, such as `bash` for `Bash`. It can also pass a known parameter under a slightly different name. Rather than treating such a call as a fatal error, have your harness handle it in one of two ways:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Return a `tool_result` with `is_error: true` that states the exact expected name. The model usually corrects the call on its next turn.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

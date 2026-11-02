@@ -1,0 +1,39 @@
+id: json-final-answer-only-line-haiku-5-5
+version: 1.0.0
+title: With thinking off, telling Claude Haiku 5.5 the JSON format is for the final answer only restores needed tool calls
+status: active
+technique:
+  summary: >
+    With thinking off and structured outputs, Haiku 5.5 may skip a tool call it needs. Prefer
+    adaptive thinking, removing output_config.format, or forcing the call with tool_choice; if
+    thinking must stay off, add a system prompt line saying the JSON format applies to the final
+    answer only and tools are called first.
+  example: |
+    The JSON output format applies to your final answer only. When you need a tool, call it first, with no text before the call, and write the JSON once you have the results.
+conditions:
+  model_family: [claude-haiku]
+  model_versions: ["5.5"]   # tested at low and medium effort
+  task_family: [unspecified]
+  reasoning: disabled
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: more complete and correct JSON answers
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      With thinking off, Claude Haiku 5.5 might skip a tool call it needs when you also request JSON output with structured outputs.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      In Anthropic’s testing with thinking off, this line raised the share of complete and correct JSON answers at `low` and `medium` effort.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

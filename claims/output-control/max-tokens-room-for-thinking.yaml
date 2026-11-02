@@ -1,0 +1,46 @@
+id: max-tokens-room-for-thinking
+version: 1.0.0
+title: Size max_tokens for thinking plus the reply on Claude 5.x models, or replies get cut off
+status: active
+technique:
+  summary: >
+    Thinking counts toward max_tokens even when its content is not returned, so set max_tokens with
+    room for the thinking and the reply rather than the reply alone. For agentic coding on Opus 5.5
+    and Sonnet 5.5, the pages suggest 128,000 (the maximum).
+conditions:
+  model_family: [claude-fable, claude-opus, claude-sonnet, claude-haiku]
+  model_versions: {claude-fable: ["5.1"], claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}   # Fable 5.1 page gives this for xhigh and max effort
+  task_family: [unspecified]
+  reasoning: enabled
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: replies not cut off at max_tokens
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
+    retrieved: 2026-11-02
+    quote: >-
+      Set `max_tokens` to leave room for the thinking and the reply, not just the reply length you expect.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Thinking counts toward `max_tokens` even when thinking content isn’t returned to you, so a limit sized for Claude Opus 5 with thinking off can cut replies off.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      Thinking counts toward `max_tokens` even when thinking content isn’t returned to you. A limit sized for a request without thinking can cut the reply off.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
+    retrieved: 2026-11-02
+    quote: >-
+      A `max_tokens` value sized for Claude Haiku 4.5 requests that ran without thinking can cut the reply off, so leave room for thinking.
+as_of: 2026-11-02
+review_by: 2027-05-02
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-02 created

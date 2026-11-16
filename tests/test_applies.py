@@ -104,3 +104,26 @@ def test_stale_claims_are_marked(tmp_path):
     assert marks(dt.date(2026, 10, 27)) == {"alpha": [], "beta": []}
     assert marks(dt.date(2027, 1, 1)) == {"alpha": [], "beta": ["stale"]}
     assert marks(dt.date(2030, 1, 1)) == {"alpha": ["stale"], "beta": ["stale"]}
+
+
+def test_task_family_filter(tmp_path):
+    reg = make_registry(tmp_path, *[claim(id=i, **{"conditions__task_family": t}) for i, t in (
+        ("anyt", ["any"]), ("unspec", ["unspecified"]), ("cls", ["classification"]),
+        ("code", ["agentic-coding"]), ("both", ["agentic-coding", "summarization"]))])
+    got = {c.id: conds for c, conds in applicable(reg, "claude", "5",
+                                                  task_families=["summarization"])}
+    assert got == {"anyt": [], "both": [], "unspec": []}
+    assert [c.id for c, _ in applicable(reg, "claude", "5", None,
+                                        ["classification", "agentic-coding"])] == \
+        ["anyt", "both", "cls", "code", "unspec"]
+    rows = dict((c.id, conds) for c, conds in applicable(reg, "claude", "5"))
+    assert rows["both"] == ["task_family=agentic-coding,summarization"]
+
+
+@pytest.mark.parametrize("task", ["classifcation", "any", "unspecified"])
+def test_unknown_task_family_is_an_error(tmp_path, capsys, task):
+    make_registry(tmp_path, claim())
+    code = main(["--root", str(tmp_path), "applies", "--model", "claude", "--version", "5",
+                 "--task-family", task])
+    assert code == 2
+    assert f"unknown task family '{task}'" in capsys.readouterr().err

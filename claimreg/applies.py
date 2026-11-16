@@ -1,4 +1,4 @@
-"""Which claims apply to a given model, version and input size."""
+"""Which claims apply to a given model, version, input size and task family."""
 from .registry import is_stale
 from .versions import expand, versions_for
 
@@ -14,6 +14,15 @@ def check_model(reg, family, version):
     known = (reg.families[family] or {}).get("versions")
     if known is not None and version not in known:
         raise ValueError(f"version {version!r} not listed for {family!r}; "
+                         f"known: {', '.join(known)}")
+
+
+def check_task_families(reg, tasks):
+    """Raise ValueError unless each of `tasks` is a concrete task family in the vocabulary."""
+    bad = [t for t in tasks if t not in reg.task_families or t in _OPEN]
+    if bad:
+        known = sorted(t for t in reg.task_families if t not in _OPEN)
+        raise ValueError(f"unknown task family {', '.join(map(repr, bad))}; "
                          f"known: {', '.join(known)}")
 
 
@@ -37,13 +46,18 @@ def _model_matches(conditions, family, version, reg):
     return False
 
 
-def open_conditions(conditions, family, reg, context_size=None):
+def _task_matches(conditions, tasks):
+    """True when the claim's task_family is open or includes one of `tasks`."""
+    return bool(set(conditions.get("task_family") or []) & {*_OPEN, *tasks})
+
+
+def open_conditions(conditions, family, reg, context_size=None, task_families=None):
     """Conditions the user still has to check, as short 'name=value' strings."""
     out = []
     if context_size is None and conditions.get("context_size") not in _OPEN:
         out.append(f"context_size={conditions.get('context_size')}")
     tasks = [t for t in conditions.get("task_family") or [] if t not in _OPEN]
-    if tasks:
+    if tasks and not task_families:
         out.append(f"task_family={','.join(tasks)}")
     for f in ("reasoning", "tool_use"):
         if conditions.get(f) not in _OPEN:
@@ -55,12 +69,14 @@ def open_conditions(conditions, family, reg, context_size=None):
     return out
 
 
-def applicable(reg, family, version, context_size=None, today=None):
+def applicable(reg, family, version, context_size=None, task_families=None, today=None):
     """Return [(claim, open_conditions)] for followed claims matching the model, sorted by id.
 
-    A claim past its review_by date on `today` (default: current date) gets "stale" as its
-    last open condition."""
+    With `task_families`, only claims whose task_family is open or includes one of them are
+    kept. A claim past its review_by date on `today` (default: current date) gets "stale" as
+    its last open condition."""
     check_model(reg, family, version)
+    check_task_families(reg, task_families or [])
     result = []
     for cid in sorted(reg.claims):
         claim = reg.claims[cid]
@@ -72,7 +88,9 @@ def applicable(reg, family, version, context_size=None, today=None):
             continue
         if context_size and cond.get("context_size") not in (*_OPEN, context_size):
             continue
-        conds = open_conditions(cond, family, reg, context_size)
+        if task_families and not _task_matches(cond, task_families):
+            continue
+        conds = open_conditions(cond, family, reg, context_size, task_families)
         if is_stale(claim, today):
             conds.append("stale")
         result.append((claim, conds))

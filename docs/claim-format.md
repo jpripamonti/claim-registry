@@ -236,9 +236,52 @@ conditions the user still has to check (task family, reasoning, tool use, and in
   line (a claim on `claude` covers `claude-sonnet`; a claim on `claude-opus` covers only Opus);
 - the version falls within that entry's `model_versions` (`any` and `unspecified` match every
   version; `unspecified` is shown as a condition to check);
-- with `--context-size`, its `context_size` is that size, `any` or `unspecified`.
+- with `--context-size`, its `context_size` is that size, `any` or `unspecified`;
+- with `--task-family` (repeatable), its `task_family` includes `any`, `unspecified` or one of
+  the given families. Task family is then no longer shown as a condition to check.
 
-The family and version must be in `vocab/model-families.yaml`; anything else is an error.
+The family and version must be in `vocab/model-families.yaml`, and each task family in
+`vocab/task-families.yaml` (other than `any` and `unspecified`); anything else is an error.
+
+## Auditing a prompt
+
+`python3 -m claimreg audit <prompt-file> --model <family or line> --version <v>
+[--context-size short|long] [--task-family F ...] [--judge opus] [--json]` checks one prompt
+against the claims that apply to the model (selected as in `applies`). It is the way a prompt
+gets its first citations: the tool proposes them, rather than the author writing them by hand.
+
+A judge model reads the prompt and, for each claim, answers one question: does the prompt use
+the technique? The answer is `uses` (with a verbatim quote from the prompt), `does_not_use` or
+`not_relevant`, plus a short reason. The judge sees each claim's technique summary and example,
+not its title or effect, and does not say whether using it is good or bad; the tool derives
+that from `effect.direction`:
+
+| direction | uses | does_not_use |
+|---|---|---|
+| `helps` | follows | missed opportunity |
+| `hurts` | problem | follows (avoids it) |
+| `no_effect`, `mixed` | informational | nothing to report |
+
+The verdicts are a model's judgment, not a measurement: they are advice, and the command exits 0
+whenever the audit ran, whatever it found. Each quote the judge gives is checked against the
+prompt file with the same normalization `check-quotes` uses; a `uses` verdict whose quote is not
+in the prompt (or is under 8 characters) is reported as unverified, not as a finding. A claim the
+judge left out is reported as unjudged.
+
+The output lists problems, missed opportunities, what the prompt follows and informational
+findings, each with the claim's id, title, the judge's reason, the quote, and the conditions
+still to check (as in `applies`). Then come the counts of not relevant, unverified and unjudged
+claims, the citation lines (`<!-- claim: id@major -->`) for every claim the prompt verifiably
+uses and that helps, and a summary naming the model that answered. `--json` prints the same as
+JSON.
+
+The judge is `claude -p` (Claude Code in headless mode), called once for all claims with
+`--model <judge>`, where `--judge` is a moving alias such as `opus`; a value that looks like a
+pinned version (`claude-opus-5-5`) is an error. The summary names the model that answered. It
+runs with no tools, in safe mode (no CLAUDE.md, skills, plugins, hooks or MCP servers), from an
+empty temporary directory. The prompt under audit is passed inside `<audited_prompt>` tags and
+the judge is told it is data, not instructions. If the CLI is missing, fails or answers with
+something that cannot be parsed, the command exits 2.
 
 ## Examples in the registry
 

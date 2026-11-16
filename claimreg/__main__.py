@@ -1,10 +1,12 @@
 """claimreg command line: `python3 -m claimreg <command>`."""
 import argparse
+import json
 import sys
 
 import yaml
 from pathlib import Path
 
+from . import audit as audit_mod
 from . import registry
 from .applies import CONTEXT_SIZES, applicable
 from .config_check import (check_citation, compare_lock, lock_text, parse_citations,
@@ -71,7 +73,7 @@ def _print_diff(root, url, page, diffed):
 def cmd_applies(args):
     reg = registry.load(args.root)
     try:
-        rows = applicable(reg, args.model, args.version, args.context_size)
+        rows = applicable(reg, args.model, args.version, args.context_size, args.task_family)
     except ValueError as e:
         print(f"error: {e}", file=sys.stderr)
         return 2
@@ -83,6 +85,36 @@ def cmd_applies(args):
     size = f", {args.context_size} context" if args.context_size else ""
     print(f"{len(rows)} claims apply to {args.model} {args.version}{size}")
     return 0
+
+
+def cmd_audit(args):
+    reg = registry.load(args.root)
+    try:
+        text = Path(args.prompt).read_text()
+    except OSError as e:
+        print(f"error: cannot read {args.prompt}: {e.strerror or e}", file=sys.stderr)
+        return 2
+    try:
+        report = audit_mod.audit(reg, text, args.model, args.version,
+                                 audit_mod.claude_judge(args.judge), args.context_size,
+                                 args.task_family)
+    except (ValueError, audit_mod.JudgeError) as e:
+        print(f"error: {e}", file=sys.stderr)
+        return 2
+    report["prompt"] = args.prompt
+    report["judge"]["alias"] = args.judge
+    print(json.dumps(report, indent=2, ensure_ascii=False) if args.json
+          else "\n".join(audit_mod.format_text(report)))
+    return 0
+
+
+def _model_args(p):
+    p.add_argument("--model", required=True, help="family or line, e.g. claude-sonnet")
+    p.add_argument("--version", required=True, help="a version listed for it, e.g. 5.5")
+    p.add_argument("--context-size", choices=CONTEXT_SIZES,
+                   help="drop claims for the other input size (default: keep all, show the condition)")
+    p.add_argument("--task-family", action="append",
+                   help="keep only claims for this task family or none in particular (repeatable)")
 
 
 def cmd_check_config(args):
@@ -129,11 +161,15 @@ def main(argv=None):
                    help=f"write the plain-text snapshot of each fetched page to {SOURCES_DIR}/")
     q.set_defaults(func=cmd_check_quotes)
     a = sub.add_parser("applies", help="list the active claims that apply to a model and version")
-    a.add_argument("--model", required=True, help="family or line, e.g. claude-sonnet")
-    a.add_argument("--version", required=True, help="a version listed for it, e.g. 5.5")
-    a.add_argument("--context-size", choices=CONTEXT_SIZES,
-                   help="drop claims for the other input size (default: keep all, show the condition)")
+    _model_args(a)
     a.set_defaults(func=cmd_applies)
+    u = sub.add_parser("audit", help="ask a judge model which applicable techniques a prompt uses")
+    u.add_argument("prompt", help="the prompt or config file to audit")
+    _model_args(u)
+    u.add_argument("--judge", default=audit_mod.DEFAULT_JUDGE,
+                   help="model alias for `claude -p --model` (default: %(default)s)")
+    u.add_argument("--json", action="store_true", help="print the report as JSON")
+    u.set_defaults(func=cmd_audit)
     k = sub.add_parser("check-config", help="check the claims a config cites, and its claims.lock")
     k.add_argument("config", help="config file citing claims as <!-- claim: id@major -->")
     k.add_argument("--lock", help="lock file (default: claims.lock next to the config)")

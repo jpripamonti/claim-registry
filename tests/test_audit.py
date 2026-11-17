@@ -153,6 +153,30 @@ def test_task_family_filter_is_applied(tmp_path):
     assert 'id="beta"' not in judge.prompt
 
 
+def test_reasoning_and_tool_use_filters_are_applied(tmp_path):
+    reg = make_registry(tmp_path, claim(**{"conditions__reasoning": "enabled"}),
+                        claim(id="beta", **{"conditions__reasoning": "disabled"}),
+                        claim(id="gamma", **{"conditions__tool_use": "required"}),
+                        claim(id="delta"))
+    judge = fake()
+    report = audit(reg, PROMPT, "claude", "5", judge, reasoning="disabled", tool_use="none")
+    assert sorted(by_id(report)) == ["beta", "delta"]
+    assert by_id(report)["beta"]["conditions"] == []
+    assert 'id="alpha"' not in judge.prompt and 'id="gamma"' not in judge.prompt
+    assert report["reasoning"] == "disabled" and report["tool_use"] == "none"
+
+
+def test_cli_reasoning_and_tool_use_reach_audit(tmp_path, capsys, monkeypatch):
+    make_registry(tmp_path, claim(**{"conditions__reasoning": "enabled"}),
+                  claim(id="beta", **{"conditions__tool_use": "required"}), claim(id="gamma"))
+    judge = fake()
+    code, out, _ = run_cli(tmp_path, capsys, monkeypatch, judge, "--reasoning", "disabled",
+                           "--tool-use", "none", "--json")
+    assert code == 0
+    assert [f["id"] for f in json.loads(out)["findings"]] == ["gamma"]
+    assert 'id="alpha"' not in judge.prompt and 'id="beta"' not in judge.prompt
+
+
 def test_no_applicable_claims_skips_judge(tmp_path):
     reg = make_registry(tmp_path, claim())
 

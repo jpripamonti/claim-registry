@@ -127,3 +127,42 @@ def test_unknown_task_family_is_an_error(tmp_path, capsys, task):
                  "--task-family", task])
     assert code == 2
     assert f"unknown task family '{task}'" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize("field, values", [
+    ("reasoning", ("enabled", "disabled")), ("tool_use", ("required", "none"))])
+def test_reasoning_and_tool_use_filters(tmp_path, field, values):
+    reg = make_registry(tmp_path, *[claim(id=v, **{f"conditions__{field}": v})
+                                    for v in (*values, "any", "unspecified")])
+    first, second = values
+    got = {c.id: conds for c, conds in applicable(reg, "claude", "5", **{field: first})}
+    assert got == {first: [], "any": [], "unspecified": []}   # other value dropped, none listed
+    got = {c.id: conds for c, conds in applicable(reg, "claude", "5", **{field: second})}
+    assert got == {second: [], "any": [], "unspecified": []}
+    rows = {c.id: conds for c, conds in applicable(reg, "claude", "5")}
+    assert rows == {first: [f"{field}={first}"], second: [f"{field}={second}"],
+                    "any": [], "unspecified": []}
+
+
+def test_each_option_leaves_the_other_condition_listed(tmp_path):
+    reg = make_registry(tmp_path, claim(**{"conditions__reasoning": "disabled",
+                                           "conditions__tool_use": "none"}))
+    assert [c for _, c in applicable(reg, "claude", "5", reasoning="disabled")] == \
+        [["tool_use=none"]]
+    assert [c for _, c in applicable(reg, "claude", "5", tool_use="none")] == \
+        [["reasoning=disabled"]]
+    assert applicable(reg, "claude", "5", reasoning="enabled", tool_use="none") == []
+
+
+def test_cli_applies_reasoning_and_tool_use(tmp_path, capsys):
+    make_registry(tmp_path, claim(id="on", **{"conditions__reasoning": "enabled"}),
+                  claim(id="off", **{"conditions__reasoning": "disabled"}),
+                  claim(id="tools", **{"conditions__tool_use": "required"}))
+    code = main(["--root", str(tmp_path), "applies", "--model", "claude", "--version", "5",
+                 "--reasoning", "disabled", "--tool-use", "none"])
+    out = capsys.readouterr().out
+    assert code == 0 and out.startswith("off ") and "on " not in out and "tools" not in out
+    assert "1 claims apply to claude 5, reasoning disabled, tool use none" in out
+    with pytest.raises(SystemExit):
+        main(["--root", str(tmp_path), "applies", "--model", "claude", "--version", "5",
+              "--reasoning", "off"])

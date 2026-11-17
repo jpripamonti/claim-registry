@@ -8,7 +8,7 @@ from pathlib import Path
 
 from . import audit as audit_mod
 from . import registry
-from .applies import CONTEXT_SIZES, applicable
+from .applies import CONTEXT_SIZES, REASONING, TOOL_USE, applicable
 from .config_check import (check_citation, compare_lock, lock_text, parse_citations,
                            registry_date)
 from .quotes import check_quotes
@@ -73,7 +73,8 @@ def _print_diff(root, url, page, diffed):
 def cmd_applies(args):
     reg = registry.load(args.root)
     try:
-        rows = applicable(reg, args.model, args.version, args.context_size, args.task_family)
+        rows = applicable(reg, args.model, args.version, args.context_size, args.task_family,
+                          reasoning=args.reasoning, tool_use=args.tool_use)
     except ValueError as e:
         print(f"error: {e}", file=sys.stderr)
         return 2
@@ -82,8 +83,11 @@ def cmd_applies(args):
         direction = (claim.data.get("effect") or {}).get("direction")
         line = f"{claim.id:<{width}}  {direction:<9}  {' '.join(conds)}"
         print(line.rstrip())
-    size = f", {args.context_size} context" if args.context_size else ""
-    print(f"{len(rows)} claims apply to {args.model} {args.version}{size}")
+    given = [f"{args.context_size} context"] if args.context_size else []
+    given += [f"reasoning {args.reasoning}"] if args.reasoning else []
+    given += [f"tool use {args.tool_use}"] if args.tool_use else []
+    print(f"{len(rows)} claims apply to {args.model} {args.version}"
+          + "".join(f", {g}" for g in given))
     return 0
 
 
@@ -97,7 +101,8 @@ def cmd_audit(args):
     try:
         report = audit_mod.audit(reg, text, args.model, args.version,
                                  audit_mod.claude_judge(args.judge), args.context_size,
-                                 args.task_family)
+                                 args.task_family, reasoning=args.reasoning,
+                                 tool_use=args.tool_use)
     except (ValueError, audit_mod.JudgeError) as e:
         print(f"error: {e}", file=sys.stderr)
         return 2
@@ -115,6 +120,12 @@ def _model_args(p):
                    help="drop claims for the other input size (default: keep all, show the condition)")
     p.add_argument("--task-family", action="append",
                    help="keep only claims for this task family or none in particular (repeatable)")
+    p.add_argument("--reasoning", choices=REASONING,
+                   help="drop claims for the other setting: extended thinking on or off "
+                        "(default: keep all, show the condition)")
+    p.add_argument("--tool-use", choices=TOOL_USE,
+                   help="drop claims for the other case: tools in use (required) or none "
+                        "(default: keep all, show the condition)")
 
 
 def cmd_check_config(args):

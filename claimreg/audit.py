@@ -223,17 +223,19 @@ def citation(finding):
     return f"<!-- claim: {finding['id']}@{finding['version'].split('.')[0]} -->"
 
 
-def audit(reg, prompt_text, family, version, judge, context_size=None, task_families=None,
-          today=None):
+def audit(reg, prompt_text, family, version, judge, context_size=None, task_families=None, *,
+          reasoning=None, tool_use=None, today=None):
     """Audit `prompt_text`; return a report dict. Raises ValueError for a bad model or task
     family and JudgeError when the judge fails. With no applicable claims, the judge is not run."""
-    rows = applicable(reg, family, version, context_size, task_families, today)
+    rows = applicable(reg, family, version, context_size, task_families,
+                      reasoning=reasoning, tool_use=tool_use, today=today)
     answer = judge(build_prompt(prompt_text, [c for c, _ in rows])) if rows else \
         {"verdicts": [], "models": []}
     by_id, extra = _verdicts_by_id(answer, {c.id for c, _ in rows})
     findings = [_finding(c, conds, by_id.get(c.id), prompt_text) for c, conds in rows]
     return {
         "model": family, "version": version, "context_size": context_size,
+        "reasoning": reasoning, "tool_use": tool_use,
         "task_families": list(task_families or []),
         "judge": {"models": list(answer.get("models") or [])},
         "findings": findings,

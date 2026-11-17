@@ -1,5 +1,5 @@
 id: progress-update-instructions
-version: 1.0.0
+version: 1.1.0
 title: Removing narration-suppressing lines and saying when to give updates yields more predictable progress updates
 status: active
 technique:
@@ -8,12 +8,14 @@ technique:
     the final response". Then, if you want more or predictable updates, say in the system prompt
     when you want user-facing text and what it should contain, for example a line of intent before
     the first tool call and a short standalone recap at the end. Helps most in human-in-the-loop
-    work.
+    work. On Fable 5.2, a one-line system prompt sentence asking for an update every few tool calls
+    also cut most long silent stretches; the opening-and-recap text raised output tokens about 20
+    percent.
   example: |
     Before you start, say in a line what you're about to do; brief updates while you work help the user follow along. Close with a short recap that stands on its own — what you found, what you did, and what's next — so a reader who only sees the last message has the full picture.
 conditions:
   model_family: [claude-fable, claude-opus, claude-sonnet]
-  model_versions: {claude-fable: ["5.1"], claude-opus: ["5.5"], claude-sonnet: ["5.5"]}
+  model_versions: {claude-fable: ["5.1", "5.2"], claude-opus: ["5.5"], claude-sonnet: ["5.5"]}
   task_family: [unspecified]   # pages: helps most in human-in-the-loop work
   reasoning: unspecified
   tool_use: required
@@ -43,8 +45,24 @@ evidence:
     retrieved: 2026-11-02
     quote: >-
       Next, remove older instructions such as “hold all findings for the final response.” If you then want updates at predictable points, for example a line on what the model is about to do before its first tool call and a short recap at the end, say so in the system prompt. The model follows instructions like this.
-as_of: 2026-11-02
-review_by: 2027-05-02
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      To receive an opening line before the first tool call, brief updates, and a closing recap, you can also add this text to your system prompt:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      With this text, the model wrote a message before its first tool call in every run of the coding tasks. Note that output tokens per task increased by roughly 20 percent as a result.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      In Anthropic's testing, this sentence cut most long silent stretches on workflow automation tasks.
+as_of: 2026-11-16
+review_by: 2027-05-16
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.1.0 2026-11-16 widened to Claude Fable 5.2; evidence 4, 5 and 6 added from the Fable 5.2 prompting page
   - 1.0.0 2026-11-02 created

@@ -1,6 +1,6 @@
 id: silence-reminder-after-quiet-tool-steps
-version: 1.0.0
-title: A harness reminder after several silent tool-calling steps shortens silent stretches on Claude Opus 5.5 and Sonnet 5.5
+version: 1.1.0
+title: A harness reminder after several silent tool-calling steps shortens silent stretches on Claude Fable 5.2, Opus 5.5 and Sonnet 5.5
 status: active
 technique:
   summary: >
@@ -11,16 +11,16 @@ technique:
   example: |
     The user hasn't heard from you in a while — say in a few words what you're doing, then continue.
 conditions:
-  model_family: [claude-opus, claude-sonnet]
-  model_versions: {claude-opus: ["5.5"], claude-sonnet: ["5.5"]}
-  task_family: [unspecified]   # Opus 5.5 result measured on agentic coding tasks
+  model_family: [claude-fable, claude-opus, claude-sonnet]
+  model_versions: {claude-fable: ["5.2"], claude-opus: ["5.5"], claude-sonnet: ["5.5"]}
+  task_family: [unspecified]   # Opus 5.5 result measured on agentic coding tasks, Fable 5.2 on multi-turn coding tasks
   reasoning: unspecified
   tool_use: required
   context_size: unspecified
 effect:
   direction: helps
   outcome: fewer and shorter silent stretches in long tool-calling turns
-  magnitude: "Opus 5.5: roughly halved the share of agentic coding tasks with a long silent stretch, with no measurable cost change"
+  magnitude: "Opus 5.5: roughly halved the share of agentic coding tasks with a long silent stretch, with no measurable cost change; Fable 5.2: roughly halved the longest silent stretch without a noticeable increase in tokens or time"
 evidence:
   - tier: asserted
     source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
@@ -37,8 +37,19 @@ evidence:
     retrieved: 2026-11-02
     quote: >-
       At `high` effort, with a tool for sending the user a message available, the reminder leads the model to update the user more often and shortens its longest silent stretches, with no measurable change in task quality.
-as_of: 2026-11-02
-review_by: 2027-05-02
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      An effective way to encourage communication is to count consecutive tool-calling steps that give the user nothing to read: no text block and no thinking block with text.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      In Anthropic's testing on multi-turn coding tasks, the reminder roughly halved the longest silent stretch without a noticeable increase in tokens or time.
+as_of: 2026-11-16
+review_by: 2027-05-16
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.1.0 2026-11-16 widened to Claude Fable 5.2; evidence 3 and 4 added from the Fable 5.2 prompting page; magnitude extended
   - 1.0.0 2026-11-02 created

@@ -1,5 +1,5 @@
 id: max-tokens-room-for-thinking
-version: 1.0.0
+version: 1.1.0
 title: Size max_tokens for thinking plus the reply on Claude 5.x models, or replies get cut off
 status: active
 technique:
@@ -9,7 +9,7 @@ technique:
     and Sonnet 5.5, the pages suggest 128,000 (the maximum).
 conditions:
   model_family: [claude-fable, claude-opus, claude-sonnet, claude-haiku]
-  model_versions: {claude-fable: ["5.1"], claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}   # Fable 5.1 page gives this for xhigh and max effort
+  model_versions: {claude-fable: ["5.1", "5.2"], claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}   # Fable 5.1 page gives this for xhigh and max effort; Fable 5.2 migration guide for medium effort and above
   task_family: [unspecified]
   reasoning: enabled
   tool_use: unspecified
@@ -39,8 +39,19 @@ evidence:
     retrieved: 2026-11-02
     quote: >-
       A `max_tokens` value sized for Claude Haiku 4.5 requests that ran without thinking can cut the reply off, so leave room for thinking.
-as_of: 2026-11-02
-review_by: 2027-05-02
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/models/fable-5-2/migration-guide
+    retrieved: 2026-11-16
+    quote: >-
+      Thinking tokens count toward max_tokens, so a request with a small max_tokens can stop with stop_reason: "max_tokens" after a thinking block and before any text.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/models/fable-5-2/migration-guide
+    retrieved: 2026-11-16
+    quote: >-
+      Raise max_tokens to leave room for thinking, or choose a lower effort level.
+as_of: 2026-11-16
+review_by: 2027-05-16
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.1.0 2026-11-16 widened to Claude Fable 5.2; evidence 4 and 5 added from the Fable 5.2 migration guide
   - 1.0.0 2026-11-02 created

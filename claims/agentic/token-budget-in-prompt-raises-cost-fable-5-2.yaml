@@ -1,0 +1,37 @@
+id: token-budget-in-prompt-raises-cost-fable-5-2
+version: 1.0.0
+title: Showing Claude Fable 5.2 a large token budget in the prompt raises cost without improving results
+status: active
+technique:
+  summary: >
+    A harness that shows the model a token budget for the task and how much is left. The budget's
+    size changes how much Fable 5.2 spends; removing a large one lowered cost with equivalent
+    performance. Test your tasks without it. Applies to budget text in the prompt, not the API's
+    task budgets feature.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.2"]
+  task_family: [agentic-coding]   # page: coding tasks at high and xhigh effort
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: higher cost at equivalent performance
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      The size of that budget changes how much Claude Fable 5.2 spends. In Anthropic's testing on coding tasks at high and xhigh effort, removing a large budget lowered cost, with equivalent performance.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      This finding is about text in the prompt, not the API's task budgets, a beta feature that the testing didn't cover.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

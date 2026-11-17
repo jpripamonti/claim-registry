@@ -1,0 +1,39 @@
+id: self-contained-report-instruction-fable-5-2
+version: 1.0.0
+title: A "write for a low-context reader" instruction makes Claude Fable 5.2's final reports less dense
+status: active
+technique:
+  summary: >
+    When the model writes final reports or handoffs after long agentic work, add a system prompt
+    block telling it to write for an intelligent but low-context reader: self-contained messages,
+    key points first, plain words, no terms coined during the work, short active sentences, prose
+    where ideas connect and bullets for separate items. Adjust it to your readers.
+  example: |
+    Write for an intelligent but low-context reader. The person reading has not seen your tool calls, your reasoning or the files you opened, and may be switching in from other work. ... Put the key points in the first few sentences. ... Do not use a term or abbreviation that you made up during the work.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.2"]
+  task_family: [unspecified]   # page: agentic tasks; shorter sentences on workflow automation tasks
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: final reports less dense, with fewer semicolons and shorter sentences
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      If you ask Claude Fable 5.2 to write final reports or handoffs, add this text to your system prompt, and adjust it to your readers and your product:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      In Anthropic's testing on agentic tasks, the text made final reports less dense and reduced the number of semicolons. It also shortened sentences on workflow automation tasks.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

@@ -1,0 +1,42 @@
+id: subagent-tool-description-cost-fable-5-2
+version: 1.0.0
+title: A subagent tool description that states what delegation costs roughly halves the subagents Claude Fable 5.2 starts
+status: active
+technique:
+  summary: >
+    Only if Fable 5.2 starts more subagents than the task needs (typically in a harness whose
+    prompts invite delegation): first review prompt, skill and agent-file lines that tell it to
+    delegate, then rewrite the subagent tool's description to state what a subagent adds to a
+    session's cost, when delegation is and isn't worth it, and how to brief a subagent.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.2"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: fewer subagents started, lowering session cost
+  magnitude: roughly half as many subagents at high effort, compared with a shorter description
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      Change your subagent tool's description only if Claude Fable 5.2 starts more subagents than your tasks need.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      In the new tool description, state what a subagent adds to the cost of a session, say when delegation is worth it and when it isn't, and tell the model how to brief a subagent that it starts.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      In Anthropic's testing at high effort, a longer description focused on this roughly halved the number of subagents compared to a shorter version.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

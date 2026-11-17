@@ -1,0 +1,31 @@
+id: effort-does-not-set-reply-length-fable-5-2
+version: 1.0.0
+title: On Claude Fable 5.2, changing effort barely changes reply length; prompt for length and tone instead
+status: active
+technique:
+  summary: >
+    Raising or lowering the effort level to make replies shorter or longer. Effort changes how much
+    the model thinks and how many tool calls it makes, not the length of its replies; use prompt
+    instructions to set reply length and tone.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.2"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: no_effect
+  outcome: length of the assistant's replies
+  magnitude: little effect
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      Effort has little effect on the length of assistant turn responses. Use prompting to change the length and tone of replies.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

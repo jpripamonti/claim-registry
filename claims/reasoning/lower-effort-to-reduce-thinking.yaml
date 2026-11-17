@@ -1,16 +1,18 @@
 id: lower-effort-to-reduce-thinking
-version: 1.1.0
-title: To reduce thinking on Claude Opus, Sonnet and Haiku 5.5, lower the effort level; prompt instructions to think less are unreliable
+version: 1.2.0
+title: To reduce thinking on Claude Fable 5.2 and Opus, Sonnet and Haiku 5.5, lower the effort level; prompt instructions to think less are unreliable
 status: active
 technique:
   summary: >
     When you want less thinking (lower cost and latency), lower the effort level rather than asking
-    for less thinking in the prompt.
+    for less thinking in the prompt. On Fable 5.2, a line such as "answer directly without
+    deliberating" does not stop thinking at medium effort and above, and from high effort up the
+    model thinks before almost every reply, so use a lower effort for easy turns.
 conditions:
-  model_family: [claude-opus, claude-sonnet, claude-haiku]
-  model_versions: {claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}
+  model_family: [claude-fable, claude-opus, claude-sonnet, claude-haiku]
+  model_versions: {claude-fable: ["5.2"], claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}
   task_family: [unspecified]
-  reasoning: enabled   # Opus 5.5 thinking is always on; Sonnet and Haiku 5.5 default to adaptive thinking
+  reasoning: enabled   # Fable 5.2 and Opus 5.5 thinking is always on; Sonnet and Haiku 5.5 default to adaptive thinking
   tool_use: unspecified
   context_size: unspecified
 effect:
@@ -33,9 +35,25 @@ evidence:
     retrieved: 2026-11-02
     quote: >-
       To get less thinking, lower the effort level. In Anthropic’s testing, telling the model in the prompt to answer directly didn’t stop it from thinking.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      Claude Fable 5.1 usually followed a line such as "answer directly without deliberating." On Claude Fable 5.2, this addition doesn't stop the model from thinking at medium and above. Remove such lines and lower the effort level, as described in Calibrate effort.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      At high and above, the model thinks before almost every reply, including a reply to a greeting. If you find basic requests taking a while or costing you more, use a lower effort for those turns.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+    retrieved: 2026-11-16
+    quote: >-
+      On Claude Fable 5.2, lower the effort level instead. In Anthropic's testing, an instruction to answer directly without deliberating didn't stop the model from thinking at medium effort and above.
 as_of: 2026-11-16
 review_by: 2027-05-16
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.2.0 2026-11-16 widened to Claude Fable 5.2; evidence 3 and 4 added from the Fable 5.2 prompting page and evidence 5 from the best-practices page
   - 1.1.0 2026-11-16 Sonnet 5.5 detail dropped from the summary (thinks briefly before almost every reply from medium up, skips thinking on simple requests at low): the Sonnet 5.5 page no longer says it; evidence 1 requoted. The advice itself is unchanged
   - 1.0.0 2026-11-02 created

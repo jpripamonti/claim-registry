@@ -1,5 +1,5 @@
 id: per-message-effort-change-keeps-cache
-version: 1.0.0
+version: 1.0.1
 title: Change effort mid-conversation with a per-message effort change, not the top-level value, to keep the prompt cache
 status: active
 technique:
@@ -22,21 +22,22 @@ effect:
 evidence:
   - tier: asserted
     source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
-    retrieved: 2026-11-02
+    retrieved: 2026-11-16
     quote: >-
-      Changing the top-level `effort` value between requests invalidates the prompt cache. To change the level partway through a conversation, use a per-message effort change (beta) instead, which keeps the cache.
+      Changing the top-level `effort` value between requests invalidates the cached messages. To change the level partway through a conversation, use a per-message effort change instead, which keeps the cache. Per-message effort is in beta.
   - tier: asserted
     source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
-    retrieved: 2026-11-02
+    retrieved: 2026-11-16
     quote: >-
-      Changing the top-level `effort` value between requests invalidates the prompt cache. To change the level partway through a conversation, use a per-message effort change (beta) instead, which keeps the cache.
+      Changing the top-level `effort` value between requests invalidates the prompt cache. To change the level partway through a conversation, use a per-message effort change instead, which keeps the cache. Per-message effort is in beta.
   - tier: asserted
     source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
-    retrieved: 2026-11-02
+    retrieved: 2026-11-16
     quote: >-
-      Changing the top-level `effort` value between requests invalidates the prompt cache for the conversation’s messages. Where your platform supports it, you can change the level partway through a conversation with a per-message effort change (beta), which keeps the cache.
-as_of: 2026-11-02
-review_by: 2027-05-02
+      Changing the top-level `output_config.effort` value between requests invalidates the prompt cache for the conversation’s messages. On supported platforms, you can change the level partway through a conversation with a per-message effort change, which keeps the cache.
+as_of: 2026-11-16
+review_by: 2027-05-16
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.0.1 2026-11-16 evidence 0, 1 and 2 requoted: the Opus, Sonnet and Haiku 5.5 pages reworded the same advice (beta status now a separate sentence)
   - 1.0.0 2026-11-02 created

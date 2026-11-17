@@ -1,0 +1,746 @@
+source: https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/start/get-started-with-gemini-3
+retrieved: 2026-11-16
+
+Get started with Gemini 3 | Gemini Enterprise Agent Platform | Google Cloud Documentation Skip to
+main content Documentation close Get Started Get Started with Google Cloud Product List Cloud
+Customer Care Featured Products Agent Platform Apigee API Management BigQuery Compute Engine Cloud
+CDN Cloud Run Cloud Storage Cloud SQL Gemini Enterprise Google Kubernetes Engine Looker
+Cross-product Tools Access and resources management Costs and usage management Infrastructure as
+code SDK, languages, frameworks, and tools Technology Areas AI and ML Application development
+Application hosting Compute Data analytics and pipelines Databases Distributed, hybrid, and
+multicloud Industry solutions Migration Networking Observability and monitoring Security Storage /
+Console English Deutsch Español - América Latina Français Indonesia Italiano Português - Brasil
+עברית 中文 - 简体 中文 - 繁體 日本語 한국어 Sign in Gemini Enterprise Agent Platform Start free Overview Studio
+Agents Models Notebooks API reference Pricing Agent Platform Generative AI Engineering Blog
+Documentation More Overview Studio Agents Models Notebooks API reference Pricing More Engineering
+Blog Console Overview Beginner's guide Get started Get started with Agent Platform Develop Gemini
+API code with the Gen AI SDK Connect to the Knowledge MCP server Get an API key Configure
+application default credentials Migrate from Google AI Studio to Agent Platform Get started with
+Gemini 4 Get started with Gemini 3 Developer guides for Gemini models Gemini 4 Hydrogen Gemini 4
+Carbon Gemini 4 Argon Gemini 3.8 Live Gemini 3.8 Flash Gemini 3.7 Flash Gemini 3.6 Flash Gemini 3.5
+Flash Google GenAI libraries Generative AI cookbook Access Gemini models using OpenAI libraries
+Express mode Overview Console tutorial API tutorial Select models Model Garden Overview of Model
+Garden Use models in Model Garden Test model capabilities Google Models All Google models Gemini
+Migrate to the latest Gemini models Hydrogen 4 Hydrogen Carbon 4 Carbon Argon 4 Argon Pro 3.1 Pro
+2.5 Pro Flash 3.8 Flash 3.7 Flash 3.6 Flash 3.5 Flash 3 Flash 2.5 Flash 2.5 Flash Live API
+Flash-Lite 3.5 Flash-Lite 3.1 Flash-Lite 2.5 Flash-Lite Image Nano Banana 2.1 Nano Banana 2 Nano
+Banana 2 Lite Nano Banana Pro Nano Banana Virtual Try-On Omni Omni 1.2 Flash Omni 1.1 Flash Omni
+Flash Cyber 3.8 Flash Cyber Live 3.8 Live Text-to-Speech Gemini 3.8 Flash TTS Gemini 3.8 Flash-Lite
+TTS Transcribe Gemini 3.5 Transcribe Translate Gemini 3.5 Live Translate Embedding Gemini Embedding
+2 Robotics Gemini Robotics ER 2 Overview Model information Spatial reasoning Agentic capabilities
+Task orchestration Video understanding Veo Veo 3.1 Lyria Lyria 2 Lyria 3 Model versions Partner
+Models Partner models overview Claude Overview Use Claude models on Google Cloud (Anthropic-managed)
+Request predictions Quotas for Anthropic Claude models Fast mode Anthropic managed Claude API audit
+logging Batch predictions Structured outputs Prompt caching Count tokens Web search Safety
+classifiers Cyber Verification Program Claude models Fable Fable 5.2 Fable 5.1 Fable 5 Opus Opus 5.5
+Opus 5 Opus 4.8 Opus 4.7 Opus 4.6 Opus 4.5 Sonnet Sonnet 5.5 Sonnet 5 Sonnet 4.6 Sonnet 4.5 Haiku
+Haiku 5.5 Haiku 4.5 Grok Overview Responses API Function calling Structured output Reasoning Model
+details Grok 4.20 Grok 4.3 Grok 4.6 Grok 4.7 Mistral AI Overview Model details Mistral Medium 3
+Mistral OCR (25.05) Mistral Small 3.1 (25.03) Codestral 2 Meta Overview Model details Muse Wonder
+Muse Ember Muse Spark 1.3 OpenAI Overview Responses API Codex Model details GPT 6.0 Astra GPT 6.1
+Sol GPT 6.1 Terra GPT 6.0 Luna Deploy partner models from Model Garden Partner model deprecations
+Open Models Overview AlphaFold 3 AlphaGenome DeepSeek Overview DeepSeek-V4.1-Flash-1017
+DeepSeek-V4.1-Flash Google Gemma Model-as-a-Service (MaaS) Gemma-4-26B-A4B-IT MaaS Use Gemma
+Tutorial: Deploy and inference Gemma (GPU) Tutorial: Deploy and inference Gemma (TPU) Llama Overview
+Request predictions Model details Llama 4 Maverick Llama 4 Scout OpenAI Overview OpenAI gpt-oss-120b
+ZAI.org Overview GLM 5.2 Managed open models (MaaS) Overview Use open models via Model as a Service
+(MaaS) Grant access to open models API Call MaaS APIs for open models Function calling Thinking
+Structured output Batch prediction Open model deprecations Self-deployed open models Overview Deploy
+open models Deploy open models from Model Garden Deploy open models with prebuilt containers Deploy
+open models with a custom vLLM container Deploy models with custom weights Use Hugging Face Models
+Tutorials Optimize model performance with advanced features in Model Garden Hex-LLM Comprehensive
+guide to vLLM for Text and Multimodal LLM Serving (GPU) vLLM TPU xDiT Deploy Llamma 3 models with
+SpotVM and Reservations Build Prompt design Introduction to prompting Prompting strategies Overview
+Give clear and specific instructions Use system instructions Include few-shot examples Add
+contextual information Structure prompts Compare prompts Instruct the model to explain its reasoning
+Break down complex tasks Experiment with parameter values Prompt iteration strategies Task-specific
+prompt guidance Design multimodal prompts Design chat prompts Capabilities Safety Overview
+Responsible AI System instructions for safety Configure content filters Gemini for safety filtering
+and content moderation Abuse monitoring Process blocked responses Content Credentials AI Content
+Detection API Text and code generation Text generation System instructions Structured output Content
+generation parameters Image generation Generate images with Gemini Generate images from video with
+Gemini Edit images with Gemini Gemini image generation best practices Generate Virtual Try-On images
+Gemini image generation limitations Responsible AI and usage for Gemini image generation Video
+generation Overview Text to video First frame image to video First and last frames to video Generate
+videos from references Extend videos Edit videos Upscale videos Prompt guide Video best practices
+Responsible AI for Veo Music generation Introduction to Lyria Generate music using Lyria Lyria
+prompt guide Audio generation Overview Create a custom voice with voice design Replicate voices
+Prompting guide Migration guide Media analysis Image understanding Video understanding Audio
+understanding Document understanding Bounding box detection URL context Thinking Overview Thought
+signatures Prompting guide Interactions API Overview Developer guide Live API Overview Get started
+Get started using the Gen AI SDK Get started using WebSockets Get started using ADK Start and manage
+live sessions Send audio and video streams Configure live avatars Configure language and voice
+Configure Gemini capabilities Asynchronous function calling Best practices with Live API
+Troubleshooting Live API Demo apps and resources Migrate from Gemini 2.5 Flash Live API to Gemini
+3.8 Live Embeddings Overview Text embeddings Get text embeddings Choose an embeddings task type Get
+multimodal embeddings Get batch embeddings inferences Translation Transcribe speech Model tools Code
+execution Computer use Function calling Grounding Overview Grounding with Google Search Grounding
+with Google Maps Grounding with Agent Search Grounding with your search API Grounding responses
+using RAG Grounding with Elasticsearch Grounding with Parallel web search Grounding with Exa web
+search Web Grounding for Enterprise Development tools Use AI-powered prompt writing tools Overview
+Optimize prompts Overview Zero-shot optimizer Few-shot optimizer Data-driven optimizer Use prompt
+templates Manage prompts with the SDK Model tuning Introduction to tuning Tuning Gemini models
+Supervised fine-tuning About supervised fine-tuning Prepare your data Use supervised fine-tuning
+Supported modalities Text tuning Document tuning Image tuning Audio tuning Video tuning Tune
+function calling Reinforcement learning fine-tuning About reinforcement learning fine-tuning
+Quickstart using the console Quickstart using the API Reinforcement learning fine-tuning job
+Overview Tuning dataset Hyperparameters Reward functions Metrics and monitoring Continuous tuning
+Preference tuning About preference tuning Prepare your data Use preference tuning Use tuning
+checkpoints Use continuous tuning Tuning recommendations with LoRA and QLoRA Open models Supervised
+and distillation fine-tuning Embeddings models Tune text embeddings models Translation models About
+supervised fine-tuning Prepare your data Use supervised fine-tuning Migrate Call Agent Platform
+models using OpenAI libraries Overview Authenticate Examples Migrate from OpenAI SDK Evaluate
+Overview Tutorial: Perform evaluation using the console Perform evaluation using the GenAI Client in
+Agent Platform SDK Tutorial: Evaluate models using the GenAI Client in Agent Platform SDK Define
+your evaluation metrics Define your evaluation metrics Details for managed rubric-based metrics
+Prepare your evaluation dataset Run an evaluation View and interpret evaluation results Evaluate
+agents Alternative evaluation methods Evaluate using the evaluation module in Agent Platform SDK
+Tutorial: Perform evaluation using the evaluation module in Agent Platform SDK Define your
+evaluation metrics Prepare your evaluation dataset Run an evaluation Interpret evaluation results
+Templates for model-based metrics Evaluate agents Evaluate a judge model Configure a judge model Run
+AutoSxS pipeline Run a computation-based evaluation pipeline Deploy Consumption options overview
+Provisioned Throughput Provisioned Throughput overview Supported models Calculate Provisioned
+Throughput requirements Provisioned Throughput for Live API Provisioned Throughput for Gemini Nano
+Banana models Provisioned Throughput for Gemini Omni models Provisioned Throughput for Veo models
+Single Zone Provisioned Throughput Purchase Provisioned Throughput Use Provisioned Throughput PayGo
+Standard PayGo Priority PayGo Flex PayGo Batch inference Overview Create batch job from Cloud
+Storage Create batch job from BigQuery Resume an incomplete batch job Quotas and system limits Cache
+reused prompt context Overview Create a context cache Use a context cache Get context cache
+information Update a context cache Delete a context cache Context cache for fine-tuned Gemini models
+Deploy generative AI models Troubleshooting error code 429 Retry strategy Administer Access control
+Networking Security controls Control access to Model Garden models Enable Data Access audit logs
+Save and share prompts Monitor models Monitor cost using custom metadata labels Log inference
+request metadata Request-response logging Secure a gen AI app by using IAP Overview Set up your
+project and source repository Create a Cloud Run service Create a load balancer Configure IAP Test
+your IAP-secured app Clean up your project Build your own model Overview MLOps on Agent Platform
+Interfaces for Agent Platform Agent Platform beginner's guides Train an AutoML model Train a custom
+model Get inferences from a custom model Train a model using Agent Platform and the Python SDK
+Introduction Prerequisites Create a notebook Create a dataset Create a training script Train a model
+Make an inference Integrated ML frameworks PyTorch TensorFlow Agent Platform for BigQuery users
+Glossary Get started Set up a project and a development environment Install the Agent Platform SDK
+for Python Authenticate to Agent Platform Choose a training method Try a tutorial Tutorials overview
+AutoML tutorials Hello image data Overview Set up your project and environment Create a dataset and
+import images Train an AutoML image classification model Evaluate and analyze model performance
+Deploy a model to an endpoint and make an inference Clean up your project Hello tabular data
+Overview Set up your project and environment Create a dataset and train an AutoML classification
+model Deploy a model and request an inference Clean up your project Custom training tutorials Train
+a custom tabular model Train a TensorFlow Keras image classification model Overview Set up your
+project and environment Train a custom image classification model Serve predictions from a custom
+image classification model Clean up your project Fine-tune an image classification model with custom
+data Use Agent Platform development tools Development tools overview Use the Agent Platform SDK
+Overview Introduction to the Agent Platform SDK for Python Python version 2.0.1 migration guide
+Agent Platform SDK for Python classes Agent Platform SDK classes overview Data classes Training
+classes Model classes Prediction classes Tracking classes Terraform support for Agent Platform Agent
+Platform Training Overview Agent Platform serverless training Overview of serverless training in
+Agent Platform Load and prepare data Data preparation overview Use Cloud Storage as a mounted file
+system Mount an NFS share for serverless training Use managed datasets Prepare training application
+Understand the serverless training service Prepare training code Use prebuilt containers Create a
+Python training application for a prebuilt container Prebuilt containers for serverless training Use
+custom containers Custom containers for serverless training Create a custom container Containerize
+and run training code locally Train on a persistent resource Overview Create persistent resource Run
+training jobs on a persistent resource Get persistent resource information Reboot a persistent
+resource Delete a persistent resource Configure training job Choose a custom training method
+Configure container settings for training Configure compute resources for training Use reservations
+with training Use Spot VMs with training Submit training job Create custom jobs Hyperparameter
+tuning Hyperparameter tuning overview Use hyperparameter tuning Create training pipelines Schedule
+jobs based on resource availability Use distributed training Training with Cloud TPU VMs Use private
+IP for custom training Use Private Service Connect interface for training (recommended) Monitor and
+debug Monitor and debug training using an interactive shell Profile model training performance
+Tutorial: Build a pipeline for continuous training Create custom organization policy constraints
+Gemini Enterprise Agent Platform clusters Overview Get started with training clusters Deployment
+considerations Compute resources Networking Storage Orchestration Create and manage clusters Create
+cluster View clusters Manage cluster Manage accounts and job scheduling on a cluster Cluster
+resiliency Monitor resilience events with a dashboard Feature guides Using Flex Start VMs with Slurm
+clusters Run workload on cluster Run prebuilt workloads Visualizing jobs with TensorBoard Manage
+training clusters using Slurm Ray on Agent Platform Ray on Agent Platform overview Set up for Ray on
+Agent Platform Create a Ray cluster on Agent Platform Monitor Ray clusters on Agent Platform Scale a
+Ray cluster on Agent Platform Develop a Ray application on Agent Platform Run Spark on Ray cluster
+on Agent Platform Use Ray on Agent Platform with BigQuery Deploy a model and get inferences Delete a
+Ray cluster Perform Neural Architecture Search Overview Set up environment Beginner tutorials Best
+practices and workflow Proxy task design Optimize training speed for PyTorch Use prebuilt training
+containers and search spaces Optimize using Agent Platform Vizier Overview of Agent Platform Vizier
+Create Agent Platform Vizier studies AutoML model development AutoML training overview Image data
+Classification Prepare data Create dataset Train model Evaluate model Get predictions Interpret
+results Object detection Prepare data Create dataset Train model Evaluate model Get predictions
+Interpret results Encode image data using Base64 Export an AutoML Edge model Tabular data Overview
+Introduction to tabular data Tabular Workflows Overview End-to-End AutoML Overview Train a model Get
+online inferences Get batch inferences Forecasting Overview Train a model Get online inferences Get
+batch inferences Pricing Service accounts Manage quotas Perform classification and regression with
+AutoML Overview Quickstart: AutoML Classification (Cloud Console) Prepare training data Create a
+dataset Train a model Evaluate model View model architecture Get online inferences Get batch
+inferences Export model Perform forecasting with AutoML Overview Prepare training data Create a
+dataset Train a model Evaluate model Get inferences Hierarchical forecasting Perform forecasting
+with ARIMA+ Perform forecasting with Prophet Perform entity reconciliation Feature attributions for
+classification and regression Feature attributions for forecasting Data types and transformations
+for tabular AutoML data Training parameters for forecasting Data splits for tabular data Best
+practices for creating tabular training data Train an AutoML Edge model Using the Console Using the
+API Generative AI model development Overview Create and manage datasets Overview Data splits for
+AutoML models Create an annotation set Delete an annotation set Add labels (console) Export metadata
+and annotations from a dataset Manage image dataset versions (API only) Get inferences Overview
+Configure models for inference Export model artifacts for inference Prebuilt containers for
+inference Custom container requirements for inference Use a custom container for inference Use
+arbitrary custom routes Use the optimized TensorFlow runtime Serve inferences with NVIDIA Triton
+Custom inference routines Get online inferences Create an endpoint Choose an endpoint type Create a
+public endpoint Use dedicated public endpoints (recommended) Use dedicated private endpoints based
+on Private Service Connect (recommended) Use private services access endpoints Deploy a model to an
+endpoint Overview of model deployment Compute resources for inference Deploy a model by using the
+Google Cloud console Deploy a model by using the gcloud CLI or Agent Platform API Use autoscaling
+for inference Use a rolling deployment to replace a deployed model Undeploy a model and delete the
+endpoint Use Cloud TPUs for online inference Use reservations with online inference Use Flex-start
+VMs with inference Use Spot VMs with inference Get an online inference View online inference metrics
+View endpoint metrics View DCGM metrics View AI AutoMetrics Share resources across deployments Use
+online inference logging Get batch inferences Get batch inferences from a custom model Use
+reservations with batch inference Get batch prediction from a self-deployed Model Garden model Serve
+generative AI models Deploy generative AI models Serve Gemma open models using Cloud TPUs with Saxml
+Serve Llama 3 open models using multi-host Cloud TPUs with Saxml Serve a DeepSeek-V3 model using
+multi-host GPU deployment Custom organization policies Machine learning operations (MLOps) Manage
+features Feature management in Agent Platform Agent Platform Feature Store About Agent Platform
+Feature Store Set up features Prepare data source Create a feature group Create a feature Set up
+online serving Online serving types Create an online store instance Create a feature view instance
+Control access Control access to resources Sync online store Start a data sync List sync operations
+Update features in a feature view Serve features Serve features from online store Serve historical
+feature values Monitor Monitor features Manage feature resources List feature groups List features
+Update a feature group Update a feature Delete a feature group Delete a feature Manage online store
+resources List online stores List feature views Update an online store Update a feature view Delete
+an online store Delete a feature view Feature metadata Update labels Search for resources Search for
+resources Manage embeddings Search using embeddings Notebook tutorials Agent Platform Feature Store
+tutorial notebooks Manage models Introduction to Agent Platform Model Registry Versioning in Model
+Registry Import models to Model Registry Copy models in Model Registry Delete a model Integrate with
+BigQuery ML Use model aliases Use model labels Evaluate models Model evaluation in Agent Platform
+Perform model evaluation in Agent Platform Model evaluation for fairness Introduction to model
+evaluation for fairness Data bias metrics for Agent Platform Model bias metrics for Agent Platform
+Orchestrate ML workflows using pipelines Introduction Interfaces Configure your project Build a
+pipeline Run a pipeline Use pipeline templates Create, upload, and use a pipeline template Use a
+prebuilt template from the Template Gallery Configure your pipeline Configure execution caching
+Configure failure policy Configure retries for a pipeline task Specify machine types for a pipeline
+step Request Google Cloud machine resources with Agent Platform Pipelines Configure Private Service
+Connect interface (recommended) Configure secrets with Secret Manager Configure a pipeline run on a
+persistent resource Schedule and trigger pipeline runs Schedule a pipeline run with scheduler API
+Trigger a pipeline run with Pub/Sub Cancel or delete pipeline runs Cancel pipeline runs Delete
+pipeline runs Rerun a pipeline Monitor pipeline execution View pipeline metrics View pipeline job
+logs Route logs to a Cloud Pub/Sub sink Configure email notifications Visualize results Visualize
+and analyze pipeline results Track the lineage of pipeline artifacts Output HTML and Markdown
+Resource labeling by Agent Platform Pipelines Understand pipeline run costs Migrate from Kubeflow
+Pipelines to Agent Platform Pipelines Use custom constraints Google Cloud Pipeline Components
+Quickstart Introduction to Google Cloud Pipeline Components Google Cloud Pipeline Component list Use
+Google Cloud Pipeline Components Build your own pipeline components Agent Platform Pipelines
+tutorials Tutorial notebooks Track and analyze your ML metadata Introduction to Vertex ML Metadata
+Data model and resources Configure your project's metadata store Use Vertex ML Metadata Track Vertex
+ML Metadata Analyze Vertex ML Metadata Manage Vertex ML Metadata System schemas Create and use
+custom schemas Use custom constraints with metadata stores Monitor model quality Introduction to
+Model Monitoring Model Monitoring v2 Set up model monitoring Run monitoring jobs Manage model
+monitors Model Monitoring v1 Provide schemas to Model Monitoring Monitor feature skew and drift
+Model Monitoring for batch predictions Track Experiments Introduction to Agent Platform Experiments
+Set up for Agent Platform Experiments Create an experiment Create and manage experiment runs Log
+data Autolog data to an experiment run Manually log data to an experiment run Log models to an
+experiment run Track executions and artifacts Add pipeline run to experiment Run training job with
+experiment tracking Compare and analyze runs Use Agent Platform TensorBoard Introduction to Agent
+Platform TensorBoard Set up Agent Platform TensorBoard Configure training script Use Agent Platform
+TensorBoard with custom training Use Agent Platform TensorBoard with Agent Platform Pipelines
+Manually log TensorBoard data Upload existing logs View Agent Platform TensorBoard Notebook
+tutorials Get started with Agent Platform Experiments Compare pipeline runs Model training Compare
+models Autologging Custom training autologging Track parameters and metrics for custom training
+Delete outdated Agent Platform TensorBoard experiments Agent Platform TensorBoard custom training
+with custom container Agent Platform TensorBoard custom training with prebuilt container Agent
+Platform TensorBoard hyperparameter tuning with HParams dashboard Profile model training performance
+using Cloud Profiler Profile model training performance using Cloud Profiler in custom training with
+prebuilt container Agent Platform TensorBoard integration with Agent Platform Pipelines Administer
+Access control Access control with IAM IAM permissions Set up a project for a team Control access to
+Agent Platform endpoints Use a custom service account Use customer-managed encryption keys Access
+Transparency Monitor Agent Platform resources Cloud Monitoring metrics Audit logging information
+Networking Networking access overview Accessing the Agent Platform API Accessing Agent Platform
+services through private services access Accessing Agent Platform services through PSC endpoints
+Accessing Agent Platform services through PSC interfaces Set up VPC Network Peering Set up
+connectivity to other networks Set up a Private Service Connect interface Tutorial: Access training
+pipelines privately from on-premises Tutorial: Access a Vector Search index privately from
+on-premises Tutorial: Access the Generative AI API from on-premises Tutorial: Access batch
+predictions privately from on-premises Tutorial: Create a Agent Platform Workbench instance in a VPC
+network Security VPC Service Controls Allow public endpoint access to protected resources from
+outside a perimeter Allow multicloud access to protected resources from outside a perimeter Allow
+access to protected resources from inside a perimeter Name resources Samples and tutorials Notebook
+tutorials Code samples Code samples for all products Get Started Get Started with Google Cloud
+Product List Cloud Customer Care Featured Products Agent Platform Apigee API Management BigQuery
+Compute Engine Cloud CDN Cloud Run Cloud Storage Cloud SQL Gemini Enterprise Google Kubernetes
+Engine Looker Cross-product Tools Access and resources management Costs and usage management
+Infrastructure as code SDK, languages, frameworks, and tools Technology Areas AI and ML Application
+development Application hosting Compute Data analytics and pipelines Databases Distributed, hybrid,
+and multicloud Industry solutions Migration Networking Observability and monitoring Security Storage
+Agent Platform Generative AI Home Documentation AI and ML Gemini Enterprise Agent Platform Models
+Send feedback Get started with Gemini 3 Stay organized with collections Save and categorize content
+based on your preferences.
+To see an example of Gemini 3 Pro, run the "Intro to Gemini 3.1 Pro" notebook in one of the
+following environments: Open in Colab | Open in Colab Enterprise | Open in Agent Platform Workbench
+| View on GitHub Gemini 3 is our most intelligent model family to date, built on a foundation of
+state-of-the-art reasoning.
+It is designed to bring any idea to life by mastering agentic workflows, autonomous coding, and
+complex multimodal tasks.
+This guide provides a consolidated, practical path to get started with Gemini 3 on Gemini Enterprise
+Agent Platform, highlighting Gemini 3's key features and best practices.
+Quickstart Before you begin, you must authenticate to Gemini Enterprise Agent Platform using an API
+key or application default credentials (ADC).
+See authentication methods for more information.
+Install the Google Gen AI SDK Gemini 3 API features require Google Gen AI SDK for Python version
+1.51.0 or later.
+pip install --upgrade google-genai Set environment variables to use the Google Gen AI SDK with
+Gemini Enterprise Agent Platform Replace the GOOGLECLOUDPROJECT value with your Google Cloud Project
+ID.
+The Gemini 3.1 Pro model gemini-3.1-pro-preview and the Gemini 3 Flash model gemini-3-flash-preview
+are only available on global endpoints: export GOOGLECLOUDPROJECT = GOOGLECLOUDPROJECT export
+GOOGLECLOUDLOCATION = global export GOOGLEGENAIUSEENTERPRISE = True Make your first request By
+default, Gemini 3 models and Gemini 3 Flash use dynamic thinking to reason through prompts.
+For faster, lower-latency responses when complex reasoning isn't required, you can constrain the
+model's thinkinglevel .
+Low thinking is ideal for high-throughput tasks where speed is paramount.
+For fast, low-latency responses: from google import genai from google.genai import types client =
+genai .
+Client () response = client .
+models .
+generatecontent ( model = "gemini-3.6-flash" , contents = "How does AI work?" , config = types .
+GenerateContentConfig ( thinkingconfig = types .
+ThinkingConfig ( thinkinglevel = types .
+ThinkingLevel .
+LOW For fast and low latency response ) ), ) print ( response .
+text ) Try complex reasoning tasks Gemini 3 excels at advanced reasoning.
+For complex tasks like multi-step planning, verified code generation, or deep tool use, use high
+thinking levels.
+Use these configurations for tasks that previously required specialized reasoning models.
+For slower, high-reasoning tasks: from google import genai from google.genai import types client =
+genai .
+Client () prompt = """ You are tasked with implementing the classic Thread-Safe Double-Checked
+Locking (DCL) Singleton pattern in modern C++.
+This task is non-trivial and requires specialized concurrency knowledge to prevent memory reordering
+issues.
+Write a complete, runnable C++ program named dclsingleton.cpp that defines a class Singleton with a
+private constructor and a static getInstance() method.
+Your solution MUST adhere to the following strict constraints: 1.
+The Singleton instance pointer (static Singleton) must be wrapped in std::atomic to correctly manage
+memory visibility across threads.
+2.
+The getInstance() method must use std::memoryorderacquire when reading the instance pointer in the
+outer check.
+3.
+The instance creation and write-back must use std::memoryorderrelease when writing to the atomic
+pointer.
+4.
+A standard std::mutex must be used only to protect the critical section (the actual instantiation).
+5.
+The main function must demonstrate safe, concurrent access by launching at least three threads, each
+calling Singleton::getInstance(), and printing the address of the returned instance to prove all
+threads received the same object.
+""" response = client .
+models .
+generatecontent ( model = "gemini-3.6-flash" , contents = prompt , config = types .
+GenerateContentConfig ( thinkingconfig = types .
+ThinkingConfig ( thinkinglevel = types .
+ThinkingLevel .
+HIGH Dynamic thinking for high reasoning tasks ) ), ) print ( response .
+text ) Other thinking levels Gemini 3 Flash introduces two new thinking levels: MINIMAL and MEDIUM
+to give you even more control over how the model handles complex reasoning tasks.
+MINIMAL offers close-to-zero thinking budget options for tasks optimized for throughput, rather than
+reasoning.
+MEDIUM allows for a balance between speed and reasoning that allows for some reasoning capability
+but still prioritizes low-latency operations.
+New API features Gemini 3 introduces powerful API enhancements and new parameters designed to give
+developers granular control over performance (latency, cost), model behavior, and multimodal
+fidelity .
+This table summarizes the core new features and parameters available, along with direct links to
+their detailed documentation: New Feature/API Change Documentation Model: gemini-3.1-pro-preview
+Model card Gemini Enterprise Agent Platform Model Garden Thinking level Thinking Media resolution
+Image understanding Video understanding Audio understanding Document understanding Thought signature
+Thought signatures Temperature API reference Multimodal function responses Function calling:
+Multimodal function responses Streaming function calling Function calling: Streaming function
+calling Thinking level The thinkinglevel parameter lets you specify a thinking budget for the
+model's response generation.
+By selecting one of two states, you can explicitly balance the trade-offs between response quality
+and reasoning complexity and latency and cost.
+MINIMAL : (Gemini 3 Flash and Gemini 3.1 Flash-Lite only) Constrains the model to use as few tokens
+as possible for thinking and is best used for low-complexity tasks that wouldn't benefit from
+extensive reasoning.
+MINIMAL is as close as possible to a zero budget for thinking, but still requires thought signatures
+.
+LOW : Constrains the model to use fewer tokens for thinking and is suitable for simpler tasks where
+extensive reasoning is not required.
+LOW is ideal for high-throughput tasks where speed is essential.
+MEDIUM : (Gemini 3 Flash, Gemini 3.1 Pro, and Gemini 3.1 Flash-Lite only) Offers a balanced approach
+suitable for tasks of moderate complexity that benefit from reasoning but don't require deep,
+multi-step planning.
+It provides more reasoning capability than LOW while maintaining lower latency than HIGH .
+HIGH : Allows the model to use more tokens for thinking and is suitable for complex prompts
+requiring deep reasoning, such as multi-step planning, verified code generation, or advanced
+function calling scenarios.
+This is the default level for Gemini 3 models and Gemini 3 Flash.
+Use this configuration when replacing tasks you might have previously relied on specialized
+reasoning models for.
+Note: You cannot use both thinkinglevel and the legacy thinkingbudget parameter in the same request.
+Doing so will return a 400 error.
+The thinkinglevel parameter is optional.
+If omitted, the model will use its default setting ( HIGH ).
+Google Gen AI SDK example from google import genai from google.genai import types client = genai .
+Client () response = client .
+models .
+generatecontent ( model = "gemini-3.6-flash" , contents = "Find the race condition in this
+multi-threaded C++ snippet: [code here]" , config = types .
+GenerateContentConfig ( thinkingconfig = types .
+ThinkingConfig ( thinkinglevel = types .
+ThinkingLevel .
+HIGH Default, dynamic thinking ) ), ) print ( response .
+text ) OpenAI compatibility example For users utilizing the OpenAI compatibility layer, standard
+parameters are automatically mapped to Gemini 3 equivalents: reasoningeffort maps to thinkinglevel .
+none : maps to thinkinglevel minimal (Gemini 3 Flash only).
+medium : maps to thinkinglevel medium for all Gemini 3 models.
+import openai from google.auth import default from google.auth.transport.requests import Request
+credentials , = default ( scopes = [ "https://www.googleapis.com/auth/cloud-platform" ]) client =
+openai .
+OpenAI ( baseurl = f "https://aiplatform.googleapis.com/v1/projects/ { PROJECTID }
+/locations/global/endpoints/openapi" , apikey = credentials .
+token , ) prompt = """ Write a bash script that takes a matrix represented as a string with format
+'[1,2],[3,4],[5,6]' and prints the transpose in the same format.
+""" response = client .
+chat .
+completions .
+create ( model = "gemini-3.6-flash" , reasoningeffort = "medium" , Map to thinkinglevel high.
+messages = [{ "role" : "user" , "content" : prompt }], ) print ( response .
+choices [ 0 ] .
+message .
+content ) Media resolution Gemini 3 introduces granular control over multimodal vision processing
+using the mediaresolution parameter.
+Higher resolutions improve the model's ability to read fine text or identify small details, but
+increase token usage and latency.
+The mediaresolution parameter determines the maximum number of tokens allocated per input image, PDF
+page or video frame.
+You can set the resolution to low , medium , or high globally (using generationconfig ) or for
+individual media parts.
+The ultrahigh resolution can only be set for individual media parts.
+If unspecified, the model uses optimal defaults based on the media type.
+Token counts This table summarizes the approximate token counts for each mediaresolution value and
+media type.
+Media Resolution Image Video PDF UNSPECIFIED (Default) 1120 70 560 LOW 280 70 280 + Text MEDIUM 560
+70 560 + Text HIGH 1120 280 1120 + Text ULTRAHIGH 2240 N/A N/A Recommended settings Media Resolution
+Max Tokens Usage Guidance ultrahigh 2240 Tasks requiring analysis of fine details in images, such as
+processing screen recording stills or high-resolution photos.
+high 1120 Image analysis tasks to ensure maximum quality.
+medium 560 low Image: 280 Video: 70 Sufficient for most tasks.
+Note: For Video low is a maximum of 70 tokens per frame.
+Note: Token counts for multimodal inputs (images, video.
+Audio, PDF) are an estimation based on the chosen mediaresolution .
+As such, the result from the counttokens API call may not match the final consumed tokens.
+The accurate usage for billing is only available after execution within the response's usagemetadata
+.
+Because mediaresolution directly impacts token count, you may need to lower the resolution (for
+example, to LOW ) to fit very long inputs, such as long videos or extensive documents.
+Setting mediaresolution per individual part You can set mediaresolution per individual media part:
+from google import genai from google.genai import types client = genai .
+Client () response = client .
+models .
+generatecontent ( model = "gemini-3.6-flash" , contents = [ types .
+Part ( filedata = types .
+FileData ( fileuri = "gs://cloud-samples-data/generative-ai/image/a-man-and-a-dog.png" , mimetype =
+"image/jpeg" , ), mediaresolution = types .
+PartMediaResolution ( level = types .
+PartMediaResolutionLevel .
+MEDIARESOLUTIONHIGH High resolution ), ), Part ( filedata = types .
+FileData ( fileuri = "gs://cloud-samples-data/generative-ai/video/behindthescenespixel.mp4" ,
+mimetype = "video/mp4" , ), mediaresolution = types .
+PartMediaResolution ( level = types .
+PartMediaResolutionLevel .
+MEDIARESOLUTIONLOW Low resolution ), ), "When does the image appear in the video?
+What is the context?" , ], ) print ( response .
+text ) Setting mediaresolution globally You can also set mediaresolution globally (using
+GenerateContentConfig ): from google import genai from google.genai import types client = genai .
+Client () response = client .
+models .
+generatecontent ( model = "gemini-3.6-flash" , contents = [ types .
+Part ( filedata = types .
+FileData ( fileuri = "gs://cloud-samples-data/generative-ai/image/a-man-and-a-dog.png" , mimetype =
+"image/jpeg" , ), ), "What is in the image?" , ], config = types .
+GenerateContentConfig ( mediaresolution = types .
+MediaResolution .
+MEDIARESOLUTIONLOW , Global setting ), ) print ( response .
+text ) Thought signatures Thought signatures are encrypted tokens that preserve the model's
+reasoning state during multi-turn conversations, specifically when using function calling.
+When a thinking model decides to call an external tool, it pauses its internal reasoning process.
+The thought signature acts as a "save state," allowing the model to resume its chain of thought
+seamlessly once you provide the function's result.
+For more information, see Thought signatures .
+Why are thought signatures important?
+Without thought signatures, the model "forgets" its specific reasoning steps during the tool
+execution phase.
+Passing the signature back ensures: Context continuity : The model preserves the reason for why the
+tool was called.
+Complex reasoning : Enables multi-step tasks where the output of one tool informs the reasoning for
+the next.
+Where are thought signatures returned?
+Gemini 3 models and Gemini 3 Flash enforce stricter validation and updated handling on thought
+signatures which were originally introduced in Gemini 2.5.
+To ensure the model maintains context across multiple turns of a conversation, you must return the
+thought signatures in your subsequent requests.
+Model responses with a function call will always return a thought signature, even when using the
+MINIMAL thinking level.
+When there are parallel function calls, the first function call part returned by the model response
+will have a thought signature.
+When there are sequential function calls (multi-step), each function call will have a signature and
+clients are expected to pass signature back Model responses without a function call will return a
+thought signature inside the last part returned by the model.
+How to handle thought signatures?
+There are two primary ways to handle thought signatures: automatically using the Google Gen AI SDKs
+or OpenAI API, or manually if you are interacting with the API directly.
+Automated handling (recommended) If you are using the Google Gen AI SDKs (Python, Node.js, Go, Java)
+or OpenAI Chat Completions API, and utilizing the standard chat history features or appending the
+full model response, thoughtsignatures are handled automatically.
+You don't need to make any changes to your code.
+Manual function calling example When using the Google Gen AI SDK, thought signatures are handled
+automatically by appending the full model response in sequential model requests: from google import
+genai from google.genai import types client = genai .
+Client () 1.
+Define your tool getweatherdeclaration = types .
+FunctionDeclaration ( name = "getweather" , description = "Gets the current weather temperature for
+a given location." , parameters = { "type" : "object" , "properties" : { "location" : { "type" :
+"string" }}, "required" : [ "location" ], }, ) getweathertool = types .
+Tool ( functiondeclarations = [ getweatherdeclaration ]) 2.
+Send a message that triggers the tool prompt = "What's the weather like in London?" response =
+client .
+models .
+generatecontent ( model = "gemini-3.6-flash" , contents = prompt , config = types .
+GenerateContentConfig ( tools = [ getweathertool ], thinkingconfig = types .
+ThinkingConfig ( includethoughts = True ) ), ) 4.
+Handle the function call functioncall = response .
+functioncalls [ 0 ] location = functioncall .
+args [ "location" ] print ( f "Model wants to call: { functioncall .
+name } " ) Execute your tool (e.g., call an API) (This is a mock response for the example) print ( f
+"Calling external tool for: { location } " ) functionresponsedata = { "location" : location ,
+"temperature" : "30C" , } 5.
+Send the tool's result back Append this turn's messages to history for a final response.
+The content object automatically attaches the required thoughtsignature behind the scenes.
+history = [ types .
+Content ( role = "user" , parts = [ types .
+Part ( text = prompt )]), response .
+candidates [ 0 ] .
+content , Signature preserved here types .
+Content ( role = "user" , parts = [ types .
+Part .
+fromfunctionresponse ( name = functioncall .
+name , response = functionresponsedata , ) ], ) ] response2 = client .
+models .
+generatecontent ( model = "gemini-3.6-flash" , contents = history , config = types .
+GenerateContentConfig ( tools = [ getweathertool ], thinkingconfig = types .
+ThinkingConfig ( includethoughts = True ) ), ) 6.
+Get the final, natural-language answer print ( f " Final model response: { response2 .
+text } " ) Automatic function calling example When using the Google Gen AI SDK in automatic function
+calling, thought signatures are handled automatically: from google import genai from google.genai
+import types def getcurrenttemperature ( location : str ) - dict : """Gets the current temperature
+for a given location.
+Args: location: The city and state, for example San Francisco, CA Returns: A dictionary containing
+the temperature and unit.
+""" ...
+(implementation) ...
+return { "temperature" : 25 , "unit" : "Celsius" } client = genai .
+Client () response = client .
+models .
+generatecontent ( model = "gemini-3.6-flash" , contents = "What's the temperature in Boston?" ,
+config = types .
+GenerateContentConfig ( tools = [ getcurrenttemperature ], ) ) print ( response .
+text ) The SDK handles the function call and thought signature, and returns the final text OpenAI
+compatibility example When using OpenAI Chat Completions API, thought signatures are handled
+automatically by appending the full model response in sequential model requests: ...
+Append user prompt and assistant response including thought signatures messages .
+append ( response1 .
+choices [ 0 ] .
+message ) Execute the tool toolcall1 = response1 .
+choices [ 0 ] .
+message .
+toolcalls [ 0 ] result1 = getcurrenttemperature ( json .
+loads ( toolcall1 .
+function .
+arguments )) Append tool response to messages messages .
+append ( { "role" : "user" , "toolcallid" : toolcall1 .
+id , "content" : json .
+dumps ( result1 ), } ) response2 = client .
+chat .
+completions .
+create ( model = "gemini-3.6-flash" , messages = messages , tools = tools , extrabody = {
+"extrabody" : { "google" : { "thinkingconfig" : { "includethoughts" : True , }, }, }, }, ) print (
+response2 .
+choices [ 0 ] .
+message .
+toolcalls ) See the full code example .
+Manual handling If you are interacting with the API directly or managing raw JSON payloads, you must
+correctly handle the thoughtsignature included in the model's turn.
+You must return this signature in the exact part where it was received when sending the conversation
+history back.
+If proper signatures are not returned, Gemini 3 will return a 400 Error " <Function Call in the
+<index of contents array content block is missing a thoughtsignature ".
+Multimodal function responses Multimodal function calling allows users to have function responses
+containing multimodal objects allowing for improved utilization of function calling capabilities of
+the model.
+Standard function calling only supports text-based function responses: from google import genai from
+google.genai import types client = genai .
+Client () This is a manual, two turn multimodal function calling workflow: 1.
+Define the function tool getimagedeclaration = types .
+FunctionDeclaration ( name = "getimage" , description = "Retrieves the image file reference for a
+specific order item." , parameters = { "type" : "object" , "properties" : { "itemname" : { "type" :
+"string" , "description" : "The name or description of the item ordered (e.g., 'green shirt')." } },
+"required" : [ "itemname" ], }, ) toolconfig = types .
+Tool ( functiondeclarations = [ getimagedeclaration ]) 2.
+Send a message that triggers the tool prompt = "Show me the green shirt I ordered last month."
+response1 = client .
+models .
+generatecontent ( model = "gemini-3.6-flash" , contents = [ prompt ], config = types .
+GenerateContentConfig ( tools = [ toolconfig ], ) ) 3.
+Handle the function call functioncall = response1 .
+functioncalls [ 0 ] requesteditem = functioncall .
+args [ "itemname" ] print ( f "Model wants to call: { functioncall .
+name } " ) Execute your tool (e.g., call an API) (This is a mock response for the example) print ( f
+"Calling external tool for: { requesteditem } " ) functionresponsedata = { "imageref" : { "$ref" :
+"dress.jpg" }, } functionresponsemultimodaldata = types .
+FunctionResponsePart ( filedata = types .
+FunctionResponseFileData ( mimetype = "image/png" , displayname = "dress.jpg" , fileuri =
+"gs://cloud-samples-data/generative-ai/image/dress.jpg" , ) ) 4.
+Send the tool's result back Append this turn's messages to history for a final response.
+history = [ types .
+Content ( role = "user" , parts = [ types .
+Part ( text = prompt )]), response1 .
+candidates [ 0 ] .
+content , types .
+Content ( role = "user" , parts = [ types .
+Part .
+fromfunctionresponse ( name = functioncall .
+name , response = functionresponsedata , parts = [ functionresponsemultimodaldata ] ) ], ) ]
+response2 = client .
+models .
+generatecontent ( model = "gemini-3.6-flash" , contents = history , config = types .
+GenerateContentConfig ( tools = [ toolconfig ], thinkingconfig = types .
+ThinkingConfig ( includethoughts = True ) ), ) print ( f " Final model response: { response2 .
+text } " ) Streaming function calling You can use streaming partial function call arguments to
+improve streaming experience on tool use.
+This feature can be enabled by explicitly setting streamfunctioncallarguments to true : from google
+import genai from google.genai import types client = genai .
+Client () getweatherdeclaration = types .
+FunctionDeclaration ( name = "getweather" , description = "Gets the current weather temperature for
+a given location." , parameters = { "type" : "object" , "properties" : { "location" : { "type" :
+"string" }}, "required" : [ "location" ], }, ) getweathertool = types .
+Tool ( functiondeclarations = [ getweatherdeclaration ]) for chunk in client .
+models .
+generatecontentstream ( model = "gemini-3.6-flash" , contents = "What's the weather in London and
+New York?" , config = types .
+GenerateContentConfig ( tools = [ getweathertool ], toolconfig = types .
+ToolConfig ( functioncallingconfig = types .
+FunctionCallingConfig ( mode = types .
+FunctionCallingConfigMode .
+AUTO , streamfunctioncallarguments = True , ) ), ), ): functioncall = chunk .
+functioncalls [ 0 ] if functioncall and functioncall .
+name : print ( f " { functioncall .
+name } " ) print ( f "willcontinue= { functioncall .
+willcontinue } " ) Model response example: { "candidates" : [ { "content" : { "role" : "model" ,
+"parts" : [ { "functionCall" : { "name" : "getweather" , "willContinue" : true } } ] } } ] }
+Temperature Range for Gemini 3: 0.0 - 2.0 (default: 1.0) For Gemini 3, it is strongly recommended to
+keep the temperature parameter at its default value of 1.0 .
+While previous models often benefited from tuning temperature to control creativity versus
+determinism, Gemini 3's reasoning capabilities are optimized for the default setting.
+Changing the temperature (setting it to less than 1.0 ) may lead to unexpected behavior, such as
+looping or degraded performance, particularly in complex mathematical or reasoning tasks.
+Supported features Gemini 3 models also support the following features: System instructions
+Structured output Function calling Grounding with Google Search Code execution URL Context Thinking
+Context caching Count tokens Chat completions Batch prediction Provisioned Throughput Standard
+pay-as-you-go Prompting best practices Gemini 3 is a reasoning model, which changes how you should
+prompt.
+Precise instructions: Be concise in your input prompts.
+Gemini 3 responds best to direct, clear instructions.
+It may over-analyze verbose or overly complex prompt engineering techniques used for older models.
+Output verbosity: By default, Gemini 3 is less verbose and prefers providing direct, efficient
+answers.
+If your use case requires a more conversational or "chatty" persona, you must explicitly steer the
+model in the prompt (for example, "Explain this as a friendly, talkative assistant").
+Grounding: For grounding use cases, we recommend using the following developer instructions: You are
+a strictly grounded assistant limited to the information provided in the User Context.
+In your answers, rely only on the facts that are directly mentioned in that context.
+You must not access or utilize your own knowledge or common sense to answer.
+Do not assume or infer from the provided facts; simply report them exactly as they appear.
+Your answer must be factual and fully truthful to the provided text, leaving absolutely no room for
+speculation or interpretation.
+Treat the provided context as the absolute limit of truth; any facts or details that are not
+directly mentioned in the context must be considered completely untruthful and completely
+unsupported.
+If the exact answer is not explicitly written in the context, you must state that the information is
+not available.
+Using the Google Search tool: When using the Google Search tool, Gemini 3 Flash can at times confuse
+the current date / time for events in 2024.
+This can result in the model formulating search queries for the wrong year.
+To ensure the model utilizes the correct time period, explicitly reinforce the current date in
+system instructions : For time-sensitive user queries that require up-to-date information, you MUST
+follow the provided current time (date and year) when formulating search queries in tool calls.
+Remember it is 2025 this year.
+Knowledge cutoff : For certain queries, Gemini 3 Flash benefits from being explicitly told its
+knowledge cutoff.
+This is the case when the Google Search tool is disabled and the query explicitly requires the model
+to be able to identify the cutoff data in parametric knowledge.
+Recommendation : Adding the following clause to system instructions : Your knowledge cutoff date is
+January 2025.
+Using mediaresolution : Use the mediaresolution parameter to control the maximum number of tokens
+the model uses to represent an image or frames in videos.
+High resolution will enable the model to capture details in an image, and may use more tokens per
+frame, while lower resolution allows for optimizing cost and latency for images with less visual
+detail.
+Improving video analysis : Use a higher Frame Per Second (FPS) sampling rate for videos requiring
+granular temporal analysis, such as fast-action understanding or high-speed motion tracking.
+Migration considerations Consider the following features and constraints when when migrating:
+Thinking level : Gemini 3 models use the thinkinglevel parameter to control the amount of internal
+reasoning the model performs ( low or high ) and to balance response quality, reasoning complexity,
+latency, and cost.
+Temperature settings: If your existing code explicitly sets temperature (especially to low values
+for deterministic outputs), it is recommended to remove this parameter and use the Gemini 3 default
+of 1.0 to avoid potential looping issues or performance degradation on complex tasks.
+Thought signatures : For Gemini 3 models, if a thought signature is expected in a turn but not
+provided, the model returns an error instead of a warning.
+Media resolution and tokenization : Gemini 3 models use a variable sequence length for media
+tokenization instead of Pan and Scan, and have new default resolutions and token costs for images,
+PDFs, and video.
+Token counting for multimodality input: Token counts for multimodal inputs (images, video.
+audio) are an estimation based on the chosen mediaresolution .
+As such, the result from the counttokens API call may not match the final consumed tokens.
+The accurate usage for billing is only available after execution within the response's usagemetadata
+.
+Token consumption: Migrating to Gemini 3 defaults may increase token usage for images and PDFs but
+decrease token usage for video.
+If requests now exceed the context window due to higher default resolutions, it is recommended to
+explicitly reduce the media resolution.
+PDF & document understanding: Default OCR resolution for PDFs has changed.
+If you relied on specific behavior for dense document parsing, test the new mediaresolution: "high"
+setting to ensure continued accuracy.
+For Gemini 3 models, PDF token counts in usagemetadata are reported under the IMAGE modality instead
+of DOCUMENT.
+Image segmentation: Image segmentation is not supported by Gemini 3 models.
+For workloads requiring built-in image segmentation, it is recommended to continue to utilize Gemini
+2.5 Flash with thinking turned off.
+Multimodal function responses : For Gemini 3 models, you can include image and PDF data in function
+responses.
+FAQ Which region is gemini-3.1-pro-preview available on Google Cloud?
+Global.
+What are the context window limits?
+Gemini 3 models support a 1 million token input context window and up to 64k tokens of output.
+Does gemini-3.1-pro-preview support image output?
+No.
+Does gemini-3.1-pro-preview support Gemini Live API ?
+No.
+What's next Learn more about Gemini 3.1 Pro .
+Try the Intro to Gemini 3 Pro notebook tutorial.
+Learn about Function calling .
+Learn about Thinking .
+Send feedback Except as otherwise noted, the content of this page is licensed under the Creative
+Commons Attribution 4.0 License , and code samples are licensed under the Apache 2.0 License .
+For details, see the Google Developers Site Policies .
+Java is a registered trademark of Oracle and/or its affiliates.
+Last updated 2026-11-16 UTC.
+Need to tell us more?
+[[["Easy to understand","easyToUnderstand","thumb-up"],["Solved my
+problem","solvedMyProblem","thumb-up"],["Other","otherUp","thumb-up"]],[["Hard to
+understand","hardToUnderstand","thumb-down"],["Incorrect information or sample
+code","incorrectInformationOrSampleCode","thumb-down"],["Missing the information/samples I
+need","missingTheInformationSamplesINeed","thumb-down"],["Other","otherDown","thumb-down"]],["Last
+updated 2026-11-16 UTC."],[],[]] Products and pricing See all products Google Cloud pricing Google
+Cloud Marketplace Contact sales Support Community forums Support Release Notes System status
+Resources GitHub Getting Started with Google Cloud Code samples Cloud Architecture Center Training
+and Certification Builders Hub Engage Blog Events X (Twitter) Google Cloud on YouTube Google Cloud
+Tech on YouTube Android Chrome Firebase Google AI About Google Privacy Site terms Google Cloud terms
+Manage cookies Our third decade of climate action: join us Sign up for the Google Cloud newsletter
+Subscribe English Deutsch Español - América Latina Français Indonesia Italiano Português - Brasil
+עברית 中文 - 简体 中文 - 繁體 日本語 한국어

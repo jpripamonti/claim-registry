@@ -1,17 +1,17 @@
 id: calibrate-effort-per-model
-version: 1.0.1
+version: 1.1.0
 title: Sweep effort levels against your own evals on each new Claude 5.x model instead of carrying over the old setting
 status: active
 technique:
   summary: >
     Choose the effort level per model by testing several levels against your own evals, starting at
-    the recommended default (Fable 5.1: high; Opus 5.5: medium; Sonnet 5.5: high, or medium for
+    the recommended default (Fable 5.1 and 5.2: high; Opus 5.5: medium; Sonnet 5.5: high, or medium for
     agentic and latency-sensitive work; Haiku 5.5: medium), rather than reusing the previous model's
     setting: level names do not mean the same amount of thinking across models. Reserve xhigh and
     max for work where you have measured a quality gain.
 conditions:
   model_family: [claude-fable, claude-opus, claude-sonnet, claude-haiku]
-  model_versions: {claude-fable: ["5.1"], claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}   # effort is not a condition field; the page's effort advice is in the summary
+  model_versions: {claude-fable: ["5.1", "5.2"], claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}   # effort is not a condition field; the page's effort advice is in the summary
   task_family: [unspecified]
   reasoning: unspecified
   tool_use: unspecified
@@ -61,9 +61,25 @@ evidence:
     retrieved: 2026-11-02
     quote: >-
       `xhigh` and `max` are for work where a quality gain on your evals justifies the cost.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      Effort levels rank the same way across Claude models, but the amount of thinking at each level can differ. So, rerun your effort sweep rather than carrying over a setting you tuned on Claude Fable 5.1 or Claude Opus 5.5.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      Set effort to high explicitly, then run your evals at medium and xhigh as well.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      xhigh is for your hardest long-running coding and agentic work where you've measured a gain.
 as_of: 2026-11-16
 review_by: 2027-05-16
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.1.0 2026-11-16 widened to Claude Fable 5.2; evidence 8, 9 and 10 added from the Fable 5.2 prompting page
   - 1.0.1 2026-11-16 evidence 6 requoted: the Haiku 5.5 page reworded the same advice
   - 1.0.0 2026-11-02 created

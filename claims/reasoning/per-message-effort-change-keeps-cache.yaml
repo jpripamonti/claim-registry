@@ -1,5 +1,5 @@
 id: per-message-effort-change-keeps-cache
-version: 1.0.1
+version: 1.1.0
 title: Change effort mid-conversation with a per-message effort change, not the top-level value, to keep the prompt cache
 status: active
 technique:
@@ -9,8 +9,8 @@ technique:
     later turns until replaced. It needs adaptive thinking (a 400 error with Sonnet's between_tools
     or Haiku's thinking off).
 conditions:
-  model_family: [claude-opus, claude-sonnet, claude-haiku]
-  model_versions: {claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}
+  model_family: [claude-fable, claude-opus, claude-sonnet, claude-haiku]
+  model_versions: {claude-fable: ["5.2"], claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}
   task_family: [unspecified]
   reasoning: enabled   # per-message effort changes need adaptive thinking
   tool_use: unspecified
@@ -35,9 +35,20 @@ evidence:
     retrieved: 2026-11-16
     quote: >-
       Changing the top-level `output_config.effort` value between requests invalidates the prompt cache for the conversation’s messages. On supported platforms, you can change the level partway through a conversation with a per-message effort change, which keeps the cache.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      To change levels within a conversation and keep the prompt cache, use Per-message effort (beta, mid-conversation-output-config-2026-07-01 header).
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      Where per-message effort isn't available, set a new top-level effort value on the next request, which can invalidate the cached messages.
 as_of: 2026-11-16
 review_by: 2027-05-16
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.1.0 2026-11-16 widened to Claude Fable 5.2; evidence 3 and 4 added from the Fable 5.2 prompting page
   - 1.0.1 2026-11-16 evidence 0, 1 and 2 requoted: the Opus, Sonnet and Haiku 5.5 pages reworded the same advice (beta status now a separate sentence)
   - 1.0.0 2026-11-02 created

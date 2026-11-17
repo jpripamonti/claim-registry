@@ -1,0 +1,52 @@
+id: code-ownership-sentence-fable-5-2
+version: 1.0.0
+title: Telling Claude Fable 5.2 the codebase is its own makes it consolidate duplicated code, at the cost of more tokens and unrequested changes
+status: active
+technique:
+  summary: >
+    Say in the prompt that the model owns and maintains the codebase. Without it (or when the code
+    is presented as someone else's), Fable 5.2 tends to add to the existing structure even when
+    that duplicates code, and to report nearby problems instead of fixing them. With it, the model
+    consolidates duplicated code far more often, but output tokens rise and it makes changes nobody
+    asked for (new tests, docs, sometimes changed behaviour). A scope-limiting rule earlier in the
+    prompt does not cancel it. Leave it out where the user owns the code and wants minimal change,
+    and review the diff, since the closing summary can omit small changes.
+  example: |
+    You are the owner and long-term maintainer of this codebase, and its design is up to you.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.2"]
+  task_family: [agentic-coding]   # page: small coding tasks
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: mixed
+  outcome: duplicated code consolidated and related fixes made, but more output tokens and unrequested changes
+  magnitude: "consolidated duplicated code in under 10 percent of runs without the sentence, about 75 percent with it; output tokens up about 70 to 80 percent"
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      When the prompt said the code base was the model's own, it often consolidated duplicated code and sometimes made related fixes without being asked.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      In Anthropic's testing on small coding tasks, the model consolidated duplicated code in under 10 percent of runs without the sentence and in about 75 percent of runs with it.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      With this prompt, output tokens rose by about 70 to 80 percent and the model made changes nobody had asked for, many of them new tests and documentation.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      Leave the ownership sentence out where the user owns the code and wants it changed as little as possible. A rule that limits scope doesn't cancel it.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

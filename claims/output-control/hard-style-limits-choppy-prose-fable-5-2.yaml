@@ -1,0 +1,30 @@
+id: hard-style-limits-choppy-prose-fable-5-2
+version: 1.0.0
+title: Hard writing-style limits, such as a maximum sentence length, make Claude Fable 5.2's prose choppy
+status: active
+technique:
+  summary: >
+    Hard style rules carried over from earlier prompts, such as "one instruction per sentence, in
+    20 words or fewer". Fable 5.2 follows them closely. Remove the rules you no longer need.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.2"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: choppy prose
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      Claude Fable 5.2 follows them closely, so a hard limit such as "one instruction per sentence, in 20 words or fewer" can make its prose choppy.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

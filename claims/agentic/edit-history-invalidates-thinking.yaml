@@ -1,5 +1,5 @@
 id: edit-history-invalidates-thinking
-version: 1.0.1
+version: 1.1.0
 title: Editing earlier turns, the system prompt or the tool list mid-conversation invalidates thinking blocks on Claude 5.x models
 status: active
 technique:
@@ -11,7 +11,7 @@ technique:
     additions from the first request.
 conditions:
   model_family: [claude-fable, claude-opus, claude-sonnet, claude-haiku]
-  model_versions: {claude-fable: ["5.1"], claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}
+  model_versions: {claude-fable: ["5.1", "5.2"], claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}
   task_family: [unspecified]
   reasoning: enabled
   tool_use: unspecified
@@ -46,9 +46,20 @@ evidence:
     retrieved: 2026-11-16
     quote: >-
       If you resume a stored conversation with a new system prompt and send its thinking blocks back, the request can return a 400 error.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      On Claude Fable 5.2, a request that fails the prefix check gets a 400 error.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      If your harness changes the system prompt, the tools, or an earlier message between requests, the thinking blocks that follow the changed point in the history become invalid.
 as_of: 2026-11-16
 review_by: 2027-05-16
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.1.0 2026-11-16 widened to Claude Fable 5.2; evidence 5 and 6 added from the Fable 5.2 prompting page
   - 1.0.1 2026-11-16 evidence 0, 1 and 4 requoted: the Fable 5.1 and Haiku 5.5 pages reworded the same advice
   - 1.0.0 2026-11-02 created

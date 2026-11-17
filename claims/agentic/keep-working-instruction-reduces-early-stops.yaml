@@ -1,5 +1,5 @@
 id: keep-working-instruction-reduces-early-stops
-version: 1.0.0
+version: 1.1.0
 title: A system prompt telling the agent to keep working until the task is done reduces early stops on Claude 5.x models
 status: active
 technique:
@@ -9,12 +9,13 @@ technique:
     stop to avoid (announcing the next step instead of taking it, asking permission for requested
     work) helps. Costs more tool calls and tokens and can make the model ask less about ambiguous
     requests; leave it out of human-in-the-loop applications. Raising effort also reduces early
-    stops on Sonnet and Haiku 5.5.
+    stops on Sonnet and Haiku 5.5. On Fable 5.2, early stops are most common at low and
+    medium effort; keep a confirmation step for risky or irreversible actions.
   example: |
     Keep working until everything the user asked for is done, and only stop to ask when you can't go on without the user or before a risky step.
 conditions:
   model_family: [claude-fable, claude-opus, claude-sonnet, claude-haiku]
-  model_versions: {claude-fable: ["5.1"], claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}   # Sonnet and Haiku: most needed at low (and medium) effort
+  model_versions: {claude-fable: ["5.1", "5.2"], claude-opus: ["5.5"], claude-sonnet: ["5.5"], claude-haiku: ["5.5"]}   # Sonnet, Haiku and Fable 5.2: most needed at low (and medium) effort
   task_family: [unspecified]   # Sonnet and Haiku pages scope it to agentic coding; Fable and Opus to long unattended tasks
   reasoning: unspecified
   tool_use: required
@@ -22,7 +23,7 @@ conditions:
 effect:
   direction: helps
   outcome: fewer turns ended before the requested work is done
-  magnitude: null
+  magnitude: "Fable 5.2 at medium effort: about half as many sessions ended with unfinished work that could have continued; output tokens up about 30 percent"
 evidence:
   - tier: asserted
     source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
@@ -59,8 +60,24 @@ evidence:
     retrieved: 2026-11-02
     quote: >-
       With a long coding-agent system prompt at `low` effort, it sometimes stops early and hands the task back to the user. If you see this in your agent, add this text to your system prompt:
-as_of: 2026-11-02
-review_by: 2027-05-02
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      On long, multistep tasks, Claude Fable 5.2 sometimes ends a turn before the work is done. It might end the turn by listing what's left to be done, offering to continue, or stopping at an ordinary obstacle such as a timeout. This happens more often at low and medium effort.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      In testing, Anthropic replayed recorded sessions from an agentic coding product at medium. With a version of this text, about half as many sessions ended with unfinished work that could have been continued.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      Output tokens rose by about 30 percent. Because the model asks less often with this text, keep your own confirmation step for risky or irreversible actions.
+as_of: 2026-11-16
+review_by: 2027-05-16
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.1.0 2026-11-16 widened to Claude Fable 5.2; evidence 7, 8 and 9 added from the Fable 5.2 prompting page; magnitude added from it
   - 1.0.0 2026-11-02 created

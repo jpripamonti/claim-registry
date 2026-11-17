@@ -1,0 +1,35 @@
+id: treat-earlier-answers-settled-fable-5-2
+version: 1.0.0
+title: On Claude Fable 5.2, "treat earlier answers as done" lines cut follow-up thinking but make it far less likely to flag its own mistakes
+status: active
+technique:
+  summary: >
+    The two chat system prompt sentences from the Opus 5.5 guide telling the model to treat an
+    earlier answer as done and focus its thinking on the new message. On Fable 5.2 they reduce
+    thinking on follow-ups, but the model becomes far less likely to point out mistakes in its
+    earlier answers. Leave them out where you want earlier answers re-examined; elsewhere, test
+    for this before adopting them.
+  example: |
+    Once you have answered something, treat that answer as done. On later turns, focus your thinking on what the user is asking now, and don't go back over an earlier answer unless the user asks about it or points out a problem with it.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.2"]
+  task_family: [chat]
+  reasoning: enabled   # thinking is always on for Fable 5.2; tested at high effort
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: mixed
+  outcome: less thinking on follow-up questions, but far fewer corrections of earlier mistakes
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      In Anthropic's testing at high effort, these instructions reduced Claude Fable 5.2's thinking on follow-up questions. The model also became far less likely to point out mistakes in its earlier answers.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

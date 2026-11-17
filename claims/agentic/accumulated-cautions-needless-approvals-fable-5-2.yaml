@@ -1,0 +1,44 @@
+id: accumulated-cautions-needless-approvals-fable-5-2
+version: 1.0.0
+title: Cautions built up in memory, notes and instruction files make Claude Fable 5.2 ask for approvals it doesn't need
+status: active
+technique:
+  summary: >
+    Cautious instructions that have accumulated across sessions in memory, notes and instruction
+    files (some written by the model itself), and absolute "never" rules. Fable 5.2 follows them
+    closely. Delete notes whose reason no longer holds, list the routine steps that need no
+    approval (a general "act more freely" is too vague), narrow stop conditions such as "stop and
+    review at the first error", and write exceptions explicitly ("ask for approval before deleting
+    files" rather than "never delete files"). Keep a confirmation step for risky actions.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.2"]
+  task_family: [unspecified]   # page: seen mostly when several agents worked together
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: unnecessary approval requests and blocked autonomous work
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      Cautious instructions can build up from past sessions through memory, notes, and instruction files. This can be counterproductive when Claude Fable 5.2 follows the instructions closely and asks for unnecessary approval.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      Telling the model to act more freely is too vague, so list the routine steps that it can take on its own.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      The model treats an instruction that contains "never" as absolute.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

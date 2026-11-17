@@ -1,0 +1,44 @@
+id: broad-approval-rule-holds-routine-work-fable-5-2
+version: 1.0.0
+title: A broadly worded approval rule makes Claude Fable 5.2 hold back routine work when nobody is there to approve
+status: active
+technique:
+  summary: >
+    An approval rule in the system prompt that names a broad class of actions (for example
+    "sending messages to people outside this conversation") as needing approval. Name the specific
+    actions you want double-checked instead. When you approve a step, say exactly what is
+    approved rather than a bare "continue".
+  example: |
+    Yes, run the migration on the staging database.
+conditions:
+  model_family: [claude-fable]
+  model_versions: ["5.2"]
+  task_family: [unspecified]   # page: simulated tasks with nobody there to approve
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: routine actions held back waiting for an approval that never comes
+  magnitude: about half of routine requests to colleagues and other teams held back
+evidence:
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      If you also write approval rules into your system prompt, be specific about the actions you want double-checked.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      In Anthropic's testing on simulated tasks where nobody was there to approve, a rule that listed "sending messages to people outside this conversation" among the steps that need approval led the model to hold back about half of its routine requests to colleagues and other teams.
+  - tier: asserted
+    source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
+    retrieved: 2026-11-16
+    quote: >-
+      When you ask the model to keep going, say exactly what you want rather than sending a simple "continue."
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

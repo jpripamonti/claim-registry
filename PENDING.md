@@ -9,3 +9,6 @@
       applicable claim refines or contradicts it.
 - [ ] Older Gemini evidence still cites ai.google.dev, which now redirects to
       aistudio.google.com; point it at the new addresses (patch-level).
+- [ ] Claude Fable 5.2: the best-practices page now names it, but `vocab/` does not list it. Add
+      it, widen `written-reasoning-declined-newest-models` to cover it, and ingest its own
+      prompting page if Anthropic publishes one.

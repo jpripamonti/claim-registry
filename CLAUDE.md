@@ -8,8 +8,8 @@
   - `python3 -m claimreg validate` checks every claim against the format rules and vocab, and warns about stale claims.
   - `python3 -m claimreg check-quotes [ids]` fetches each source and confirms its quote is there.
     `--save-sources` refreshes the page snapshots in `sources/`; a missing quote shows a diff against its snapshot.
-  - `python3 -m claimreg applies --model claude-sonnet --version 5.5 [--context-size long] [--task-family F]` lists the active claims that apply to that model.
-  - `python3 -m claimreg audit prompt.md --model claude-sonnet --version 5.5 [--judge opus] [--json]`
+  - `python3 -m claimreg applies --model claude-sonnet --version 5.5 [--context-size long] [--task-family F] [--reasoning enabled|disabled] [--tool-use required|none]` lists the active claims that apply to that model.
+  - `python3 -m claimreg audit prompt.md --model claude-sonnet --version 5.5 [--reasoning ...] [--tool-use ...] [--judge opus] [--json]`
     asks a judge model (`claude -p`) which applicable techniques the prompt uses, checks its quotes
     against the prompt, and prints problems, missed opportunities and citation lines. Calls the
     real CLI; tests use a fake judge.

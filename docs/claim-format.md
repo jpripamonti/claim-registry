@@ -226,10 +226,10 @@ the lock. The command exits 1 when any problem is found.
 
 ## Finding the claims that apply to a model
 
-`python3 -m claimreg applies --model <family or line> --version <v> [--context-size short|long]`
+`python3 -m claimreg applies --model <family or line> --version <v> [--context-size short|long] [--reasoning enabled|disabled] [--tool-use required|none]`
 lists the claims that apply to one model, sorted by id, with each claim's effect direction and the
-conditions the user still has to check (task family, reasoning, tool use, and input size when
-`--context-size` is not given). A claim applies when:
+conditions the user still has to check (task family, reasoning, tool use and input size, each
+unless its option is given). A claim applies when:
 
 - its status is `active` (superseded and withdrawn claims are no longer followed);
 - one of its `model_family` entries is the given family or line, or the parent family of the given
@@ -238,7 +238,12 @@ conditions the user still has to check (task family, reasoning, tool use, and in
   version; `unspecified` is shown as a condition to check);
 - with `--context-size`, its `context_size` is that size, `any` or `unspecified`;
 - with `--task-family` (repeatable), its `task_family` includes `any`, `unspecified` or one of
-  the given families. Task family is then no longer shown as a condition to check.
+  the given families. Task family is then no longer shown as a condition to check;
+- with `--reasoning enabled|disabled`, its `reasoning` is that value, `any` or `unspecified`
+  (`enabled` means extended or adaptive thinking is on, `disabled` that it is off);
+- with `--tool-use required|none`, its `tool_use` is that value, `any` or `unspecified`
+  (`required` means the prompt gives the model tools, `none` that it gives none).
+  Each of these two options also removes its condition from the ones to check.
 
 The family and version must be in `vocab/model-families.yaml`, and each task family in
 `vocab/task-families.yaml` (other than `any` and `unspecified`); anything else is an error.
@@ -246,7 +251,8 @@ The family and version must be in `vocab/model-families.yaml`, and each task fam
 ## Auditing a prompt
 
 `python3 -m claimreg audit <prompt-file> --model <family or line> --version <v>
-[--context-size short|long] [--task-family F ...] [--judge opus] [--json]` checks one prompt
+[--context-size short|long] [--task-family F ...] [--reasoning enabled|disabled]
+[--tool-use required|none] [--judge opus] [--json]` checks one prompt
 against the claims that apply to the model (selected as in `applies`). It is the way a prompt
 gets its first citations: the tool proposes them, rather than the author writing them by hand.
 

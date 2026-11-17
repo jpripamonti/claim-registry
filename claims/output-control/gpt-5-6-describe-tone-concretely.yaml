@@ -1,0 +1,35 @@
+id: gpt-5-6-describe-tone-concretely
+version: 1.0.0
+title: On GPT-5.6, describe tone as concrete writing choices instead of labels like "friendly"
+status: active
+technique:
+  summary: >
+    Replace broad tone labels ("friendly", "empathetic") with the writing choices that make up the
+    tone: how directly to state the answer, when to acknowledge a problem, whether reassurance or
+    a sign-off belongs. Keep personality and collaboration-style instructions short.
+  example: |
+    State the answer directly. If the user reports a problem, acknowledge the
+    specific issue before giving the next step. Use reassurance only when it is
+    relevant. Omit generic praise and unnecessary sign-offs.
+conditions:
+  model_family: [gpt]
+  model_versions: ["5.6"]
+  task_family: [unspecified]   # page: customer-facing assistants and collaborative products
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: tone matches the product (labels alone are ambiguous)
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-5.6
+    retrieved: 2026-11-16
+    quote: >-
+      Broad labels such as “friendly” or “empathetic” can be ambiguous. Describe the writing choices that define your product's tone, such as how directly to state the answer, when to acknowledge a problem, and whether reassurance or a sign-off is appropriate.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

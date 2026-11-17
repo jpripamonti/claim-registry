@@ -1,0 +1,33 @@
+id: gpt-6-prose-over-lists-instruction
+version: 1.0.0
+title: GPT-6 Astra defaults to lists, tables and Markdown; specify prose when the application needs it
+status: active
+technique:
+  summary: >
+    When the application needs prose, say so: clear paragraphs that each develop one idea, lists
+    only for genuinely parallel or sequential content, no nested lists, plain language, main point
+    stated early.
+  example: |
+    Default to using clear, concise paragraphs, each developing one main idea. Use lists only when the information is genuinely parallel, sequential, or easier to compare, and avoid nested lists unless the hierarchy cannot be expressed clearly in prose.
+conditions:
+  model_family: [gpt]
+  model_versions: ["6", "6.1"]   # prompts offered "across the GPT-6 model family"; behaviour observed with GPT-6 Astra
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: less formatting where prose is wanted
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-6-astra
+    retrieved: 2026-11-16
+    quote: >-
+      GPT-6 Astra tends to use lists, tables and Markdown to make responses scannable. If your application needs prose with less formatting, specify that preference.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

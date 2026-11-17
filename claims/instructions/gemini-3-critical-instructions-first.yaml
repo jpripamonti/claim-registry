@@ -1,0 +1,31 @@
+id: gemini-3-critical-instructions-first
+version: 1.0.0
+title: On Gemini 3, put behavioural constraints, persona and output format in the system instruction or at the start of the prompt
+status: active
+technique:
+  summary: >
+    Place essential behavioural constraints, the role (persona) and output-format requirements in
+    the system instruction or at the very beginning of the user prompt. With long context the
+    specific task or question still goes at the end (see gemini-3-long-context-instructions-at-end).
+conditions:
+  model_family: [gemini]
+  model_versions: ["3", "3.1", "3.5", "3.6", "3.7", "3.8"]   # "Gemini 3" section
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: unspecified ("optimal results")
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://aistudio.google.com/docs/prompting-strategies
+    retrieved: 2026-11-16
+    quote: >-
+      Prioritize critical instructions: Place essential behavioral constraints, role definitions (persona), and output format requirements in the System Instruction or at the very beginning of the user prompt.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

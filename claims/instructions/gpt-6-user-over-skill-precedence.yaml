@@ -1,0 +1,33 @@
+id: gpt-6-user-over-skill-precedence
+version: 1.0.0
+title: GPT-6 Astra is more sensitive to skill and AGENTS.md instructions; state that the user's instructions take precedence
+status: active
+technique:
+  summary: >
+    State explicitly that the user's instructions take precedence over skills and instruction
+    files, and audit those files for unclear or conflicting guidance. Optionally ask the model to
+    name and quote the skill instruction that made it pause or change direction.
+  example: |
+    The user's instructions take precedence over guidelines provided in a skill. If explicit user instructions conflict with a skill's instructions, prioritize the user's instructions.
+conditions:
+  model_family: [gpt]
+  model_versions: ["6", "6.1"]   # prompts offered "across the GPT-6 model family"; behaviour observed with GPT-6 Astra
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: fewer early pauses caused by unclear or conflicting skill guidance
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-6-astra
+    retrieved: 2026-11-16
+    quote: >-
+      GPT-6 Astra is better able to follow longer instructions, but can also be more sensitive to information in context. For example, unclear or conflicting guidance in a skill file may cause the model to pause and block work early. Make the priority of user instructions and skills explicit.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

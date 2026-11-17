@@ -1,0 +1,36 @@
+id: gemini-3-precise-direct-instructions
+version: 1.0.0
+title: Gemini 3.x responds best to precise, direct instructions; verbose or persuasive prompting can make it over-analyze
+status: active
+technique:
+  summary: >
+    State the goal clearly and concisely. Drop overly persuasive language and the verbose or
+    complex prompt-engineering techniques written for older models, and define any ambiguous
+    terms explicitly.
+conditions:
+  model_family: [gemini]
+  model_versions: ["3", "3.1", "3.5", "3.6", "3.7", "3.8"]   # "Gemini 3" / "Gemini 3.x models"
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: response quality; avoids over-analysis
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://aistudio.google.com/docs/prompting-strategies
+    retrieved: 2026-11-16
+    quote: >-
+      Be precise and direct: State your goal clearly and concisely. Avoid unnecessary or overly persuasive language.
+  - tier: asserted
+    source: https://aistudio.google.com/docs/whats-new-gemini-3.5
+    retrieved: 2026-11-16
+    quote: >-
+      Precise instructions: Be concise. Gemini 3.x responds best to direct, clear instructions. Verbose or complex prompt engineering techniques designed for older models may cause the model to over-analyze.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

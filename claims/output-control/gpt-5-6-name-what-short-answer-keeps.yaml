@@ -1,0 +1,39 @@
+id: gpt-5-6-name-what-short-answer-keeps
+version: 1.0.0
+title: For short answers on GPT-5.6, say what must be kept and what can be dropped
+status: active
+technique:
+  summary: >
+    When a task needs a shorter answer, name the content the model must preserve (conclusion,
+    supporting evidence, material caveats, next action) and the detail it may omit, instead of a
+    bare length limit.
+  example: |
+    Lead with the conclusion. Include the evidence needed to support it, any material
+    caveat, and the next action. Omit secondary detail and repetition.
+conditions:
+  model_family: [gpt]
+  model_versions: ["5.6"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: short answers keep the content the task needs
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-5.6
+    retrieved: 2026-11-16
+    quote: >-
+      When a task calls for a shorter answer, identify the information the model must preserve and the detail it can omit.
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-5.6
+    retrieved: 2026-11-16
+    quote: >-
+      This gives the model a clear priority order: preserve the content needed to complete the task, then remove lower-value detail.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

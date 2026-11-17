@@ -1,0 +1,42 @@
+id: gpt-5-6-repeated-approval-instructions
+version: 1.0.0
+title: Repeating "ask first" / "wait for approval" across a GPT-5.6 prompt causes needless approval requests
+status: active
+technique:
+  summary: >
+    Repeating approval instructions ("ask first", "do not mutate", "wait for approval") in several
+    places. Instead give one compact autonomy policy, stated once: what each kind of request
+    authorizes, which safe local actions need no approval, and which actions (external writes,
+    destructive steps, purchases, scope expansion) need confirmation.
+  example: |
+    For requests to change, build, or fix, make the requested in-scope local changes
+    and run relevant non-destructive validation without asking first.
+    Require confirmation for external writes, destructive actions, purchases, or a
+    material expansion of scope.
+conditions:
+  model_family: [gpt]
+  model_versions: ["5.6"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: unnecessary approval requests for safe, expected actions
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-5.6
+    retrieved: 2026-11-16
+    quote: >-
+      Keep the policy in one place and state each rule once. Repeating instructions such as “ask first,” “do not mutate,” or “wait for approval” can cause unnecessary approval requests for safe, expected actions.
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/upgrading-to-gpt-5p6-sol.md
+    retrieved: 2026-11-16
+    quote: >-
+      repeating `ask first` until safe local work becomes blocked;
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

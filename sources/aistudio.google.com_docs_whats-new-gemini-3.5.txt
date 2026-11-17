@@ -1,0 +1,459 @@
+source: https://aistudio.google.com/docs/whats-new-gemini-3.5
+retrieved: 2026-11-16
+
+What's new in Gemini 3.5 Flash - Gemini API | Google AI Studio AI Agent Context - Full documentation
+index: https://aistudio.google.com/llms.txt - Gemini Docs MCP server (consistent live info):
+https://gemini-api-docs-mcp.dev - Coding agent skills & setup guide:
+https://aistudio.google.com/docs/coding-agents.md What's new in Gemini 3.5 Flash {% callout
+type="caution" %} Deprecated: Gemini 3.5 Flash (gemini-3.5-flash) is deprecated and has been
+replaced by [Gemini 3.6 Flash (gemini-3.6-flash)](/docs/whats-new-gemini-3.6).
+It is no longer available to select in Google AI Studio, and API requests to gemini-3.5-flash are
+automatically routed to gemini-3.6-flash.
+Update your model string to gemini-3.6-flash (or [Gemini 3.8 Flash](/docs/latest-model)) and review
+the [Gemini 3.6 Flash guide](/docs/whats-new-gemini-3.6).
+{% /callout %} Gemini 3.5 Flash (gemini-3.5-flash) is an earlier-generation Flash model in the
+Gemini 3 series, now deprecated and automatically routed to [Gemini 3.6
+Flash](/docs/whats-new-gemini-3.6).
+This guide is preserved for reference and documents the capabilities and baseline Gemini 3.x
+parameter updates introduced in Gemini 3.5 Flash.
+Model overview {% id="new-model" %} | Model | Model ID | Description | | :--- | :--- | :--- | |
+Gemini 3.5 Flash (Deprecated) | gemini-3.5-flash | Earlier-generation Flash model for agentic and
+coding tasks.
+Replaced by [Gemini 3.6 Flash](/docs/whats-new-gemini-3.6).
+| Gemini 3.5 Flash supports the 1M token context window, 65k max output tokens, thinking, and the
+same set of tools and platform features as Gemini 3 Flash, including [Computer
+Use](/docs/computer-use).
+For complete specs, see the [models overview](/docs/models/gemini-3.5-flash).
+Quickstart {% id="quickstart" %} All examples in this guide use the Interactions API.
+The GenerateContent API is also supported; the same configuration options and recommendations apply.
+{% tabs %} {% tab filename="quickstart.py" label="Python" %} python from google import genai client
+= genai.Client() interaction = client.interactions.create( model="gemini-3.6-flash", input="Explain
+how parallel agentic execution works in three sentences." ) print(interaction.outputtext) {% /tab %}
+{% tab filename="quickstart.js" label="JavaScript" %} javascript import { GoogleGenAI } from
+"@google/genai"; const client = new GoogleGenAI({}); async function main() { const interaction =
+await client.interactions.create({ model: "gemini-3.6-flash", input: "Explain how parallel agentic
+execution works in three sentences.", }); console.log(interaction.outputtext); } await main(); {%
+/tab %} {% tab label="REST" %} bash curl -X POST
+"https://generativelanguage.googleapis.com/v1beta/interactions" \ -H "x-goog-api-key: $GEMINIAPIKEY"
+\ -H 'Content-Type: application/json' \ -H "Api-Revision: 2026-05-20" \ -d '{ "model":
+"gemini-3.6-flash", "input": "Explain how parallel agentic execution works in three sentences." }'
+{% /tab %} {% tab label="Java" %} java import com.google.genai.Client; import
+com.google.genai.gaos.models.interactions.CreateModelInteraction; import
+com.google.genai.gaos.models.interactions.Interaction; import
+com.google.genai.gaos.models.interactions.InteractionsInput; import
+com.google.genai.gaos.models.interactions.Model; import
+com.google.genai.gaos.models.operations.CreateInteractionRequestBody; Client client = new Client();
+CreateModelInteraction params = CreateModelInteraction.builder()
+.model(Model.of("gemini-3.5-flash")) .input( InteractionsInput.of( "Explain how parallel agentic
+execution works in three sentences.")) .build(); Interaction interaction =
+client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.outputText().orElse("")); {% /tab %} {% tab label="Go" %} go package
+main import ( "context" "fmt" "log" "google.golang.org/genai"
+"google.golang.org/genai/interactions/models/interactions"
+"google.golang.org/genai/interactions/models/operations" ) func main() { ctx := context.Background()
+client, err := genai.NewClient(ctx, nil) if err != nil { log.Fatal(err) } res, err :=
+client.Interactions.Create(ctx, operations.CreateInteractionRequest{ Body:
+operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{ Model:
+interactions.Model("gemini-3.5-flash"), Input: interactions.NewInteractionsInput("Explain how
+parallel agentic execution works in three sentences."), }), }) if err != nil { log.Fatal(err) } if
+res.Interaction.OutputText != nil { fmt.Println(res.Interaction.OutputText) } } {% /tab %} {% /tabs
+%} What's new {% id="whats-new" %} Sustained frontier performance: Our most intelligent Flash model,
+optimized for agentic and coding tasks at scale.
+Agentic execution: Sub-agent deployment, problem solving, and rapid agentic loops at scale.
+Coding: Iterative coding cycles, rapid exploration, and prototyping to test alternate paths and
+dynamically explore solutions.
+Long horizon: Multi-step workflows and tool use at scale.
+Thought preservation: The model maintains intermediate reasoning across multi-turn conversations
+automatically.
+No API changes needed.
+New default effort level: Default thinking effort changed from high to medium.
+See [New default effort level](/docs/whats-new-gemini-3.5default-effort-level) for details.
+Improved low thinking: low is now significantly improved for code and agentic tasks that require
+fewer steps, offering strong quality at lower latency and cost.
+GA release: Stable model for scaled production use.
+Choosing the right Flash model {% id="choose-model" %} Gemini 3.5 Flash is deprecated and
+automatically routed to [Gemini 3.6 Flash](/docs/whats-new-gemini-3.6).
+Depending on your cost, latency, and capability requirements, we recommend the following models:
+Gemini 3.8 Flash: Our latest and most intelligent Flash model for complex coding and agentic
+workflows.
+See the [Gemini 3.8 Flash guide](/docs/latest-model).
+Gemini 3.6 Flash: Direct replacement for Gemini 3.5 Flash with reduced token usage and lower output
+pricing.
+See the [Gemini 3.6 Flash and 3.5 Flash-Lite guide](/docs/whats-new-gemini-3.6).
+Gemini 3.5 Flash-Lite / Gemini 3.1 Flash-Lite: For low-cost, high-volume tasks that don't require
+full Flash reasoning depth, use [Gemini 3.5 Flash-Lite](/docs/models/gemini-3.5-flash-lite) or
+[Gemini 3.1 Flash-Lite](/docs/models/gemini-3.1-flash-lite).
+Behavioral changes {% id="behavioral-changes" %} New default effort level: medium {%
+id="default-effort-level" %} The default thinking effort is now medium, changed from high in Gemini
+3 Flash Preview.
+medium yields very good results across a wide range of tasks while being faster and more
+cost-efficient.
+For complex problems, high encourages the model to think more deeply.
+| Effort level | When to use | | :--- | :--- | | minimal | Optimized for response speed.
+Chat-like use cases, quick factual answers, simpler tool calls.
+| | low | Code and agentic tasks that require lower latency and fewer steps.
+Also works well for analysis and writing tasks that require some thinking.
+| | medium (default) | Best quality for most tasks.
+Recommended for complex code and agentic use cases.
+| | high | Maximizes the model's ability to think and use tools.
+Best for complex reasoning, hard math, and the most difficult code or agent tasks.
+Allows extended thoughts and function calls.
+| To override the default, set thinkinglevel in your config: {% tabs %} {% tab
+filename="thinkinglevel.py" label="Python" %} python from google import genai client =
+genai.Client() interaction = client.interactions.create( model="gemini-3.6-flash", input="Prove that
+the square root of 2 is irrational.", generationconfig={"thinkinglevel": "high"}, )
+print(interaction.outputtext) {% /tab %} {% tab filename="thinkinglevel.js" label="JavaScript" %}
+javascript import { GoogleGenAI } from "@google/genai"; const client = new GoogleGenAI({}); async
+function main() { const interaction = await client.interactions.create({ model: "gemini-3.6-flash",
+input: "Prove that the square root of 2 is irrational.", generationconfig: { thinkinglevel: "high"
+}, }); console.log(interaction.outputtext); } await main(); {% /tab %} {% tab label="REST" %} bash
+curl -X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \ -H "x-goog-api-key:
+$GEMINIAPIKEY" \ -H 'Content-Type: application/json' \ -H "Api-Revision: 2026-05-20" \ -d '{
+"model": "gemini-3.6-flash", "input": "Prove that the square root of 2 is irrational.",
+"generationconfig": {"thinkinglevel": "high"} }' {% /tab %} {% tab label="Java" %} java import
+com.google.genai.Client; import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.GenerationConfig; import
+com.google.genai.gaos.models.interactions.Interaction; import
+com.google.genai.gaos.models.interactions.InteractionsInput; import
+com.google.genai.gaos.models.interactions.Model; import
+com.google.genai.gaos.models.interactions.ThinkingLevel; import
+com.google.genai.gaos.models.operations.CreateInteractionRequestBody; Client client = new Client();
+CreateModelInteraction params = CreateModelInteraction.builder()
+.model(Model.of("gemini-3.5-flash")) .input(InteractionsInput.of("Prove that the square root of 2 is
+irrational."))
+.generationConfig(GenerationConfig.builder().thinkingLevel(ThinkingLevel.HIGH).build()) .build();
+Interaction interaction =
+client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get();
+System.out.println(interaction.outputText().orElse("")); {% /tab %} {% tab label="Go" %} go package
+main import ( "context" "fmt" "log" "google.golang.org/genai"
+"google.golang.org/genai/interactions/models/interactions"
+"google.golang.org/genai/interactions/models/operations" ) func main() { ctx := context.Background()
+client, err := genai.NewClient(ctx, nil) if err != nil { log.Fatal(err) } res, err :=
+client.Interactions.Create(ctx, operations.CreateInteractionRequest{ Body:
+operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{ Model:
+interactions.Model("gemini-3.5-flash"), Input: interactions.NewInteractionsInput("Prove that the
+square root of 2 is irrational."), GenerationConfig: &interactions.GenerationConfig{ ThinkingLevel:
+interactions.ThinkingLevelHigh.ToPointer(), }, }), }) if err != nil { log.Fatal(err) } if
+res.Interaction.OutputText != nil { fmt.Println(res.Interaction.OutputText) } } {% /tab %} {% /tabs
+%} {% callout type="note" %} Start with medium, it provides the best quality for the vast majority
+of tasks.
+Try low for a faster, cheaper experience with strong quality.
+Switch to high for complex reasoning, hard math, or difficult coding challenges.
+Use minimal to optimize for speed in simple queries.
+{% /callout %} The following table shows which thinking levels are supported per model: {% table %}
+Thinking Level Gemini 3.5 Flash Gemini 3.1 Pro Gemini 3.1 Flash-Lite Gemini 3 Flash Description ---
+minimal Supported Not supported Supported (Default) Supported Matches the "no thinking" setting for
+most queries.
+Note, minimal does not guarantee that thinking is off, the model may reason very minimally for
+complex tasks.
+--- low Supported Supported Supported Supported Minimizes latency and cost.
+--- medium Supported (Default) Supported Supported Supported Balanced thinking for most tasks.
+--- high Supported (Dynamic) Supported (Default, Dynamic) Supported (Dynamic) Supported (Default,
+Dynamic) Maximizes reasoning depth.
+{% /table %} {% callout type="caution" %} You cannot use both thinkinglevel and the legacy
+thinkingbudget parameter in the same request.
+Doing so will return a 400 error.
+{% /callout %} Thought preservation {% id="thought-preservation" %} The model maintains intermediate
+reasoning across multi-turn conversations automatically.
+When present in the conversation history, reasoning context carries forward, which improves
+performance on complex multi-step tasks like iterative debugging and code refactoring.
+No API changes needed: Interactions API: Thoughts are already preserved automatically.
+No change in behavior.
+GenerateContent API: Beginning with Gemini 3.5 Flash, the model uses reasoning context from all
+previous turns when thought signatures are present in the conversation history.
+To enable this, pass the full, unmodified conversation history (including [thought
+signatures](/docs/thinkingsignatures)) in contents.
+The SDKs handle this automatically.
+Parameter updates and best practices in Gemini 3.x {% id="parameter-updates" %} The following apply
+to all Gemini 3.x models, including Gemini 3.5 Flash.
+temperature, topp, topk: we strongly recommend not changing the default values.
+Gemini 3's reasoning capabilities are optimized for the default settings.
+Use thinkinglevel instead of thinkingbudget.
+Function calling response matching: id, name, and response count must match the preceding calls.
+Multimodal function responses: include multimodal content inside the function response, not outside
+it.
+Inline instructions in function responses: append to the function response text, not as separate
+parts.
+Reduce unnecessary tool calls: Use lower thinking levels or experiment with system instructions to
+reduce tool calls in agentic workflows.
+See the sections below for how to update your code.
+Sampling parameters (no longer recommended) {% id="sampling-parameters" %} temperature, topp, and
+topk are no longer recommended for all Gemini 3.x models.
+Gemini 3's reasoning capabilities are optimized for the default settings.
+Remove these parameters from all requests.
+python ⚠️ Remove these parameters (not recommended) generationconfig = { "temperature": 0.7, "topp":
+0.9, "topk": 40, } To ensure determinism, we recommend defining a system instruction with explicit
+rules for your specific use case.
+thinkingbudget (no longer recommended) {% id="thinking-budget" %} The raw numeric thinkingbudget
+parameter is no longer recommended across all Gemini 3.x models.
+Use the thinkinglevel string enum instead.
+python ⚠️ Before (not recommended) generationconfig = { "thinking": {"thinkingbudget": 7500}, } ✅
+After generationconfig = { "thinking": {"thinkinglevel": "medium"}, } Available values: minimal,
+low, medium (default), and high.
+Function calling: strict response matching {% id="function-calling" %} The Interactions API already
+errors on mismatched function responses.
+The GenerateContent API does not yet error, but mismatched responses cause the model to return empty
+responses with finishreason: STOP in most cases.
+Always follow these conventions: | Requirement | Details | | :--- | :--- | | Include id | Every
+FunctionResponse must include the id from the corresponding FunctionCall | | Match name | The name
+in the response must match the name in the call | | Match counts | Return exactly one
+FunctionResponse for each FunctionCall received | {% tabs %} {% tab
+filename="functioncallingmatch.py" label="Python" %} python ✅ Include matching callid and name in
+the functionresult finalinteraction = client.interactions.create( model="gemini-3.6-flash",
+previousinteractionid=interaction.id, tools=[mytool], input=[{ "type": "functionresult", "name":
+fcstep.name, "callid": fcstep.id, "result": [{"type": "text", "text": json.dumps(result)}], }], ) {%
+/tab %} {% tab filename="functioncallingmatch.js" label="JavaScript" %} javascript // ✅ Include
+matching callid and name in the functionresult const finalInteraction = await
+client.interactions.create({ model: "gemini-3.6-flash", previousInteractionId: interaction.id,
+tools: [myTool], input: [{ type: "functionresult", name: fcStep.name, callid: fcStep.id, result: [{
+type: "text", text: JSON.stringify(result) }], }], }); {% /tab %} {% tab label="REST" %} bash curl
+-X POST "https://generativelanguage.googleapis.com/v1beta/interactions" \ -H "x-goog-api-key:
+$GEMINIAPIKEY" \ -H 'Content-Type: application/json' \ -H "Api-Revision: 2026-05-20" \ -d '{
+"model": "gemini-3.6-flash", "previousinteractionid": "<INTERACTIONID", "tools": [...], "input": [{
+"type": "functionresult", "name": "myfunction", "callid": "<CALLID", "result": [{"type": "text",
+"text": "..."}] }] }' {% /tab %} {% tab label="Java" %} java import java.util.Arrays; import
+com.google.genai.Client; import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.Function; import
+com.google.genai.gaos.models.interactions.FunctionResultStep; import
+com.google.genai.gaos.models.interactions.FunctionResultStepResultUnion; import
+com.google.genai.gaos.models.interactions.Interaction; import
+com.google.genai.gaos.models.interactions.InteractionsInput; import
+com.google.genai.gaos.models.interactions.Model; import
+com.google.genai.gaos.models.interactions.TextContent; import
+com.google.genai.gaos.models.operations.CreateInteractionRequestBody; import java.util.List; Client
+client = new Client(); // Assumes interactionId, callId, functionName, myTool, and resultJson from
+previous step String interactionId = "interaction-id-123"; String callId = "call-id-123"; String
+functionName = "getweather"; Function myTool = Function.builder().name(functionName).build(); String
+resultJson = "{ temperature : 72F }"; // ✅ Include matching callId and name in the
+FunctionResultStep FunctionResultStep functionResult = FunctionResultStep.builder()
+.name(functionName) .callId(callId) .result( FunctionResultStepResultUnion.of(
+Arrays.asList(TextContent.builder().text(resultJson).build()))) .build(); CreateModelInteraction
+params = CreateModelInteraction.builder() .model(Model.of("gemini-3.5-flash"))
+.previousInteractionId(interactionId) .tools(Arrays.asList(myTool))
+.input(InteractionsInput.ofStep(Arrays.asList(functionResult))) .build(); Interaction
+finalInteraction =
+client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get(); {% /tab %}
+{% tab label="Go" %} go package main import ( "context" "log" "google.golang.org/genai"
+"google.golang.org/genai/interactions/models/interactions"
+"google.golang.org/genai/interactions/models/operations" ) func main() { ctx := context.Background()
+client, err := genai.NewClient(ctx, nil) if err != nil { log.Fatal(err) } // Assumes interactionID,
+callID, functionName, myTool, and resultJSON from previous step interactionID :=
+"interaction-id-123" callID := "call-id-123" functionName := "getweather" myTool :=
+interactions.NewTool(interactions.Function{Name: genai.Ptr(functionName)}) resultJSON :=
+{"temperature": "72F"} // ✅ Include matching CallID and Name in the FunctionResultStep
+functionResult := interactions.NewStep(interactions.FunctionResultStep{ Name:
+genai.Ptr(functionName), CallID: callID, Result:
+interactions.NewFunctionResultStepResultUnion([]interactions.FunctionResultSubcontent{
+interactions.NewFunctionResultSubcontent(interactions.TextContent{Text: resultJSON}), }), })
+finalRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{ Body:
+operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{ Model:
+interactions.Model("gemini-3.5-flash"), PreviousInteractionID: genai.Ptr(interactionID), Tools:
+[]interactions.Tool{myTool}, Input:
+interactions.NewInteractionsInput([]interactions.Step{functionResult}), }), }) if err != nil {
+log.Fatal(err) } = finalRes } {% /tab %} {% /tabs %} Multimodal function responses {%
+id="multimodal-function-responses" %} We often see clients provide images outside function response.
+This can lead to unexpected model behavior (e.g.
+thought leakage) and result in lower quality outputs.
+Follow the recommendation in [Multimodal Function Responses API
+docs](/docs/function-calling?example=meetingmultimodal) instead and include multimodal content in
+the function response parts that you send to the model.
+The model can process this multimodal content in its next turn to produce a more informed response.
+{% tabs %} {% tab filename="multimodalfunction.py" label="Python" %} python ✅ Include multimodal
+content in the function response finalinteraction = client.interactions.create(
+model="gemini-3.6-flash", previousinteractionid=interaction.id, input=[ { "type": "functionresult",
+"name": toolcall.name, "callid": toolcall.id, "result": [ {"type": "text", "text":
+"instrument.jpg"}, { "type": "image", "mimetype": "image/jpeg", "data": base64imagedata, }, ], } ],
+) {% /tab %} {% tab filename="multimodalfunction.js" label="JavaScript" %} javascript // ✅ Include
+multimodal content in the function response const finalInteraction = await
+client.interactions.create({ model: "gemini-3.6-flash", previousInteractionId: interaction.id,
+input: [{ type: "functionresult", name: toolCall.name, callid: toolCall.id, result: [ { type:
+"text", text: "instrument.jpg" }, { type: "image", mimetype: "image/jpeg", data: base64ImageData, },
+], }], }); {% /tab %} {% tab label="Java" %} java import java.util.Arrays; import
+com.google.genai.Client; import com.google.genai.gaos.models.interactions.CreateModelInteraction;
+import com.google.genai.gaos.models.interactions.FunctionResultStep; import
+com.google.genai.gaos.models.interactions.FunctionResultStepResultUnion; import
+com.google.genai.gaos.models.interactions.ImageContent; import
+com.google.genai.gaos.models.interactions.ImageContentMimeType; import
+com.google.genai.gaos.models.interactions.Interaction; import
+com.google.genai.gaos.models.interactions.InteractionsInput; import
+com.google.genai.gaos.models.interactions.Model; import
+com.google.genai.gaos.models.interactions.TextContent; import
+com.google.genai.gaos.models.operations.CreateInteractionRequestBody; import java.util.List; Client
+client = new Client(); // Assumes interactionId, callId, functionName, and base64ImageData from
+previous step String interactionId = "interaction-id-123"; String callId = "call-id-123"; String
+functionName = "getinstrumentimage"; String base64ImageData =
+"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII="; // ✅
+Include multimodal content in the function response FunctionResultStep functionResult =
+FunctionResultStep.builder() .name(functionName) .callId(callId) .result(
+FunctionResultStepResultUnion.of( Arrays.asList(
+TextContent.builder().text("instrument.jpg").build(), ImageContent.builder()
+.mimeType(ImageContentMimeType.IMAGEJPEG) .data(base64ImageData) .build()))) .build();
+CreateModelInteraction params = CreateModelInteraction.builder()
+.model(Model.of("gemini-3.5-flash")) .previousInteractionId(interactionId)
+.input(InteractionsInput.ofStep(Arrays.asList(functionResult))) .build(); Interaction
+finalInteraction =
+client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get(); {% /tab %}
+{% tab label="Go" %} go package main import ( "context" "log" "google.golang.org/genai"
+"google.golang.org/genai/interactions/models/interactions"
+"google.golang.org/genai/interactions/models/operations" ) func main() { ctx := context.Background()
+client, err := genai.NewClient(ctx, nil) if err != nil { log.Fatal(err) } // Assumes interactionID,
+callID, functionName, and base64ImageData from previous step interactionID := "interaction-id-123"
+callID := "call-id-123" functionName := "getinstrumentimage" base64ImageData :=
+"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" // ✅
+Include multimodal content in the function response functionResult :=
+interactions.NewStep(interactions.FunctionResultStep{ Name: genai.Ptr(functionName), CallID: callID,
+Result: interactions.NewFunctionResultStepResultUnion([]interactions.FunctionResultSubcontent{
+interactions.NewFunctionResultSubcontent(interactions.TextContent{ Text: "instrument.jpg", }),
+interactions.NewFunctionResultSubcontent(interactions.ImageContent{ MimeType:
+interactions.ImageContentMimeType("image/jpeg").ToPointer(), Data: genai.Ptr(base64ImageData), }),
+}), }) finalRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{ Body:
+operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{ Model:
+interactions.Model("gemini-3.5-flash"), PreviousInteractionID: genai.Ptr(interactionID), Input:
+interactions.NewInteractionsInput([]interactions.Step{functionResult}), }), }) if err != nil {
+log.Fatal(err) } = finalRes } {% /tab %} {% /tabs %} Inline instructions in function responses {%
+id="inline-instructions" %} We often see clients provide additional instructions along with function
+responses as subsequent Parts.
+This can lead to unexpected model behavior (e.g.
+thought leakage) and result in lower quality outputs.
+Instead, append any extra instructions to the end of the function response text separated by two
+newlines.
+{% tabs %} {% tab filename="inlineinstructions.py" label="Python" %} python ✅ Append inline
+instructions to the end of the function response separated by two newlines resulttext =
+f"{json.dumps(result)} <your inline instructions" finalinteraction = client.interactions.create(
+model="gemini-3.6-flash", previousinteractionid=interaction.id, tools=[mytool], input=[{ "type":
+"functionresult", "name": fcstep.name, "callid": fcstep.id, "result": [{"type": "text", "text":
+resulttext}], }], ) {% /tab %} {% tab filename="inlineinstructions.js" label="JavaScript" %}
+javascript // ✅ Append inline instructions to the end of the function response separated by two
+newlines const resultText = ${JSON.stringify(result)} <your inline instructions; const
+finalInteraction = await client.interactions.create({ model: "gemini-3.6-flash",
+previousInteractionId: interaction.id, tools: [myTool], input: [{ type: "functionresult", name:
+fcStep.name, callid: fcStep.id, result: [{ type: "text", text: resultText }], }], }); {% /tab %} {%
+tab label="Java" %} java import java.util.Arrays; import com.google.genai.Client; import
+com.google.genai.gaos.models.interactions.CreateModelInteraction; import
+com.google.genai.gaos.models.interactions.Function; import
+com.google.genai.gaos.models.interactions.FunctionResultStep; import
+com.google.genai.gaos.models.interactions.FunctionResultStepResultUnion; import
+com.google.genai.gaos.models.interactions.Interaction; import
+com.google.genai.gaos.models.interactions.InteractionsInput; import
+com.google.genai.gaos.models.interactions.Model; import
+com.google.genai.gaos.models.interactions.TextContent; import
+com.google.genai.gaos.models.operations.CreateInteractionRequestBody; import java.util.List; Client
+client = new Client(); // Assumes interactionId, callId, functionName, myTool, and resultJson from
+previous step String interactionId = "interaction-id-123"; String callId = "call-id-123"; String
+functionName = "getweather"; Function myTool = Function.builder().name(functionName).build(); String
+resultJson = "{ temperature : 72F }"; // ✅ Append inline instructions to the end of the function
+response separated by two newlines String resultText = resultJson + " <your inline instructions";
+FunctionResultStep functionResult = FunctionResultStep.builder() .name(functionName) .callId(callId)
+.result( FunctionResultStepResultUnion.of(
+Arrays.asList(TextContent.builder().text(resultText).build()))) .build(); CreateModelInteraction
+params = CreateModelInteraction.builder() .model(Model.of("gemini-3.5-flash"))
+.previousInteractionId(interactionId) .tools(Arrays.asList(myTool))
+.input(InteractionsInput.ofStep(Arrays.asList(functionResult))) .build(); Interaction
+finalInteraction =
+client.interactions.create(CreateInteractionRequestBody.of(params)).interaction().get(); {% /tab %}
+{% tab label="Go" %} go package main import ( "context" "log" "google.golang.org/genai"
+"google.golang.org/genai/interactions/models/interactions"
+"google.golang.org/genai/interactions/models/operations" ) func main() { ctx := context.Background()
+client, err := genai.NewClient(ctx, nil) if err != nil { log.Fatal(err) } // Assumes interactionID,
+callID, functionName, myTool, and resultJSON from previous step interactionID :=
+"interaction-id-123" callID := "call-id-123" functionName := "getweather" myTool :=
+interactions.NewTool(interactions.Function{Name: genai.Ptr(functionName)}) resultJSON :=
+{"temperature": "72F"} // ✅ Append inline instructions to the end of the function response separated
+by two newlines resultText := resultJSON + " <your inline instructions" functionResult :=
+interactions.NewStep(interactions.FunctionResultStep{ Name: genai.Ptr(functionName), CallID: callID,
+Result: interactions.NewFunctionResultStepResultUnion([]interactions.FunctionResultSubcontent{
+interactions.NewFunctionResultSubcontent(interactions.TextContent{Text: resultText}), }), })
+finalRes, err := client.Interactions.Create(ctx, operations.CreateInteractionRequest{ Body:
+operations.NewCreateInteractionRequestBody(interactions.CreateModelInteraction{ Model:
+interactions.Model("gemini-3.5-flash"), PreviousInteractionID: genai.Ptr(interactionID), Tools:
+[]interactions.Tool{myTool}, Input:
+interactions.NewInteractionsInput([]interactions.Step{functionResult}), }), }) if err != nil {
+log.Fatal(err) } = finalRes } {% /tab %} {% /tabs %} Reducing unnecessary tool calls {%
+id="reducing-tool-calls" %} If you experience an overuse of tool calls, two techniques help minimize
+them: 1.
+Start by reducing the thinking level (medium, low, or minimal): Higher thinking levels encourage the
+model to use more tools to explore and verify, so lowering the level can reduce tool calls.
+2.
+Add a system instruction: If overuse persists after adjusting the thinking level, consider a prompt
+that restricts tool usage.
+For example: text You have a limited action budget of <n tool calls.
+Use them efficiently.
+{% callout type="caution" %} We strongly recommend updating to google-genai SDK v2.0.0 or later.
+This version introduces breaking changes to the Interactions API.
+See the [breaking changes migration guide](/docs/interactions-breaking-changes-may-2026) for
+details.
+{% /callout %} Gemini 3 family features {% id="gemini-3-features" %} Gemini 3.5 Flash inherits all
+Gemini 3 family capabilities, including Computer Use.
+Features introduced in Gemini 3 that carry forward: [Thinking](/docs/thinking): Encrypted reasoning
+context preserved across API calls.
+Automatic in the Interactions API; implicit in GenerateContent.
+[Structured outputs with tools](/docs/structured-output): Combine JSON mode with built-in tools
+(Search, URL context, code execution, function calling).
+[Multimodal function responses](/docs/function-callingmultimodal): Return images, audio, and other
+media in function call results.
+[Code execution with images](/docs/code-executionimages): Execute code that processes and generates
+images.
+[Combined tool use](/docs/tool-combination): Use built-in tools and custom function calling in the
+same request.
+[Media resolution](/docs/media-resolution): Fine-grained control over token allocation for image,
+video, and PDF inputs.
+Gemini 3 models support per-content-item resolution settings (low, medium, high, ultrahigh) for
+mixed-fidelity prompts.
+[Thought signatures](/docs/thinkingsignatures): Encrypted representations of the model's internal
+reasoning.
+Required for multi-turn function calling in stateless mode; managed automatically by the
+Interactions API and the official SDKs.
+Prompting best practices {% id="prompting-best-practices" %} Gemini 3.x models are reasoning models,
+which changes how you should prompt.
+Precise instructions: Be concise.
+Gemini 3.x responds best to direct, clear instructions.
+Verbose or complex prompt engineering techniques designed for older models may cause the model to
+over-analyze.
+Output verbosity: By default, Gemini 3 and 3.1 is less verbose and prefers direct, efficient
+answers.
+If your use case requires a conversational tone, steer the model explicitly in your prompt (for
+example, "Explain this as a friendly, talkative assistant").
+Context management: When working with large datasets (such as entire books, codebases, or long
+videos), place your specific instructions or questions at the end of the prompt, after the data
+context.
+Anchor the model's reasoning by starting your question with a phrase like, "Based on the preceding
+information...".
+Learn more about prompt design strategies in the [prompt engineering
+guide](/docs/prompting-strategies).
+Limitations {% id="limitations" %} Image segmentation is not supported in Gemini 3.x.
+For segmentation workloads, continue using Gemini 2.5 Flash with thinking off, or [Gemini
+Robotics-ER 1.6](/docs/robotics-overview).
+FAQ {% id="faq" %} 1.
+What is the knowledge cutoff for Gemini 3.5 Flash?
+Gemini 3.5 Flash has a knowledge cutoff of January 2025.
+For more recent information, use the [Search Grounding](/docs/google-search) tool.
+2.
+What are the context window limits?
+Gemini 3.5 Flash supports a 1 million token input context window and up to 65k output tokens.
+3.
+Will my old thinkingbudget code still work?
+Yes, thinkingbudget is still supported for backward compatibility, but we recommend migrating to
+thinkinglevel for more predictable performance.
+Don't use both in the same request.
+4.
+Does Gemini 3.5 Flash support the Batch API?
+Yes.
+See the [Batch API](/docs/batch-api) guide for details.
+5.
+Is Context Caching supported?
+Yes, [Context Caching](/docs/caching) is supported.
+6.
+Which tools are supported?
+Gemini 3.5 Flash supports [Google Search](/docs/google-search), [Grounding with Google
+Maps](/docs/maps-grounding), [File Search](/docs/file-search), [Code
+Execution](/docs/code-execution), [URL Context](/docs/url-context), and standard [Function
+Calling](/docs/function-calling), including [combined tool use](/docs/tool-combination), and
+[Computer Use](/docs/computer-use).
+Other models {% id="other-models" %} [Latest Gemini models](/docs/latest-model) [Gemini 4
+Hydrogen](/docs/whats-new-gemini-4-hydrogen) [Gemini 4 Carbon](/docs/whats-new-gemini-4-carbon)
+[Gemini 4 Argon](/docs/whats-new-gemini-4-argon) [Gemini 3.8 Flash](/docs/whats-new-gemini-3.8)
+[Gemini 3.6 Flash and 3.5 Flash-Lite](/docs/whats-new-gemini-3.6) [See all models](/docs/models)
+What's next {% id="whats-next" %} Learn more about prompt design strategies in the [prompt
+engineering guide](/docs/prompting-strategies).
+Get started with the [Gemini 3 Cookbook](https://github.com/google-gemini/cookbook) Learn about
+[Gemini API optimization and inference](/docs/optimization)

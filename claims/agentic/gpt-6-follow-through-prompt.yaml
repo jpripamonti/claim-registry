@@ -1,0 +1,44 @@
+id: gpt-6-follow-through-prompt
+version: 1.0.0
+title: GPT-6 Astra asks for clarification more often than earlier models; a follow-through prompt reduces needless stops
+status: active
+technique:
+  summary: >
+    Tell the agent to infer intent and scope from context, treat requests like "can you..." as
+    instructions to do the work, persist until the goal is met, and ask for approval only after
+    preparing a concrete, reviewable result (approval as the final step before deploys, external
+    writes, merges or publishing). Tune it to the autonomy the application wants.
+  example: |
+    When the user's prompt indicates a request for action, such as "can you...", "I want to...", "help me..." and similar expressions, treat these as instructions to do the work and take action. Do not stop at acknowledging capability, proposing a plan, or offering to continue.
+conditions:
+  model_family: [gpt]
+  model_versions: ["6", "6.1"]   # prompts offered "across the GPT-6 model family"; behaviour observed with GPT-6 Astra
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: fewer stops to ask before doing authorized work; often quicker task completion
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-6-astra
+    retrieved: 2026-11-16
+    quote: >-
+      Use the following prompts as a starting point across the GPT-6 model family. They address behavior observed with GPT-6 Astra; evaluate them with your chosen model and workload.
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-6-astra
+    retrieved: 2026-11-16
+    quote: >-
+      GPT-6 Astra is generally better than GPT-5.6 Sol and earlier models at staying coherent during long tasks. It is also more likely to ask for clarification where earlier models would make assumptions.
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-6-astra
+    retrieved: 2026-11-16
+    quote: >-
+      Prompt the model to ask for approval only after preparing a concrete, reviewable result. This avoids blocking the task before the model has done the work it can, and often leads to quicker task completion.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

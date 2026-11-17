@@ -1,0 +1,41 @@
+id: gemini-4-max-output-tokens-room-for-thinking
+version: 1.0.0
+title: Low max_output_tokens caps can cut Gemini 4 answers short because thinking shares the limit
+status: active
+technique:
+  summary: >
+    Keeping a low max_output_tokens cap carried over from earlier models. Thinking and output share
+    the limit and Gemini 4 can spend more of it on thinking: raise it (at least 32,768 on Carbon and
+    Argon; 65,536 or no cap on Hydrogen) and lower the thinking level instead to save tokens.
+conditions:
+  model_family: [gemini-carbon, gemini-argon, gemini-hydrogen]
+  model_versions: {gemini-carbon: ["4"], gemini-argon: ["4"], gemini-hydrogen: ["4"]}
+  task_family: [unspecified]
+  reasoning: enabled
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: answers truncated when thinking uses up the output limit
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://aistudio.google.com/docs/whats-new-gemini-4-carbon
+    retrieved: 2026-11-16
+    quote: >-
+      Raise max_output_tokens to at least 32,768. Gemini 4 Carbon can spend more of the limit on thinking than earlier models. To use fewer tokens, lower the thinking level instead.
+  - tier: asserted
+    source: https://aistudio.google.com/docs/whats-new-gemini-4-argon
+    retrieved: 2026-11-16
+    quote: >-
+      Raise max_output_tokens to at least 32,768. Gemini 4 Argon can spend more of the limit on thinking than earlier models. To use fewer tokens, lower the thinking level instead.
+  - tier: asserted
+    source: https://aistudio.google.com/docs/whats-new-gemini-4-hydrogen
+    retrieved: 2026-11-16
+    quote: >-
+      Remove hardcoded low caps (such as 8,192) or raise max_output_tokens to 65,536. To use fewer tokens, lower the thinking level instead.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

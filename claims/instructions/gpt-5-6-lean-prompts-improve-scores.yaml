@@ -1,0 +1,39 @@
+id: gpt-5-6-lean-prompts-improve-scores
+version: 1.0.0
+title: On GPT-5.6, removing repeated instructions, examples and unneeded tool descriptions improved coding-agent eval scores and cut tokens
+status: active
+technique:
+  summary: >
+    Trim a working prompt one group at a time, rerunning evals after each cut: state each rule
+    once, drop examples and process instructions that do not change behaviour, and expose only
+    the tools the task needs. Keep the outcome, success and stopping criteria, constraints,
+    tool-routing rules and the required output shape.
+conditions:
+  model_family: [gpt]
+  model_versions: ["5.6"]       # pages: "GPT-5.6 Sol or the GPT-5.6 family"
+  task_family: [unspecified]    # measured on internal coding-agent evals; advice given generally
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: task performance and token efficiency
+  magnitude: >-
+    roughly 10-15 percent higher eval scores, 41-66 percent fewer tokens and 33-67 percent lower
+    cost in a sample of OpenAI's internal coding-agent eval runs; stated as directional
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-5.6
+    retrieved: 2026-11-16
+    quote: >-
+      Removing repeated instructions and examples and simplifying tool descriptions can improve task performance and token efficiency. In a sample of internal coding-agent eval runs, configurations with leaner system prompts improved evaluation scores by roughly 10–15% while reducing total tokens by 41–66% and cost by 33–67%.
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6.md
+    retrieved: 2026-11-16
+    quote: >-
+      Start with a prompt and tool set that already works. Remove one group of instructions, examples, or tools at a time, then rerun the same evals.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

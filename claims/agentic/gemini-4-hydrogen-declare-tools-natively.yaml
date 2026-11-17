@@ -1,0 +1,31 @@
+id: gemini-4-hydrogen-declare-tools-natively
+version: 1.0.0
+title: On Gemini 4 Hydrogen, prompting for raw-text JSON tool calls with no declared tools can fail; declare tools or use structured outputs
+status: active
+technique:
+  summary: >
+    Telling the model in the system instruction to emit custom raw-text JSON tool calls while no
+    tools are declared. Declare tools natively with function calling, or constrain JSON responses
+    with structured outputs.
+conditions:
+  model_family: [gemini-hydrogen]
+  model_versions: ["4"]         # Hydrogen migration checklist
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: requests can return MALFORMED_FUNCTION_CALL
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://aistudio.google.com/docs/whats-new-gemini-4-hydrogen
+    retrieved: 2026-11-16
+    quote: >-
+      Do not prompt the model via system instructions to emit custom raw-text JSON tool calls with zero declared tools, which can return MALFORMED_FUNCTION_CALL.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

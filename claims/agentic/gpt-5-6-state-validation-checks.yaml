@@ -1,0 +1,36 @@
+id: gpt-5-6-state-validation-checks
+version: 1.0.0
+title: Give GPT-5.6 tools to validate its output and say which validation matters before it finishes
+status: active
+technique:
+  summary: >
+    Give the model tools that can check its output and state which checks matter: for code,
+    targeted tests, type or lint checks, build checks or a smoke test, and an explanation when a
+    check cannot be run; for visual artifacts, render and inspect before finalizing.
+  example: |
+    After making changes, run the most relevant validation available:
+    - targeted tests for changed behavior
+    - type checks or lint checks when applicable
+    If validation cannot be run, explain why and describe the next best check.
+conditions:
+  model_family: [gpt]
+  model_versions: ["5.6"]
+  task_family: [unspecified]   # examples given for coding and visual artifacts
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: unspecified (the page recommends it without stating the effect)
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6.md
+    retrieved: 2026-11-16
+    quote: >-
+      Give GPT-5.6 access to tools that can validate the output, and state what validation matters.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

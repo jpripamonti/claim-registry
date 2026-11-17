@@ -1,6 +1,6 @@
 id: gpt-5-contradictory-instructions-costly
-version: 1.0.0
-title: Contradictory or vague instructions hurt GPT-5 more than other models
+version: 1.1.0
+title: Contradictory or vague instructions hurt GPT-5 and GPT-5.6 more than other models
 status: active
 technique:
   summary: >
@@ -8,7 +8,7 @@ technique:
     "in emergencies do Y before anything"). Resolve the instruction hierarchy explicitly.
 conditions:
   model_family: [gpt]
-  model_versions: ["5"]
+  model_versions: ["5", "5.6"]   # GPT-5 guide; GPT-5.6 guide ("GPT-5-class models")
   task_family: [unspecified]
   reasoning: enabled
   tool_use: unspecified
@@ -23,8 +23,14 @@ evidence:
     retrieved: 2026-10-25
     quote: >-
       However, its careful instruction-following behavior means that poorly-constructed prompts containing contradictory or vague instructions can be more damaging to GPT-5 than to other models, as it expends reasoning tokens searching for a way to reconcile the contradictions rather than picking one instruction at random.
-as_of: 2026-10-25
-review_by: 2027-04-25
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6.md
+    retrieved: 2026-11-16
+    quote: >-
+      Review the remaining instructions for contradictions. GPT-5-class models follow prompt contracts closely, so conflicting rules can create more instability than missing detail.
+as_of: 2026-11-16
+review_by: 2027-05-16
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.1.0 2026-11-16 GPT-5.6 added (conditions widened) with evidence from the GPT-5.6 prompting guidance
   - 1.0.0 2026-10-25 created

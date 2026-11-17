@@ -1,0 +1,36 @@
+id: gemini-agentic-planning-system-instruction
+version: 1.0.0
+title: Google's plan-before-acting system instruction improved Gemini on agentic benchmarks with a complex rulebook
+status: active
+technique:
+  summary: >
+    A system instruction that makes the agent plan and reason before every tool call or reply:
+    resolve dependencies and constraints in order of importance, assess risk, explore hypotheses,
+    adapt the plan to observations, use every information source, ground claims by quoting
+    policies, be complete, persist on transient errors within retry limits, and act only after
+    this reasoning.
+  example: |
+    You are a very strong reasoner and planner. Use these critical instructions to structure your plans, thoughts, and responses.
+    Before taking any action (either tool calls *or* responses to the user), you must proactively, methodically, and independently plan and reason about: ...
+conditions:
+  model_family: [gemini]
+  model_versions: unspecified   # "Agentic workflows" section names no model version
+  task_family: [unspecified]    # agentic benchmarks with a complex rulebook and user interaction
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: performance on agentic benchmarks that require following a complex rulebook and interacting with a user
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://aistudio.google.com/docs/prompting-strategies
+    retrieved: 2026-11-16
+    quote: >-
+      The following system instruction is an example that has been evaluated by researchers to improve performance on agentic benchmarks where the model must adhere to a complex rulebook and interact with a user.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

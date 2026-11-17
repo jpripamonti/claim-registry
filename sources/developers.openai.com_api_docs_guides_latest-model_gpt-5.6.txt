@@ -1,0 +1,389 @@
+source: https://developers.openai.com/api/docs/guides/latest-model/gpt-5.6
+retrieved: 2026-11-16
+
+Using GPT-5.6 | OpenAI API For the complete documentation index, see llms.txt .
+Markdown versions of documentation pages are available by appending .md to the page URL.
+ChatGPT Start searching API Dashboard Try ChatGPT Theme Light Dark System Home API Overview Get
+started with the OpenAI API Models Explore models and compare capabilities Agents Build persistent
+agents on hosted infrastructure Tools Connect models to tools and data Audio & voice Build speech
+and realtime voice experiences Production Deploy and scale your API integrations API reference
+Explore endpoints, parameters, and responses ChatGPT Plugins Extend ChatGPT and Codex Sign in with
+ChatGPT Apps powered by your user's ChatGPT plan Commerce Build commerce flows in ChatGPT Agent
+Access Allow verified ChatGPT browser visits to your website Ads Publish and measure ads in ChatGPT
+Workspace Agents Trigger published ChatGPT workspace agents ChatGPT + Codex user docs Guides and
+product docs for ChatGPT and Codex Use cases Example workflows and tasks teams can take on with
+ChatGPT or Codex Docs Use cases Training Resources Resources Showcase Demo apps to get inspired Blog
+Learnings and experiences from developers Cookbook Notebook examples for building with OpenAI models
+Learn Docs, videos, and demo apps for building with OpenAI Community Programs, meetups, and support
+for builders Overview Models Agents Tools Audio & voice Production API reference Search the API docs
+Search docs Suggested responses create reasoningeffort realtime prompt caching Primary navigation
+API ChatGPT Docs Use cases Training Resources Resources Theme Light Dark System Search docs
+Suggested responses create reasoningeffort realtime prompt caching Overview Models Agents Tools
+Audio & voice Production API reference Docs Overview Home Get started Quickstart Using GPT-6 Key
+concepts API credits for ChatGPT subscribers Core concepts Responses API Decisions API Conversation
+state Background mode Streaming WebSocket mode Mid-turn steering Multi-agent Webhooks File inputs
+Compaction Counting tokens SDKs and CLI OpenAI SDK OpenAI CLI Cloud providers Amazon Bedrock Google
+Cloud Resources Changelog Deprecations Supported countries OpenAI Crawlers Terms and policies Legacy
+APIs Agent Builder Overview Migration guide Node reference Safety in building agents Evals Getting
+started Working with evals Prompt optimizer External models Graders Fine-tuning Optimization cycle
+Supervised fine-tuning Vision fine-tuning Direct preference optimization Best practices Assistants
+API Migration guide Model catalog Choose a model Pricing Model selection Text and code Text
+generation Code generation Structured output Prompting Overview Prompt engineering Citation
+formatting Migration guide Prompt generation Frontend prompting Reasoning Reasoning models Reasoning
+best practices Images Images and vision Image input cost calculator Image generation Overview Image
+prompting Realtime and audio Audio and speech Getting started Voice agents Specialized models
+Embeddings Moderation CSAM classifier Overview Agents API Overview Quickstart Architecture
+Configuring Agents Sessions Run and continue sessions Events and items Manage sessions Scheduled
+automations Automatic review Webhooks Environments and sandboxes OpenAI-hosted sandboxes Self-hosted
+sandboxes Sandbox lifecycle Pre-warm sandboxes Sandbox security Files and artifacts Tools and
+integrations Web search Computer use Functions MCP connections Plugins Vaults Multi-agent
+Observability and usage Tracing Errors and recovery API reference Bedrock Managed Agents Agents SDK
+Overview Quickstart Agent definitions Models and providers Running agents Sandbox agents
+Orchestration Guardrails Results and state Integrations and observability Evaluate agent workflows
+ChatKit Overview Customize Widgets Actions Advanced integrations Overview Function calling Search
+and retrieval Web search File search Retrieval Connect tools and data MCP servers Secure MCP Tunnel
+Build tool workflows Skills Tool search Programmatic tool calling Async tool calling Computer and
+code Shell Computer use Integration recipes Driver reference Apply Patch Code interpreter Media
+Image generation Overview GPT-Live Getting started Prompting Managing sessions Delegation and tools
+Migrate to GPT-Live Partner integrations Realtime API Getting started Prompting Managing
+conversations Voice activity detection Tools and MCP Build with voice Voice agents Connect voice to
+Decisions Custom voices Cost optimization Connections WebRTC WebRTC with WARP WebSockets Telephony
+and SIP Server-side controls Audio processing File transcription Live transcription Live translation
+Text to speech Audio in Chat Completions Go live Production best practices API keys and service
+accounts Deployment checklist Performance and quality Keep the prefix unchanged Fast mode Ultrafast
+mode Latency optimization Predicted Outputs Accuracy optimization Evaluation Evaluation best
+practices Promptfoo Cost and throughput Cost optimization Prompt caching Prompt cache diagnostics
+Batch Flex processing Safety and governance Safety best practices Red teaming Daybreak Safety checks
+Safety classifiers Cybersecurity checks Misalignment monitoring Enforcement notifications Under-18
+guidance CSAM guidance Content provenance Your data Data residency Private Safety Processing
+Permissions Infrastructure and access Terraform provider Overview Projects and access Service
+accounts Rate limits and spend Model, tool, and data controls Import and reconciliation Private Link
+IP allowlist Organization blocking Mutual TLS Workload identity federation Federation rules X.509
+certificates Kubernetes AWS Microsoft Azure Google Cloud Oracle Cloud Infrastructure GitHub Actions
+SPIFFE Idira IP egress ranges Operations Rate limits Spend limits Admin APIs Error codes Overview
+Plugins Sign in with ChatGPT Commerce Agent Access Ads Workspace Agents ChatGPT + Codex user docs
+Use cases Docs Overview Home Quickstart Core concepts Plugin architecture Skills MCP server Plan
+Brainstorm use cases Define tools Build Build an MCP server Add UI to your MCP server (optional) Add
+events to your MCP server (optional) Extensions Authenticate users Build skills Package your plugin
+Examples Test and publish Connect and test your plugin Submit and publish Submit desktop-only
+plugins Submission error reference Conversion specs Restaurant reservation spec Get Quote spec
+Product checkout spec Guides UI guidelines Optimize Metadata Submit a Claude Code plugin Security &
+Privacy Troubleshooting Resources Changelog Plugin guidelines MCP server review requirements Plugin
+UI reference Checkout API reference Home Quickstart Request a client ID Identity On your website In
+your ChatGPT plugin Account security notification ChatGPT plan usage Overview UI/UX guidelines
+Registration and sign-in Accounts and sessions Models and inference Codex app-server Self-hosted VMs
+Token reference Errors and recovery Preview limitations Home Partner Playbook Overview Commerce
+Partner Playbook Submit product feeds Help ensure cloud browser access Accept payments Build a
+plugin Integrate Sign in with ChatGPT Claim your business Product feeds · Reference Product feed
+schema Ads Overview Measurement Measurement Pixel Multiple Pixels (Advanced) Image Tag Conversions
+API Supported Events Advertiser API Overview API Partner Setup Campaign Management Bidding & Budgets
+Targeting Product Feeds Hotel Feeds (limited beta) Conversion Tracking Reporting Troubleshooting
+Account Management API Reference Authentication Ad Account Audit Logs Campaigns Ad Groups Ads
+Insights Files Conversion Setup Home Get started Trigger workspace agent runs Authenticate with
+Workspace Agent access tokens Overview Features Configuration Developers Security Administration Use
+Cases Resources Docs Overview Home Get started Quickstart Use ChatGPT Get started with Work Meet
+dots Import from another agent Foundations Prompting Working with agents Model selection Personalize
+ChatGPT Skills & Plugins Permissions Explore What's new Models Pricing Glossary Available on ChatGPT
+desktop app ChatGPT mobile app ChatGPT on the web Codex CLI Codex IDE extension Codex Cloud Releases
+Changelog Feature Maturity Open Source Overview Workflows Projects and chats Build plugins
+Visualizations Scheduled tasks Long-running work Notifications Pets Codex Micro Capabilities Browser
+Computer use Voice Composer Predictions Plugins Sign in with ChatGPT Web search Image generation
+Image inputs Appshots Browser extension Work with files Sites Overview Create a site Data and
+connections Publish and share Manage a site dots Meet dots Getting started Messaging Tasks and
+memory Computers and apps Controls ChatGPT Space Overview Getting started Pages Work with agents
+Collaboration Reference Commands Slash commands Settings Troubleshooting Overview Customization
+Overview Memories Computer History Config file Config Basics Advanced Config Config Reference
+Environment Variables Sample Config Agent configuration AGENTS.md Subagents Speed Rules Extend
+ChatGPT and Codex Record & Replay MCP Linux Desktop app Windows Desktop app Windows sandbox WSL
+Overview Development workflows Code review Integrated terminal Extend and automate Build skills Site
+tools (WebMCP) Annotations Extensibility Hooks Environments Modes Local environments Git worktrees
+Codex Cloud Cloud environments Build with Codex Codex SDK App Server GitHub Action Non-interactive
+mode Third-party integrations GitHub GitLab (Beta) Slack Linear Reference CLI customization
+Developer commands Developer settings Overview Permissions Profiles Sandboxing Auto-review Agent
+approvals & security Codex Security Overview Daybreak Defense Factory Setup Findings and fixes
+Import scanner findings Security Review Improving the threat model Notifications FAQ Codex Security
+plugin Quickstart Run a security scan Run a deep scan Review code changes Use the Security workbench
+Triage a backlog Fix findings Propose security hardening Write vulnerability reports Export and
+track findings Changelog Codex Security CLI Quickstart Run bulk scans CI/CD Overview GitHub Actions
+GitLab CI/CD Reference FAQ Codex Security SDK Cyber safety Models & Trusted Access Recommended
+configuration Overview Getting started Admin rollout guide Admin plugin Feature Configuration Dots
+Space Sites Teams and Team Tasks ChatGPT in Slack and Teams Workspace connections Local computer
+access for Work Cloud and dots Identity and access Authentication overview Groups and provisioning
+Dynamic groups User lifecycle management Roles and workspace permissions Personal access tokens
+Service accounts Configuration Windows app and CLI deployment NFS home directories Manage app
+updates Managed configuration Desktop browser policies Self-host configuration Codex security
+cookbook Remote connections Workspace model availability Advanced deployment Amazon Bedrock GovCloud
+deployment Connect to a gateway Roll out a gateway ChatGPT EDU Education plans Higher education
+setup ChatGPT Work Overview Cloud security Local security Usage and cost Admin FAQ Collaboration and
+sharing GPTs and sharing Plugins and connections Plugin controls Import and sync plugins from GitHub
+Skill controls Migrate custom GPTs to plugins Usage and analytics Workspace analytics Usage Insights
+Analytics API Security and compliance Governance Agent security Safety and security in dots Prisma
+AIRS HIPAA configuration Compliance API and audit events Home All use cases Home Videos Showcase
+OpenAI Academy Online trainings Community Codex Ambassadors Codex for Students Codex for Open Source
+Events Blog Company blog Developer blog Home All use cases Collections Productivity & Collaboration
+Business Operations Data Science Web development Game development Native development Production
+systems Security Finance Sales Life Sciences Education Home Videos Showcase OpenAI Academy Online
+trainings Community Codex Ambassadors Codex for Students Codex for Open Source Events Blog Company
+blog Developer blog Showcase Blog Cookbook Learn Community Docs Showcase All posts Recent Securing
+persistent agents like OpenClaw at OpenAI Pushing voice agents further: inside four GPT-Live builds
+Building a retro handheld game with Codex and ModRetro Chromatic Designing failover across OpenAI
+model providers Maintaining software with the GPT-6 family Topics General API Apps SDK Audio Codex
+Life sciences Home Topics Sign-in with ChatGPT Agents Evals Multimodal Text Guardrails Optimization
+ChatGPT Codex gpt-oss Contribute Cookbook on GitHub Home OpenAI Developers plugin Docs MCP
+Categories Demo apps Videos Topics Agents Audio & Voice Computer Use Codex Evals gpt-oss Fine-tuning
+Image generation Scaling Tools Video generation Community Programs Codex Ambassadors Meet the
+ambassadors Codex for Students Student Collective Codex for Open Source OpenAI for Startups Spaces
+Events Developer Forum Discord Reddit X API Dashboard Try ChatGPT Home Get started Quickstart Using
+GPT-6 Key concepts API credits for ChatGPT subscribers Core concepts Responses API Decisions API
+Conversation state Background mode Streaming WebSocket mode Mid-turn steering Multi-agent Webhooks
+File inputs Compaction Counting tokens SDKs and CLI OpenAI SDK OpenAI CLI Cloud providers Amazon
+Bedrock Google Cloud Resources Changelog Deprecations Supported countries OpenAI Crawlers Terms and
+policies Legacy APIs Agent Builder Overview Migration guide Node reference Safety in building agents
+Evals Getting started Working with evals Prompt optimizer External models Graders Fine-tuning
+Optimization cycle Supervised fine-tuning Vision fine-tuning Direct preference optimization Best
+practices Assistants API Migration guide Copy Page Using GPT-5.6 Copy Page Learn best practices,
+features, and migration guidance for GPT-5.6 and the GPT-5.6 model family.
+GPT-6 & GPT-6.1 GPT-5.6 Older models Introduction GPT-5.6 sets a new quality and efficiency baseline
+for complex production workflows.
+GPT-5.6 is especially token-efficient and improves frontend aesthetics, including layout, visual
+hierarchy, and design judgment.
+GPT-5.6 also introduces a new naming scheme.
+The gpt-5.6 alias routes requests to gpt-5.6-sol , the model for flagship capability.
+Use gpt-5.6-terra for strong performance at a lower price and gpt-5.6-luna for efficient,
+high-volume workloads.
+When migrating from GPT-5.5 or GPT-5.4, start with your current GPT-5.5 or GPT-5.4 reasoning
+setting, then test the same setting and one level lower on representative tasks.
+GPT-5.6 can often maintain or improve quality with fewer tokens, but the best setting depends on
+your workload.
+What's new Programmatic Tool Calling: GPT-5.6 can write JavaScript to call eligible tools, pass
+results between calls, and process intermediate outputs in a hosted runtime.
+Use Programmatic Tool Calling for bounded, tool-heavy workflows that do not require fresh model
+judgment between each step.
+Programmatic Tool Calling is ZDR-compatible with no additional container costs.
+Multi-agent [beta]: Multi-agent lets a GPT-5.6 instance coordinate multiple subagents in parallel
+and synthesize their results.
+Similar to ultra mode in Codex, this can reduce wall-clock time and improve performance for complex
+tasks that divide cleanly into independent workstreams.
+Multi-agent is available as a beta feature in the Responses API as we iterate on developer feedback.
+Explicit prompt caching: GPT-5.6 lets you mark exactly which reusable prompt prefixes OpenAI caches.
+You can still use automatic caching in implicit mode.
+OpenAI bills cache writes at 1.25× the uncached input rate, while cache reads remain discounted.
+Learn how to configure prompt caching .
+Persisted reasoning: GPT-5.6 can reuse available reasoning items across turns to improve multi-turn
+quality and cache efficiency.
+Use reasoning.context to select the behavior.
+Learn how to preserve reasoning across calls .
+Max reasoning effort: GPT-5.6 supports max reasoning effort for demanding tasks that need more
+exploration and verification.
+If you currently use xhigh , compare both settings on representative workloads.
+Pro mode: GPT-5.6 can perform more model work to improve reliability on difficult tasks and return a
+single final answer.
+Enable it with reasoning.mode: "pro" when quality matters more than latency and token usage.
+Learn how to use pro mode .
+Token efficiency: GPT-5.6 reaches flagship-level performance with fewer output tokens.
+Frontend design: GPT-5.6 creates more polished and usable websites and applications, with stronger
+layout, visual hierarchy, and design judgment.
+Intent understanding: GPT-5.6 can better infer the user's underlying goal and intended level of work
+from context, so you often do not need to prescribe every step.
+Continue to provide domain context, hard constraints, approval boundaries, and success criteria.
+Tell the model when an important ambiguity should trigger a question.
+Original image detail: GPT-5.6 preserves image dimensions with original or auto detail, except that
+images larger than 65,535 pixels on either side are scaled down to fit that limit.
+The API rejects images that still exceed the 30,000-patch limit , rather than resizing them to fit
+it.
+Large images can use more input tokens and increase latency.
+Learn how to choose an image detail level .
+Safeguards When using GPT-5.6 models, users may encounter safeguards that block or refuse some
+requests due to real-time cyber and biology misuse classifiers that are run as model outputs are
+generated.
+Other requests may take longer because generation is paused for several seconds mid-stream while
+these classifiers synchronously review outputs.
+Safeguards may occasionally intervene on legitimate work, particularly in dual-use areas where
+defensive and offensive activity can initially look similar.
+If your application serves individual end users, send a stable, privacy-preserving safetyidentifier
+with each request.
+See Implement safety identifiers for guidance.
+We are continuously evolving these safeguards so that they are robust and effective in holding up to
+adversarial pressure, while preserving access to legitimate work such as code review, vulnerability
+research, patch development, debugging, security education, and defensive testing.
+Migration quickstart Migrate with Codex Codex can apply the recommended changes in this guide with
+the OpenAI Docs skill .
+$openai-docs migrate this project to the GPT-5.6 model family To use this skill in other coding
+agents, download it from the OpenAI skills repository .
+Update API and model parameters Choose the target model for the workload.
+Use gpt-5.6-sol for flagship capability, gpt-5.6-terra for a balance of intelligence and cost, or
+gpt-5.6-luna for efficient, high-volume workloads.
+The gpt-5.6 alias routes requests to gpt-5.6-sol .
+Use the Responses API for reasoning, tool-calling, and multi-turn workflows.
+Set reasoning.effort intentionally.
+GPT-5.6 supports none , low , medium , high , xhigh , and max .
+If you are migrating from GPT-5.5 or GPT-5.4, preserve your current reasoning effort as the
+baseline, then compare one level lower.
+If you use none , keep it as your latency baseline and also test low when the workflow benefits from
+reasoning or tool use.
+Use medium as a balanced starting point and low for latency-sensitive workloads.
+Use high or xhigh when more reasoning produces a measured quality gain.
+Reserve max for the hardest quality-first workloads.
+Compare max and xhigh to find the best quality, latency, and cost tradeoff for your use case.
+To use pro mode, keep your selected GPT-5.6 model and set reasoning.mode to pro in the Responses
+API; do not switch to a separate Pro model slug.
+Choose reasoning.effort independently.
+If you omit it, GPT-5.6 defaults to medium in both standard and pro modes.
+See reasoning mode for a request example and billing details.
+Configure persisted reasoning based on how much prior reasoning is still relevant.
+GPT-5.6 models default to allturns ; earlier models default to currentturn .
+Omit reasoning.context or set it to auto to use allturns , the GPT-5.6 default.
+Check the response's reasoning.context field to confirm the effective mode.
+Set reasoning.context to allturns when the task's goals, assumptions, and priorities stay stable
+across turns.
+With allturns , continue with previousresponseid to make reasoning from earlier responses available
+to the model.
+When managing history manually, preserve and resend previous user inputs and every response output
+item.
+For store: false or Zero Data Retention, replay the encrypted reasoning items that the API returns
+by default.
+Set reasoning.context to currentturn when earlier reasoning is no longer relevant.
+Review prompt caching.
+You do not need to change code to keep using implicit caching.
+Because GPT-5.6 cache writes cost 1.25× the uncached input rate, track cachedtokens and
+cachewritetokens to understand net cost.
+Use explicit breakpoints or promptcacheoptions.mode: "explicit" to avoid unnecessary writes, and
+replace promptcacheretention with promptcacheoptions.ttl .
+To use Programmatic Tool Calling, add the programmatictoolcalling tool and opt eligible tools in
+with allowedcallers .
+Update your application to handle program items, program-issued function calls, and programoutput
+items while preserving each call's callid and caller linkage.
+See the Programmatic Tool Calling guide for request and continuation examples.
+Benchmark the PTC-enabled workflow on representative tasks.
+Compare task success, final-answer completeness, required evidence, total tokens, latency, and cost.
+Fewer calls, turns, or intermediate outputs are improvements only when the final answer still meets
+the required quality bar.
+Prompting best practices Favor leaner prompts Removing repeated instructions and examples and
+simplifying tool descriptions can improve task performance and token efficiency.
+In a sample of internal coding-agent eval runs, configurations with leaner system prompts improved
+evaluation scores by roughly 10-15% while reducing total tokens by 41-66% and cost by 33-67%.
+Results will vary by workload, so treat these ranges as directional and validate changes on
+representative tasks from your own application.
+To simplify prompts without losing important guidance: Start with a prompt and tool set that already
+works.
+Remove one group of instructions, examples, or tools at a time, then rerun the same evals.
+State each instruction once.
+Expose only tools relevant to the task, and keep their descriptions concise and precise.
+Keep examples and style guidance when they encode a product requirement or correct a measured gap.
+Track context both at the start of a run and as the conversation grows.
+Long sessions can amplify repeated prompt and tool content.
+Define autonomy and approval boundaries GPT-5.6 can be proactive and persistent when carrying out
+multi-step tasks.
+Define what level of action each request authorizes so the model can continue safe, in-scope work
+without unnecessary pauses while stopping before external, destructive, costly, or scope-expanding
+actions.
+A compact policy is usually sufficient: For requests to answer, explain, review, diagnose, or plan,
+inspect the relevant materials and report the result.
+Do not implement changes unless the request also asks for them.
+For requests to change, build, or fix, make the requested in-scope local changes and run relevant
+non-destructive validation without asking first.
+Require confirmation for external writes, destructive actions, purchases, or a material expansion of
+scope.
+Name safe local actions explicitly, such as reading files, inspecting logs, editing in-scope code,
+and running tests.
+Keep the policy in one place and state each rule once.
+Repeating instructions such as "ask first," "do not mutate," or "wait for approval" can cause
+unnecessary approval requests for safe, expected actions.
+Set response length and style GPT-5.6 tends to be more concise by default than GPT-5.5.
+When migrating, check whether broad brevity instructions such as "Be concise" or "Keep it short" are
+still useful.
+They may be unnecessary for some tasks and can sometimes make responses too brief.
+Keep them when they reliably produce the output your application needs.
+For more consistent control across requests, use text.verbosity to set the default level of detail,
+then use the prompt for task-specific requirements.
+Set a default with text.verbosity Choose low , medium , or high as the default level of detail for a
+request.
+In the prompt, specify any task-specific length, structure, or required content.
+See Set up text.verbosity for an API example.
+Specify what a short answer must include When a task calls for a shorter answer, identify the
+information the model must preserve and the detail it can omit.
+For example: Lead with the conclusion.
+Include the evidence needed to support it, any material caveat, and the next action.
+Omit secondary detail and repetition.
+Keep all required facts, decisions, caveats, and next steps.
+Trim introductions, repetition, generic reassurance, and optional background first.
+This gives the model a clear priority order: preserve the content needed to complete the task, then
+remove lower-value detail.
+Define the tone Broad labels such as "friendly" or "empathetic" can be ambiguous.
+Describe the writing choices that define your product's tone, such as how directly to state the
+answer, when to acknowledge a problem, and whether reassurance or a sign-off is appropriate.
+State the answer directly.
+If the user reports a problem, acknowledge the specific issue before giving the next step.
+Use reassurance only when it is relevant.
+Omit generic praise and unnecessary sign-offs.
+Pro mode Choose pro mode when quality matters most Pro mode is a Responses API execution mode that
+applies more model work to a request before returning a single final answer.
+It can improve reliability on difficult tasks, but it increases latency and aggregates the tokens
+from that work in reported usage.
+Those tokens are billed at the selected model's standard token rates.
+Use pro mode when a marginal quality improvement materially affects the outcome and the task is
+difficult enough to benefit, such as complex optimization, high-value coding or review, or deep
+analysis with clear evaluation criteria.
+Prefer standard mode for routine, latency-sensitive, or high-volume work, and whenever your
+evaluations do not show a meaningful gain from pro mode.
+Reasoning mode and reasoning effort are independent.
+Pro mode works with any GPT-5.6 model and its supported reasoning efforts.
+Start with the same model and effort as your standard-mode baseline, then compare configurations on
+representative tasks instead of assuming that the highest effort is always the best tradeoff.
+Configure pro mode in the API Enable pro mode in the API request.
+Keep the same outcome-focused prompt you use in standard mode: state the goal, relevant context,
+constraints, required evidence, success criteria, and output format.
+You do not need to ask the model to "use pro mode," "think harder," or generate several candidate
+answers.
+For example: Review this database migration plan for failure modes that could cause data loss or
+extended downtime.
+For each finding, cite the relevant step, estimate impact and likelihood, and recommend a specific
+mitigation.
+Return the five most important risks in severity order.
+Compare quality and cost Compare standard and pro modes on the same representative tasks.
+Measure task success, answer completeness, required evidence, total tokens, latency, and cost.
+Use pro mode selectively where its quality or reliability gain justifies the extra model work.
+Learn more in the reasoning mode guide .
+Programmatic Tool Calling Choose Programmatic Tool Calling by task shape Programmatic Tool Calling
+(PTC) works best for bounded workflows where code can process several tool results or large
+intermediate outputs and return a much smaller structured result.
+Use it for filtering, joining, ranking, deduplication, aggregation, validation, or other predictable
+processing.
+Multiple, parallel, or dependent calls alone do not justify Programmatic Tool Calling.
+Prefer direct, non-PTC tool calls when: One call is sufficient The intermediate outputs are already
+small Each result may change the model's next decision An action requires approval The final output
+must preserve citations or native artifacts Make routing instructions task-specific Do not rely on
+tool availability or generic instructions such as "use Programmatic Tool Calling efficiently" to
+produce the right route.
+When both direct and programmatic calling are available, explicitly state: Which bounded stage
+should use Programmatic Tool Calling.
+Which tools it may call.
+The exact output schema and required evidence.
+Concurrency, retry, and stopping limits.
+Which work should remain direct.
+Tool descriptions should document their expected return fields, types, and error behavior.
+If the model cannot determine the return shape before writing the program, prefer direct tool
+calling so it can inspect the result before deciding how to use it.
+If both routes are needed, define one clear handoff and tell the model not to switch routes or
+repeat completed work.
+For example: <toolorchestration Use Programmatic Tool Calling for [bounded stage] using only
+[eligible tools].
+Run independent calls concurrently when safe.
+Use only documented tool input and output fields.
+Process and reduce the intermediate results, then emit exactly [output schema], including the
+evidence needed for the final answer.
+Stop when [condition] is met.
+Retry transient failures at most [R] times.
+Do not repeat completed calls or perform side-effecting actions.
+If a required result is still missing, return a clear structured failure.
+Use direct tool calls for [semantic judgment, approval, or final validation].
+</toolorchestration Assess the final answer The programoutput item and final assistant message are
+separate outputs; make sure to test both.
+In theory, a program can return the correct records while the message omits a required field,
+citation, or caveat.
+Compare direct and programmatic calling on the same representative tasks.
+Check whether the final response is correct, complete, and includes the required evidence.
+Then compare total tokens, latency, cost, calls, turns, and retries.
+Count lower resource use as an improvement only when the response still passes your existing evals.
+Learn more in the Programmatic Tool Calling guide .
+Previous Quickstart Next Key concepts Ask AI Docs agent Loading docs agent...

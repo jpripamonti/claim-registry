@@ -1,0 +1,38 @@
+id: gpt-6-calibrate-testing-coding
+version: 1.0.0
+title: GPT-6 Astra tests broadly even for small coding changes; an instruction calibrating testing avoids unneeded tests
+status: active
+technique:
+  summary: >
+    For coding agents, say how much testing a change needs: no tests for reversible, low-impact
+    changes that mirror the implementation; run the checks the change requires, and broaden or
+    repeat testing only when new changes, failures or open concerns justify it.
+  example: |
+    Do not write tests for reversible, low-impact changes that mirror the implementation. If you do choose to verify your work with tests, make sure that the tests are meaningful and necessary to verify implementation.
+conditions:
+  model_family: [gpt]
+  model_versions: ["6", "6.1"]   # prompts offered "across the GPT-6 model family"; behaviour observed with GPT-6 Astra
+  task_family: [agentic-coding]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: fewer unnecessary tests and repeated checks on small changes
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-6-astra
+    retrieved: 2026-11-16
+    quote: >-
+      For coding tasks, the model tends to be thorough in testing before considering a task complete. For smaller tasks, this can result in broader tests than the task requires.
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-6-astra
+    retrieved: 2026-11-16
+    quote: >-
+      For coding tasks, calibrate how much testing and verification a change requires. This can help avoid unnecessary tests or repeated checks for small changes.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

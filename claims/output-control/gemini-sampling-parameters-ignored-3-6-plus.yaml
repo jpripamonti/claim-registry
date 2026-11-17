@@ -1,0 +1,42 @@
+id: gemini-sampling-parameters-ignored-3-6-plus
+version: 1.0.0
+title: Gemini 3.6+, 3.5 Flash-Lite and Gemini 4 ignore temperature, top_p and top_k; remove them
+status: active
+technique:
+  summary: >
+    Setting temperature, top_p or top_k. From Gemini 3.6 Flash and 3.5 Flash-Lite on, the API
+    ignores custom (in-range) values and returns deprecation warnings; future generations will
+    return a 400 error. Remove the parameters; for determinism, write explicit rules in the system
+    instruction.
+conditions:
+  model_family: [gemini, gemini-flash-lite]
+  model_versions: {gemini: ["3.6", "3.7", "3.8", "4"], gemini-flash-lite: ["3.5"]}   # "Gemini 4 and Gemini 3.6+ models"; 3.6 page adds 3.5 Flash-Lite
+  task_family: [any]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: no_effect
+  outcome: generation is unaffected (values ignored); out-of-range values and future models return 400 errors
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://aistudio.google.com/docs/prompting-strategies
+    retrieved: 2026-11-16
+    quote: >-
+      Gemini 4 and Gemini 3.6+ models ignore custom values for temperature, top_p, and top_k and return deprecation warning headers (and will return 400 errors in a future release).
+  - tier: asserted
+    source: https://aistudio.google.com/docs/whats-new-gemini-3.6
+    retrieved: 2026-11-16
+    quote: >-
+      temperature, top_p, and top_k are deprecated and ignored. In future model generations, supplying these parameters returns an HTTP 400 error.
+  - tier: asserted
+    source: https://aistudio.google.com/docs/whats-new-gemini-4-hydrogen
+    retrieved: 2026-11-16
+    quote: >-
+      The server ignores in-range custom values if sent. Out-of-range values return a 400 validation error.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [gemini-3-keep-default-temperature], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

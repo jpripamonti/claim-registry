@@ -1,19 +1,19 @@
 source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5-5
-retrieved: 2026-11-02
+retrieved: 2026-11-16
 
 Prompting Claude Sonnet 5.5 - Claude Platform Docs Claude Platform Docs Messages Managed Agents
 Admin Resources  Best practices  Models & pricing SDKs, CLI, and libraries Claude API skill
 Release notes  API reference  English   Console Log in   Search Ctrl K Use cases Overview
 Ticket routing Customer support agent Content moderation Legal summarization Commerce agent Prompt
-engineering Overview Prompting best practices Prompting Claude Fable 5.1 Prompting Claude Fable 5
-Prompting Claude Opus 5.5 Prompting Claude Opus 5 Prompting Claude Opus 4.8 Prompting Claude Sonnet
-5.5 Prompting Claude Sonnet 5 Prompting Claude Haiku 5.5 Test and evaluate Define success and build
-evaluations Reducing latency Strengthen guardrails Reduce hallucinations Increase output consistency
-Mitigate jailbreaks Reduce prompt leak Reference Glossary Additional resources  Console Best
-practices  Prompt engineering Prompting Claude Sonnet 5.5  Copy page  Prompting patterns specific
-to Claude Sonnet 5.5: effort, initiative and scope, running without up-front thinking, JSON output,
-progress updates, tool use, mid-turn messages, coding verification, tool calls, visual inputs, and
-refusals.
+engineering Overview Prompting best practices Prompting Claude Fable 5.2 Prompting Claude Fable 5.1
+Prompting Claude Fable 5 Prompting Claude Opus 5.5 Prompting Claude Opus 5 Prompting Claude Opus 4.8
+Prompting Claude Sonnet 5.5 Prompting Claude Sonnet 5 Prompting Claude Haiku 5.5 Test and evaluate
+Define success and build evaluations Reducing latency Strengthen guardrails Reduce hallucinations
+Increase output consistency Mitigate jailbreaks Reduce prompt leak Reference Glossary Additional
+resources  Console Best practices  Prompt engineering Prompting Claude Sonnet 5.5  Copy page 
+Prompting patterns specific to Claude Sonnet 5.5: effort, initiative and scope, running without
+up-front thinking, JSON output, progress updates, tool use, mid-turn messages, coding verification,
+tool calls, visual inputs, and refusals.
  Copy page  This guide covers the prompting patterns specific to Claude Sonnet 5.5.
 For the model's API changes, see What's new in Claude Sonnet 5.5 .
 For techniques that apply across all current Claude models, see Prompting best practices .
@@ -32,8 +32,9 @@ changes are reported as done without a test or build run: Verification on coding
 calls a tool with the wrong letter case or passes a parameter under a slightly different name:
 Tolerant tool-call handling Answers about dense charts or technical drawings miss detail: Tools for
 complex visual inputs Requests return stopreason: "refusal" : Safeguard refusals  For the five
-breaking API changes when migrating from Claude Sonnet 5, see the migration guide .
-Calibrate effort  Effort is the main control for how much Claude Sonnet 5.5 thinks, and with it
+breaking API changes when migrating from Claude Sonnet 5, see the Claude Sonnet 5.5 migration guide
+.
+Calibrate effort Effort is the main control for how much Claude Sonnet 5.5 thinks, and with it
 quality, latency, and cost.
 Its levels are recalibrated: a level doesn't produce the same amount of thinking as the same level
 on Claude Sonnet 5.
@@ -59,20 +60,18 @@ Reserve xhigh and max for work where you've measured a quality gain, because thi
 get much longer there.
 At those levels, betweentools isn't accepted, so up-front thinking can't be turned off.
 To get less thinking, lower the effort level.
-From medium up, the model thinks briefly before almost every reply, even a greeting, which adds to
-the time before the first visible token.
-Asking it in the system prompt to think less doesn't reliably reduce its thinking.
-At low , it skips thinking on most simple requests.
+Asking the model in the system prompt to think less doesn't reliably reduce its thinking.
 Changing the top-level effort value between requests invalidates the prompt cache.
-To change the level partway through a conversation, use a per-message effort change (beta) instead,
-which keeps the cache.
+To change the level partway through a conversation, use a per-message effort change instead, which
+keeps the cache.
+Per-message effort is in beta.
 A change holds for every later turn until another one replaces it.
 For example, in an interactive session at low , add a change to high before the user's hard problem,
 and a change back to low after Claude answers it.
 Per-message effort changes need adaptive thinking.
 With betweentools , they return a 400 error, as Running without up-front thinking explains.
-Steer initiative and scope  How far Claude Sonnet 5.5 goes on its own depends on the effort level
-and the request.
+Steer initiative and scope How far Claude Sonnet 5.5 goes on its own depends on the effort level and
+the request.
 At lower effort, it sometimes checks in before a coding task is done.
 At higher effort, or on an open-ended request, it can do more than you asked.
 Steer it with the effort level and with instructions in your system prompt.
@@ -86,7 +85,7 @@ To keep the model working without changing effort, add this to your system promp
 until everything the user asked for is done, and only stop to ask when you can't go on without the
 user or before a risky step.
 When the work the user asked for is done and checked, stop and report.
-Don't add features, tests, files, docs or refactors that weren't asked for.
+Don't add features, tests, files, docs, or refactors that weren't asked for.
 If you think one would help, mention it at the end instead of doing it.
  With this prompt, the model carries more of the work through at low and medium effort, so sessions
 at those levels run longer and cost more.
@@ -110,7 +109,7 @@ This takes more time and tokens, so run routine work at high or below, where it'
 If you do want that extra thoroughness of these effort levels, but want to direct it to the task
 itself, add this to your system prompt: When the work the user asked for is done and its checks
 pass, stop and report.
-Don't start extra rounds of review or hardening on your own, and don't launch reviewer sub-agents
+Don't start extra rounds of review or hardening on your own, and don't launch reviewer subagents
 unless the user asked for a review.
 If you think a deeper review is worth doing, say so at the end.
  In testing on coding tasks at max effort, this stopped the model from launching reviewer subagents
@@ -121,9 +120,9 @@ Open-ended requests.
 When a request is open-ended, for example "show me what you can do with this," the model can start
 building a presentation, report, or video when you only wanted ideas.
 If you want ideas or a plan first, say so in the request, or add this to your system prompt: When
-the user asks for ideas, options or a plan, give them that and stop.
+the user asks for ideas, options, or a plan, give them that and stop.
 Don't start building or changing anything until they say to go ahead.
- Running without up-front thinking  To run Claude Sonnet 5.5 without up-front thinking, send
+ Running without up-front thinking To run Claude Sonnet 5.5 without up-front thinking, send
 thinking: {"type": "betweentools"} .
 It's the lowest thinking setting on this model, and it's accepted at high effort or below.
 If your integration runs with thinking off today, switch it to betweentools and check these points:
@@ -149,7 +148,7 @@ Use adaptive thinking for reasoning tasks without tools.
 In a request without tools, betweentools means the model answers without thinking first.
 For tasks that need a few steps of working out, use adaptive thinking instead.
 See Reasoning tasks with JSON output .
-Reasoning tasks with JSON output  This section applies when you ask Claude Sonnet 5.5 for a JSON
+Reasoning tasks with JSON output This section applies when you ask Claude Sonnet 5.5 for a JSON
 answer to a task that needs a few steps of working out.
 Examples include totaling figures from a document, applying a rule, or ranking items.
 On tasks like these, the model often answers without thinking first, particularly at low and medium
@@ -205,7 +204,7 @@ Also consider xhigh effort with adaptive thinking.
 The model then works the problem out in its thinking and nearly always returns the JSON alone.
 Total output tokens stay about the same as at high , because the working moves from the response
 text into the thinking.
-User-facing progress updates  Between tool calls, Claude Sonnet 5.5 writes user-facing notes about
+User-facing progress updates Between tool calls, Claude Sonnet 5.5 writes user-facing notes about
 what it just found and what it's doing next.
 Notes longer than a sentence or two come back as progress-update thinking blocks .
 Shorter remarks stay text .
@@ -232,8 +231,8 @@ If long tool-calling turns still go quiet for longer than you want, your harness
 update.
 Have it count consecutive tool-calling steps that send the user no text or progress update.
 After several in a row, for example five, append a one-turn reminder after the latest tool results.
-Send it as a turn-scoped system message (beta), with text such as the following: The user hasn't
-heard from you in a while - say in a few words what you're doing, then continue.
+Send it as a turn-scoped system message (in beta), with text such as the following: The user hasn't
+heard from you in a while: say in a few words what you're doing, then continue.
  If the turn stays quiet, stop sending reminders after the second or third.
 Frequent harness text after tool results can lead the model to treat that text as a possible prompt
 injection, as Mid-turn user messages explains.
@@ -243,18 +242,18 @@ preserved thinking stay intact.
 At high effort, with a tool for sending the user a message available, the reminder leads the model
 to update the user more often and shortens its longest silent stretches, with no measurable change
 in task quality.
-Tool use in chat and knowledge work  On chat and knowledge-work tasks, Claude Sonnet 5.5 sometimes
+Tool use in chat and knowledge work On chat and knowledge-work tasks, Claude Sonnet 5.5 sometimes
 answers from its training knowledge when a web search would catch details that have changed.
 Examples include what is allowed, required, or charged.
 First, check your prompt for language that discourages tool use, such as "only use tools when
 strictly necessary" or "minimize tool calls," and remove it.
 Then, if your product gives the model a search tool, add this to your system prompt: Use the search
-tool to check specifics that may have changed since your training, such as what is allowed, required
-or charged, even when you feel confident.
+tool to check specifics that may have changed since your training, such as what is allowed,
+required, or charged, even when you feel confident.
 For researched work such as a report or a comparison, gather current sources rather than writing
 from your training knowledge.
  This matters most for research and support products, where answers depend on current details.
-Mid-turn user messages  Claude Sonnet 5.5 is trained to resist indirect prompt injection, meaning
+Mid-turn user messages Claude Sonnet 5.5 is trained to resist indirect prompt injection, meaning
 malicious instructions that arrive through tool results and other content it reads during a task.
 Sometimes it treats a genuine user message as a possible injection.
 Suppose a message the user typed mid-task reaches the model as a mid-conversation system message
@@ -279,9 +278,9 @@ user's words.
 Never put a notice and the user's words in the same block.
 In interactive sessions where users can type mid-turn, don't add your own token or budget countdown
 after tool results.
-Task budgets (beta) add a similar countdown, but they haven't been seen to cause this misread.
+Task budgets (in beta) add a similar countdown, but they haven't been seen to cause this misread.
 If you see the misread while a task budget is set, try the session without one.
-Verification on coding tasks  On agentic coding tasks, Claude Sonnet 5.5 generally checks its work
+Verification on coding tasks On agentic coding tasks, Claude Sonnet 5.5 generally checks its work
 before it reports a change as done.
 At low effort, though, it sometimes reports a change as done without running a check that exercises
 it.
@@ -293,12 +292,12 @@ quality and only a slightly higher cost per task: When you change code that can 
 type-checked, run a real check that exercises the change before reporting it done: the project's
 tests, type-checker, or build, or the changed command itself.
 A syntax-only check, or a check command that failed to start, does not count; if all that is missing
-is the project's declared dependencies, install them with its own package manager and lockfile (e.g.
-npm install, pip install -r requirements.txt), never via sudo or the system package manager, unless
-told not to.
+is the project's declared dependencies, install them with its own package manager and lockfile (for
+example, npm install or pip install -r requirements.txt), never through sudo or the system package
+manager, unless told not to.
 Only if no real check can run here, say which one you did not run and why instead of reporting the
 change as done.
- Tolerant tool-call handling  Claude Sonnet 5.5 occasionally calls a declared tool by a name that
+ Tolerant tool-call handling Claude Sonnet 5.5 occasionally calls a declared tool by a name that
 differs only in letter case, such as bash for Bash .
 It can also pass a known parameter under a slightly different name.
 Rather than treating such a call as a fatal error, have your harness handle it in one of two ways:
@@ -306,7 +305,7 @@ Accept the call when the match is unambiguous, even if the letter case is wrong.
 Return a toolresult with iserror: true that states the exact expected name.
 The model usually corrects the call on its next turn.
 See Handling errors with iserror .
-Tools for complex visual inputs  For dense charts and technical drawings, give Claude Sonnet 5.5 a
+Tools for complex visual inputs For dense charts and technical drawings, give Claude Sonnet 5.5 a
 way to crop, zoom, or run code on the image.
 With such tools, the model reads these inputs markedly more accurately.
 On charts, the tools help at every effort level.
@@ -314,7 +313,7 @@ On technical drawings, they help only from high effort up, and most at xhigh and
 For charts, adding tools helps more than raising effort: in testing, with tools at high effort, the
 model read charts more accurately than without tools at max effort, at a fraction of the cost.
 The crop tool recipe has a working tool definition.
-Safeguard refusals  Claude Sonnet 5.5 runs safety classifiers that can decline a request.
+Safeguard refusals Claude Sonnet 5.5 runs safety classifiers that can decline a request.
 A decline arrives as a normal response with stopreason: "refusal" , and stopdetails.category names
 the refusal category : cyber : the request could enable cyber harm, such as malware or exploit
 development.
@@ -331,7 +330,7 @@ If the cyber classifier blocks your organization's legitimate security work, you
 Cyber Verification Program .
 If the bio classifier blocks your organization's life sciences work, you can apply to the Life
 Sciences Verification Program .
-If you turn on server-side fallback (beta), it retries cyber and frontierllm declines on Claude
+If you turn on server-side fallback (in beta), it retries cyber and frontierllm declines on Claude
 Sonnet 5.
 It doesn't retry bio , reasoningextraction , or generalharms declines.
 See Refusals, fallback, and billing .
@@ -353,4 +352,4 @@ Economic Futures Research News Responsible Scaling Policy Security and complianc
 Blog Courses Use cases Connectors Customer stories Engineering at Anthropic Events Powered by Claude
 Service partners Startups program Help and security Availability Status Support Discord Terms and
 policies Privacy policy Responsible disclosure policy Terms of service: Commercial Terms of service:
-Consumer Usage policy Ask Docs 
+Consumer Usage policy  Console

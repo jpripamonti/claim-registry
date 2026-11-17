@@ -1,20 +1,20 @@
 source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
-retrieved: 2026-11-02
+retrieved: 2026-11-16
 
 Prompting Claude Opus 5.5 - Claude Platform Docs Claude Platform Docs Messages Managed Agents Admin
 Resources  Best practices  Models & pricing SDKs, CLI, and libraries Claude API skill Release
 notes  API reference  English   Console Log in   Search Ctrl K Use cases Overview Ticket
 routing Customer support agent Content moderation Legal summarization Commerce agent Prompt
-engineering Overview Prompting best practices Prompting Claude Fable 5.1 Prompting Claude Fable 5
-Prompting Claude Opus 5.5 Prompting Claude Opus 5 Prompting Claude Opus 4.8 Prompting Claude Sonnet
-5.5 Prompting Claude Sonnet 5 Prompting Claude Haiku 5.5 Test and evaluate Define success and build
-evaluations Reducing latency Strengthen guardrails Reduce hallucinations Increase output consistency
-Mitigate jailbreaks Reduce prompt leak Reference Glossary Additional resources  Console Best
-practices  Prompt engineering Prompting Claude Opus 5.5  Copy page  Behavioral differences from
-Claude Opus 5 and the prompting and harness patterns that address them: effort calibration, thinking
-behavior in API integrations and chat, progress updates, unattended and multiagent tasks, safeguard
-refusals, frontend design, complex visual inputs, multiapp workflows, and pasted text in user
-messages.
+engineering Overview Prompting best practices Prompting Claude Fable 5.2 Prompting Claude Fable 5.1
+Prompting Claude Fable 5 Prompting Claude Opus 5.5 Prompting Claude Opus 5 Prompting Claude Opus 4.8
+Prompting Claude Sonnet 5.5 Prompting Claude Sonnet 5 Prompting Claude Haiku 5.5 Test and evaluate
+Define success and build evaluations Reducing latency Strengthen guardrails Reduce hallucinations
+Increase output consistency Mitigate jailbreaks Reduce prompt leak Reference Glossary Additional
+resources  Console Best practices  Prompt engineering Prompting Claude Opus 5.5  Copy page 
+Behavioral differences from Claude Opus 5 and the prompting and harness patterns that address them:
+effort calibration, thinking behavior in API integrations and chat, progress updates, unattended and
+multiagent tasks, safeguard refusals, frontend design, complex visual inputs, multiapp workflows,
+and pasted text in user messages.
  Copy page  This guide covers the prompting patterns specific to Claude Opus 5.5.
 For the model's capabilities and API changes, see What's new in Claude Opus 5.5 .
 For techniques that apply across all current Claude models, see Prompting best practices .
@@ -34,8 +34,8 @@ application start slowly because the model thinks at length first: Thinking inst
 system prompts The model follows instructions that arrived inside text a user pasted: Mark pasted
 text in user messages Answers about dense charts, diagrams, or screenshots miss detail: Tools for
 complex visual inputs Frontend output looks generic: Frontend design defaults  For the four
-breaking API changes when migrating from Claude Opus 5, see the migration guide .
-Capabilities relevant to prompting  The capabilities that matter most for prompting are: Agentic
+breaking API changes when migrating from Claude Opus 5, see the Claude Opus 5.5 migration guide .
+Capabilities relevant to prompting The capabilities that matter most for prompting are: Agentic
 coding and code review: The model is strongest on multistep work in a real repository, such as
 carrying a change through a large code base until its tests pass.
 In Anthropic's testing, at its default medium effort the model matched or beat Claude Opus 5 at high
@@ -64,7 +64,7 @@ It's also more reliable at computer use, where it operates applications from scr
 steps: at its default effort it matched the success rate that Claude Opus 5 reached only at a much
 higher effort setting.
 See Tools for complex visual inputs .
-Calibrate effort  Effort is the main control for how much Claude Opus 5.5 thinks, and because
+Calibrate effort Effort is the main control for how much Claude Opus 5.5 thinks, and because
 thinking is always on, it's the first setting to adjust when trading off intelligence, latency, and
 cost.
 Start at medium , the default on Claude Opus 5.5 (Claude Opus 5 defaults to high ), set it
@@ -88,11 +88,12 @@ Reserve xhigh and max for work where you've measured a quality gain.
 To get less thinking, lower the effort level first.
 Lowering effort reduces thinking, and with it cost and latency, more reliably than prompt
 instructions do.
-Changing the top-level effort value between requests invalidates the prompt cache.
-To change the level partway through a conversation, use a per-message effort change (beta) instead,
-which keeps the cache.
+Changing the top-level effort value between requests invalidates the cached messages.
+To change the level partway through a conversation, use a per-message effort change instead, which
+keeps the cache.
+Per-message effort is in beta.
 A change holds for every later turn until another one replaces it.
-Prompts written for thinking disabled  Claude Opus 5 accepts thinking: {"type": "disabled"} at high
+Prompts written for thinking disabled Claude Opus 5 accepts thinking: {"type": "disabled"} at high
 effort or below.
 Claude Opus 5.5 returns a 400 error for it (see Configuring thinking ).
 If your Claude Opus 5 integration ran with thinking disabled, four changes go with it: Start at low
@@ -120,8 +121,8 @@ Read the response by block type.
 Check each block's type instead of assuming the first content block is text: a response might or
 might not start with a thinking block, whose thinking field is empty under the default display:
 "omitted" .
-Unattended agentic runs  On long tasks with several parts, Claude Opus 5.5 keeps the user updated
-as it works, and some of those updates end the turn with text rather than a tool call ( stopreason:
+Unattended agentic runs On long tasks with several parts, Claude Opus 5.5 keeps the user updated as
+it works, and some of those updates end the turn with text rather than a tool call ( stopreason:
 "endturn" ).
 An unattended agent loop that treats such a turn as the end of the task stops running there.
 A few harness and prompt changes help it keep running.
@@ -150,7 +151,7 @@ unattended, where you want the model to keep working rather than stop to report.
 Treat it as a starting point: you might need to adapt it for your own application.
 Add it at the end of your system prompt from the first request of the session: adding it partway
 through changes the system prompt and invalidates the conversation's earlier thinking blocks (see
-Add instructions with a mid-conversation system message ).
+Change instructions ).
 Because it tells the model to put status notes in the same message as its next tool call, those
 notes arrive between tool calls as progress updates.
 The text of these updates comes back empty at the default thinking.display .
@@ -180,10 +181,10 @@ next thing.
 The stops the user does want are the ones where nothing can move without them, or where the thing
 blocking you is deliberately protected from you.
 This does not override the need for confirmation on risky or destructive actions.
- Safeguard refusals  Claude Opus 5.5 runs safety classifiers, including for biology,
-cybersecurity, and reasoning extraction.
-Biology: The biology safeguards are the same as Claude Fable 5.1's and are new if you're coming from
-Claude Opus 5.
+ Safeguard refusals Claude Opus 5.5 runs safety classifiers, including for biology, cybersecurity,
+and reasoning extraction.
+Biology: The biology safeguards are the same as Claude Fable 5.1's, and Claude Opus 5 doesn't have
+them.
 Everyday health and educational questions are unaffected.
 If the biology classifier blocks your organization's life sciences work, apply to the Life Sciences
 Verification Program .
@@ -202,7 +203,7 @@ A classifier decline arrives as a normal response with stopreason: "refusal" and
 object naming the category.
 You can have the request retried automatically on a fallback model, except for reasoningextraction
 declines, which server-side fallback returns to you instead of retrying; see Refusals and fallback .
-User-facing progress updates  Between tool calls, Claude Opus 5.5 writes short user-facing progress
+User-facing progress updates Between tool calls, Claude Opus 5.5 writes short user-facing progress
 updates: what it just found and what it's doing next.
 Four levers control what your users see.
 First, check that your client receives them.
@@ -212,11 +213,10 @@ As a result, a client that renders only text blocks can look silent during a lon
 Set display: "updates" (beta, thinking-display-updates-2026-08-18 header) to receive a short summary
 of each note; see Progress updates between tool calls for how to render them.
 Second, if the model might need to hand the user something verbatim partway through a long turn,
-such as a code snippet, give it a simple tool for sending the user a message and tell it to reserve
-the tool for that content.
+such as a code snippet, give it a tool for sending the user a message and tell it to reserve the
+tool for that content.
 Declare the tool in tools from the first request of the session: adding it to tools later edits the
-conversation's prefix and invalidates earlier thinking blocks (see tool changes in Preserved
-thinking ).
+conversation's prefix and invalidates earlier thinking blocks (see Add, remove, or turn off tools ).
 Third, if you want more frequent or predictable updates, such as a one-line statement of intent
 before the first tool call and a short recap at the end, say so in the system prompt; the model is
 responsive to such instructions.
@@ -231,11 +231,11 @@ mid-conversation-system-clear-at-2026-08-21 header).
 If the turn stays quiet, stop after two or three reminders rather than sending more.
 Because each reminder is appended and left in place, rather than inserted for one request and
 deleted on the next, the prompt cache keeps matching and the thinking blocks that follow it stay
-valid.
+valid (see Send a reminder for one turn ).
 In Anthropic's testing on agentic coding tasks, this roughly halved the share of tasks with a long
 silent stretch, with no measurable change in cost.
-The user hasn't heard from you in a while - say in a few words what you're doing, then continue.
- Explore context in multiapp workflows  In workflow automation across several connected apps, such
+The user hasn't heard from you in a while: say in a few words what you're doing, then continue.
+ Explore context in multiapp workflows In workflow automation across several connected apps, such
 as email, documents, spreadsheets, and CRM records, the information a task depends on often sits
 somewhere the request doesn't explicitly mention: for example, a policy in an old email thread, a
 rule on another spreadsheet tab, or a note on a customer record.
@@ -243,7 +243,7 @@ Claude Opus 5.5 tends to get to work quickly, and on loosely specified tasks it 
 model to look through the relevant sources before acting.
 If your agent works across several apps on tasks like these, one sentence in the system prompt makes
 it look around before it changes anything: Before taking any action, explore broadly with tool
-calls: list and open the emails, documents, spreadsheet tabs and records across the available apps
+calls: list and open the emails, documents, spreadsheet tabs, and records across the available apps
 that could be relevant to this task, including ones the task does not explicitly mention, and use
 what you find.
  In Anthropic's testing on multiapp automation tasks, Claude Opus 5.5 completed noticeably more of
@@ -251,14 +251,16 @@ them correctly with this instruction, at both medium and max effort, at the cost
 tool calls and tokens.
 Because it tells the model to act on what it finds, keep untrusted content out of the records it
 searches.
-Time signals for multiagent harnesses  Claude Opus 5.5 is highly responsive to information about
-elapsed time, and in a multiagent setup, for example a lead agent that delegates to subagents, you
-can use that to speed up the work through better parallelization.
-If you can estimate how long the task should take, give the model a time budget: have your harness
-add a short line at the end of each message it sends back to the model giving the elapsed time
-against that budget, in seconds, for example elapsed 340s / 1200s .
-The model paces its work to finish inside the budget and usually finishes well before it, so set the
-budget somewhat above the time you actually want spent and tune it on a sample of your own tasks.
+Time signals for multiagent harnesses Claude Opus 5.5 is highly responsive to information about
+elapsed time.
+In a multiagent setup, for example a lead agent that delegates to subagents, you can use that to
+speed up the work through better parallelization.
+If you can estimate how long the task should take, give the model a time budget.
+Have your harness add a short line at the end of each message it sends back to the model, giving the
+elapsed time against that budget in seconds, for example elapsed 340s / 1200s .
+The model paces its work to finish inside the budget and can finish well before it.
+So set the budget somewhat above the time you actually want spent, and tune it on a sample of your
+own tasks.
 If you can't predict a sensible budget, show the elapsed time alone and add one sentence to the
 system prompt: Time matters here: do not spend time that can be avoided, and the earlier a correct
 result is obtained, the better.
@@ -272,7 +274,7 @@ The budget is advisory and nothing stops the model at the limit, so if you need 
 your own timeout.
 Also check answer quality on your own tasks, because under time pressure the model might search and
 verify a little less.
-Thinking instructions in chat system prompts  In chat applications, if your system prompt contains
+Thinking instructions in chat system prompts In chat applications, if your system prompt contains
 instructions that tell Claude to think carefully before answering, consider removing them for Claude
 Opus 5.5.
 The model determines how much to think, and the effort level is the main control.
@@ -290,7 +292,7 @@ Leave it out where you want the model to keep re-examining its earlier work, for
 analyses, or in agentic tasks where a later step can reveal a mistake in an earlier one.
 The instruction might also make the model less likely to point out a mistake in an earlier answer on
 its own, so if that matters for your application, test for it before adopting the instruction.
-Mark pasted text in user messages  Claude Opus 5.5 resists indirect prompt injection, meaning
+Mark pasted text in user messages Claude Opus 5.5 resists indirect prompt injection, meaning
 instructions that arrive through tool results, webpages, and on-screen or browser content, better
 than any earlier Opus model.
 With the right context it is also robust against instructions inside content a user copied into
@@ -309,7 +311,7 @@ mention it when referring to the pasted text.
  This can make the model slightly more cautious at times, so measure the effect on your own tasks.
 The tags are plain text and can be imitated, so treat this as one guardrail alongside other
 prompt-injection defenses .
-Tools for complex visual inputs  Because Claude Opus 5.5 reads charts, diagrams, and screenshots
+Tools for complex visual inputs Because Claude Opus 5.5 reads charts, diagrams, and screenshots
 considerably more precisely than Claude Opus 5 without tools (see Capabilities relevant to prompting
 ), re-test whether you still need scaffolding you built for visual inputs on earlier models.
 For the densest inputs, two things still add accuracy.
@@ -321,7 +323,7 @@ If a container is too much overhead, a cropping tool alone still helps; the crop
 working definition.
 The model uses these tools more effectively at higher effort levels.
 Without tools, raising effort improves its reading of technical drawings but does little for charts.
-Frontend design defaults  Asked for frontend work without design direction, Claude Opus 5.5 falls
+Frontend design defaults Asked for frontend work without design direction, Claude Opus 5.5 falls
 back on a few default styles, and a general instruction such as "avoid a generic AI look" mostly
 swaps one default for another.
 It responds well to instructions that name specific patterns to avoid, as in the following example.
@@ -342,4 +344,4 @@ Research News Responsible Scaling Policy Security and compliance Transparency Le
 cases Connectors Customer stories Engineering at Anthropic Events Powered by Claude Service partners
 Startups program Help and security Availability Status Support Discord Terms and policies Privacy
 policy Responsible disclosure policy Terms of service: Commercial Terms of service: Consumer Usage
-policy Ask Docs 
+policy  Console

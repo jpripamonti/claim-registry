@@ -1,5 +1,5 @@
 id: calibrate-effort-per-model
-version: 1.0.0
+version: 1.0.1
 title: Sweep effort levels against your own evals on each new Claude 5.x model instead of carrying over the old setting
 status: active
 technique:
@@ -53,16 +53,17 @@ evidence:
       Reserve `xhigh` and `max` for work where you’ve measured a quality gain, because thinking and replies get much longer there.
   - tier: asserted
     source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
-    retrieved: 2026-11-02
+    retrieved: 2026-11-16
     quote: >-
-      It replaces the thinking budget (`budget_tokens`) that Claude Haiku 4.5 used, so there’s no old setting to carry over. Compare two or three of these levels on your own evals:
+      Claude Haiku 4.5 uses a thinking budget (`budget_tokens`) instead, so there’s no effort setting to carry over. On Claude Haiku 5.5, a request that sets `budget_tokens` returns a 400 error. Compare two or three of these levels on your own evals:
   - tier: asserted
     source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-haiku-5-5
     retrieved: 2026-11-02
     quote: >-
       `xhigh` and `max` are for work where a quality gain on your evals justifies the cost.
-as_of: 2026-11-02
-review_by: 2027-05-02
+as_of: 2026-11-16
+review_by: 2027-05-16
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.0.1 2026-11-16 evidence 6 requoted: the Haiku 5.5 page reworded the same advice
   - 1.0.0 2026-11-02 created

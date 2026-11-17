@@ -1,5 +1,5 @@
 id: gemini-3-keep-default-temperature
-version: 1.1.0
+version: 1.2.0
 title: Lowering temperature below the default 1.0 on Gemini 3 can cause looping or degraded performance
 status: active
 technique:
@@ -19,15 +19,15 @@ effect:
   magnitude: null
 evidence:
   - tier: asserted
-    source: https://ai.google.dev/gemini-api/docs/gemini-3
-    retrieved: 2026-10-25
+    source: https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/start/get-started-with-gemini-3
+    retrieved: 2026-11-16
     quote: >-
-      Changing the temperature (setting it below 1.0) may lead to unexpected behavior, such as looping or degraded performance, particularly in complex mathematical or reasoning tasks.
+      Changing the temperature (setting it to less than 1.0) may lead to unexpected behavior, such as looping or degraded performance, particularly in complex mathematical or reasoning tasks.
   - tier: asserted
-    source: https://ai.google.dev/gemini-api/docs/gemini-3
-    retrieved: 2026-10-25
+    source: https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/start/get-started-with-gemini-3
+    retrieved: 2026-11-16
     quote: >-
-      For all Gemini 3 models, we strongly recommend keeping the temperature parameter at its default value of 1.0.
+      For Gemini 3, it is strongly recommended to keep the temperature parameter at its default value of 1.0.
   - tier: asserted
     source: https://aistudio.google.com/docs/whats-new-gemini-3.5
     retrieved: 2026-11-16
@@ -42,5 +42,6 @@ as_of: 2026-11-16
 review_by: 2027-05-16
 relations: {contradicts: [gemini-sampling-parameters-ignored-3-6-plus], refines: [], superseded_by: null}
 history:
+  - 1.2.0 2026-11-16 evidence 0 and 1 moved to Google Cloud's "Get started with Gemini 3" guide, which has the same two sentences: the Gemini API's gemini-3 page was retired and now redirects to the Gemini 3.6 page, which does not
   - 1.1.0 2026-11-16 versions listed as the Gemini 3.x series (now 3 to 3.8, Gemini 4 excluded); evidence added from the Gemini 3.5 Flash and prompt design pages; contradicted by gemini-sampling-parameters-ignored-3-6-plus. The gemini-3 page of evidence 0 and 1 now redirects and no longer has those quotes.
   - 1.0.0 2026-10-25 created

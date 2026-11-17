@@ -1,5 +1,5 @@
 id: image-tools-for-dense-visual-inputs
-version: 1.0.0
+version: 1.0.1
 title: Crop, zoom and image-processing tools improve Claude 5.x accuracy on dense charts and technical drawings
 status: active
 technique:
@@ -22,9 +22,9 @@ effect:
 evidence:
   - tier: asserted
     source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
-    retrieved: 2026-11-02
+    retrieved: 2026-11-16
     quote: >-
-      If running a container is too much overhead, an image-cropping tool alone delivers most of the uplift: a tool that returns a chosen region of the image, cropped and enlarged, lets the model examine specific details in more depth and scales test-time compute with image tokens.
+      If running a container is too much overhead, an image-cropping tool alone also helps. A tool that returns a chosen region of the image, cropped and enlarged, lets the model examine specific details in more depth, and it scales test-time compute with image tokens.
   - tier: asserted
     source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5-5
     retrieved: 2026-11-02
@@ -40,8 +40,9 @@ evidence:
     retrieved: 2026-11-02
     quote: >-
       With such tools, the model reads these inputs markedly more accurately. On charts, the tools help at every effort level. On technical drawings, they help only from `high` effort up, and most at `xhigh` and `max`. For charts, adding tools helps more than raising effort: in testing, with tools at `high` effort, the model read charts more accurately than without tools at `max` effort, at a fraction of the cost.
-as_of: 2026-11-02
-review_by: 2027-05-02
+as_of: 2026-11-16
+review_by: 2027-05-16
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.0.1 2026-11-16 evidence 0 requoted: the Fable 5.1 page now says a cropping tool alone "also helps" instead of "delivers most of the uplift"; the claim never stated how much, so its substance is unchanged
   - 1.0.0 2026-11-02 created

@@ -1,5 +1,5 @@
 id: written-reasoning-declined-newest-models
-version: 1.1.0
+version: 1.1.1
 title: On the newest Claude models, asking for written-out reasoning may be declined; rely on thinking instead
 status: active
 technique:
@@ -20,9 +20,9 @@ effect:
 evidence:
   - tier: asserted
     source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
-    retrieved: 2026-10-25
+    retrieved: 2026-11-16
     quote: >-
-      On Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, and Claude Sonnet 5.5, rely on thinking instead, at a lower effort level if cost or latency matters: a prompt that asks the model to write out its reasoning, for example in <thinking> tags, may be declined.
+      On Claude Fable 5.2, Claude Fable 5.1, Claude Fable 5, Claude Opus 5.5, Claude Opus 5, and Claude Sonnet 5.5, rely on thinking instead, at a lower effort level if cost or latency matters: a prompt that asks the model to write out its reasoning, for example in <thinking> tags, might be declined.
   - tier: asserted
     source: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-1
     retrieved: 2026-11-02
@@ -38,9 +38,10 @@ evidence:
     retrieved: 2026-11-02
     quote: >-
       If your prompts ask the model to include its reasoning in the response, remove those instructions, because they invite `reasoning_extraction` declines.
-as_of: 2026-11-02
-review_by: 2027-05-02
+as_of: 2026-11-16
+review_by: 2027-05-16
 relations: {contradicts: [], refines: [manual-cot-when-thinking-off], superseded_by: null}
 history:
+  - 1.1.1 2026-11-16 evidence 0 requoted: the best-practices page reworded "may" to "might" and added Claude Fable 5.2, which is not in the vocabulary yet, so the conditions are unchanged
   - 1.1.0 2026-11-02 evidence added from the Fable 5.1, Opus 5.5 and Sonnet 5.5 prompting pages
   - 1.0.0 2026-10-25 created

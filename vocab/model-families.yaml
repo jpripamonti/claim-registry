@@ -21,11 +21,43 @@ claude-mythos:
   versions: ["preview", "5", "5.1"]
 
 gpt:
-  versions: ["3.5-turbo", "4", "4o", "4o-mini", "4.1", "5", "5.1", "5.1-mini", "5.2"]
+  versions: ["3.5-turbo", "4", "4o", "4o-mini", "4.1", "5", "5.1", "5.1-mini", "5.2", "5.3", "5.4", "5.5",
+             "5.6", "6", "6.1"]
+# From GPT-5.6 on, OpenAI names tiers within a version (gpt-5.6-sol, gpt-6.1-terra); not every tier
+# has every version, so tiers are lines, as with Claude. "gpt-5.6" is an alias of gpt-5.6-sol.
+gpt-astra:
+  parent: gpt
+  versions: ["6"]
+gpt-sol:
+  parent: gpt
+  versions: ["5.6", "6", "6.1"]
+gpt-terra:
+  parent: gpt
+  versions: ["5.6", "6.1"]
+gpt-luna:
+  parent: gpt
+  versions: ["5.6", "6"]
 openai-o:
   versions: ["o1-preview", "o1", "o1-mini", "o3", "o3-mini", "o4-mini"]
 gemini:
-  versions: ["1.5", "2.0", "2.5", "3", "3.1"]
+  versions: ["1.5", "2.0", "2.5", "3", "3.1", "3.5", "3.6", "3.7", "3.8", "4"]
+# "Gemini 3" in Google's pages means the 3.x series (3 to 3.8). Gemini 4 models are named
+# gemini-4-carbon, gemini-4-argon and gemini-4-hydrogen.
+gemini-flash:
+  parent: gemini
+  versions: ["1.5", "2.0", "2.5", "3", "3.5", "3.6", "3.7", "3.8"]
+gemini-flash-lite:
+  parent: gemini
+  versions: ["2.0", "2.5", "3.1", "3.5"]
+gemini-carbon:
+  parent: gemini
+  versions: ["4"]
+gemini-argon:
+  parent: gemini
+  versions: ["4"]
+gemini-hydrogen:
+  parent: gemini
+  versions: ["4"]
 
 llama:
   versions: ["2", "3", "3.1"]

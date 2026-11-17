@@ -1,0 +1,46 @@
+id: gpt-5-6-outcome-first-success-criteria
+version: 1.0.0
+title: GPT-5.6 works best when the prompt states the outcome, constraints, evidence and completion bar rather than every step
+status: active
+technique:
+  summary: >
+    Describe the destination: the user-visible outcome, what success means, the constraints, the
+    available evidence and when to stop. Leave the path (searches, tools, reasoning) to the model
+    instead of prescribing each step.
+  example: |
+    Resolve the customer's issue end to end.
+    Success means:
+    - make the eligibility decision from available policy and account evidence
+    - return completed_actions, customer_message, and blockers
+conditions:
+  model_family: [gpt]
+  model_versions: ["5.6"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: unspecified ("works best"); lets the model choose an efficient path
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6.md
+    retrieved: 2026-11-16
+    quote: >-
+      GPT-5.6 works best when prompts define the outcome, important constraints, available evidence, and completion bar, then leave room for the model to choose an efficient path.
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6.md
+    retrieved: 2026-11-16
+    quote: >-
+      Describe the destination rather than prescribing every step. GPT-5.6 can usually choose an efficient search, tool, or reasoning path when the prompt states what good looks like.
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/upgrading-to-gpt-5p6-sol.md
+    retrieved: 2026-11-16
+    quote: >-
+      explicit success criteria, dependencies, stopping conditions, and completion boundaries;
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

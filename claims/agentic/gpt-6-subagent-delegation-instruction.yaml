@@ -1,0 +1,37 @@
+id: gpt-6-subagent-delegation-instruction
+version: 1.0.0
+title: GPT-6 Astra may delegate to subagents less than wanted; say when and how much to delegate
+status: active
+technique:
+  summary: >
+    In a multi-agent harness, state when and how much the model should hand work to subagents
+    for parallel work (for example, whenever parallelizing could save time or improve quality).
+  example: |
+    If at any point you can parallelize work by delegating tasks to another agent (no matter if you are the root or subagent), you should do so using collaboration tools if it could save time or improve quality.
+conditions:
+  model_family: [gpt]
+  model_versions: ["6", "6.1"]   # prompts offered "across the GPT-6 model family"; behaviour observed with GPT-6 Astra
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: amount of delegation matches the harness
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-6-astra
+    retrieved: 2026-11-16
+    quote: >-
+      The model may delegate less often than desired for your workflow. Specify when and how much it should use subagents for parallel work.
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-6-astra
+    retrieved: 2026-11-16
+    quote: >-
+      The model tends to respond well to prompting for how and when it should delegate work to subagents, so tune this behavior to fit with your harness and multi-agent implementation.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

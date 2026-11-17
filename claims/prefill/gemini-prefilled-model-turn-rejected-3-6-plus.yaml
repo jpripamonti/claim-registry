@@ -1,0 +1,43 @@
+id: gemini-prefilled-model-turn-rejected-3-6-plus
+version: 1.0.0
+title: From Gemini 3.6 Flash and 3.5 Flash-Lite on, a request ending in a prefilled model turn returns a 400 error
+status: active
+technique:
+  summary: >
+    Prefilling the model turn (ending the request with a non-empty model turn) to suppress
+    preambles or force a format such as JSON. Use the system instruction or structured outputs
+    instead.
+  example: |
+    system_instruction="Output only the translation without introductory text."
+conditions:
+  model_family: [gemini, gemini-flash-lite]
+  model_versions: {gemini: ">=3.6", gemini-flash-lite: ["3.5"]}   # "these models and all future Gemini model releases"
+  task_family: [any]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: request rejected with HTTP 400
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://aistudio.google.com/docs/whats-new-gemini-3.6
+    retrieved: 2026-11-16
+    quote: >-
+      Starting with Gemini 3.6 Flash and Gemini 3.5 Flash-Lite, the following API changes apply to these models and all future Gemini model releases.
+  - tier: asserted
+    source: https://aistudio.google.com/docs/whats-new-gemini-3.6
+    retrieved: 2026-11-16
+    quote: >-
+      Prefilling model turns is no longer supported. If the last non-empty turn in the request is a model turn, the API returns a 400 error.
+  - tier: asserted
+    source: https://aistudio.google.com/docs/whats-new-gemini-3.6
+    retrieved: 2026-11-16
+    quote: >-
+      If your application previously prefilled a model turn to suppress preambles or force JSON formatting, use system_instruction or
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

@@ -1,0 +1,35 @@
+id: gpt-5-6-say-what-edits-preserve
+version: 1.0.0
+title: For edits, rewrites and summaries on GPT-5.6, tell the model what to preserve
+status: active
+technique:
+  summary: >
+    For editing, rewriting, summaries and customer-facing drafts, name what must survive (the
+    artifact, length, structure, genre, factual claims) and forbid adding claims, sections or a
+    more promotional tone unless asked.
+  example: |
+    Preserve the requested artifact, length, structure, genre, and factual claims
+    first. Improve clarity, flow, and correctness without adding new claims,
+    sections, or a more promotional tone unless requested.
+conditions:
+  model_family: [gpt]
+  model_versions: ["5.6"]
+  task_family: [summarization, generative-writing]   # page: editing, rewriting, summaries, customer-facing drafts
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: unspecified (the page recommends it without stating the effect)
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6.md
+    retrieved: 2026-11-16
+    quote: >-
+      For editing, rewriting, summaries, and customer-facing drafts, tell the model what to preserve:
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

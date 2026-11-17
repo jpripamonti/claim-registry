@@ -1,0 +1,38 @@
+id: gpt-6-stock-phrase-avoidance-instruction
+version: 1.0.0
+title: GPT-6 Astra may reuse stock phrases; an instruction naming phrases and patterns to avoid reduces them
+status: active
+technique:
+  summary: >
+    List the stock words, phrases and patterns to avoid ("delve", "leverage", "Bottom Line:",
+    "This isn't about X. It's about Y.", concluding summary lines, invented compound labels) and
+    ask for direct statements with plain verbs.
+  example: |
+    Avoid using slop words or phrases like "Bottom Line:" in conclusions, "delve," "foster," "leverage," "it's worth noting," "importantly,". Do not use concluding summary statements such as "In short:..".
+conditions:
+  model_family: [gpt]
+  model_versions: ["6", "6.1"]   # prompts offered "across the GPT-6 model family"; behaviour observed with GPT-6 Astra
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: less jargon and fewer stock phrases in writing
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-6-astra
+    retrieved: 2026-11-16
+    quote: >-
+      The model tends toward detailed, formatted responses and may use recurring phrases across sessions. Specify the writing style and structure your application needs.
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-6-astra
+    retrieved: 2026-11-16
+    quote: >-
+      To reduce jargon and stock phrases in writing, start with this prompt:
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

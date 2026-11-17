@@ -1,0 +1,32 @@
+id: gpt-5-6-citation-and-evidence-rules
+version: 1.0.0
+title: For grounded answers on GPT-5.6, put citation and missing-evidence rules in the prompt
+status: active
+technique:
+  summary: >
+    For grounded answers, state in the prompt what needs support, what counts as enough evidence,
+    and what to do when evidence is missing (absence of evidence is not a factual "no"). For
+    research and synthesis: cite only retrieved sources, attach citations to the claims they
+    support, label inference, state conflicts, and report missing evidence instead of guessing.
+conditions:
+  model_family: [gpt]
+  model_versions: ["5.6"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: unspecified (the page recommends it without stating the effect)
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6.md
+    retrieved: 2026-11-16
+    quote: >-
+      For grounded answers, citation behavior should be part of the prompt. Define what needs support, what counts as enough evidence, and how to behave when evidence is missing. Absence of evidence should not automatically become a factual “no.”
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

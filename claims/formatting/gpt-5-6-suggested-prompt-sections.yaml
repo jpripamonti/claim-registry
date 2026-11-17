@@ -1,0 +1,36 @@
+id: gpt-5-6-suggested-prompt-sections
+version: 1.0.0
+title: OpenAI's suggested section structure for complex GPT-5.6 prompts
+status: active
+technique:
+  summary: >
+    Organise a complex prompt into short sections: Role, Personality, Goal, Success criteria,
+    Constraints, Tools, Output, Stop rules. Add detail only where it changes behaviour.
+  example: |
+    Role: [the model's function and context]
+    Goal: [user-visible outcome]
+    Success criteria: [what must be true before the final answer]
+    Output: [sections, length, format, and tone]
+    Stop rules: [when to retry, fallback, abstain, ask, or stop]
+conditions:
+  model_family: [gpt]
+  model_versions: ["5.6"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: unspecified (offered as a starting point for complex prompts)
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6.md
+    retrieved: 2026-11-16
+    quote: >-
+      Use this structure as a starting point for complex prompts. Keep each section short. Add detail only where it changes behavior.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

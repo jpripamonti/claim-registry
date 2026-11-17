@@ -1,0 +1,33 @@
+id: gemini-3-flash-strict-grounding-clause
+version: 1.0.0
+title: A strict-grounding clause in the system instruction improves Gemini 3 Flash's grounding in provided context
+status: active
+technique:
+  summary: >
+    Add a system-instruction clause limiting answers to facts stated in the provided context: no
+    outside knowledge or inference, and say the information is not available when the answer is not
+    written in the context.
+  example: |
+    You are a strictly grounded assistant limited to the information provided in the User Context. In your answers, rely **only** on the facts that are directly mentioned in that context. ... If the exact answer is not explicitly written in the context, you must state that the information is not available.
+conditions:
+  model_family: [gemini-flash]
+  model_versions: ["3"]         # "Gemini 3 Flash strategies" (gemini-3-flash-preview)
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: grounding of responses in the provided context
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://aistudio.google.com/docs/prompting-strategies
+    retrieved: 2026-11-16
+    quote: >-
+      Add the following clause to the system instructions (with edits where appropriate) to improve the model's ability to ground responses in provided context:
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

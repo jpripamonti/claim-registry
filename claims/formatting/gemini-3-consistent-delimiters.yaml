@@ -1,0 +1,41 @@
+id: gemini-3-consistent-delimiters
+version: 1.0.0
+title: On Gemini 3, separate prompt parts with one consistent delimiter format (XML-style tags or Markdown headings)
+status: active
+technique:
+  summary: >
+    Mark the parts of the prompt (role, constraints, context, task) with clear delimiters, XML-style
+    tags or Markdown headings, and use one format consistently within a prompt.
+  example: |
+    <constraints>
+    1. Be objective.
+    </constraints>
+    <context>...</context>
+    <task>...</task>
+conditions:
+  model_family: [gemini]
+  model_versions: ["3", "3.1", "3.5", "3.6", "3.7", "3.8"]   # "Gemini 3" section
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: the model tells instructions, context and tasks apart
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://aistudio.google.com/docs/prompting-strategies
+    retrieved: 2026-11-16
+    quote: >-
+      Choose one format and use it consistently within a single prompt.
+  - tier: asserted
+    source: https://aistudio.google.com/docs/prompting-strategies
+    retrieved: 2026-11-16
+    quote: >-
+      Using tags or Markdown helps the model distinguish between instructions, context, and tasks.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

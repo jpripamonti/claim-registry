@@ -1,0 +1,37 @@
+id: gpt-5-6-blanket-brevity-instructions
+version: 1.0.0
+title: Blanket brevity instructions ("Be concise") may be unneeded on GPT-5.6 and can make answers too brief
+status: active
+technique:
+  summary: >
+    Generic length instructions such as "Be concise", "Keep it short" or "be thorough". GPT-5.6 is
+    more concise by default than GPT-5.5; keep such a line only where it reliably produces the
+    output needed, set the default with text.verbosity, and state task-specific length in the
+    prompt.
+conditions:
+  model_family: [gpt]
+  model_versions: ["5.6"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: mixed            # one page: check and keep if it works; the migration page: avoid
+  outcome: response length (answers can become too brief)
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/latest-model/gpt-5.6
+    retrieved: 2026-11-16
+    quote: >-
+      GPT-5.6 tends to be more concise by default than GPT-5.5. When migrating, check whether broad brevity instructions such as “Be concise” or “Keep it short” are still useful. They may be unnecessary for some tasks and can sometimes make responses too brief.
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/upgrading-to-gpt-5p6-sol.md
+    retrieved: 2026-11-16
+    quote: >-
+      generic `be brief`, `be thorough`, or `think step by step` instructions;
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

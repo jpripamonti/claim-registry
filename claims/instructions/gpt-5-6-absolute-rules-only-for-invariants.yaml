@@ -1,0 +1,34 @@
+id: gpt-5-6-absolute-rules-only-for-invariants
+version: 1.0.0
+title: OpenAI advises against ALWAYS / NEVER / must for judgment calls on GPT-5.6; keep absolutes for true invariants
+status: active
+technique:
+  summary: >
+    Writing absolute rules (ALWAYS, NEVER, must, only) for judgment calls such as when to search,
+    ask, use a tool or keep iterating. Keep absolutes for true invariants (safety rules, required
+    fields, actions that must never happen) and give decision rules for the rest.
+  example: |
+    Before: ALWAYS search before answering.
+    After:  Search when the answer depends on facts that are not in the conversation or may have changed.
+conditions:
+  model_family: [gpt]
+  model_versions: ["5.6"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: hurts
+  outcome: unspecified (the page advises against it without stating the effect)
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6.md
+    retrieved: 2026-11-16
+    quote: >-
+      Avoid unnecessary absolute rules. Use ALWAYS, NEVER, must, and only for true invariants such as safety rules, required fields, or actions that should never happen. For judgment calls, such as when to search, ask, use a tool, or keep iterating, prefer decision rules.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

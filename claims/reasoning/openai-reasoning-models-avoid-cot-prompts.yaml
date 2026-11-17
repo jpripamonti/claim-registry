@@ -1,14 +1,14 @@
 id: openai-reasoning-models-avoid-cot-prompts
-version: 1.0.0
+version: 1.1.0
 title: Telling OpenAI reasoning models to "think step by step" is unnecessary and can hinder performance
 status: active
 technique:
   summary: >
     Adding chain-of-thought instructions ("think step by step", "explain your reasoning") to prompts
-    for o-series reasoning models. Keep prompts simple and direct instead.
+    for o-series reasoning models and GPT-5.6. Keep prompts simple and direct instead.
 conditions:
-  model_family: [openai-o]
-  model_versions: any          # page mentions o1, o1-mini, o3, o3-mini, o4-mini
+  model_family: [openai-o, gpt]
+  model_versions: {openai-o: any, gpt: ["5.6"]}   # o-series page mentions o1, o1-mini, o3, o3-mini, o4-mini; GPT-5.6 migration guide
   task_family: [unspecified]
   reasoning: enabled
   tool_use: unspecified
@@ -28,8 +28,14 @@ evidence:
     retrieved: 2026-10-25
     quote: >-
       Since these models perform reasoning internally, prompting them to “think step by step” or “explain your reasoning” is unnecessary.
-as_of: 2026-10-25
-review_by: 2027-04-25
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/upgrading-to-gpt-5p6-sol.md
+    retrieved: 2026-11-16
+    quote: >-
+      generic `be brief`, `be thorough`, or `think step by step` instructions;
+as_of: 2026-11-16
+review_by: 2027-05-16
 relations: {contradicts: [], refines: [], superseded_by: null}
 history:
+  - 1.1.0 2026-11-16 GPT-5.6 added (conditions widened) with evidence from the GPT-5.6 migration guide
   - 1.0.0 2026-10-25 created

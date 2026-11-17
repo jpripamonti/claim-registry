@@ -1,0 +1,38 @@
+id: gemini-3-tool-call-budget-instruction
+version: 1.0.0
+title: If Gemini 3.x overuses tools, lower the thinking level first, then add a system instruction that restricts tool use
+status: active
+technique:
+  summary: >
+    Against tool-call overuse: lower the thinking level first (higher levels explore and verify
+    with more tools); if overuse persists, add a system instruction that limits tool use, such as a
+    stated tool-call budget.
+  example: |
+    You have a limited action budget of <n> tool calls. Use them efficiently.
+conditions:
+  model_family: [gemini]
+  model_versions: ["3", "3.1", "3.5", "3.6", "3.7", "3.8"]   # listed under "apply to all Gemini 3.x models"
+  task_family: [unspecified]
+  reasoning: enabled
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: fewer unnecessary tool calls
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://aistudio.google.com/docs/whats-new-gemini-3.5
+    retrieved: 2026-11-16
+    quote: >-
+      Use lower thinking levels or experiment with system instructions to reduce tool calls in agentic workflows.
+  - tier: asserted
+    source: https://aistudio.google.com/docs/whats-new-gemini-3.5
+    retrieved: 2026-11-16
+    quote: >-
+      If overuse persists after adjusting the thinking level, consider a prompt that restricts tool usage.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

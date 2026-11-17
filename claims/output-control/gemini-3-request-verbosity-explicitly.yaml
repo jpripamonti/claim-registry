@@ -1,0 +1,37 @@
+id: gemini-3-request-verbosity-explicitly
+version: 1.0.0
+title: Gemini 3 answers tersely by default; ask explicitly for a conversational or detailed response
+status: active
+technique:
+  summary: >
+    If the application needs a conversational tone or more detail, say so explicitly in the
+    instructions; by default Gemini 3 gives direct, efficient answers.
+  example: |
+    Explain this as a friendly, talkative assistant.
+conditions:
+  model_family: [gemini]
+  model_versions: ["3", "3.1", "3.5", "3.6", "3.7", "3.8"]   # prompt design page: "Gemini 3 models"; 3.5 page: "Gemini 3 and 3.1"
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: unspecified
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: response length and tone match the request
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://aistudio.google.com/docs/prompting-strategies
+    retrieved: 2026-11-16
+    quote: >-
+      By default, Gemini 3 models provide direct and efficient answers. If you need a more conversational or detailed response, you must explicitly request it in your instructions.
+  - tier: asserted
+    source: https://aistudio.google.com/docs/whats-new-gemini-3.5
+    retrieved: 2026-11-16
+    quote: >-
+      By default, Gemini 3 and 3.1 is less verbose and prefers direct, efficient answers. If your use case requires a conversational tone, steer the model explicitly in your prompt
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

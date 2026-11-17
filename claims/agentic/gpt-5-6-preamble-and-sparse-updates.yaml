@@ -1,0 +1,35 @@
+id: gpt-5-6-preamble-and-sparse-updates
+version: 1.0.0
+title: For multi-step tool work on GPT-5.6, prompt for a short preamble and sparse phase updates, not narration of every call
+status: active
+technique:
+  summary: >
+    Ask for a one- or two-sentence visible update before the first tool call, then updates only
+    when a major phase begins or a finding changes the plan, each stating one outcome and the next
+    step. Do not ask the model to narrate routine tool calls.
+  example: |
+    Before tool calls for a multi-step task, send a one- or two-sentence
+    user-visible update that states the first step. During the task, update only
+    when a major phase begins or a finding changes the plan.
+conditions:
+  model_family: [gpt]
+  model_versions: ["5.6"]
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: unspecified (the page recommends it without stating the effect)
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://developers.openai.com/api/docs/guides/prompt-guidance-gpt-5p6.md
+    retrieved: 2026-11-16
+    quote: >-
+      For multi-step or tool-heavy tasks, prompt for a short visible preamble before the first tool call, then sparse outcome-based updates at major phase changes. Do not ask the model to narrate routine tool calls.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

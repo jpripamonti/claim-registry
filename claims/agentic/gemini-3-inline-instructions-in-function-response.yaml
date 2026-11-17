@@ -1,0 +1,33 @@
+id: gemini-3-inline-instructions-in-function-response
+version: 1.0.0
+title: On Gemini 3.x, append extra instructions to the function response text instead of sending them as separate parts
+status: active
+technique:
+  summary: >
+    Instructions sent alongside a function response as separate parts can cause thought leakage and
+    lower quality. Append them to the end of the function response text, separated by two
+    newlines.
+  example: |
+    result_text = f"{json.dumps(result)}\n\n<your inline instructions>"
+conditions:
+  model_family: [gemini]
+  model_versions: ["3", "3.1", "3.5", "3.6", "3.7", "3.8"]   # listed under "apply to all Gemini 3.x models"
+  task_family: [unspecified]
+  reasoning: unspecified
+  tool_use: required
+  context_size: unspecified
+effect:
+  direction: helps
+  outcome: avoids unexpected behaviour (e.g. thought leakage) and lower-quality outputs
+  magnitude: null
+evidence:
+  - tier: asserted
+    source: https://aistudio.google.com/docs/whats-new-gemini-3.5
+    retrieved: 2026-11-16
+    quote: >-
+      This can lead to unexpected model behavior (e.g. thought leakage) and result in lower quality outputs. Instead, append any extra instructions to the end of the function response text separated by two newlines.
+as_of: 2026-11-16
+review_by: 2027-05-16
+relations: {contradicts: [], refines: [], superseded_by: null}
+history:
+  - 1.0.0 2026-11-16 created

@@ -65,3 +65,14 @@ jobs:
           if [ -n "$existing" ]; then
             gh issue close "$existing" --comment "Quote check passes again. Run: $RUN_URL"
           fi
+
+      - name: Healthchecks
+        # Tells Healthchecks.io how the run ended (the dashboard of every scheduled task).
+        if: always()
+        env:
+          URL: ${{ secrets.HEALTHCHECKS_URL_QUOTE_CHECK }}
+          STATUS: ${{ job.status }}
+        run: |
+          [ -n "$URL" ] || exit 0
+          [ "$STATUS" = success ] || URL="$URL/fail"
+          curl -fsS -m 10 --retry 3 -o /dev/null "$URL" || true

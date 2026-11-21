@@ -21,3 +21,4 @@
 - Run both commands before committing claim changes.
 - When auditing a project against the claims, check each condition (model, version, input size)
   against measured values, not limits or estimates from the code.
+- quote-check.yml ends with a step that pings Healthchecks.io (secret `HEALTHCHECKS_URL_QUOTE_CHECK`; without it, nothing happens).
